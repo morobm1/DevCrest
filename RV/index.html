@@ -2,27 +2,25 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>3D Apartment Skybox Tour</title>
+    <title>Apartment VR Room</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   </head>
   <body>
     <a-scene>
-      <!-- Skybox using cube of images -->
-      <a-box position="0 1.6 0" depth="500" height="500" width="500" material="shader: cube; src: #skybox"></a-box>
-
-      <!-- Define each side of the cube -->
-      <a-assets>
-        <img id="px" src="east.jpg">
-        <img id="nx" src="west.jpg">
-        <img id="py" src="top.jpg">
-        <img id="ny" src="bottom.jpg">
-        <img id="pz" src="south.jpg">
-        <img id="nz" src="north.jpg">
-      </a-assets>
-
-      <!-- Camera with look controls for VR/360 experience -->
+      <!-- Camera to allow looking around -->
       <a-entity camera look-controls position="0 1.6 0"></a-entity>
+
+      <!-- Room walls -->
+      <a-plane src="east.jpg" position="5 2.5 0" rotation="0 -90 0" width="10" height="5"></a-plane>
+      <a-plane src="west.jpg" position="-5 2.5 0" rotation="0 90 0" width="10" height="5"></a-plane>
+      <a-plane src="north.jpg" position="0 2.5 -5" rotation="0 0 0" width="10" height="5"></a-plane>
+      <a-plane src="south.jpg" position="0 2.5 5" rotation="0 180 0" width="10" height="5"></a-plane>
+
+      <!-- Ceiling and floor -->
+      <a-plane src="top.jpg" position="0 5 0" rotation="-90 0 0" width="10" height="10"></a-plane>
+      <a-plane src="bottom.jpg" position="0 0 0" rotation="90 0 0" width="10" height="10"></a-plane>
     </a-scene>
   </body>
 </html>
+
 
