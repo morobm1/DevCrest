@@ -5,20 +5,21 @@
     <title>My VR Room</title>
     <meta name="description" content="360 VR Room">
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r129/examples/js/loaders/CubeTextureLoader.js"></script>
   </head>
   <body>
     <a-scene>
       <a-sky
         cubemap="
-          px: east.jpg;
-          nx: west.jpg;
-          py: top.jpg;
-          ny: bottom.jpg;
-          pz: south.jpg;
-          nz: north.jpg;
+          px: px.jpg;
+          nx: nx.jpg;
+          py: py.jpg;
+          ny: ny.jpg;
+          pz: pz.jpg;
+          nz: nz.jpg;
         ">
       </a-sky>
-      <a-camera position="0 1.6 0" wasd-controls-enabled="false" look-controls="true"></a-camera>
+      <a-camera position='0 1.6 0' wasd-controls-enabled='false' look-controls='true'></a-camera>
     </a-scene>
   </body>
 </html>
