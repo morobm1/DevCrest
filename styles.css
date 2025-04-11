@@ -1,0 +1,340 @@
+/* GLOBAL STYLES */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --husky-purple: #4b2e83;
+    --husky-gold: #b7a57a;
+}
+
+/* NAVIGATION */
+.custom-navbar {
+    background-color: var(--husky-purple);
+}
+
+.custom-navbar a, .custom-navbar i {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.custom-navbar a:hover {
+    color: #d1c4e9;
+}
+
+.navbar-logo {
+    height: 50px;
+    object-fit: contain;
+}
+
+/* HERO SECTION */
+.page-hero {
+    padding: 60px 0;
+    text-align: center;
+    background: #f8f9fa;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full screen height */
+    background-image: url('https://residentialvillage.com/wp-content/uploads/2024/12/Residential_007_Dining.webp'); /* Official Hero Image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dark overlay for text readability */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Darker for better contrast */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Hero Content */
+.hero-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.hero-box h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--husky-purple);
+}
+
+.hero-box p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* HEADINGS */
+h1, h2, h3 {
+    color: var(--husky-purple);
+    font-weight: 700;
+}
+
+/* MAIN CONTENT */
+main h2 {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+main p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* CAMPUS IMAGE GALLERY */
+.campus-image {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    height: 200px;
+    object-fit: cover;
+}
+
+/* FEATURE CARDS - OLD SIMPLE STYLE */
+.feature-card {
+    padding: 20px;
+    border: 2px solid var(--husky-gold);
+    border-radius: 12px;
+    margin: 5px;
+    font-weight: 600;
+    color: var(--husky-purple);
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* FEATURE BOX - NEW IMAGE CARDS WITH ICONS */
+.feature-list {
+    margin-top: 30px;
+}
+
+.feature-box {
+    position: relative;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.feature-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(183, 165, 122, 0.4); /* Husky Gold with 40% opacity */
+    z-index: 1;
+}
+
+.feature-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+    filter: brightness(0) invert(1);
+}
+
+.feature-box h4 {
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* CALL TO ACTION */
+.cta-section {
+    padding: 40px;
+    background: #f8f9fa;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* BUTTONS */
+.btn-primary {
+    background-color: var(--husky-gold);
+    border: none;
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: #a08f6a;
+    color: white;
+}
+
+/* FOOTER */
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* ICON LISTS */
+.custom-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.custom-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.custom-list li::before {
+    content: "✔️";
+    position: absolute;
+    left: 0;
+    color: var(--husky-purple);
+}
+
+/* PROMO & CALLOUT */
+.promo-section h2, .promo-section h3 {
+    color: var(--husky-purple);
+    font-weight: 700;
+}
+
+.callout-section {
+    background-color: #f4f4f4;
+    border: 2px solid var(--husky-purple);
+    text-align: center;
+}
+
+.callout-section h3 {
+    margin-bottom: 15px;
+    color: var(--husky-purple);
+}
+
+/* FLIP CARDS */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 300px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.flip-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.flip-card-back {
+    background-color: white;
+    color: var(--husky-purple);
+    transform: rotateY(180deg);
+    padding: 20px;
+}
+
+.flip-card-back h3 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.flip-card-back p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.btn-flip {
+    background-color: var(--husky-purple);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-flip:hover {
+    background-color: #3a2265;
+}
+
+/* LOGO SLIDER */
+.logo-slide img {
+    height: 80px;
+    margin: 0 15px;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+}
+
+
