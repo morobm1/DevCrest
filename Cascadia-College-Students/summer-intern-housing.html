@@ -393,7 +393,7 @@
             background: #fff;
             border-radius: 1.25rem;
             box-shadow: 0 4px 18px rgba(60,0,100,0.07);
-            padding: 2.2rem 1.2rem 1.2rem 1.2rem;
+           padding: 2.2rem 1.2rem 1.2rem 1.2rem;
             transition: box-shadow 0.18s, transform 0.18s;
             min-height: 230px;
             display: flex;
@@ -643,7 +643,7 @@
                 <!-- Double Room Card -->
                 <div class="col-12 col-md-6 col-lg-5">
                     <div class="uhd-floorplan-card h-100 d-flex flex-column align-items-center text-center p-4">
-                        <div class="uhd-floorplan-img-wrap mb-3">
+
                             <img src="./images/Horizon-2BR-2BA-Double.webp"
                                 alt="Horizon Hall 2 Bedroom 2 Bath Double Room Floor Plan"
                                 class="uhd-floorplan-img"
@@ -652,7 +652,7 @@
                                 data-bs-target="#floorplanModal"
                                 data-img="./images/Horizon-2BR-2BA-Double.webp"
                                 data-caption="Double Room: Horizon 2 Bedroom / 2 Bath (in shared unit)">
-                        </div>
+
                         <div class="fw-bold" style="font-size:1.25rem; color:#2d1e4a;">Double Room</div>
                         <div class="text-muted mb-2" style="font-size:1.05rem;">2 Bedroom / 2 Bath (shared unit)</div>
                         <div class="uhd-floorplan-caption">
@@ -802,7 +802,7 @@
           </div>
         </div>
       </section>
-        <!-- Modern, youthful "Get in Touch" section inspired by uhdenver.com -->
+
         <section class="container my-5" id="contact">
           <div class="row justify-content-center align-items-stretch g-5">
             <!-- Contact Form -->
@@ -812,7 +812,7 @@
                   Get in Touch
                 </h2>
                 <p class="mb-4" style="color: #5a5a5a; font-size: 1.15rem;">
-                  Ready to experience luxury summer living or have questions? Our team is here to help you every step of the way.
+                  Ready to experience summer living or have questions? Our team is here to help you every step of the way.
                 </p>
                 <form action="https://formspree.io/f/xwkgyyqk" method="POST" autocomplete="off">
                   <div class="mb-3">
@@ -895,23 +895,24 @@
                 });
             });
         }
-        // Use direct URLs from parent gallery for the carousel
-        const imageUrls = [
-            'https://residentialvillage.com/wp-content/uploads/2023/11/Residential_020_Exterior-scaled.jpg',
-            'https://residentialvillage.com/wp-content/uploads/2023/11/Residential_022_OutdoorDining-scaled.jpg',
-            'https://residentialvillage.com/wp-content/uploads/2023/11/Residential_024_Lounge-scaled.jpg',
-            'https://residentialvillage.com/wp-content/uploads/2023/11/Residential_026_LivingRoom-scaled.jpg',
-            'https://residentialvillage.com/wp-content/uploads/2023/11/Residential_041_Study-scaled.jpg'
+        // Dynamically load all images from ./images/slideshow into the carousel
+        const slideshowDir = './images/slideshow/';
+        const imageFilenames = [
+            'Residential_020_Exterior.webp',
+            'Residential_022_OutdoorDining.webp',
+            'Residential_024_Lounge.webp',
+            'Residential_026_LivingRoom.webp',
+            'Residential_041_Study.webp'
         ];
         const carouselInner = document.getElementById('slideshow-carousel-inner');
         if (carouselInner) {
-            imageUrls.forEach((url, idx) => {
+            imageFilenames.forEach((filename, idx) => {
                 const div = document.createElement('div');
                 div.className = 'carousel-item' + (idx === 0 ? ' active' : '');
                 const img = document.createElement('img');
-                img.src = url;
+                img.src = slideshowDir + filename;
                 img.className = 'd-block w-100';
-                img.alt = 'Horizon Hall Slide ' + (idx + 1);
+                img.alt = 'Horizon Hall ' + filename.replace('.webp', '');
                 div.appendChild(img);
                 carouselInner.appendChild(div);
             });
