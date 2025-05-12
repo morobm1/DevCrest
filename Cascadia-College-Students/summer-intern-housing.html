@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -427,7 +426,6 @@
             font-size: 1rem;
             margin-top: 0.25rem;
         }
-        
         /* Misc */
         .fw-800 { font-weight: 800 !important; }
         .fw-700 { font-weight: 700 !important; }
@@ -438,6 +436,65 @@
         .bg-purple { background: var(--uhd-purple) !important; }
         .rounded-xl { border-radius: 1.5rem !important; }
         .shadow-xl { box-shadow: 0 12px 40px rgba(60,0,100,0.13) !important; }
+        /* Compact Banner Styles */
+        .uhd-limited-banner-compact {
+          background: #3c0064;
+          color: #fff;
+          border-radius: 0;
+          box-shadow: 0 2px 12px rgba(60,0,100,0.10);
+          margin-bottom: 0;
+        }
+        .uhd-limited-badge-compact {
+          display: inline-block;
+          background: #ffc600;
+          color: #3c0064;
+          font-weight: 700;
+          font-size: 1rem;
+          border-radius: 2rem;
+          padding: 0.35rem 1.1rem;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          vertical-align: middle;
+        }
+        .uhd-limited-message-compact {
+          font-size: 1.05rem;
+          font-weight: 600;
+          color: #fff;
+          vertical-align: middle;
+        }
+        .uhd-limited-terms-compact {
+          font-size: 0.98rem;
+          color: #ffc600;
+          font-weight: 600;
+          margin-left: 1.5rem;
+          vertical-align: middle;
+        }
+        .uhd-limited-btn-compact {
+          font-size: 1.08rem;
+          border-radius: 0.75rem;
+          box-shadow: 0 2px 8px rgba(60,0,100,0.08);
+          margin-top: 0;
+        }
+        @media (max-width: 991.98px) {
+          .uhd-limited-banner-compact .row {
+            flex-direction: column !important;
+            text-align: center;
+          }
+          .uhd-limited-banner-compact .col-md-8,
+          .uhd-limited-banner-compact .col-md-4 {
+            width: 100%;
+            max-width: 100%;
+            flex: 0 0 100%;
+            margin-bottom: 0.75rem;
+            text-align: center;
+            justify-content: center;
+          }
+          .uhd-limited-terms-compact {
+            display: block;
+            margin-left: 0;
+            margin-top: 0.25rem;
+          }
+        }
     </style>
 </head>
 <body>
@@ -479,8 +536,7 @@
         <div class="uhd-hero-content">
             <h1>Summer Intern Housing<br>at Horizon Hall</h1>
             <p>Modern, fully furnished apartments for students interning in the Bothell area.<br>
-                Stay with us between June 20th – August 31st.</span>
-            </p>
+                Stay with us between June 20th – August 31st.</p>
         </div>
     </header>
     <div class="uhd-limited-banner-compact w-100">
@@ -514,114 +570,53 @@
       </div>
     </div>
 
-    <style>
-    .uhd-limited-banner-compact {
-      background: #3c0064;
-      color: #fff;
-      border-radius: 0;
-      box-shadow: 0 2px 12px rgba(60,0,100,0.10);
-      margin-bottom: 0;
-    }
-    .uhd-limited-badge-compact {
-      display: inline-block;
-      background: #ffc600;
-      color: #3c0064;
-      font-weight: 700;
-      font-size: 1rem;
-      border-radius: 2rem;
-      padding: 0.35rem 1.1rem;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      vertical-align: middle;
-    }
-    .uhd-limited-message-compact {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #fff;
-      vertical-align: middle;
-    }
-    .uhd-limited-terms-compact {
-      font-size: 0.98rem;
-      color: #ffc600;
-      font-weight: 600;
-      margin-left: 1.5rem;
-      vertical-align: middle;
-    }
-    .uhd-limited-btn-compact {
-      font-size: 1.08rem;
-      border-radius: 0.75rem;
-      box-shadow: 0 2px 8px rgba(60,0,100,0.08);
-      margin-top: 0;
-    }
-    @media (max-width: 991.98px) {
-      .uhd-limited-banner-compact .row {
-        flex-direction: column !important;
-        text-align: center;
-      }
-      .uhd-limited-banner-compact .col-md-8,
-      .uhd-limited-banner-compact .col-md-4 {
-        width: 100%;
-        max-width: 100%;
-        flex: 0 0 100%;
-        margin-bottom: 0.75rem;
-        text-align: center;
-        justify-content: center;
-      }
-      .uhd-limited-terms-compact {
-        display: block;
-        margin-left: 0;
-        margin-top: 0.25rem;
-      }
-    }
-    </style>
-
     <!-- Main Content -->
     <main class="container py-5">
 
-            <div class="col-md-12 d-flex flex-column justify-content-start">
-                <h2 class="uhd-section-title mb-3">Horizon Hall</h2>
-                <div class="row">
-                    <div class="col-lg-7">
-                        <div class="uhd-card">
-                            <p>
-                                Horizon Hall offers spacious, fully furnished apartments ideal for students participating in summer internships in the local area. Each unit includes in-unit laundry, high-speed internet, and a modern kitchen setup. Interns will enjoy a vibrant and inclusive community, convenient access to campus and city amenities, and flexible lease terms designed specifically for summer stays.
-                            </p>
-                            <p class="text-danger fw-semibold">
-                                <strong>Please note:</strong> Residential Village summer housing is designated for individuals who are actively participating in a local internship program. Proof of internship, such as an offer letter or documentation from your employer, will be required as part of the application process.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <!-- Auto-sliding image carousel -->
-                        <div class="mt-4 mt-lg-0">
-                            <div id="horizonHallCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-                                <div class="carousel-inner rounded shadow" id="slideshow-carousel-inner">
-                                    <!-- Slides will be injected by JS -->
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#horizonHallCarousel" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#horizonHallCarousel" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- End carousel -->
-                         
-                        <!-- Schedule a Tour Button -->
-                        <div class="mt-3 text-center">
-                            <button id="scheduleTourBtn" class="btn uhd-btn-gold btn-lg w-100 fw-bold">
-                                <i class="bi bi-calendar-event me-2"></i>Schedule a Tour
-                            </button>
-                        </div>
-                        <!-- End Schedule a Tour Button -->
+        <div class="col-md-12 d-flex flex-column justify-content-start">
+            <h2 class="uhd-section-title mb-3">Horizon Hall</h2>
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="uhd-card">
+                        <p>
+                            Horizon Hall offers spacious, fully furnished apartments ideal for students participating in summer internships in the local area. Each unit includes in-unit laundry, high-speed internet, and a modern kitchen setup. Interns will enjoy a vibrant and inclusive community, convenient access to campus and city amenities, and flexible lease terms designed specifically for summer stays.
+                        </p>
+                        <p class="text-danger fw-semibold">
+                            <strong>Please note:</strong> Residential Village summer housing is designated for individuals who are actively participating in a local internship program. Proof of internship, such as an offer letter or documentation from your employer, will be required as part of the application process.
+                        </p>
                     </div>
                 </div>
+                <div class="col-lg-5">
+                    <!-- Auto-sliding image carousel -->
+                    <div class="mt-4 mt-lg-0">
+                        <div id="horizonHallCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                            <div class="carousel-inner rounded shadow" id="slideshow-carousel-inner">
+                                <!-- Slides will be injected by JS -->
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#horizonHallCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#horizonHallCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- End carousel -->
+                     
+                    <!-- Schedule a Tour Button -->
+                    <div class="mt-3 text-center">
+                        <button id="scheduleTourBtn" class="btn uhd-btn-gold btn-lg w-100 fw-bold">
+                            <i class="bi bi-calendar-event me-2"></i>Schedule a Tour
+                        </button>
+                    </div>
+                    <!-- End Schedule a Tour Button -->
+                </div>
             </div>
+        </div>
 
-        <!-- Modern Floorplans Section -->
+        <!-- Modern Floorplans Section: Two Card Layout -->
         <section class="uhd-floorplans-section" id="floorplans">
             <h2 class="uhd-section-title text-center mb-4">Choose Your Floor Plan</h2>
             <div class="row g-4 justify-content-center">
@@ -900,25 +895,23 @@
                 });
             });
         }
-        // Dynamically load all images from ./images/slideshow into the carousel
-        const slideshowDir = '/images/slideshow/';
-        const imageFilenames = [
-            'Residential_020_Exterior.webp',
-            'Residential_022_OutdoorDining.webp',
-            'Residential_024_Lounge.webp',
-            'Residential_026_LivingRoom.webp',
-            'Residential_041_Study.webp',
-            'Residential_041_Study.webp',
+        // Use direct URLs from parent gallery for the carousel
+        const imageUrls = [
+            'https://residentialvillage.com/wp-content/uploads/2023/11/Residential_020_Exterior-scaled.jpg',
+            'https://residentialvillage.com/wp-content/uploads/2023/11/Residential_022_OutdoorDining-scaled.jpg',
+            'https://residentialvillage.com/wp-content/uploads/2023/11/Residential_024_Lounge-scaled.jpg',
+            'https://residentialvillage.com/wp-content/uploads/2023/11/Residential_026_LivingRoom-scaled.jpg',
+            'https://residentialvillage.com/wp-content/uploads/2023/11/Residential_041_Study-scaled.jpg'
         ];
         const carouselInner = document.getElementById('slideshow-carousel-inner');
         if (carouselInner) {
-            imageFilenames.forEach((filename, idx) => {
+            imageUrls.forEach((url, idx) => {
                 const div = document.createElement('div');
                 div.className = 'carousel-item' + (idx === 0 ? ' active' : '');
                 const img = document.createElement('img');
-                img.src = slideshowDir + filename;
+                img.src = url;
                 img.className = 'd-block w-100';
-                img.alt = 'Horizon Hall ' + filename.replace('.webp', '');
+                img.alt = 'Horizon Hall Slide ' + (idx + 1);
                 div.appendChild(img);
                 carouselInner.appendChild(div);
             });
