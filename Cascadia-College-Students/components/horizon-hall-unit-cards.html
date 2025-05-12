@@ -1,0 +1,92 @@
+<!-- Horizon Hall Unit Cards Section -->
+<section class="container my-5">
+  <div class="row g-4 justify-content-center">
+    <!-- Card 1: 4 Bed / 2 Bath Single, Corner Unit -->
+    <div class="col-md-6">
+      <div class="unit-card shadow-sm h-100">
+        <div class="unit-card-header text-center">
+          <span class="property-name">HORIZON HALL</span>
+        </div>
+        <div class="unit-card-body text-center">
+          <div class="unit-type mb-1">4 Bed / 2 Bath</div>
+          <div class="unit-subtitle mb-1">Single, Corner Unit</div>
+          <div class="unit-sqft mb-3">1072 SQ FT</div>
+          <img src="./images/Horizon-4BR-2BA-Single.webp" alt="Horizon Hall 4 Bed 2 Bath Single Corner Unit Floor Plan" class="unit-floorplan-img mb-2">
+        </div>
+      </div>
+    </div>
+    <!-- Card 2: 2 Bed / 2 Bath Double -->
+    <div class="col-md-6">
+      <div class="unit-card shadow-sm h-100">
+        <div class="unit-card-header text-center">
+          <span class="property-name">HORIZON HALL</span>
+        </div>
+        <div class="unit-card-body text-center">
+          <div class="unit-type mb-1">2 Bed / 2 Bath</div>
+          <div class="unit-subtitle mb-1">Double</div>
+          <div class="unit-sqft mb-3">710 SQ FT</div>
+          <img src="./images/Horizon-2BR-2BA-Double.webp" alt="Horizon Hall 2 Bed 2 Bath Double Floor Plan" class="unit-floorplan-img mb-2">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.unit-card {
+  background: #fff;
+  border-radius: 1.25rem;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100%;
+  transition: box-shadow 0.2s;
+}
+.unit-card:hover {
+  box-shadow: 0 8px 32px rgba(60,0,100,0.10), 0 2px 8px rgba(0,0,0,0.04);
+}
+.unit-card-header {
+  margin-bottom: 1.25rem;
+}
+.property-name {
+  font-variant: small-caps;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  color: #3c0064;
+  font-size: 1.1rem;
+}
+.unit-type {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #222;
+}
+.unit-subtitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #555;
+}
+.unit-sqft {
+  font-size: 1rem;
+  color: #888;
+  letter-spacing: 0.04em;
+}
+.unit-floorplan-img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 12px rgba(60,0,100,0.08);
+  background: #f8f8fa;
+  margin: 0 auto;
+  display: block;
+}
+@media (max-width: 767.98px) {
+  .unit-card {
+    padding: 1.25rem 0.5rem 1rem 0.5rem;
+  }
+  .unit-floorplan-img {
+    max-width: 100%;
+  }
+}
+</style>
