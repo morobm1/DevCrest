@@ -445,7 +445,7 @@
           margin-bottom: 0;
         }
         .uhd-limited-badge-compact {
-          display: inline-block;
+          display: block;
           background: #ffc600;
           color: #3c0064;
           font-weight: 700;
@@ -455,6 +455,16 @@
           letter-spacing: 0.5px;
           text-transform: uppercase;
           vertical-align: middle;
+          text-align: center;
+          width: 100%;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+        }
+        @media (min-width: 768px) {
+          .uhd-limited-badge-compact {
+            display: inline-block;
+            width: auto;
+          }
         }
         .uhd-limited-message-compact {
           font-size: 1.05rem;
@@ -542,7 +552,7 @@
         <div class="row align-items-center justify-content-between flex-column flex-md-row py-3">
           <!-- Left: Badge, Message, Terms -->
           <div class="col-md-8 d-flex align-items-center mb-3 mb-md-0">
-            <div>
+            <div class="text-center w-100">
               <span class="uhd-limited-badge-compact me-3">
                 Now Leasing for Summer Interns
               </span>
