@@ -121,25 +121,26 @@
             transform: translateX(-50%);
             width: 100vw;
             min-width: 1200px;
-            max-width: 1920px;
+            max-width: 1900px;
             height: auto;
             z-index: -1;
             pointer-events: none;
+            
+
             /* The image will overlap into the hero/purple area above for the immersive effect */
         }
         .dining-info-purple-container {
             position: relative;
             z-index: 2;
             background: #2d1e4a;
-            border-radius: 1.5rem;
             box-shadow: 0 4px 18px rgba(60,0,100,0.10);
             padding: 2.5rem 2.5rem 2.5rem 2.5rem;
             /* Align with the Clean Plate card (col-lg-3 = 1/4 of 1140px container = 285px) + gutter (approx 12px) */
-            margin: 3vw 0 3vw calc((100vw - 1140px)/2 + 0px);
+            margin: 5vw 2 5vw calc((100vw - 1140px)/2 + 0px);
             max-width: 440px;
             width: 100%;
             text-align: left;
-            opacity: 0.97;
+            opacity: 0.85;
             left: 0;
         }
         .dining-info-list-popout-white {
@@ -248,9 +249,29 @@
             color: #1a1333 !important;
         }
         .uwb-dining-logo {
-            max-width: 220px;
+            max-width: 140px;
             width: 100%;
+            height: auto;
+            margin-bottom: 1.2rem;
+        }
+
+        .pavilion {
+            color:#ffc600;
+        }
+        .statement-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: #ffc600 !important;
+            text-shadow: 1px 2px 8px rgba(44, 30, 74, 0.18);
+            font-family: 'Montserrat', Arial, sans-serif;
             margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        @media (max-width: 768px) {
+            .statement-title {
+                font-size: 1.5rem;
+            }
         }
         @media (max-width: 768px) {
             .hero-dining-content h1 { font-size: 1.5rem; }
@@ -282,7 +303,7 @@
         <div class="hero-dark-overlay"></div>
         <div class="hero-dining-content position-relative">
             <img src="https://bothelldining.campusdish.com/-/media/Local/Higher-Education/GroupH/UnivofWashingtonBothell/Images/Bothell-Dining-Logo.ashx?h=415&mh=1280&mw=1920&w=415&hash=66C59D114EF1C79626F0CB760434FFB7569E0095"
-                 alt="Bothell Dining Logo" class="uwb-dining-logo" style="max-width:220px; width:100%; margin-bottom:1.5rem;">
+                 alt="Bothell Dining Logo" class="uwb-dining-logo">
             <h1>Conference Dining & Catering</h1>
             <p>
                 Enjoy delicious, convenient dining at the <strong>Terrace Dining Pavilion</strong> during your stay at UW Bothell Residential Village.<br>
@@ -317,9 +338,9 @@
         </div>
 
         <!-- Terrace Dining Pavilion Venues Section -->
-        <div class="text-center mt-5">
-            <div class="section-title">What's Inside the Terrace Dining Pavilion?</div>
-            <div class="gold-divider mx-auto"></div>
+        <div class="text-end mt-5">
+            <div class="section-title pavilion statement-title">What's Inside the Terrace Dining Pavilion?</div>
+            <div class="gold-divider ms-auto"></div>
         </div>
         <div class="row mb-5">
             <!-- Clean Plate -->
