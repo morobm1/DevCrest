@@ -49,7 +49,9 @@
         /* Hero Section with Video Background */
         .hero-section {
             background: #000;
-            min-height: 55vh;
+            min-height: 340px;
+            max-height: 480px;
+            height: 48vw;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -90,27 +92,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 55vh;
+            min-height: 240px;
         }
         .hero-box {
             background: transparent;
             border-radius: 0;
             box-shadow: none;
-            padding: 3rem 2rem;
+            padding: 2.2rem 1.2rem;
             max-width: 700px;
             text-align: center;
         }
         .hero-box h1 {
             font-family: 'Montserrat', Arial, sans-serif;
             font-weight: 800;
-            font-size: 2.7rem;
+            font-size: 2.2rem;
             color: #fff;
             margin-bottom: 1.1rem;
             letter-spacing: -2px;
             text-shadow: 0 2px 16px rgba(0,0,0,0.35);
         }
         .hero-box p {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             color: #fff;
             margin-bottom: 1.5rem;
             text-shadow: 0 2px 16px rgba(0,0,0,0.25);
@@ -240,6 +242,20 @@
             justify-content: center;
             align-items: center;
         }
+        .flip-card-title {
+            color: var(--uhd-gold-bright);
+            font-weight: 800;
+            font-size: 1.35rem;
+            margin-bottom: 0.7rem;
+            letter-spacing: -1px;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        .flip-card-desc {
+            color: #fff;
+            font-size: 1.08rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', Arial, sans-serif;
+        }
         .btn-flip {
             background: linear-gradient(90deg, #e5c97b 0%, #ffc600 100%);
             color: #2d1e4a !important;
@@ -301,9 +317,14 @@
             border: 0;
         }
         @media (max-width: 768px) {
-            .hero-box h1 { font-size: 2rem; }
-            .hero-box { padding: 2rem 0.5rem; }
-            .hero-overlay { min-height: 40vh; }
+            .hero-section {
+                min-height: 180px;
+                height: 38vw;
+                max-height: 320px;
+            }
+            .hero-box h1 { font-size: 1.3rem; }
+            .hero-box { padding: 1.2rem 0.5rem; }
+            .hero-overlay { min-height: 120px; }
         }
     </style>
 </head>
@@ -323,7 +344,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Video Background and Modal Button -->
+    <!-- Hero Section with Vimeo Video Background and Get Started Scroll Button -->
     <header class="hero-section position-relative overflow-hidden">
         <div class="hero-video-bg">
             <iframe src="https://player.vimeo.com/video/1081610017?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0"
@@ -337,16 +358,13 @@
             <div class="hero-box">
                 <h1>Welcome to Residential Village</h1>
                 <p>Your home away from home. Explore, connect, and thrive.</p>
-                <a href="#" class="btn-primary me-2">Get Started</a>
-                <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#videoModal">
-                    <i class="bi bi-play-circle me-1"></i> WATCH OUR VIDEO
-                </button>
+                <a href="#uwb-rv-info" class="btn-primary" id="getStartedBtn">Get Started</a>
             </div>
         </div>
     </header>
 
     <!-- UW Bothell + Residential Village Info Section -->
-    <section class="uwb-rv-info-section py-5">
+    <section id="uwb-rv-info" class="uwb-rv-info-section py-5">
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-5 text-center text-lg-start">
@@ -451,8 +469,8 @@
                                 <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_027_Bedroom.webp" alt="Accommodations" class="img-fluid">
                             </div>
                             <div class="flip-card-back d-flex flex-column justify-content-center align-items-center text-center p-3">
-                                <h3>Overnight Accommodations</h3>
-                                <p>Total availability: 5,000 beds<br>Room types: Suites & Apartments<br>Bath: Private & Shared</p>
+                                <h3 class="flip-card-title">Overnight Accommodations</h3>
+                                <p class="flip-card-desc">Total availability: 5,000 beds<br>Room types: Suites & Apartments<br>Bath: Private & Shared</p>
                                 <a href="./accommodations.html" class="btn btn-flip">Accommodations</a>
                             </div>
                         </div>
@@ -467,9 +485,9 @@
                                 <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_009_Dining.webp" alt="Dining and Catering" class="img-fluid">
                             </div>
                             <div class="flip-card-back d-flex flex-column justify-content-center align-items-center text-center p-3">
-                                <h3>Food & Beverage</h3>
-                                <p>Dining plans & catering<br>Groups: 10–10,000<br>Alcohol service: Yes</p>
-                                <a href="#" class="btn btn-flip">Dining & Catering</a>
+                                <h3 class="flip-card-title">Food & Beverage</h3>
+                                <p class="flip-card-desc">Dining plans & catering<br>Groups: 10–10,000<br>Alcohol service: Yes</p>
+                                <a href="dining.html" class="btn btn-flip">Dining & Catering</a>
                             </div>
                         </div>
                     </div>
@@ -483,8 +501,8 @@
                                 <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_042_Study.webp" alt="Meeting Space" class="img-fluid">
                             </div>
                             <div class="flip-card-back d-flex flex-column justify-content-center align-items-center text-center p-3">
-                                <h3>Meeting & Event Space</h3>
-                                <p>Flexible spaces available<br>Theater, classroom, lounges</p>
+                                <h3 class="flip-card-title">Meeting & Event Space</h3>
+                                <p class="flip-card-desc">Flexible spaces available<br>Theater, classroom, lounges</p>
                                 <a href="#" class="btn btn-flip">Meeting Space</a>
                             </div>
                         </div>
@@ -562,6 +580,20 @@
     if (videoModal) {
         videoModal.addEventListener('hidden.bs.modal', stopVimeo);
     }
+    
+    // Smooth scroll for Get Started button
+    document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('getStartedBtn');
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.getElementById('uwb-rv-info');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+    });
     </script>
 </body>
 
