@@ -435,40 +435,22 @@
     </footer>
     <script>
         <?php
-        // Define the web-relative path to gallery images
-        $galleryWebPath = '/images/Gallery';
-        
-        // Define allowed image extensions
-        $allowed_ext = ['jpg','jpeg','png','gif','webp','bmp'];
-        
-        // Get physical directory path for scanning
-        $galleryDir = __DIR__ . '/../images/Gallery';
-        
-        $images = [];
-        if (is_dir($galleryDir)) {
-            foreach (scandir($galleryDir) as $file) {
-                if ($file[0] === '.') continue;
-                $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-                if (in_array($ext, $allowed_ext)) {
-                    // Extract caption from filename (remove extension and replace underscores/hyphens with spaces)
-                    $caption = pathinfo($file, PATHINFO_FILENAME);
-                    $caption = str_replace(['_', '-'], ' ', $caption);
-                    $caption = ucwords($caption); // Capitalize first letter of each word
-                    
-                    $images[] = [
-                        'filename' => $galleryWebPath . '/' . $file,
-                        'caption' => $caption
-                    ];
-                }
-            }
-            // Sort alphabetically
-            usort($images, function($a, $b) {
-                return strcmp($a['filename'], $b['filename']);
-            });
-        }
+        // Manually list all gallery images here (add or remove as needed)
+        $galleryImages = [
+            // Example entries - replace with your actual filenames
+            ['filename' => '/images/Gallery/living_room.jpg', 'caption' => 'Living Room'],
+            ['filename' => '/images/Gallery/pool_area.jpg', 'caption' => 'Pool Area'],
+            ['filename' => '/images/Gallery/gym.jpg', 'caption' => 'Gym'],
+            ['filename' => '/images/Gallery/kitchen.jpg', 'caption' => 'Kitchen'],
+            ['filename' => '/images/Gallery/bedroom.jpg', 'caption' => 'Bedroom'],
+            ['filename' => '/images/Gallery/study_room.jpg', 'caption' => 'Study Room'],
+            ['filename' => '/images/Gallery/community_space.jpg', 'caption' => 'Community Space'],
+            ['filename' => '/images/Gallery/exterior_view.jpg', 'caption' => 'Exterior View'],
+            // Add more images as needed
+        ];
         ?>
-        // Gallery images array from PHP directory scan
-        const galleryImages = <?php echo json_encode($images); ?>;
+        // Gallery images array from PHP manual list
+        const galleryImages = <?php echo json_encode($galleryImages); ?>;
         // 2. Dynamically generate the gallery grid
         const galleryMasonry = document.getElementById('galleryMasonry');
         galleryImages.forEach((img, idx) => {
