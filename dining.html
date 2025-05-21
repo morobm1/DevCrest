@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conference Dining & Catering | UW Bothell Residential Village</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Montserrat & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --uhd-purple: #2d1e4a;
+            --uhd-gold: #e5c97b;
+            --uhd-gold-bright: #ffc600;
+            --uhd-bg: #f7f7f9;
+            --uhd-dark: #1a1333;
+        }
+        body {
+            background: var(--uhd-bg);
+            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+            color: var(--uhd-dark);
+        }
+        .navbar {
+            background: var(--uhd-purple);
+        }
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: -1px;
+        }
+        .hero-dining {
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            color: #fff;
+            background: none !important;
+            overflow: hidden;
+        }
+        .hero-video-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .hero-video-bg iframe {
+            position: absolute;
+            top: 50%; left: 50%;
+            min-width: 100vw;
+            min-height: 100vh;
+            width: 177.77vh; /* 16:9 ratio */
+            height: 56.25vw;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .hero-dark-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(34, 22, 66, 0.75);
+            z-index: -1;
+        }
+        .hero-dining-content {
+            position: relative;
+            z-index: 3;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        .hero-dining-content h1 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            color: var(--uhd-gold-bright);
+            margin-bottom: 1rem;
+        }
+        .hero-dining-content p {
+            font-size: 1.2rem;
+            color: #fff;
+        }
+        .section-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 800;
+            color: var(--uhd-purple);
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+        }
+        .gold-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--uhd-gold), var(--uhd-gold-bright));
+            border-radius: 2px;
+            margin: 1rem 0 2rem 0;
+        }
+        .dining-info-list li {
+            font-size: 1.08rem;
+            margin-bottom: 0.7rem;
+        }
+        .dining-info-popout-bg-immersive {
+            position: relative;
+            width: 100vw;
+            left: 50%;
+            transform: translateX(-50%);
+            min-height: 340px;
+            margin-bottom: 2rem;
+            background: none !important;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            z-index: -1;
+        }
+        .dining-popout-img-immersive {
+            position: absolute;
+            top: -300px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            min-width: 1200px;
+            max-width: 1900px;
+            height: auto;
+            z-index: -1;
+            pointer-events: none;
+            
+
+            /* The image will overlap into the hero/purple area above for the immersive effect */
+        }
+        .dining-info-purple-container {
+            position: relative;
+            z-index: 2;
+            background: #2d1e4a;
+            box-shadow: 0 4px 18px rgba(60,0,100,0.10);
+            padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+            /* Align with the Clean Plate card (col-lg-3 = 1/4 of 1140px container = 285px) + gutter (approx 12px) */
+            margin: 5vw 2 5vw calc((100vw - 1140px)/2 + 0px);
+            max-width: 440px;
+            width: 100%;
+            text-align: left;
+            opacity: 0.85;
+            left: 0;
+        }
+        .dining-info-list-popout-white {
+            color: #fff;
+            font-size: 1.13rem;
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            background: none;
+            text-align: left;
+        }
+        .dining-info-list-popout-white li {
+            margin-bottom: 0.7rem;
+            font-weight: 500;
+        }
+        .dining-info-list-popout-white a {
+            color: #ffc600;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .dining-info-list-popout-white a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+        .dining-info-list-husky {
+            color: #2d1e4a;
+            font-size: 1.13rem;
+            font-family: 'Inter', Arial, sans-serif;
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+        }
+        .dining-info-list-husky li {
+            margin-bottom: 0.7rem;
+            font-weight: 500;
+        }
+        .dining-info-list-husky a {
+            color: #2d1e4a;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .dining-info-list-husky a:hover {
+            color: #ffc600;
+            text-decoration: none;
+        }
+        @media (max-width: 1199px) {
+            .dining-popout-img-immersive {
+                width: 100vw;
+                min-width: 0;
+                max-width: 100vw;
+            }
+            .dining-info-purple-container {
+                margin-left: 2vw;
+                max-width: 98vw;
+                padding: 1.2rem 0.7rem;
+            }
+        }
+        @media (max-width: 991px) {
+            .dining-info-popout-bg-immersive {
+                min-height: 220px;
+            }
+            .dining-info-list-popout-white {
+                font-size: 1rem;
+            }
+        }
+        .sample-menu-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 18px rgba(60,0,100,0.07);
+            margin-bottom: 2rem;
+        }
+        .sample-menu-card h4 {
+            color: var(--uhd-gold-bright);
+            font-weight: 700;
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin-bottom: 0.8rem;
+        }
+        .sample-menu-card ul {
+            margin-bottom: 0;
+        }
+        .catering-section {
+            background: #f3f0e6;
+            border-radius: 1rem;
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .catering-section h3 {
+            color: var(--uhd-purple);
+            font-weight: 700;
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin-bottom: 1rem;
+        }
+        .btn-uwgold {
+            background: linear-gradient(90deg, #e5c97b 0%, #ffc600 100%);
+            color: #2d1e4a !important;
+            border: none;
+            font-weight: 700;
+            font-size: 1.13rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(60,0,100,0.08);
+            padding: 0.75rem 2rem;
+            transition: background 0.2s, color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-uwgold:hover, .btn-uwgold:focus {
+            background: linear-gradient(90deg, #ffc600 0%, #e5c97b 100%);
+            color: #1a1333 !important;
+        }
+        .uwb-dining-logo {
+            max-width: 140px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 1.2rem;
+        }
+
+        .pavilion {
+            color:#ffc600;
+        }
+        .statement-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: #ffc600 !important;
+            text-shadow: 1px 2px 8px rgba(44, 30, 74, 0.18);
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        @media (max-width: 768px) {
+            .statement-title {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-dining-content h1 { font-size: 1.5rem; }
+            .section-title { font-size: 1.3rem; }
+            .sample-menu-card { padding: 1.2rem 0.7rem; }
+            .catering-section { padding: 1.2rem 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-arrow-left me-2"></i> Return to Conference Home
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero-dining position-relative overflow-hidden" style="background:none;">
+        <div class="hero-video-bg">
+            <iframe src="https://player.vimeo.com/video/1083740349?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                title="Terrace Dining Pavilion Video"></iframe>
+        </div>
+        <div class="hero-dark-overlay"></div>
+        <div class="hero-dining-content position-relative">
+            <img src="https://bothelldining.campusdish.com/-/media/Local/Higher-Education/GroupH/UnivofWashingtonBothell/Images/Bothell-Dining-Logo.ashx?h=415&mh=1280&mw=1920&w=415&hash=66C59D114EF1C79626F0CB760434FFB7569E0095"
+                 alt="Bothell Dining Logo" class="uwb-dining-logo">
+            <h1>Conference Dining & Catering</h1>
+            <p>
+                Enjoy delicious, convenient dining at the <strong>Terrace Dining Pavilion</strong> during your stay at UW Bothell Residential Village.<br>
+                Our dining team is committed to providing fresh, local, and sustainable meals for all conference guests.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Dining Info Section with Left-Aligned Husky Purple List and Popout Image -->
+        <div class="mb-4">
+            <div class="section-title text-start">Terrace Dining Pavilion</div>
+            <div class="gold-divider ms-0"></div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-12 px-0">
+                <div class="dining-info-popout-bg-immersive position-relative">
+                    <img src="diningback.png" alt="Terrace Dining Pavilion Popout" class="dining-popout-img-immersive" aria-hidden="true">
+                    <div class="dining-info-purple-container">
+                        <ul class="dining-info-list-popout-white position-relative m-0">
+                            <li><strong>Location:</strong> Central campus, steps from Residential Village</li>
+                            <li><strong>Service Style:</strong> All-you-care-to-eat buffet</li>
+                            <li><strong>Meal Times:</strong> Breakfast, Lunch, and Dinner available daily</li>
+                            <li><strong>Dietary Needs:</strong> Vegetarian, vegan, gluten-free, and allergen-friendly options</li>
+                            <li><strong>Group Dining:</strong> Reserved seating and group meal plans for conference guests</li>
+                            <li><strong>Hours & Menus:</strong> <a href="https://bothelldining.campusdish.com/" target="_blank">View current hours and menus</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terrace Dining Pavilion Venues Section -->
+        <div class="text-end mt-5">
+            <div class="section-title pavilion statement-title">What's Inside the Terrace Dining Pavilion?</div>
+            <div class="gold-divider ms-auto"></div>
+        </div>
+        <div class="row mb-5">
+            <!-- Clean Plate -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="sample-menu-card h-100 text-center p-0">
+                    <img src="https://bothelldining.campusdish.com/-/media/Local/Higher-Education/GroupH/UnivofWashingtonBothell/Images/clean-plate-campus-dish-header.ashx?mh=270&mw=540&hash=F4BAA060DFFBA7CF2343DD22E709ADF66AA63031" alt="Clean Plate" class="img-fluid rounded-top" style="width:100%;height:140px;object-fit:cover;">
+                    <div class="p-3">
+                        <h4>Clean Plate</h4>
+                        <p>
+                            Allergen-friendly station serving delicious meals free from the top 9 allergens and gluten. Enjoy safe, wholesome options for every guest.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Urban Kitchen + Market Bar -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="sample-menu-card h-100 text-center p-0">
+                    <img src="https://bothelldining.campusdish.com/-/media/Global/All-Divisions/Images/LocationsMenus/NavigationCards/Generic/Chicken-Parm.ashx?mh=270&mw=540&hash=B84D45F0657690909EBCEBB156826D807A5887D7" alt="Urban Kitchen + Market Bar" class="img-fluid rounded-top" style="width:100%;height:140px;object-fit:cover;">
+                    <div class="p-3">
+                        <h4>Urban Kitchen + Market Bar</h4>
+                        <p>
+                            Classic and contemporary entrées, global cuisine, and a fresh market bar with salads, fruits, and more. Rotating chef-inspired menus daily.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- The Drop -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="sample-menu-card h-100 text-center p-0">
+                    <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_021_Exterior.webp" alt="The Drop" class="img-fluid rounded-top" style="width:100%;height:140px;object-fit:cover;">
+                    <div class="p-3">
+                        <h4>The Drop</h4>
+                        <p>
+                            Beverage bar featuring espresso drinks, coffee, tea, and refreshing cold beverages. Perfect for a morning boost or afternoon break.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- The Food Lab -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="sample-menu-card h-100 text-center p-0">
+                    <img src="https://bothelldining.campusdish.com/-/media/Global/All-Divisions/Images/LocationsMenus/NavigationCards/Generic/EntreeBowl-EggChicken.ashx?mh=270&mw=540&hash=9914E85F8FAB77BF488F502E88950A7EB7E96B56" alt="The Food Lab" class="img-fluid rounded-top" style="width:100%;height:140px;object-fit:cover;">
+                    <div class="p-3">
+                        <h4>The Food Lab</h4>
+                        <p>
+                            Creative, chef-driven pop-up concepts and themed menus. Experience something new each week with innovative flavors and fun presentations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Menus Section -->
+        <div class="text-center">
+            <div class="section-title">Sample Menus</div>
+            <div class="gold-divider mx-auto"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sample-menu-card p-3">
+                    <h4>Breakfast</h4>
+                    <ul>
+                        <li>Scrambled eggs & breakfast potatoes</li>
+                        <li>Pancakes or French toast</li>
+                        <li>Fresh fruit, yogurt, and granola</li>
+                        <li>Assorted pastries & bagels</li>
+                        <li>Oatmeal bar with toppings</li>
+                        <li>Coffee, tea, and juices</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="sample-menu-card p-3">
+                    <h4>Lunch</h4>
+                    <ul>
+                        <li>Chef’s daily entrée (chicken, beef, or vegetarian)</li>
+                        <li>Seasonal vegetables & grains</li>
+                        <li>Salad bar with fresh toppings</li>
+                        <li>Pizza & pasta station</li>
+                        <li>Sandwich & deli bar</li>
+                        <li>Fresh baked cookies & dessert</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="sample-menu-card p-3">
+                    <h4>Dinner</h4>
+                    <ul>
+                        <li>Rotating hot entrées (grilled salmon, stir fry, etc.)</li>
+                        <li>Vegetarian & vegan selections</li>
+                        <li>Soup & salad bar</li>
+                        <li>International cuisine nights</li>
+                        <li>Fresh fruit & dessert bar</li>
+                        <li>Beverages included</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Catering Section -->
+        <div class="catering-section mt-5">
+            <h3>Conference Catering</h3>
+            <p>
+                For receptions, banquets, coffee breaks, or special events, our catering team offers a wide variety of options to fit your group’s needs and budget. 
+                From boxed lunches to formal buffets, we can accommodate dietary restrictions and create a memorable dining experience for your guests.
+            </p>
+            <ul>
+                <li>Customizable menus for all occasions</li>
+                <li>Locally sourced ingredients</li>
+                <li>Professional service staff</li>
+                <li>Alcohol service available for approved events</li>
+            </ul>
+            <a href="https://bothelldining.campusdish.com/Catering" target="_blank" class="btn btn-uwgold mt-3">View Catering Options</a>
+        </div>
+
+        <!-- Contact & Call to Action -->
+        <div class="text-center my-5">
+            <h3 class="section-title">Ready to Plan Your Event?</h3>
+            <p>
+                Contact our conference team to discuss dining options, group meal plans, and catering for your summer program.<br>
+                <strong>Email:</strong> <a href="mailto:info@residentialvillage.com">info@residentialvillage.com</a>
+            </p>
+            <a href="index.html" class="btn btn-uwgold mt-2">Return to Conference Home</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="uhd-footer mt-5" style="background: #2d1e4a; color: #fff; padding: 2.5rem 0 1.5rem 0;">
+        <div class="container text-center">
+            <img src="https://residentialvillage.com/wp-content/uploads/2020/10/Secondary_White_Cropped.png"
+                 alt="Residential Village Logo" style="height: 48px; width: auto; max-width: 180px; display: inline-block; margin-bottom: 1rem;">
+            <div>
+                <strong>Residential Village</strong> &mdash; 18612 Beardslee Blvd, Bothell, WA 98011<br>
+                <a href="mailto:info@residentialvillage.com" style="color:#fff;">info@residentialvillage.com</a>
+            </div>
+            <div class="mt-2" style="font-size:0.95rem;">
+                &copy; 2025 Residential Village. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JS (for navbar, if needed) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

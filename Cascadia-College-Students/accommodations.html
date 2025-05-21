@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conference Accommodations | Residential Village</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        .navbar {
+            background: #3c0064;
+            color: #fff;
+        }
+        .navbar-logo {
+            height: 40px;
+        }
+        .page-hero {
+            background: #f5f5f5;
+            padding: 2.5rem 0 1.5rem 0;
+        }
+        .hero-image {
+            max-width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        .campus-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .feature-box {
+            background-size: cover;
+            background-position: center;
+            border-radius: 1rem;
+            min-height: 180px;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        .feature-content {
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            width: 100%;
+            padding: 1.25rem 1rem 1rem 1rem;
+            border-radius: 0 0 1rem 1rem;
+            text-align: center;
+        }
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .feature-card {
+            background: #f5f5f5;
+            border-radius: 1rem;
+            padding: 1.5rem 1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cta-section {
+            background: #f8f9fa;
+            border-radius: 1rem;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        @media (max-width: 768px) {
+            .hero-image {
+                height: 180px;
+            }
+            .campus-image {
+                height: 100px;
+            }
+            .feature-box {
+                min-height: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar (Purple) -->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="https://residentialvillage.com/">
+                <i class="bi bi-arrow-left me-2"></i> Return to Resident Village
+            </a>
+            <div class="d-flex ms-auto">
+                <img src="https://residentialvillage.com/wp-content/uploads/2020/10/Secondary_White_Cropped.png"
+                    alt="Resident Village Logo" class="navbar-logo">
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header class="page-hero">
+        <div class="container text-center">
+            <h1>Conference Accommodations</h1>
+            <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_007_Dining.webp" alt="Conference Accommodations Dining Area" class="hero-image">
+        </div>
+    </header>
+
+    <!-- Intro Section -->
+    <main class="container wide-container my-5">
+        <section>
+            <p>Residential Village at UW Bothell offers modern, flexible accommodations for conferences and events. Whether you're hosting a retreat, leadership program, or seminar, our spaces are designed for comfort, collaboration, and community.</p>
+            <h2>Two Convenient Campus Locations</h2>
+        </section>
+
+        <!-- North Campus Section -->
+        <section class="campus-section my-5">
+            <h3>North Campus: A Traditional Experience</h3>
+            <p>Enjoy beautiful gathering areas, private and shared suites, and community spaces that foster connection and collaboration.</p>
+
+            <div class="row g-3 my-3">
+                <div class="col-md-3"><img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_014_Lounge.webp" class="campus-image" alt="North Lounge"></div>
+                <div class="col-md-3"><img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_004_Quad.webp" class="campus-image" alt="North Quad"></div>
+                <div class="col-md-3"><img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_011_Suite.webp" class="campus-image" alt="North Suite"></div>
+                <div class="col-md-3"><img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_008_CommunityKitchen.webp" class="campus-image" alt="North Kitchen"></div>
+            </div>
+
+            <div class="row g-3 my-4 feature-list">
+                <!-- Private Rooms -->
+                <div class="col-md-4">
+                    <div class="feature-box" style="background-image: url('https://residentialvillage.com/wp-content/uploads/2024/12/Residential_027_Bedroom.webp');">
+                        <div class="feature-content">
+                            <span class="feature-icon"><i class="bi bi-door-closed"></i></span>
+                            <h4>Private Rooms</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- Flexible Spaces -->
+                <div class="col-md-4">
+                    <div class="feature-box" style="background-image: url('https://residentialvillage.com/wp-content/uploads/2024/12/Residential_008_CommunityKitchen.webp');">
+                        <div class="feature-content">
+                            <span class="feature-icon"><i class="bi bi-arrows-move"></i></span>
+                            <h4>Flexible Spaces</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- Community Market -->
+                <div class="col-md-4">
+                    <div class="feature-box" style="background-image: url('https://residentialvillage.com/wp-content/uploads/2024/12/Residential_004_Quad.webp');">
+                        <div class="feature-content">
+                            <span class="feature-icon"><i class="bi bi-shop"></i></span>
+                            <h4>Community Market Nearby</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="text-center">
+                <a href="#" class="btn btn-primary rounded-pill">North Campus Guest Rooms</a>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <!-- West Campus Section -->
+        <section class="campus-section my-5">
+            <h3>West Campus: Urban Environment</h3>
+            <p>Enjoy modern urban living with access to cafes, lounges, and public areas. West Campus offers a vibrant, connected experience right in the heart of campus.</p>
+
+            <div class="row g-3 my-3">
+                <div class="col-md-3"><img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_012_Community.webp" class="campus-image" alt="West Community"></div>
+                <div class="col-md-3"><img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_002_Apartment.webp" class="campus-image" alt="West Apartment"></div>
+                <div class="col-md-3"><img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_009_Dining.webp" class="campus-image" alt="West Dining"></div>
+                <div class="col-md-3"><img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_005_GameRoom.webp" class="campus-image" alt="West Game Room"></div>
+            </div>
+
+            <div class="row text-center my-4">
+                <div class="col-md-4 feature-card">
+                    <i class="bi bi-controller feature-icon me-2"></i> Game Rooms
+                </div>
+                <div class="col-md-4 feature-card">
+                    <i class="bi bi-house-door feature-icon me-2"></i> Private Suites
+                </div>
+                <div class="col-md-4 feature-card">
+                    <i class="bi bi-shop feature-icon me-2"></i> District Market Nearby
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="#" class="btn btn-primary rounded-pill">West Campus Guest Rooms</a>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="cta-section text-center my-5">
+            <h3>Ready to get started?</h3>
+            <p>Book your conference accommodations today! Summer availability starts June 22, 2025.</p>
+            <a href="#" class="btn btn-primary rounded-pill">Talk to Us About Your Event</a>
+        </section>
+    </main>
+
+</body>
+
+</html>
