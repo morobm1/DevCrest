@@ -435,11 +435,15 @@
     </footer>
     <script>
         <?php
-        // Gallery folder path (relative to this PHP file)
-        $galleryDir = realpath(__DIR__ . '/../images/Gallery');
-        $galleryWebPath = '/images/Gallery'; // for use in src attribute
-
+        // Define the web-relative path to gallery images
+        $galleryWebPath = '/images/Gallery';
+        
+        // Define allowed image extensions
         $allowed_ext = ['jpg','jpeg','png','gif','webp','bmp'];
+        
+        // Get physical directory path for scanning
+        $galleryDir = __DIR__ . '/../images/Gallery';
+        
         $images = [];
         if (is_dir($galleryDir)) {
             foreach (scandir($galleryDir) as $file) {
