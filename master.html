@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Portfolio - Master</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 32px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(60,60,120,0.10);
+        }
+        h1 {
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #2d3142;
+            margin-bottom: 8px;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #4f5d75;
+            margin-bottom: 32px;
+            font-size: 1.1rem;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
+        }
+        .project-card {
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(44,62,80,0.08);
+            padding: 32px 24px;
+            transition: transform 0.13s, box-shadow 0.13s;
+            cursor: pointer;
+            text-align: center;
+            border: 1.5px solid #e0e5ec;
+            position: relative;
+        }
+        .project-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(44,62,80,0.13);
+            border-color: #7b9acc;
+        }
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #22223b;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        .project-desc {
+            color: #4f5d75;
+            font-size: 0.98rem;
+            margin-bottom: 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 12px;
+            }
+            .project-card {
+                padding: 18px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Project Portfolio</h1>
+        <p class="subtitle">Select a project to view its website. Crafted with passion as a junior developer.</p>
+        <div class="projects-grid">
+            <a class="project-card" href="https://devcrest.netlify.app/">
+                <div class="project-title">Residential Village</div>
+                <div class="project-desc">A modern living community project showcasing smart design and amenities.</div>
+            </a>
+            <a class="project-card" href="ferry-street-flats.html">
+                <div class="project-title">Ferry Street Flats</div>
+                <div class="project-desc">Urban apartments with a focus on comfort and accessibility.</div>
+            </a>
+            <a class="project-card" href="/webtemplate/index.html">
+                <div class="project-title">Ivory University House</div>
+                <div class="project-desc">Student housing designed for collaborative and productive living.</div>
+            </a>
+            <a class="project-card" href="florida-poly-phase1.html">
+                <div class="project-title">Florida Poly Phase I</div>
+                <div class="project-desc">Innovative campus development for the next generation of learners.</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
