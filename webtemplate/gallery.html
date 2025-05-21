@@ -28,7 +28,8 @@
             padding: 0;
         }
         body {
-            padding-top: calc(var(--banner-height) + var(--navbar-height));
+            /* Remove padding-top to fix white gap, and use margin on .gallery-hero instead */
+            /* padding-top: calc(var(--banner-height) + var(--navbar-height)); */
         }
         .special.banner {
             position: fixed;
@@ -107,6 +108,7 @@
             color: var(--iuh-white);
             padding: 120px 0 60px 0;
             text-align: center;
+            /* Add margin-top to offset fixed nav and banner */
             margin-top: calc(var(--banner-height) + var(--navbar-height));
         }
         .gallery-hero h1 {
@@ -199,6 +201,7 @@
             max-width: 96vw;
             max-height: 92vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
@@ -207,10 +210,11 @@
             height: 80vh;
             max-width: 90vw;
             max-height: 90vh;
-            border-radius: 10px;
+            border-radius: 10px 10px 0 0;
             box-shadow: 0 2px 16px rgba(0,0,0,0.25);
             background: var(--iuh-white);
             object-fit: contain;
+            display: block;
         }
         .lightbox-close, .lightbox-prev, .lightbox-next {
             position: absolute;
@@ -247,13 +251,29 @@
         .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
             background: var(--iuh-red);
         }
+        /* Improved Lightbox Caption Styling */
         .lightbox-caption {
-            color: var(--iuh-white);
-            text-align: center;
-            margin-top: 18px;
-            font-size: 1.2rem;
+            width: 100%;
+            max-width: 90vw;
+            margin: 0 auto;
+            padding: 0;
+            position: relative;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: #fff;
+            font-size: 1.3rem;
             font-weight: 500;
+            text-align: center;
+            z-index: 5;
+            /* Gradient background below image, fading up */
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.0) 100%);
+            border-radius: 0 0 10px 10px;
+            padding: 24px 12px 18px 12px;
+            margin-top: -12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
             text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            display: block;
         }
         @media (max-width: 900px) {
             .lightbox-content img {
@@ -280,6 +300,10 @@
             .lightbox-close {
                 top: 8px;
                 right: 8px;
+            }
+            .lightbox-caption {
+                font-size: 1.05rem;
+                padding: 14px 6px 10px 6px;
             }
         }
         /* Footer styles (same as index) */
@@ -433,8 +457,8 @@
             <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#10094;</button>
             <img src="" alt="Gallery Large" id="lightboxImg">
             <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#10095;</button>
+            <div class="lightbox-caption" id="lightboxCaption"></div>
         </div>
-        <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
     <footer class="footer-section">
         <div class="footer-section-inner">
@@ -472,17 +496,21 @@
         </div>
     </footer>
     <script>
-        // 1. List all your images here (relative to the images folder)
-        //    You can add as many as you want, just add the filename and optional caption.
+        // Manually list all gallery images here (add or remove as needed)
         const galleryImages = [
-            { filename: 'images/gallery1.jpg', caption: 'Lobby and Common Area' },
-            { filename: 'images/gallery2.jpg', caption: 'Modern Kitchen' },
-            { filename: 'images/gallery3.jpg', caption: 'Study Lounge' },
-            { filename: 'images/gallery4.jpg', caption: 'Fitness Center' },
-            { filename: 'images/gallery5.jpg', caption: 'Outdoor Courtyard' },
-            { filename: 'images/gallery6.jpg', caption: 'Private Bedroom' },
-            // Add more images as needed, e.g.:
-            // { filename: 'images/yourfilename.jpg', caption: 'Your Caption' },
+            { filename: "images/Gallery/IMG_3913.jpg", caption: "Art Room" },
+            { filename: "images/Gallery/IMG_3924.jpg", caption: "Common Area Lounge" },
+            { filename: "images/Gallery/IMG_3935.jpg", caption: "Community Space" },
+            { filename: "images/Gallery/IMG_3940.jpg", caption: "Lounge" },
+            { filename: "images/Gallery/IMG_3953.jpg", caption: "Community Study Lounge" },
+            { filename: "images/Gallery/IMG_3959.jpg", caption: "Printing Station" },
+            { filename: "images/Gallery/IMG_3973.jpg", caption: "Community Space" },
+            { filename: "images/Gallery/IMG_3981.jpg", caption: "Recreation Lounge" },
+            { filename: "images/Gallery/UofU_Dorms-1.jpg", caption: "Apartment"},
+            { filename: "images/Gallery/UofU_Dorms-2.jpg", caption: "Living Room"},
+            { filename: "images/Gallery/UofU_Dorms-3.jpg", caption: "Kitchen"},
+            { filename: "images/Gallery/UofU_Dorms-4.jpg", caption: "Bathroom"},
+            // Add more images as needed
         ];
 
         // 2. Dynamically generate the gallery grid
@@ -555,22 +583,6 @@
                 currentIndex = (currentIndex + 1) % galleryImages.length;
                 showLightbox(currentIndex);
             }
-        });
-    </script>
-</body>
-</html>
-        });
-    </script>
-</body>
-</html>
-        });
-    </script>
-</body>
-</html>
-        });
-    </script>
-</body>
-</html>
         });
     </script>
 </body>
