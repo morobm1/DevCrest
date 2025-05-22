@@ -730,19 +730,18 @@
             .contact-form h3 {
                 font-size: 1.1rem;
             }
-            /* ====== Modal Styles ====== */
+            /* ====== Modal Overlay and Content (Improved) ====== */
             .modal-overlay {
               display: none;
               position: fixed;
               z-index: 9999;
               inset: 0;
               background: rgba(34,49,63,0.75);
-              align-items: center;
-              justify-content: center;
+              overflow-y: auto;
               transition: opacity 0.3s;
             }
             .modal-overlay.active {
-              display: flex;
+              display: block;
               animation: fadeInModal 0.3s;
             }
             @keyframes fadeInModal {
@@ -752,11 +751,12 @@
             .modal-content {
               background: #fff;
               color: #222;
-              border-radius: 16px;
+              border-radius: 18px;
               box-shadow: 0 8px 48px rgba(0,0,0,0.18);
               padding: 2.5rem 2rem 2rem 2rem;
               max-width: 420px;
               width: 95vw;
+              margin: 60px auto; /* margin-top for spacing from top */
               position: relative;
               animation: modalPopIn 0.3s;
             }
@@ -784,6 +784,10 @@
               color: var(--primary);
               letter-spacing: 1px;
               text-align: center;
+              background: linear-gradient(90deg, var(--accent), var(--brand-green));
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
             }
             .modal-form {
               display: flex;
@@ -806,29 +810,32 @@
             .modal-form input[type="time"] {
               padding: 0.7rem 1rem;
               border: 1.5px solid #a6a955;
-              border-radius: 6px;
+              border-radius: 8px;
               font-size: 1rem;
               font-family: inherit;
               background: #f7f7f7;
               color: #222;
-              transition: border 0.2s;
+              transition: border 0.2s, box-shadow 0.2s;
+              box-shadow: 0 1px 4px rgba(166,169,85,0.07);
             }
             .modal-form input:focus {
               border-color: #fcbb44;
               outline: none;
+              box-shadow: 0 0 0 2px #fcbb4433;
             }
             .modal-form button[type="submit"] {
               margin-top: 0.7rem;
               background: linear-gradient(90deg, var(--accent), var(--brand-green));
               color: #fff;
               border: none;
-              border-radius: 6px;
+              border-radius: 8px;
               padding: 0.9rem 0;
               font-size: 1.1rem;
               font-weight: 700;
               cursor: pointer;
-              transition: background 0.2s;
+              transition: background 0.2s, color 0.2s;
               box-shadow: 0 2px 12px rgba(47,109,55,0.10);
+              letter-spacing: 1px;
             }
             .modal-form button[type="submit"]:hover {
               background: linear-gradient(90deg, #ffe08a, #a6a955);
@@ -841,6 +848,7 @@
               .modal-content {
                 padding: 1.2rem 0.5rem 1.5rem 0.5rem;
                 max-width: 98vw;
+                margin: 30px auto;
               }
               .modal-content h2 {
                 font-size: 1.3rem;
@@ -1105,6 +1113,12 @@
                 e.preventDefault();
                 document.getElementById('scheduleTourModal').classList.add('active');
                 document.getElementById('scheduleTourModal').setAttribute('aria-hidden', 'false');
+              
+                // Position modal near user's current scroll position
+                const modalContent = document.querySelector('#scheduleTourModal .modal-content');
+                const scrollY = window.scrollY;
+                modalContent.style.marginTop = Math.max(60, Math.min(scrollY + 60, window.innerHeight * 0.2)) + 'px';
+              
                 // Focus first input for accessibility
                 setTimeout(() => {
                   const firstInput = document.querySelector('#scheduleTourModal input:not([type="hidden"]):not([name="bot-field"])');
@@ -1121,6 +1135,7 @@
           function closeModal() {
             document.getElementById('scheduleTourModal').classList.remove('active');
             document.getElementById('scheduleTourModal').setAttribute('aria-hidden', 'true');
+            // Don't reset scroll position when modal closes
           }
           // ESC key closes modal
           document.addEventListener('keydown', function(e) {
