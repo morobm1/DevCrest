@@ -730,6 +730,122 @@
             .contact-form h3 {
                 font-size: 1.1rem;
             }
+            /* ====== Modal Styles ====== */
+            .modal-overlay {
+              display: none;
+              position: fixed;
+              z-index: 9999;
+              inset: 0;
+              background: rgba(34,49,63,0.75);
+              align-items: center;
+              justify-content: center;
+              transition: opacity 0.3s;
+            }
+            .modal-overlay.active {
+              display: flex;
+              animation: fadeInModal 0.3s;
+            }
+            @keyframes fadeInModal {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            .modal-content {
+              background: #fff;
+              color: #222;
+              border-radius: 16px;
+              box-shadow: 0 8px 48px rgba(0,0,0,0.18);
+              padding: 2.5rem 2rem 2rem 2rem;
+              max-width: 420px;
+              width: 95vw;
+              position: relative;
+              animation: modalPopIn 0.3s;
+            }
+            @keyframes modalPopIn {
+              from { transform: translateY(40px) scale(0.97); opacity: 0; }
+              to { transform: none; opacity: 1; }
+            }
+            .modal-close {
+              position: absolute;
+              top: 18px;
+              right: 18px;
+              background: none;
+              border: none;
+              font-size: 2rem;
+              color: #222;
+              cursor: pointer;
+              transition: color 0.2s;
+            }
+            .modal-close:hover { color: #fcbb44; }
+            .modal-content h2 {
+              margin-top: 0;
+              margin-bottom: 1.2rem;
+              font-size: 2rem;
+              font-weight: 900;
+              color: var(--primary);
+              letter-spacing: 1px;
+              text-align: center;
+            }
+            .modal-form {
+              display: flex;
+              flex-direction: column;
+              gap: 1rem;
+            }
+            .modal-form label {
+              font-weight: 600;
+              font-size: 1rem;
+              margin-bottom: 0.2rem;
+              color: var(--primary);
+              display: flex;
+              flex-direction: column;
+              gap: 0.3rem;
+            }
+            .modal-form input[type="text"],
+            .modal-form input[type="email"],
+            .modal-form input[type="tel"],
+            .modal-form input[type="date"],
+            .modal-form input[type="time"] {
+              padding: 0.7rem 1rem;
+              border: 1.5px solid #a6a955;
+              border-radius: 6px;
+              font-size: 1rem;
+              font-family: inherit;
+              background: #f7f7f7;
+              color: #222;
+              transition: border 0.2s;
+            }
+            .modal-form input:focus {
+              border-color: #fcbb44;
+              outline: none;
+            }
+            .modal-form button[type="submit"] {
+              margin-top: 0.7rem;
+              background: linear-gradient(90deg, var(--accent), var(--brand-green));
+              color: #fff;
+              border: none;
+              border-radius: 6px;
+              padding: 0.9rem 0;
+              font-size: 1.1rem;
+              font-weight: 700;
+              cursor: pointer;
+              transition: background 0.2s;
+              box-shadow: 0 2px 12px rgba(47,109,55,0.10);
+            }
+            .modal-form button[type="submit"]:hover {
+              background: linear-gradient(90deg, #ffe08a, #a6a955);
+              color: var(--primary);
+            }
+            .calendar-input::-webkit-calendar-picker-indicator {
+              filter: invert(38%) sepia(77%) saturate(600%) hue-rotate(30deg) brightness(1.1);
+            }
+            @media (max-width: 600px) {
+              .modal-content {
+                padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+                max-width: 98vw;
+              }
+              .modal-content h2 {
+                font-size: 1.3rem;
+              }
+            }
         }
     </style>
 </head>
@@ -756,7 +872,7 @@
         <div class="hero-content animate">
             <img src="./images/main logo.webp" alt="Ferry Street Flats" style="max-width: 320px; width: 80%; margin-bottom: 1.2rem;">
             <p class="hero-subtitle">Modern, Affordable Living in Downtown Eugene, Oregon</p>
-            <a href="contact.html" class="cta-btn">Schedule a Tour</a>
+            <a href="#" class="cta-btn">Schedule a Tour</a>
         </div>
     </header>
 
@@ -859,6 +975,58 @@
         </div>
     </section>
     <!-- ====== End Contact Section ====== -->
+
+    <!-- ====== Schedule a Tour Modal ====== -->
+    <div id="scheduleTourModal" class="modal-overlay" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" aria-label="Close">&times;</button>
+        <h2 id="modalTitle">Schedule a Tour</h2>
+        <form 
+          name="schedule-tour"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="modal-form"
+          autocomplete="off"
+        >
+          <input type="hidden" name="form-name" value="schedule-tour">
+          <p style="display:none">
+            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+          </p>
+          <label>
+            First Name
+            <input type="text" name="firstName" required>
+          </label>
+          <label>
+            Last Name
+            <input type="text" name="lastName" required>
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required>
+          </label>
+          <label>
+            Phone
+            <input type="tel" name="phone">
+          </label>
+          <label>
+            Preferred Tour Date
+            <input type="date" name="tourDate" required class="calendar-input">
+          </label>
+          <label>
+            Preferred Time
+            <input type="time" name="tourTime" required>
+          </label>
+          <label>
+            Floorplan (optional)
+            <input type="text" name="floorplan">
+          </label>
+          <button type="submit">Book Tour</button>
+        </form>
+      </div>
+    </div>
+    <!-- ====== End Modal ====== -->
+
 <script type="text/javascript">
    window.keyChatWidgetConfig = { propertyUID : '1defcf20fb6a4edbb1430b2ea692122a' };
 </script>
@@ -927,6 +1095,38 @@
         }
         window.addEventListener('scroll', animateOnScroll);
         window.addEventListener('DOMContentLoaded', animateOnScroll);
+
+        // Modal open/close logic for Schedule a Tour
+        document.addEventListener('DOMContentLoaded', function() {
+          // Open modal on Schedule a Tour button click
+          document.querySelectorAll('.cta-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+              if (btn.textContent.trim().toLowerCase().includes('schedule a tour')) {
+                e.preventDefault();
+                document.getElementById('scheduleTourModal').classList.add('active');
+                document.getElementById('scheduleTourModal').setAttribute('aria-hidden', 'false');
+                // Focus first input for accessibility
+                setTimeout(() => {
+                  const firstInput = document.querySelector('#scheduleTourModal input:not([type="hidden"]):not([name="bot-field"])');
+                  if (firstInput) firstInput.focus();
+                }, 200);
+              }
+            });
+          });
+          // Close modal on X or overlay click
+          document.querySelector('.modal-close').addEventListener('click', closeModal);
+          document.getElementById('scheduleTourModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+          });
+          function closeModal() {
+            document.getElementById('scheduleTourModal').classList.remove('active');
+            document.getElementById('scheduleTourModal').setAttribute('aria-hidden', 'true');
+          }
+          // ESC key closes modal
+          document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") closeModal();
+          });
+        });
     </script>
 </body>
 </html>
