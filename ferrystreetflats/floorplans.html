@@ -33,17 +33,17 @@
             <a href="apply.html" style="color:inherit;">Apply for your favorite today!</a>
         </div>
     </section>
-    <section class="section animate">
-        <div class="section-content" style="width:100%;">
-            <!-- Placeholder for Floorplan Viewer Widget -->
-            <div style="width:100%;max-width:900px;margin:0 auto;">
-                <div style="background:#f0efef;border:2px dashed #a6a955;padding:2rem;text-align:center;">
-                    <strong>[Floorplan Viewer Widget Placeholder]</strong><br>
-                    Interactive floorplan viewer will be embedded here.
-                </div>
-            </div>
-        </div>
+    <section class="floorplan-viewer-section animate">
+        <div id="floorplan-viewer" class="floorplan-viewer"></div>
     </section>
+
+    <!-- Modal for Floorplan Details -->
+    <div id="floorplan-modal" class="fp-modal-overlay" aria-hidden="true">
+        <div class="fp-modal-content" role="dialog" aria-modal="true" aria-labelledby="fp-modal-title">
+            <button class="fp-modal-close" aria-label="Close">&times;</button>
+            <div id="fp-modal-body"></div>
+        </div>
+    </div>
     <section class="section animate" id="virtual-tour">
         <div class="section-content" style="width:100%;">
             <h2>Virtual Tour</h2>
@@ -57,6 +57,432 @@
     <footer>
         &copy; 2024 Ferry Street Flats | 555 Ferry Street, Eugene, OR 97401 | <a href="mailto:info@ferrystreetflats.com">info@ferrystreetflats.com</a>
     </footer>
+    <style>
+        .floorplan-viewer-section {
+            background: #f7f7f7;
+            padding: 3rem 0 2rem 0;
+        }
+        .floorplan-viewer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .fp-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(47,109,55,0.08);
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem 1.2rem 1rem;
+            transition: box-shadow 0.2s, transform 0.2s;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+        }
+        .fp-card:hover, .fp-card:focus-within {
+            box-shadow: 0 8px 32px rgba(252,187,68,0.13);
+            border-color: #fcbb44;
+            transform: translateY(-4px) scale(1.02);
+        }
+        .fp-card img {
+            width: 100%;
+            max-width: 240px;
+            height: 140px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #f0efef;
+            margin-bottom: 1rem;
+        }
+        .fp-card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.7rem;
+            text-align: center;
+        }
+        .fp-card-info {
+            width: 100%;
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.3rem 0.7rem;
+        }
+        .fp-card-info span {
+            display: inline-block;
+            min-width: 90px;
+        }
+        .fp-card-availability {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #2f6d37;
+            margin-bottom: 0.5rem;
+        }
+        .fp-card-btns {
+            display: flex;
+            gap: 0.7rem;
+            width: 100%;
+            justify-content: center;
+        }
+        .fp-card-btn, .fp-card-apply {
+            background: linear-gradient(90deg, var(--accent), var(--brand-green));
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 0.6rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+            box-shadow: 0 2px 12px rgba(47,109,55,0.10);
+            text-decoration: none;
+            text-align: center;
+        }
+        .fp-card-btn:hover, .fp-card-apply:hover {
+            background: linear-gradient(90deg, #ffe08a, #a6a955);
+            color: var(--primary);
+        }
+
+        /* Modal Styles */
+        .fp-modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            background: rgba(34,49,63,0.75);
+            align-items: flex-start;
+            justify-content: center;
+            overflow-y: auto;
+        }
+        .fp-modal-overlay.active {
+            display: flex;
+            animation: fadeInModal 0.3s;
+        }
+        .fp-modal-content {
+            background: #fff;
+            color: #222;
+            border-radius: 18px;
+            box-shadow: 0 8px 48px rgba(0,0,0,0.18);
+            padding: 2.2rem 2rem 2rem 2rem;
+            max-width: 420px;
+            width: 95vw;
+            margin: 60px auto 40px auto;
+            position: relative;
+            animation: modalPopIn 0.3s;
+        }
+        .fp-modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #222;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .fp-modal-close:hover { color: #fcbb44; }
+        .fp-modal-title {
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .fp-modal-img {
+            width: 100%;
+            max-width: 340px;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: #f0efef;
+            margin: 0 auto 1.2rem auto;
+            display: block;
+        }
+        .fp-modal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.2rem;
+        }
+        .fp-modal-table td {
+            padding: 0.3rem 0.5rem;
+            font-size: 1.05rem;
+            color: #444;
+        }
+        .fp-modal-table td:first-child {
+            font-weight: 600;
+            color: var(--primary);
+            width: 40%;
+        }
+        .fp-modal-availability {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #2f6d37;
+            margin-bottom: 1.2rem;
+            text-align: center;
+        }
+        .fp-modal-desc {
+            font-size: 1.05rem;
+            color: #444;
+            margin-bottom: 1.2rem;
+            text-align: center;
+        }
+        .fp-modal-apply-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--brand-green));
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+            box-shadow: 0 2px 12px rgba(47,109,55,0.10);
+            text-align: center;
+            text-decoration: none;
+        }
+        .fp-modal-apply-btn:hover {
+            background: linear-gradient(90deg, #ffe08a, #a6a955);
+            color: var(--primary);
+        }
+        @media (max-width: 600px) {
+            .floorplan-viewer {
+                gap: 1rem;
+            }
+            .fp-card {
+                width: 98vw;
+                max-width: 340px;
+                padding: 1rem 0.5rem;
+            }
+            .fp-modal-content {
+                padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+                max-width: 98vw;
+                margin: 30px auto;
+            }
+        }
+    </style>
     <script src="main.js"></script>
+    <script>
+        const floorplans = [
+            {
+                name: "Studio A Loft",
+                img: "images/floorplans/studio-a-loft.png",
+                desc: "Spacious studio loft with open living area and modern finishes. Perfect for flexible living and working.",
+                rate: "$1,295",
+                sqft: "410",
+                available: 2,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            },
+            {
+                name: "Studio A Corner Loft",
+                img: "images/floorplans/studio-a-corner-loft.png",
+                desc: "Corner studio loft with extra windows for natural light. Features a unique layout and stylish design.",
+                rate: "$1,325",
+                sqft: "420",
+                available: 1,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            },
+            {
+                name: "Studio B Loft",
+                img: "images/floorplans/studio-b-loft.png",
+                desc: "Efficient studio loft with a cozy sleeping area and functional kitchen. Ideal for professionals on the go.",
+                rate: "$1,250",
+                sqft: "400",
+                available: 3,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            },
+            {
+                name: "Studio B Loft Corner",
+                img: "images/floorplans/studio-b-loft-corner.png",
+                desc: "Corner version of Studio B Loft, offering more privacy and additional sunlight.",
+                rate: "$1,275",
+                sqft: "410",
+                available: 1,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            },
+            {
+                name: "Studio C1",
+                img: "images/floorplans/studio-c1.png",
+                desc: "Modern studio with a smart layout, maximizing every square foot for comfort and convenience.",
+                rate: "$1,200",
+                sqft: "390",
+                available: 4,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            },
+            {
+                name: "Studio C2",
+                img: "images/floorplans/studio-c2.png",
+                desc: "Similar to C1, this studio offers a slightly different configuration for your lifestyle needs.",
+                rate: "$1,210",
+                sqft: "395",
+                available: 2,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            },
+            {
+                name: "Studio D",
+                img: "images/floorplans/studio-d.png",
+                desc: "Classic studio design with a welcoming living space and easy access to amenities.",
+                rate: "$1,180",
+                sqft: "370",
+                available: 2,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            },
+            {
+                name: "Studio D1",
+                img: "images/floorplans/studio-d1.png",
+                desc: "A variation of Studio D, featuring a unique entryway and efficient use of space.",
+                rate: "$1,185",
+                sqft: "375",
+                available: 1,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            },
+            {
+                name: "Studio D2",
+                img: "images/floorplans/studio-d2.png",
+                desc: "Bright studio with a modern kitchen and flexible living area.",
+                rate: "$1,190",
+                sqft: "380",
+                available: 2,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            },
+            {
+                name: "Studio D3",
+                img: "images/floorplans/studio-d3.png",
+                desc: "Spacious studio with a large window and open-concept layout.",
+                rate: "$1,210",
+                sqft: "400",
+                available: 1,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            },
+            {
+                name: "Studio D4",
+                img: "images/floorplans/studio-d4.png",
+                desc: "Top-floor studio with great views and a peaceful atmosphere.",
+                rate: "$1,250",
+                sqft: "410",
+                available: 1,
+                beds: 0,
+                baths: 1,
+                deposit: "$500"
+            }
+        ];
+
+        // Fallback image if not found
+        const fallbackImg = "images/floorplans/floorplan-placeholder.png";
+
+        function renderFloorplans() {
+            const container = document.getElementById('floorplan-viewer');
+            container.innerHTML = '';
+            floorplans.forEach((fp, idx) => {
+                const card = document.createElement('div');
+                card.className = 'fp-card';
+                card.tabIndex = 0;
+                card.innerHTML = `
+                    <img src="${fp.img}" alt="${fp.name} Floorplan" onerror="this.src='${fallbackImg}'">
+                    <div class="fp-card-title">${fp.name}</div>
+                    <div class="fp-card-info">
+                        <span><strong>Rate:</strong> ${fp.rate}</span>
+                        <span><strong>Sq Ft:</strong> ${fp.sqft}</span>
+                    </div>
+                    <div class="fp-card-info">
+                        <span><strong>Deposit:</strong> ${fp.deposit}</span>
+                        <span><strong>Bath:</strong> ${fp.baths}</span>
+                    </div>
+                    <div class="fp-card-availability">
+                        ${fp.available > 0 ? `<span>${fp.available} Available</span>` : `<span style="color:#c00;">Waitlist</span>`}
+                    </div>
+                    <div class="fp-card-btns">
+                        <button class="fp-card-btn" data-idx="${idx}">View Details</button>
+                        <a href="apply.html" class="fp-card-apply">Apply Now</a>
+                    </div>
+                `;
+                card.querySelector('.fp-card-btn').addEventListener('click', e => {
+                    e.stopPropagation();
+                    openFloorplanModal(idx);
+                });
+                card.addEventListener('keydown', e => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        openFloorplanModal(idx);
+                    }
+                });
+                container.appendChild(card);
+            });
+        }
+
+        function openFloorplanModal(idx) {
+            const fp = floorplans[idx];
+            const modal = document.getElementById('floorplan-modal');
+            const body = document.getElementById('fp-modal-body');
+            body.innerHTML = `
+                <div class="fp-modal-title">${fp.name}</div>
+                <img class="fp-modal-img" src="${fp.img}" alt="${fp.name} Floorplan" onerror="this.src='${fallbackImg}'">
+                <table class="fp-modal-table">
+                    <tr><td>Rate</td><td>${fp.rate}</td></tr>
+                    <tr><td>Sq Ft</td><td>${fp.sqft}</td></tr>
+                    <tr><td>Deposit</td><td>${fp.deposit}</td></tr>
+                    <tr><td>Bath</td><td>${fp.baths}</td></tr>
+                    <tr><td>Availability</td><td>${fp.available > 0 ? `${fp.available} Available` : `<span style='color:#c00;'>Waitlist</span>`}</td></tr>
+                </table>
+                <div class="fp-modal-desc">${fp.desc}</div>
+                <a href="apply.html" class="fp-modal-apply-btn">Apply for this Floorplan</a>
+            `;
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            setTimeout(() => {
+                const closeBtn = document.querySelector('.fp-modal-close');
+                if (closeBtn) closeBtn.focus();
+            }, 200);
+        }
+
+        function closeFloorplanModal() {
+            const modal = document.getElementById('floorplan-modal');
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFloorplans();
+            document.querySelector('.fp-modal-close').addEventListener('click', closeFloorplanModal);
+            document.getElementById('floorplan-modal').addEventListener('click', function(e) {
+                if (e.target === this) closeFloorplanModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape") closeFloorplanModal();
+            });
+        });
+    </script>
 </body>
 </html>
