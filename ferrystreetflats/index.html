@@ -1,0 +1,1145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferry Street Flats | Modern Living in Eugene, Oregon</title>
+    <meta name="description" content="Ferry Street Flats offers modern, affordable apartments in downtown Eugene, Oregon. Enjoy stylish living, great amenities, and a prime location.">
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,700,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Brand Colors */
+            --primary: #2f6d37;
+            --accent: #fcbb44;
+            --accent2: #a6a955;
+            --background: #fff;
+            --text: #2f6d37;
+            --nav-bg: #fff;
+            --nav-text: #2f6d37;
+            --nav-hover: #fcbb44;
+            --footer-bg: #2f6d37;
+            --footer-text: #fff;
+            --transition: 0.5s cubic-bezier(.4,0,.2,1);
+
+            /* True Brand Palette */
+            --brand-main: #fcbb44;
+            --brand-green: #2f6d37;
+            --brand-gray: #9e9e9e;
+            --brand-olive: #a6a955;
+            --brand-light: #f0efef;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            scroll-behavior: smooth;
+        }
+
+        /* Dynamic SVG backgrounds */
+        .bg-svg {
+            position: absolute;
+            width: 100vw;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .bg-svg.top {
+            top: 0;
+            height: 60vh;
+            min-height: 400px;
+        }
+        .bg-svg.bottom {
+            bottom: 0;
+            height: 300px;
+        }
+
+        header {
+            position: relative;
+            width: 100vw;
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-bg-image {
+            position: absolute;
+            inset: 0;
+            background: url('./images/community_kitchen.webp') center/cover no-repeat;
+            z-index: 1;
+            filter: brightness(0.7) saturate(1.1);
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(252,187,68,0.18) 0%, rgba(166,169,85,0.13) 100%);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            color: #fff;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            background: linear-gradient(90deg, var(--accent), var(--brand-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-content p {
+            font-size: 1.35rem;
+            font-weight: 400;
+            margin-bottom: 2.2rem;
+            opacity: 0.96;
+            text-shadow: 0 4px 16px rgba(0,0,0,0.18);
+            color: #fff;
+        }
+        .cta-btn {
+            background: linear-gradient(90deg, var(--accent), var(--brand-green));
+            color: #fff;
+            padding: 1.1rem 2.7rem;
+            border: none;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 1px;
+            outline: none;
+            transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+            text-transform: uppercase;
+            box-shadow: 0 4px 24px rgba(47,109,55,0.13);
+        }
+        .cta-btn:hover, .cta-btn:focus {
+            background: linear-gradient(90deg, #ffe08a, #a6a955);
+            color: var(--primary);
+            box-shadow: 0 8px 32px rgba(47,109,55,0.18);
+        }
+
+        nav {
+            background: var(--nav-bg);
+            border-bottom: 2px solid #eee;
+            padding: 1.1rem 0 1.1rem 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            color: var(--nav-text);
+            text-decoration: none;
+            margin: 0 2.2rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            padding: 0.3rem 0.5rem;
+            transition: color var(--transition), background var(--transition);
+            text-transform: uppercase;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--brand-green));
+            transition: width 0.3s;
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+        }
+        nav a:hover, nav a:focus {
+            color: var(--accent);
+            background: none;
+        }
+        nav a:hover::after, nav a:focus::after {
+            width: 100%;
+        }
+
+        .section {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            min-height: 400px;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background: #fff;
+        }
+        .section.reverse {
+            flex-direction: row-reverse;
+        }
+        .section-image {
+            flex: 1 1 50%;
+            min-width: 300px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .section-image::after {
+            content: '';
+            display: block;
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(252,187,68,0.09) 0%, rgba(166,169,85,0.07) 100%);
+            z-index: 1;
+        }
+        .section-content {
+            flex: 1 1 50%;
+            min-width: 300px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3.5rem 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        .section-content h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: linear-gradient(90deg, var(--accent), var(--brand-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-content p {
+            font-size: 1.15rem;
+            color: #444;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        /* Animations */
+        .animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--transition), transform 0.8s var(--transition);
+        }
+        .animate.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Gallery */
+        .gallery-section {
+            background: var(--brand-light);
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .gallery-section .bg-svg {
+            height: 200px;
+            top: unset;
+            bottom: 0;
+        }
+        .gallery-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 2.5rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: linear-gradient(90deg, var(--accent), var(--brand-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gallery img {
+            width: 370px;
+            height: 240px;
+            object-fit: cover;
+            border: none;
+            margin: 0;
+            padding: 0;
+            background: #eee;
+            transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
+            box-shadow: 0 8px 32px rgba(47,109,55,0.08);
+        }
+        .gallery img:hover, .gallery img:focus {
+            transform: scale(1.04) rotate(-1deg);
+            box-shadow: 0 16px 48px rgba(252,187,68,0.13);
+        }
+
+        /* Modern Footer Styles */
+        .site-footer {
+            background: #181c1a;
+            color: #fff;
+            padding: 48px 0 24px 0;
+            font-family: 'Inter', Arial, sans-serif;
+            letter-spacing: 0.2px;
+            margin-top: 0;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1100px;
+            margin: 0 auto 24px auto;
+            padding: 0 24px;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .footer-col {
+            flex: 1 1 220px;
+            min-width: 200px;
+            margin-bottom: 24px;
+        }
+        .footer-col h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+        .footer-col address,
+        .footer-col p,
+        .footer-col ul {
+            font-size: 1rem;
+            margin: 0 0 8px 0;
+            color: #fff;
+            font-style: normal;
+        }
+        .footer-phone a {
+            color: #fff;
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        .footer-phone a:hover,
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        .footer-hours,
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        .footer-compliance-logos {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-compliance-logos svg {
+            background: #fff;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            padding: 2px;
+        }
+        .footer-bottom {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.98rem;
+            padding-top: 12px;
+            border-top: 1px solid #222;
+            letter-spacing: 0.5px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        @media (max-width: 900px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+                padding: 0 8vw;
+            }
+            .footer-col {
+                min-width: 0;
+                width: 100%;
+            }
+            .footer-bottom {
+                padding-left: 8vw;
+                padding-right: 8vw;
+            }
+        }
+
+        /* --- Brand Section Styles --- */
+        .brand-section {
+            background: linear-gradient(90deg, var(--accent) 0%, var(--brand-green) 100%);
+            color: #fff;
+            padding: 4.5rem 0 3.5rem 0;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+            margin-top: 0;
+        }
+        .brand-container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 2.5rem;
+            width: 90%;
+        }
+        .brand-title {
+            flex: 1 1 35%;
+            font-size: 2.3rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #fff, #ffe08a 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #fff; /* fallback */
+            align-self: flex-start;
+            text-align: left;
+            min-width: 220px;
+        }
+        .brand-right {
+            flex: 2 1 65%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+        }
+        .brand-desc {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #fff;
+            opacity: 0.98;
+            /* Block/Square styling */
+            width: 600px;
+            height: 420px;
+            max-width: 90vw;
+            background: none;
+            border-radius: 0;
+            box-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: justify;
+            margin-bottom: 1.8rem;
+            margin-left: auto;
+            margin-right: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.7;
+            overflow: visible;
+            word-break: break-word;
+        }
+        .brand-highlight {
+            display: inline-block;
+            background: rgba(0,0,0,0.18);
+            color: #fff;
+            font-weight: 700;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 1.05rem;
+            margin-top: 0;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+        }
+
+        @media (max-width: 900px) {
+            .brand-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1.5rem;
+                width: 96%;
+            }
+            .brand-title,
+            .brand-right {
+                text-align: left;
+                align-items: flex-start;
+            }
+            .brand-right {
+                text-align: left;
+                align-items: flex-start;
+            }
+            .brand-desc {
+                width: 100%;
+                min-width: 0;
+                height: auto;
+                padding: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+        @media (max-width: 600px) {
+            .brand-title {
+                font-size: 1.3rem;
+            }
+            .brand-desc {
+                font-size: 1rem;
+                padding: 0.7rem;
+            }
+        }
+        /* --- Community Spaces Section Styles --- */
+        .cs-section {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            min-height: 400px;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background: #f8f8f3;
+        }
+        .cs-section-image {
+            flex: 1 1 50%;
+            min-width: 300px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .cs-section-image::after {
+            content: '';
+            display: block;
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(252,187,68,0.09) 0%, rgba(166,169,85,0.07) 100%);
+            z-index: 1;
+        }
+        .cs-section-content {
+            flex: 1 1 50%;
+            min-width: 300px;
+            background: #f8f8f3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3.5rem 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        .cs-section-content h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: linear-gradient(90deg, var(--accent), var(--brand-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .cs-section-content p {
+            font-size: 1.15rem;
+            color: #444;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        /* ====== Contact Section Styles ====== */
+        .contact-section {
+            position: relative;
+            min-height: 420px;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            z-index: 20;
+            overflow: hidden;
+        }
+        .contact-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            filter: brightness(0.6) saturate(1.1);
+            z-index: 1;
+        }
+        .contact-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 60px 40px;
+            box-sizing: border-box;
+            color: #fff;
+        }
+        .contact-info {
+            max-width: 48%;
+        }
+        .contact-info h2 {
+            font-size: 2.3rem;
+            margin: 0 0 10px 0;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.18);
+        }
+        .contact-info p {
+            font-size: 1.25rem;
+            margin: 0;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+        .contact-form {
+            background: rgba(0,0,0,0.7);
+            padding: 32px 28px 28px 28px;
+            border-radius: 10px;
+            max-width: 340px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+        }
+        .contact-form h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.35rem;
+            color: #fff;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .contact-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 0 0;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .contact-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .contact-form button:hover,
+        .contact-form button:focus {
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        /* ====== Modal Overlay and Content (Global) ====== */
+        .modal-overlay {
+          display: none;
+          position: fixed;
+          z-index: 9999;
+          inset: 0;
+          background: rgba(34,49,63,0.75);
+          overflow-y: auto;
+          transition: opacity 0.3s;
+          align-items: flex-start;
+          justify-content: center;
+        }
+        .modal-overlay.active {
+          display: flex;
+          animation: fadeInModal 0.3s;
+        }
+        @keyframes fadeInModal {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .modal-content {
+          background: #fff;
+          color: #222;
+          border-radius: 18px;
+          box-shadow: 0 8px 48px rgba(0,0,0,0.18);
+          padding: 2.5rem 2rem 2rem 2rem;
+          max-width: 420px;
+          width: 95vw;
+          margin: 60px auto 40px auto;
+          position: relative;
+          animation: modalPopIn 0.3s;
+        }
+        @keyframes modalPopIn {
+          from { transform: translateY(40px) scale(0.97); opacity: 0; }
+          to { transform: none; opacity: 1; }
+        }
+        .modal-close {
+          position: absolute;
+          top: 18px;
+          right: 18px;
+          background: none;
+          border: none;
+          font-size: 2rem;
+          color: #222;
+          cursor: pointer;
+          transition: color 0.2s;
+        }
+        .modal-close:hover { color: #fcbb44; }
+        .modal-content h2 {
+          margin-top: 0;
+          margin-bottom: 1.2rem;
+          font-size: 2rem;
+          font-weight: 900;
+          color: var(--primary);
+          letter-spacing: 1px;
+          text-align: center;
+          background: linear-gradient(90deg, var(--accent), var(--brand-green));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .modal-form {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .modal-form label {
+          font-weight: 600;
+          font-size: 1rem;
+          margin-bottom: 0.2rem;
+          color: var(--primary);
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+        }
+        .modal-form input[type="text"],
+        .modal-form input[type="email"],
+        .modal-form input[type="tel"],
+        .modal-form input[type="date"],
+        .modal-form input[type="time"] {
+          padding: 0.7rem 1rem;
+          border: 1.5px solid #a6a955;
+          border-radius: 8px;
+          font-size: 1rem;
+          font-family: inherit;
+          background: #f7f7f7;
+          color: #222;
+          transition: border 0.2s, box-shadow 0.2s;
+          box-shadow: 0 1px 4px rgba(166,169,85,0.07);
+        }
+        .modal-form input:focus {
+          border-color: #fcbb44;
+          outline: none;
+          box-shadow: 0 0 0 2px #fcbb4433;
+        }
+        .modal-form button[type="submit"] {
+          margin-top: 0.7rem;
+          background: linear-gradient(90deg, var(--accent), var(--brand-green));
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          padding: 0.9rem 0;
+          font-size: 1.1rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: background 0.2s, color 0.2s;
+          box-shadow: 0 2px 12px rgba(47,109,55,0.10);
+          letter-spacing: 1px;
+        }
+        .modal-form button[type="submit"]:hover {
+          background: linear-gradient(90deg, #ffe08a, #a6a955);
+          color: var(--primary);
+        }
+        .calendar-input::-webkit-calendar-picker-indicator {
+          filter: invert(38%) sepia(77%) saturate(600%) hue-rotate(30deg) brightness(1.1);
+        }
+        @media (max-width: 600px) {
+          .modal-content {
+            padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+            max-width: 98vw;
+            margin: 30px auto;
+          }
+          .modal-content h2 {
+            font-size: 1.3rem;
+          }
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .section-content, .cs-section-content {
+                padding: 2.2rem 1.2rem;
+            }
+            .gallery img {
+                width: 90vw;
+                max-width: 400px;
+            }
+        }
+        @media (max-width: 900px) {
+            .section, .cs-section {
+                flex-direction: column;
+                min-height: unset;
+            }
+            .section.reverse {
+                flex-direction: column;
+            }
+            .section-image, .section-content,
+            .cs-section-image, .cs-section-content {
+                min-width: 0;
+                width: 100%;
+                padding: 2rem 1rem;
+            }
+            .section-image, .cs-section-image {
+                height: 220px;
+            }
+            .contact-content {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px 10px;
+                gap: 32px;
+            }
+            .contact-info {
+                max-width: 100%;
+                margin-bottom: 24px;
+            }
+            .contact-form {
+                max-width: 100%;
+            }
+        }
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 1.7rem;
+            }
+            .section-content h2, .cs-section-content h2 {
+                font-size: 1.2rem;
+            }
+            .gallery-title {
+                font-size: 1.1rem;
+            }
+            nav a {
+                margin: 0 0.7rem;
+                font-size: 0.95rem;
+            }
+            .contact-section {
+                min-height: 0;
+            }
+            .contact-content {
+                padding: 24px 4vw;
+            }
+            .contact-info h2 {
+                font-size: 1.3rem;
+            }
+            .contact-form h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="floorplans.html">Floorplans</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="amenities.html">Amenities</a>
+        <a href="residents.html">Residents</a>
+        <a href="apply.html">Apply</a>
+        <a href="contact.html">Contact</a>
+        <a href="faq.html">FAQ</a>
+    </nav>
+    <header style="margin-bottom: 0;">
+        <!-- Dynamic SVG background shapes -->
+        <svg class="bg-svg top" viewBox="0 0 1440 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path d="M0,0 C400,200 1100,0 1440,200 L1440,0 L0,0 Z" fill="#fcbb44" fill-opacity="0.13"/>
+            <circle cx="1200" cy="80" r="120" fill="#2f6d37" fill-opacity="0.10"/>
+            <circle cx="300" cy="120" r="80" fill="#a6a955" fill-opacity="0.10"/>
+        </svg>
+        <div class="hero-bg-image"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content animate">
+            <img src="./images/main logo.webp" alt="Ferry Street Flats" style="max-width: 320px; width: 80%; margin-bottom: 1.2rem;">
+            <p class="hero-subtitle">Modern, Affordable Living in Downtown Eugene, Oregon</p>
+            <a href="#" class="cta-btn">Schedule a Tour</a>
+        </div>
+    </header>
+
+    <!-- ====== Brand Section (UPDATED) ====== -->
+    <section class="brand-section animate">
+        <div class="brand-container">
+            <div class="brand-title">Welcome to Modern Living</div>
+            <div class="brand-right">
+                <div class="brand-desc">
+                    Ferry Street Flats offers fully furnished studio and studio loft apartments designed for traveling professionals, essential workers, and members of Eugene’s workforce. Each unit is move-in ready, combining comfort, convenience, and functionality for short- or long-term stays. Located near downtown Eugene, major hospitals, business districts, and the University of Oregon, Ferry Street Flats provides easy access to work and daily essentials while maintaining a quiet, professional atmosphere. With flexible lease options, modern furnishings, and a focus on simplicity, Ferry Street Flats serves as a dependable home base for those who need to stay productive and feel at home while on assignment or in transition.
+                </div>
+                <div class="brand-highlight">
+                    Now Leasing – Studio &amp; Studio Loft Apartments
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== End Brand Section ====== -->
+
+    <!-- ====== Community Spaces Section (NEW) ====== -->
+    <section class="cs-section animate">
+        <div class="cs-section-image" style="background-image:url('./images/roof_patio.webp');"></div>
+        <div class="cs-section-content">
+            <h2>Community Spaces</h2>
+            <p>
+                Ferry Street Flats is designed with the working professional in mind. Enjoy thoughtfully curated amenities that support comfort, focus, and convenience. Settle into the cozy resident lounge for a quiet evening, stay productive in dedicated coworking spaces, and take advantage of flexible features that make life on the go easier. Every detail supports a seamless living experience for those who work hard and need a dependable place to recharge.
+            </p>
+            <a href="contact.html" class="cta-btn">Check our Amenities</a>
+    </section>
+    <!-- ====== End Community Spaces Section ====== -->
+
+    <section class="section animate">
+        <div class="section-image" style="background-image:url('./images/bedroom.webp');"></div>
+        <div class="section-content">
+            <h2>Modern Apartments</h2>
+            <p>Fully furnished studio and studio loft apartments with contemporary finishes and stainless steel appliances. Designed with working professionals in mind, each unit offers a clean, modern aesthetic and functional layout to support a comfortable, hassle-free stay. Whether you're here for work or an extended visit, Ferry Street Flats provides a welcoming space that feels like home.</p>
+        </div>
+    </section>
+    <section class="section reverse animate">
+        <div class="section-image" style="background-image:url('./images/eugene.png');"></div>
+        <div class="section-content">
+            <h2>Prime Location</h2>
+            <p>
+                Live where convenience meets connection. Ferry Street Flats puts you within walking distance of downtown Eugene’s restaurants, cafes, and nightlife, making it an ideal home for those working in the service and hospitality industry. Quick access to local hospitals, the University of Oregon, and public transit makes commuting simple. We are proud to have hosted numerous travel nurses and medical professionals who value comfort, flexibility, and location. Plus, with the riverfront trail system just steps away, it’s easy to unwind in nature after a busy day.
+            </p>
+        </div>
+    </section>
+    <section class="section animate">
+        <div class="section-image" style="background-image:url('https://images.unsplash.com/photo-1536376072261-38c75010e6c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+        <div class="section-content">
+            <h2>Great Amenities</h2>
+            <p>Ferry Street Flats is thoughtfully equipped to support your lifestyle. Enjoy the convenience of a secure building, dedicated bike storage, secure package pickup, and on-site parking. Each floor features a shared community kitchen and laundry room, offering added flexibility for daily living. Relax or connect with others on the rooftop deck, and feel right at home with our pet-friendly policy. Every amenity is designed to make your stay comfortable, safe, and convenient.</p>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <svg class="bg-svg bottom" viewBox="0 0 1440 200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path d="M0,200 C400,0 1100,200 1440,0 L1440,200 L0,200 Z" fill="#a6a955" fill-opacity="0.10"/>
+            <circle cx="200" cy="100" r="80" fill="#fcbb44" fill-opacity="0.10"/>
+            <circle cx="1240" cy="120" r="60" fill="#2f6d37" fill-opacity="0.10"/>
+        </svg>
+        <div class="gallery-title">Gallery</div>
+        <div class="gallery">
+            <img src="./images/Ferry Street Flats_A.jpg" alt="Ferry Street Flats Exterior">
+            <img src="./images/roof_patio.webp" alt="Modern Apartment Interior">
+            <img src="./images/community_kitchen.webp" alt="Rooftop Deck">
+        </div>
+    </section>
+
+    <!-- ====== Contact Section ====== -->
+    <section class="contact-section animate">
+        <div class="contact-bg"></div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2>Ferry Street Flats</h2>
+                <p style="font-size: 1.25rem; margin-top: 10px;">Ready to make your move?<br>Contact us today to schedule a tour or join our interest list!</p>
+            </div>
+<form 
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  class="contact-form"
+  autocomplete="off"
+>
+  <!-- Netlify hidden fields -->
+  <input type="hidden" name="form-name" value="contact">
+  <p style="display:none">
+    <label>Don't fill this out if you're human: <input name="bot-field"></label>
+  </p>
+  <h3>Welcome to your<br><strong>New Home!</strong></h3>
+  <input type="text" placeholder="First Name" name="firstName" required>
+  <input type="text" placeholder="Last Name" name="lastName" required>
+  <input type="email" placeholder="Email" name="email" required>
+  <input type="tel" placeholder="Phone" name="phone">
+  <input type="text" placeholder="Move-in Date" name="moveInDate">
+  <input type="text" placeholder="Floorplan" name="floorplan">
+  <button type="submit">Schedule a Tour Today!</button>
+</form>
+        </div>
+    </section>
+    <!-- ====== End Contact Section ====== -->
+
+    <!-- ====== Schedule a Tour Modal ====== -->
+    <div id="scheduleTourModal" class="modal-overlay" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" aria-label="Close">&times;</button>
+        <h2 id="modalTitle">Schedule a Tour</h2>
+        <form 
+          name="schedule-tour"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="modal-form"
+          autocomplete="off"
+        >
+          <input type="hidden" name="form-name" value="schedule-tour">
+          <p style="display:none">
+            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+          </p>
+          <label>
+            First Name
+            <input type="text" name="firstName" required>
+          </label>
+          <label>
+            Last Name
+            <input type="text" name="lastName" required>
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required>
+          </label>
+          <label>
+            Phone
+            <input type="tel" name="phone">
+          </label>
+          <label>
+            Preferred Tour Date
+            <input type="date" name="tourDate" required class="calendar-input">
+          </label>
+          <label>
+            Preferred Time
+            <input type="time" name="tourTime" required>
+          </label>
+          <label>
+            Floorplan (optional)
+            <input type="text" name="floorplan">
+          </label>
+          <button type="submit">Book Tour</button>
+        </form>
+      </div>
+    </div>
+    <!-- ====== End Modal ====== -->
+
+<script type="text/javascript">
+   window.keyChatWidgetConfig = { propertyUID : '1defcf20fb6a4edbb1430b2ea692122a' };
+</script>
+<script src="https://www.keytexting.com/assets/livechat.js"></script>
+
+    <!-- ====== Modern Footer ====== -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <address>
+                    1820 Ferry Street<br>
+                    Eugene, OR 97401
+                </address>
+                <p class="footer-phone">p: <a href="tel:15417629131">(541) 762-9131</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Office Hours</h3>
+                <ul class="footer-hours">
+                    <li>Mon–Fri: 9:00 AM–5:00 PM</li>
+                    <li>Sat: Closed &nbsp; Sun: Closed</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>More Info</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Disclosures &amp; Licenses</a></li>
+                    <li><a href="https://cardinalgroup.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a></li>
+                </ul>
+                <div class="footer-compliance-logos">
+                    <!-- Fair Housing Logo SVG -->
+                    <a href="https://www.hud.gov/program_offices/fair_housing_equal_opp" target="_blank" rel="noopener" title="Fair Housing">
+                        <svg width="36" height="36" viewBox="0 0 64 64" aria-label="Fair Housing Logo" style="vertical-align: middle; margin-right: 8px;">
+                            <rect x="12" y="28" width="40" height="24" fill="#fff" stroke="#222" stroke-width="2"/>
+                            <polygon points="32,12 8,32 12,32 12,52 52,52 52,32 56,32" fill="#fff" stroke="#222" stroke-width="2"/>
+                            <rect x="28" y="40" width="8" height="12" fill="#222"/>
+                        </svg>
+                    </a>
+                    <!-- ADA Logo SVG -->
+                    <a href="https://www.ada.gov/" target="_blank" rel="noopener" title="ADA Accessible">
+                        <svg width="36" height="36" viewBox="0 0 64 64" aria-label="ADA Logo" style="vertical-align: middle;">
+                            <circle cx="32" cy="32" r="30" fill="#fff" stroke="#222" stroke-width="2"/>
+                            <circle cx="32" cy="22" r="4" fill="#222"/>
+                            <rect x="30" y="26" width="4" height="18" fill="#222"/>
+                            <rect x="22" y="44" width="20" height="4" fill="#222"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 Ferry Street Flats
+        </div>
+    </footer>
+    <script>
+        // Simple scroll-in animation
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate');
+            const triggerBottom = window.innerHeight * 0.92;
+            elements.forEach(el => {
+                const boxTop = el.getBoundingClientRect().top;
+                if (boxTop < triggerBottom) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('DOMContentLoaded', animateOnScroll);
+
+        // Modal open/close logic for Schedule a Tour
+        document.addEventListener('DOMContentLoaded', function() {
+          // Open modal on Schedule a Tour button click
+          document.querySelectorAll('.cta-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+              if (btn.textContent.trim().toLowerCase().includes('schedule a tour')) {
+                e.preventDefault();
+                document.getElementById('scheduleTourModal').classList.add('active');
+                document.getElementById('scheduleTourModal').setAttribute('aria-hidden', 'false');
+              
+                // Focus first input for accessibility
+                setTimeout(() => {
+                  const firstInput = document.querySelector('#scheduleTourModal input:not([type="hidden"]):not([name="bot-field"])');
+                  if (firstInput) firstInput.focus();
+                }, 200);
+              }
+            });
+          });
+          // Close modal on X or overlay click
+          document.querySelector('.modal-close').addEventListener('click', closeModal);
+          document.getElementById('scheduleTourModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+          });
+          function closeModal() {
+            document.getElementById('scheduleTourModal').classList.remove('active');
+            document.getElementById('scheduleTourModal').setAttribute('aria-hidden', 'true');
+            // Don't reset scroll position when modal closes
+          }
+          // ESC key closes modal
+          document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") closeModal();
+          });
+        });
+    </script>
+</body>
+</html>

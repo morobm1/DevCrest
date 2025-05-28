@@ -1,0 +1,877 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Floor Plans | Ivory University House</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --iuh-black: #000000;
+            --iuh-white: #FFFFFF;
+            --iuh-red: #E84B3F;
+            --iuh-storm: #367D3D;
+            --iuh-blue: #4CA2C6;
+            --iuh-mayo: #F1C24B;
+            --iuh-gray: #E7E5E3;
+            --banner-height: 40px;
+            --navbar-height: 100px;
+        }
+        html, body {
+            font-family: 'Oswald', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+            font-weight: 300;
+            background: var(--iuh-gray);
+            color: var(--iuh-black);
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            padding-top: calc(var(--banner-height) + var(--navbar-height));
+        }
+        .special.banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--banner-height);
+            background-color: var(--iuh-red);
+            color: var(--iuh-white);
+            text-align: center;
+            font-weight: 700;
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.05em;
+        }
+        .navbar {
+            position: fixed;
+            top: var(--banner-height);
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            z-index: 1050;
+            background-color: var(--iuh-black);
+            margin-top: 0 !important;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .navbar .container-fluid {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 0;
+            padding-right: 0;
+            position: relative;
+        }
+        .navbar-brand {
+            position: static;
+            margin-left: 32px;
+            margin-right: 32px;
+            transform: none;
+            left: unset;
+        }
+        .navbar-brand img {
+            height: 60px;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .navbar .collapse.navbar-collapse {
+            flex-grow: 0;
+            margin-left: auto;
+        }
+        .navbar .nav-link, .navbar .btn {
+            color: var(--iuh-white) !important;
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 0.03em;
+        }
+        .navbar .btn-primary {
+            background: var(--iuh-blue);
+            border: none;
+        }
+        .navbar .btn-danger {
+            background: var(--iuh-red);
+            border: none;
+        }
+        .navbar .btn-primary:hover, .navbar .btn-danger:hover {
+            opacity: 0.85;
+        }
+
+
+        /* "WINDOW" FOR FLOORPLANS */
+        .floorplan-section {
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 6px 32px rgba(0,0,0,0.13);
+            padding: 48px 24px 64px 24px;
+            position: relative;
+            z-index: 2;
+        }
+        @media (max-width: 900px) {
+            .floorplan-section { padding: 20px 6px 40px 6px; margin-top: 20px; }
+        }
+
+        /* Filter Tabs */
+        .floorplan-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .floorplan-filter-btn {
+            border-radius: 50px !important;
+            font-weight: 600;
+            font-size: 1.08rem;
+            padding: 8px 28px;
+            border: 2px solid var(--iuh-mayo);
+            background: var(--iuh-white);
+            color: var(--iuh-black);
+            transition: background 0.18s, color 0.18s, border 0.18s;
+        }
+        .floorplan-filter-btn.active,
+        .floorplan-filter-btn:hover {
+            background: var(--iuh-mayo);
+            color: var(--iuh-black);
+            border: 2px solid var(--iuh-red);
+        }
+        /* Grid/List Toggle */
+        .floorplan-toggle {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 18px;
+            gap: 8px;
+        }
+        .floorplan-toggle-btn {
+            border: none;
+            background: var(--iuh-white);
+            color: var(--iuh-black);
+            font-size: 1.4rem;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.18s, color 0.18s;
+            cursor: pointer;
+        }
+        .floorplan-toggle-btn.active,
+        .floorplan-toggle-btn:hover {
+            background: var(--iuh-mayo);
+            color: var(--iuh-red);
+        }
+        /* Floorplan Cards */
+        .floorplan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+        }
+        .floorplan-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .floorplan-card {
+            background: var(--iuh-white);
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.18s;
+            cursor: pointer;
+            min-height: 420px;
+        }
+        .floorplan-card:hover {
+            transform: scale(1.025);
+            box-shadow: 0 6px 24px rgba(52,125,61,0.13);
+            z-index: 2;
+        }
+        .floorplan-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: var(--iuh-gray);
+        }
+        .floorplan-card-body {
+            padding: 22px 20px 18px 20px;
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .floorplan-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--iuh-storm);
+            margin-bottom: 8px;
+        }
+        .floorplan-info {
+            font-size: 1.08rem;
+            color: var(--iuh-black);
+            margin-bottom: 8px;
+        }
+        .floorplan-details {
+            font-size: 1rem;
+            color: var(--iuh-blue);
+            margin-bottom: 8px;
+        }
+        .floorplan-card .btn-view-details {
+            background: var(--iuh-red);
+            color: var(--iuh-white);
+            border: none;
+            border-radius: 6px;
+            padding: 10px 18px;
+            font-size: 1.08rem;
+            font-weight: 600;
+            margin-top: 10px;
+            align-self: flex-start;
+            transition: background 0.18s;
+        }
+        .floorplan-card .btn-view-details:hover {
+            background: var(--iuh-blue);
+        }
+        /* List View */
+        .floorplan-list .floorplan-card {
+            flex-direction: row;
+            min-height: 180px;
+            align-items: stretch;
+        }
+        .floorplan-list .floorplan-card img {
+            width: 220px;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        .floorplan-list .floorplan-card-body {
+            padding: 24px 32px;
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        /* Modal Styles */
+        .modal-backdrop-custom {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        #virtualTourContainer {
+            display: none;
+            margin-top: 24px;
+        }
+        .virtual-tour-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .virtual-tour-title {
+            font-weight: 600;
+            color: var(--iuh-storm);
+            font-size: 1.1rem;
+        }
+        .virtual-tour-fullscreen-btn {
+            background: var(--iuh-blue);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 0.98rem;
+            font-weight: 500;
+            margin-left: 12px;
+            cursor: pointer;
+            transition: background 0.18s;
+        }
+        .virtual-tour-fullscreen-btn:hover {
+            background: var(--iuh-red);
+        }
+        .virtual-tour-iframe-wrapper {
+            width: 100%;
+            aspect-ratio: 16/9;
+            min-height: 180px;
+            max-height: 280px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            background: #eee;
+            margin-bottom: 0;
+        }
+        .virtual-tour-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+            display: block;
+        }
+        @media (max-width: 700px) {
+            .virtual-tour-iframe-wrapper {
+                aspect-ratio: 16/10;
+                min-height: 120px;
+                max-height: 180px;
+            }
+        }
+        .modal-backdrop-custom.active {
+            display: flex;
+        }
+        .floorplan-modal {
+            background: var(--iuh-white);
+            border-radius: 18px;
+            max-width: 700px;
+            width: 96vw;
+            padding: 32px 24px 24px 24px;
+            box-shadow: 0 2px 24px rgba(0,0,0,0.18);
+            position: relative;
+            text-align: left;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .floorplan-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--iuh-red);
+            color: var(--iuh-white);
+            border: none;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .floorplan-modal-close:hover {
+            background: var(--iuh-blue);
+        }
+        .floorplan-modal img {
+            width: 100%;
+            max-height: 320px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            background: var(--iuh-gray);
+        }
+        .floorplan-modal-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--iuh-storm);
+            margin-bottom: 10px;
+        }
+        .floorplan-modal-info {
+            font-size: 1.1rem;
+            color: var(--iuh-black);
+            margin-bottom: 10px;
+        }
+        .floorplan-modal-details {
+            font-size: 1rem;
+            color: var(--iuh-blue);
+            margin-bottom: 14px;
+        }
+        .floorplan-modal-description {
+            font-size: 1.05rem;
+            color: var(--iuh-black);
+            margin-bottom: 0;
+        }
+        /* Lightbox styles */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.95);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-overlay.active {
+            display: flex;
+        }
+        .lightbox-img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 2px 24px rgba(0,0,0,0.5);
+            cursor: zoom-out;
+        }
+        @media (max-width: 900px) {
+            .floorplan-card img { height: 140px; }
+            .floorplan-modal img { max-height: 180px; }
+            .floorplan-list .floorplan-card img { width: 120px; }
+            .floorplan-list .floorplan-card-body { padding: 16px 12px; }
+        }
+        /* Footer styles (same as index) */
+        .footer-section {
+            width: 100vw;
+            background: var(--iuh-black);
+            color: var(--iuh-white);
+            margin: 60px 0 0 0;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+            padding: 0;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+        .footer-section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 40px 20px;
+            gap: 40px;
+        }
+        .footer-section-inner > div {
+            flex: 1 1 0;
+            min-width: 200px;
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer-logo img {
+            max-width: 180px;
+            min-width: 100px;
+            width: 100%;
+            background: var(--iuh-white);
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .footer-office-hours h3,
+        .footer-contact h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.03em;
+            color: var(--iuh-mayo);
+        }
+        .footer-office-hours p,
+        .footer-contact p {
+            margin: 0 0 6px 0;
+            font-size: 1rem;
+            color: var(--iuh-white);
+        }
+        .footer-social {
+            margin-top: 12px;
+            display: flex;
+            gap: 14px;
+            justify-content: flex-start;
+        }
+        .footer-social-icon img {
+            width: 28px;
+            height: 28px;
+            filter: grayscale(1) brightness(1.2);
+            transition: filter 0.2s;
+        }
+        .footer-social-icon img:hover {
+            filter: none;
+        }
+        @media (max-width: 900px) {
+            .footer-section-inner {
+                flex-direction: column;
+                align-items: center;
+                gap: 24px;
+                padding: 24px 10px;
+            }
+            .footer-section-inner > div {
+                min-width: 0;
+                width: 100%;
+                text-align: center;
+            }
+            .footer-logo img {
+                margin: 20px auto;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 700px) {
+            .footer-section-inner {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="special banner">Now Leasing for Fall 2024!</div>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="images/IvoryUniversityHouse_PrimaryLogo_FullColorWhiteText_Opt1.png" alt="Ivory University House logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" >
+                        <a class="nav-link" href="./our_impact.html">Our Impact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./gallery.html">Photo Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./floorplan.html">Floorplan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary">Resident Portal</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-danger"><a class="nav-link" href="./our_impact.html">Our Impact</a></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- "WINDOW" FOR FLOORPLANS -->
+    <section class="floorplan-section">
+        <div class="floorplan-filters" id="floorplanFilters">
+            <button class="floorplan-filter-btn active" data-filter="all">All</button>
+            <button class="floorplan-filter-btn" data-filter="studio">Studio</button>
+            <button class="floorplan-filter-btn" data-filter="3br">3 Bedroom</button>
+        </div>
+        <div class="floorplan-toggle">
+            <button class="floorplan-toggle-btn active" data-view="grid" aria-label="Grid View"><i class="bi bi-grid-3x3-gap"></i></button>
+            <button class="floorplan-toggle-btn" data-view="list" aria-label="List View"><i class="bi bi-list-ul"></i></button>
+        </div>
+        <div class="floorplan-grid" id="floorplanGrid">
+            <!-- Studio A1 -->
+            <div class="floorplan-card" data-type="studio">
+                <img src="./images/A1.png" alt="Studio A1 Floorplan">
+                <div class="floorplan-card-body">
+                    <div class="floorplan-title">Studio A1</div>
+                    <div class="floorplan-info"><i class="bi bi-door-closed"></i> Studio &nbsp; <i class="bi bi-droplet"></i> 1 Bath &nbsp; <i class="bi bi-arrows-fullscreen"></i> 420 sq ft</div>
+                    <div class="floorplan-details"><i class="bi bi-currency-dollar"></i> Contact for pricing</div>
+                    <button class="btn-view-details"
+                        data-title="Studio A1"
+                        data-img="images/A1.png"
+                        data-info="Studio • 1 Bath • 420 sq ft"
+                        data-details="Contact for pricing"
+                        data-description="Studio A1 offers a modern, open-concept living space with a private bathroom and in-unit laundry.">View Details</button>
+                </div>
+            </div>
+            <!-- Studio A2 -->
+            <div class="floorplan-card" data-type="studio">
+                <img src="./images/A2.png" alt="Studio A2 Floorplan">
+                <div class="floorplan-card-body">
+                    <div class="floorplan-title">Studio A2</div>
+                    <div class="floorplan-info"><i class="bi bi-door-closed"></i> Studio &nbsp; <i class="bi bi-droplet"></i> 1 Bath &nbsp; <i class="bi bi-arrows-fullscreen"></i> 420 sq ft</div>
+                    <div class="floorplan-details"><i class="bi bi-currency-dollar"></i> Contact for pricing</div>
+                    <button class="btn-view-details"
+                        data-title="Studio A2"
+                        data-img="images/A2.png"
+                        data-info="Studio • 1 Bath • 420 sq ft"
+                        data-details="Contact for pricing"
+                        data-description="Studio A2 features a similar layout to A1 with a modern kitchen, private bath, and in-unit laundry.">View Details</button>
+                </div>
+            </div>
+            <!-- Studio B1 -->
+            <div class="floorplan-card" data-type="studio">
+                <img src="./images/B1.png" alt="Studio B1 Floorplan">
+                <div class="floorplan-card-body">
+                    <div class="floorplan-title">Studio B1</div>
+                    <div class="floorplan-info"><i class="bi bi-door-closed"></i> Studio &nbsp; <i class="bi bi-droplet"></i> 1 Bath &nbsp; <i class="bi bi-arrows-fullscreen"></i> 420 sq ft</div>
+                    <div class="floorplan-details"><i class="bi bi-currency-dollar"></i> Contact for pricing</div>
+                    <button class="btn-view-details"
+                        data-title="Studio B1"
+                        data-img="images/B1.png"
+                        data-info="Studio • 1 Bath • 420 sq ft"
+                        data-details="Contact for pricing"
+                        data-description="Studio B1 is a studio layout with a modern kitchen, private bath, and in-unit laundry.">View Details</button>
+                </div>
+            </div>
+            <!-- Studio C1 -->
+            <div class="floorplan-card" data-type="studio">
+                <img src="./images/C1.png" alt="Studio C1 Floorplan">
+                <div class="floorplan-card-body">
+                    <div class="floorplan-title">Studio C1</div>
+                    <div class="floorplan-info"><i class="bi bi-door-closed"></i> Studio &nbsp; <i class="bi bi-droplet"></i> 1 Bath &nbsp; <i class="bi bi-arrows-fullscreen"></i> 420 sq ft</div>
+                    <div class="floorplan-details"><i class="bi bi-currency-dollar"></i> Contact for pricing</div>
+                    <button class="btn-view-details"
+                        data-title="Studio C1"
+                        data-img="images/C1.png"
+                        data-info="Studio • 1 Bath • 420 sq ft"
+                        data-details="Contact for pricing"
+                        data-description="Studio C1 offers a spacious studio layout with a private bathroom and in-unit laundry.">View Details</button>
+                </div>
+            </div>
+            <!-- Studio C2 -->
+            <div class="floorplan-card" data-type="studio">
+                <img src="./images/C2.png" alt="Studio C2 Floorplan">
+                <div class="floorplan-card-body">
+                    <div class="floorplan-title">Studio C2</div>
+                    <div class="floorplan-info"><i class="bi bi-door-closed"></i> Studio &nbsp; <i class="bi bi-droplet"></i> 1 Bath &nbsp; <i class="bi bi-arrows-fullscreen"></i> 420 sq ft</div>
+                    <div class="floorplan-details"><i class="bi bi-currency-dollar"></i> Contact for pricing</div>
+                    <button class="btn-view-details"
+                        data-title="Studio C2"
+                        data-img="images/C2.png"
+                        data-info="Studio • 1 Bath • 420 sq ft"
+                        data-details="Contact for pricing"
+                        data-description="Studio C2 features a modern studio layout with a private bath and in-unit laundry.">View Details</button>
+                </div>
+            </div>
+            <!-- Studio C3 -->
+            <div class="floorplan-card" data-type="studio">
+                <img src="./images/C2.png" alt="Studio C3 Floorplan">
+                <div class="floorplan-card-body">
+                    <div class="floorplan-title">Studio C3</div>
+                    <div class="floorplan-info"><i class="bi bi-door-closed"></i> Studio &nbsp; <i class="bi bi-droplet"></i> 1 Bath &nbsp; <i class="bi bi-arrows-fullscreen"></i> 420 sq ft</div>
+                    <div class="floorplan-details"><i class="bi bi-currency-dollar"></i> Contact for pricing</div>
+                    <button class="btn-view-details"
+                        data-title="Studio C3"
+                        data-img="images/C2.png"
+                        data-info="Studio • 1 Bath • 420 sq ft"
+                        data-details="Contact for pricing"
+                        data-description="Studio C3 provides a studio layout with a large living area and in-unit laundry.">View Details</button>
+                </div>
+            </div>
+            <!-- D1 (3x3) -->
+            <div class="floorplan-card" data-type="3br">
+                <img src="./images/D1.jpg" alt="D1 Floorplan">
+                <div class="floorplan-card-body">
+                    <div class="floorplan-title">D1</div>
+                    <div class="floorplan-info"><i class="bi bi-door-closed"></i> 3 Bed &nbsp; <i class="bi bi-droplet"></i> 3 Bath &nbsp; <i class="bi bi-arrows-fullscreen"></i> 1,170 sq ft</div>
+                    <div class="floorplan-details"><i class="bi bi-currency-dollar"></i> Contact for pricing</div>
+                    <button class="btn-view-details"
+                        data-title="D1"
+                        data-img="images/D1.jpg"
+                        data-info="3 Bed • 3 Bath • 1,170 sq ft"
+                        data-details="Contact for pricing"
+                        data-description="D1 is a spacious 3-bedroom, 3-bath floor plan with private bedrooms, modern kitchen, and in-unit laundry.">View Details</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal for Floorplan Details -->
+    <div class="modal-backdrop-custom" id="floorplanModalBackdrop">
+        <div class="floorplan-modal" id="floorplanModal">
+            <button class="floorplan-modal-close" id="floorplanModalClose" aria-label="Close">&times;</button>
+            <img src="" alt="Floorplan Large" id="modalImg" style="cursor: zoom-in;">
+            <div class="floorplan-modal-title" id="modalTitle"></div>
+            <div class="floorplan-modal-info" id="modalInfo"></div>
+            <div class="floorplan-modal-details" id="modalDetails"></div>
+            <div class="floorplan-modal-description" id="modalDescription"></div>
+            <!-- Virtual Tour Container (hidden by default) -->
+            <div id="virtualTourContainer">
+                <div class="virtual-tour-header">
+                    <span class="virtual-tour-title">Virtual Tour</span>
+                    <button class="virtual-tour-fullscreen-btn" id="virtualTourFullscreenBtn" type="button">
+                        View Fullscreen
+                    </button>
+                </div>
+                <div class="virtual-tour-iframe-wrapper">
+                    <iframe
+                        id="virtualTourIframe"
+                        src=""
+                        class="virtual-tour-iframe"
+                        allowfullscreen
+                        loading="lazy"
+                        title="D1 Virtual Tour"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Lightbox overlay for fullscreen image -->
+    <div id="lightboxOverlay" class="lightbox-overlay">
+        <img id="lightboxImg" src="" alt="Floorplan Fullscreen" class="lightbox-img">
+    </div>
+    <footer class="footer-section">
+        <div class="footer-section-inner">
+            <div class="footer-office-hours">
+                <h3>OFFICE HOURS</h3>
+                <p>M-F 9AM - 6PM</p>
+                <p>SAT 10AM - 5PM</p>
+                <p>SUN 1PM - 5PM</p>
+                <p style="color: var(--iuh-red); font-weight: bold; margin-top: 10px;">🔍 RESIDENTS</p>
+                <p style="color: var(--iuh-red); text-transform: uppercase; font-weight: bold; margin-top: 5px;">Schedule a Self-Guided Tour</p>
+            </div>
+            <div class="footer-logo">
+                <img src="images/IvoryUniversityHouse_PrimaryLogo_OneColor_Black.png" alt="Ivory University House logo">
+            </div>
+            <div class="footer-contact">
+                <h3>CONTACT US</h3>
+                <p>1949 E UNIVERSITY DR.</p>
+                <p>TEMPE, AZ 85281</p>
+                <p style="font-weight: bold;">CALL OR TEXT (520) 422-7879</p>
+                <div class="footer-social">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook">
+                    </a>
+                    <a href="https://twitter.com" target="_blank" aria-label="Twitter" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter">
+                    </a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram">
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Filtering
+        const filterBtns = document.querySelectorAll('.floorplan-filter-btn');
+        const floorplanCards = document.querySelectorAll('.floorplan-card');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const filter = this.getAttribute('data-filter');
+                floorplanCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-type') === filter) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Grid/List Toggle
+        const gridBtn = document.querySelector('.floorplan-toggle-btn[data-view="grid"]');
+        const listBtn = document.querySelector('.floorplan-toggle-btn[data-view="list"]');
+        const floorplanGrid = document.getElementById('floorplanGrid');
+        gridBtn.addEventListener('click', function() {
+            gridBtn.classList.add('active');
+            listBtn.classList.remove('active');
+            floorplanGrid.classList.remove('floorplan-list');
+            floorplanGrid.classList.add('floorplan-grid');
+        });
+        listBtn.addEventListener('click', function() {
+            listBtn.classList.add('active');
+            gridBtn.classList.remove('active');
+            floorplanGrid.classList.remove('floorplan-grid');
+            floorplanGrid.classList.add('floorplan-list');
+        });
+
+        // Modal
+        const modalBackdrop = document.getElementById('floorplanModalBackdrop');
+        const modalClose = document.getElementById('floorplanModalClose');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalInfo = document.getElementById('modalInfo');
+        const modalDetails = document.getElementById('modalDetails');
+        const modalDescription = document.getElementById('modalDescription');
+        // Virtual tour elements
+        const virtualTourContainer = document.getElementById('virtualTourContainer');
+        const virtualTourIframe = document.getElementById('virtualTourIframe');
+        const virtualTourFullscreenBtn = document.getElementById('virtualTourFullscreenBtn');
+        let currentTourUrl = '';
+
+        document.querySelectorAll('.btn-view-details').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                modalImg.src = this.getAttribute('data-img');
+                modalTitle.textContent = this.getAttribute('data-title');
+                modalInfo.textContent = this.getAttribute('data-info');
+                modalDetails.textContent = this.getAttribute('data-details');
+                modalDescription.textContent = this.getAttribute('data-description');
+                
+                // Show virtual tour only for D1
+                if (this.getAttribute('data-title') === 'D1') {
+                    currentTourUrl = 'https://tour.theviewvr.com/?locationId=3528';
+                    virtualTourContainer.style.display = 'block';
+                    virtualTourIframe.src = currentTourUrl;
+                } else {
+                    virtualTourContainer.style.display = 'none';
+                    virtualTourIframe.src = '';
+                    currentTourUrl = '';
+                }
+                
+                modalBackdrop.classList.add('active');
+            });
+        });
+        
+        virtualTourFullscreenBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (currentTourUrl) {
+                window.open(currentTourUrl, '_blank');
+            }
+        });
+        modalClose.addEventListener('click', function() {
+            modalBackdrop.classList.remove('active');
+            modalImg.src = '';
+            virtualTourContainer.style.display = 'none';
+            virtualTourIframe.src = '';
+            currentTourUrl = '';
+        });
+        modalBackdrop.addEventListener('click', function(e) {
+            if (e.target === modalBackdrop) {
+                modalBackdrop.classList.remove('active');
+                modalImg.src = '';
+                virtualTourContainer.style.display = 'none';
+                virtualTourIframe.src = '';
+                currentTourUrl = '';
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (!modalBackdrop.classList.contains('active')) return;
+            if (e.key === "Escape") {
+                modalBackdrop.classList.remove('active');
+                modalImg.src = '';
+                virtualTourContainer.style.display = 'none';
+                virtualTourIframe.src = '';
+                currentTourUrl = '';
+            }
+        });
+
+        // Lightbox logic
+        const lightboxOverlay = document.getElementById('lightboxOverlay');
+        const lightboxImg = document.getElementById('lightboxImg');
+        
+        modalImg.addEventListener('click', function() {
+            if (!modalImg.src) return;
+            lightboxImg.src = modalImg.src;
+            lightboxOverlay.classList.add('active');
+        });
+        
+        lightboxOverlay.addEventListener('click', function() {
+            lightboxOverlay.classList.remove('active');
+            lightboxImg.src = '';
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (lightboxOverlay.classList.contains('active') && e.key === "Escape") {
+                lightboxOverlay.classList.remove('active');
+                lightboxImg.src = '';
+            }
+        });
+    </script>
+</body>
+</html>

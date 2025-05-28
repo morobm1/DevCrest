@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Our Impact | Ivory University House</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <style>
+        :root {
+            --iuh-black: #000000;
+            --iuh-white: #FFFFFF;
+            --iuh-red: #E84B3F;
+            --iuh-storm: #367D3D;
+            --iuh-blue: #4CA2C6;
+            --iuh-mayo: #F1C24B;
+            --iuh-gray: #E7E5E3;
+            --banner-height: 40px;
+            --navbar-height: 100px;
+        }
+        body, html {
+            font-family: 'Oswald', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+            font-weight: 300;
+            background: var(--iuh-gray);
+            color: var(--iuh-black);
+        }
+        h1, h2, h3, h4, h5, h6, .navbar-brand {
+            font-family: 'Oswald', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .section-main h1, .section-main h2, .section-main h3 {
+            font-weight: 700;
+        }
+        .section-main p, .section-main button, .gallery-section, .perks-section, .community-section, .footer-section {
+            font-family: 'Oswald', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+            font-weight: 300;
+        }
+        body {
+            padding-top: calc(var(--banner-height) + var(--navbar-height));
+        }
+        .special.banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--banner-height);
+            background-color: var(--iuh-red);
+            color: var(--iuh-white);
+            text-align: center;
+            font-weight: 700;
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.05em;
+        }
+        .navbar {
+            position: fixed;
+            top: var(--banner-height);
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            z-index: 1050;
+            background-color: var(--iuh-black);
+            margin-top: 0 !important;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .navbar .container-fluid {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 0;
+            padding-right: 0;
+            position: relative;
+        }
+        .navbar-brand {
+            position: static;
+            margin-left: 32px;
+            margin-right: 32px;
+            transform: none;
+            left: unset;
+        }
+        .navbar-brand img {
+            height: 60px;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .navbar .collapse.navbar-collapse {
+            flex-grow: 0;
+            margin-left: auto;
+        }
+        .navbar .nav-link, .navbar .btn {
+            color: var(--iuh-white) !important;
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 0.03em;
+        }
+        .navbar .btn-primary {
+            background: var(--iuh-blue);
+            border: none;
+        }
+        .navbar .btn-danger {
+            background: var(--iuh-red);
+            border: none;
+        }
+        .navbar .btn-primary:hover, .navbar .btn-danger:hover {
+            opacity: 0.85;
+        }
+        /* HERO VIDEO */
+        .hero-impact-video {
+            width: 100vw;
+            height: 60vh;
+            min-height: 320px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-impact-video video {
+            width: 100vw;
+            height: 60vh;
+            min-height: 320px;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 1;
+        }
+        .hero-impact-video-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 2;
+        }
+        .hero-impact-content {
+            position: relative;
+            z-index: 3;
+            color: var(--iuh-white);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .hero-impact-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: 0.04em;
+        }
+        .hero-impact-content p {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+        .impact-section {
+            background: var(--iuh-white);
+            padding: 60px 0 40px 0;
+        }
+        .impact-section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .impact-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+        .impact-stat {
+            flex: 1 1 220px;
+            background: var(--iuh-mayo);
+            color: var(--iuh-black);
+            border-radius: 10px;
+            padding: 32px 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .impact-stat h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--iuh-red);
+        }
+        .impact-stat p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        /* Embedded YouTube Video */
+        .impact-video-embed {
+            margin: 40px 0;
+            text-align: center;
+        }
+        .impact-video-embed h2 {
+            color: #367D3D;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        .impact-video-embed .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .impact-video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .impact-stories {
+            margin-top: 40px;
+        }
+        .impact-story {
+            background: var(--iuh-gray);
+            border-radius: 8px;
+            padding: 28px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .impact-story h3 {
+            color: var(--iuh-storm);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .impact-story p {
+            font-size: 1.08rem;
+            color: var(--iuh-black);
+        }
+        .impact-cta {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .btn-impact-cta {
+            padding: 14px 36px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: var(--iuh-red);
+            color: var(--iuh-white);
+            border: none;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            transition: background 0.2s;
+        }
+        .btn-impact-cta:hover {
+            background: var(--iuh-blue);
+            color: var(--iuh-white);
+        }
+        /* Donor Section */
+        .donor-section {
+            background: var(--iuh-gray);
+            padding: 60px 0 40px 0;
+        }
+        .donor-section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .donor-section h2 {
+            font-size: 2.2rem;
+            color: var(--iuh-storm);
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+        .donor-section p {
+            font-size: 1.15rem;
+            color: var(--iuh-black);
+            margin-bottom: 32px;
+        }
+        .donor-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 36px 48px;
+            align-items: center;
+        }
+        .donor-logo {
+            background: var(--iuh-white);
+            border-radius: 8px;
+            padding: 18px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            min-height: 60px;
+            max-width: 220px;
+            max-height: 80px;
+        }
+        .donor-logo img {
+            max-width: 160px;
+            max-height: 60px;
+            width: auto;
+            height: auto;
+            display: block;
+        }
+        /* News Section */
+        .news-section {
+            background: var(--iuh-white);
+            padding: 60px 0 40px 0;
+        }
+        .news-section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .news-section h2 {
+            font-size: 2.2rem;
+            color: var(--iuh-storm);
+            font-weight: 700;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        .news-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+        }
+        .news-item {
+            background: var(--iuh-gray);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            padding: 24px 20px;
+            flex: 1 1 320px;
+            max-width: 350px;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .news-item h3 {
+            color: var(--iuh-red);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .news-item p {
+            color: var(--iuh-black);
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+        .news-item a {
+            color: var(--iuh-blue);
+            font-weight: 600;
+            text-decoration: underline;
+            font-size: 1rem;
+        }
+        .news-item a:hover {
+            color: var(--iuh-red);
+        }
+        /* Footer styles (same as index) */
+        .footer-section {
+            width: 100vw;
+            background: var(--iuh-black);
+            color: var(--iuh-white);
+            margin: 60px 0 0 0;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+            padding: 0;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+        .footer-section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 40px 20px;
+            gap: 40px;
+        }
+        .footer-section-inner > div {
+            flex: 1 1 0;
+            min-width: 200px;
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer-logo img {
+            max-width: 180px;
+            min-width: 100px;
+            width: 100%;
+            background: var(--iuh-white);
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .footer-office-hours h3,
+        .footer-contact h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.03em;
+            color: var(--iuh-mayo);
+        }
+        .footer-office-hours p,
+        .footer-contact p {
+            margin: 0 0 6px 0;
+            font-size: 1rem;
+            color: var(--iuh-white);
+        }
+        .footer-social {
+            margin-top: 12px;
+            display: flex;
+            gap: 14px;
+            justify-content: flex-start;
+        }
+        .footer-social-icon img {
+            width: 28px;
+            height: 28px;
+            filter: grayscale(1) brightness(1.2);
+            transition: filter 0.2s;
+        }
+        .footer-social-icon img:hover {
+            filter: none;
+        }
+        @media (max-width: 900px) {
+            .impact-stats, .news-list, .donor-logos {
+                flex-direction: column;
+                gap: 24px;
+            }
+            .footer-section-inner {
+                flex-direction: column;
+                align-items: center;
+                gap: 24px;
+                padding: 24px 10px;
+            }
+            .footer-section-inner > div {
+                min-width: 0;
+                width: 100%;
+                text-align: center;
+            }
+            .footer-logo img {
+                margin: 20px auto;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 700px) {
+            .hero-impact-video {
+                height: 32vh;
+                min-height: 180px;
+            }
+            .impact-section-inner, .news-section-inner, .donor-section-inner {
+                padding: 0 6px;
+            }
+            .footer-section-inner {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            window.addEventListener("scroll", function() {
+                let navbar = document.querySelector(".navbar");
+                if (window.scrollY > 50) {
+                    navbar.classList.add("scrolled");
+                } else {
+                    navbar.classList.remove("scrolled");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="special banner">Special Go Here</div>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="images/IvoryUniversityHouse_PrimaryLogo_FullColorWhiteText_Opt1.png" alt="Ivory University House logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" >
+                        <a class="nav-link" href="./our_impact.html">Our Impact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./gallery.html">Photo Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./floorplan.html">Floorplan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary">Resident Portal</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-danger"><a class="nav-link" href="./our_impact.html">Our Impact</a></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- HERO IMPACT VIDEO SECTION -->
+    <div class="hero-impact-video">
+        <video autoplay muted loop playsinline>
+            <source src="images/ivoryvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-impact-video-overlay"></div>
+        <div class="hero-impact-content">
+            <h1>Our Impact</h1>
+            <p>
+                Ivory University House is more than a place to live. It’s a place to belong, to grow, and to make a difference. Our mission is to provide affordable, safe, and supportive housing for students, empowering them to succeed academically and personally while giving back to the community.
+            </p>
+        </div>
+    </div>
+    <section class="impact-section">
+        <div class="impact-section-inner">
+            <div class="impact-stats">
+                <div class="impact-stat">
+                    <h2>98%</h2>
+                    <p>Resident Satisfaction Rate</p>
+                </div>
+                <div class="impact-stat">
+                    <h2>120+</h2>
+                    <p>Community Events Hosted Annually</p>
+                </div>
+                <div class="impact-stat">
+                    <h2>50+</h2>
+                    <p>Scholarships Awarded</p>
+                </div>
+                <div class="impact-stat">
+                    <h2>100%</h2>
+                    <p>Substance-Free Commitment</p>
+                </div>
+            </div>
+            <!-- BEGIN: YouTube Video Embed -->
+            <div class="impact-video-embed">
+                <h2>Watch Our Story</h2>
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/GsX4WkO_02o" 
+                        title="Ivory University House Impact Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <!-- END: YouTube Video Embed -->
+            <div class="impact-stories">
+                <div class="impact-story">
+                    <h3>Empowering Academic Success</h3>
+                    <p>
+                        "Living at Ivory University House gave me the quiet study spaces and supportive community I needed to excel in my classes. The mentorship programs and academic workshops helped me stay on track and achieve my goals."
+                        <br><em>- Jordan, Resident</em>
+                    </p>
+                </div>
+                <div class="impact-story">
+                    <h3>Building Lifelong Friendships</h3>
+                    <p>
+                        "The events and activities at IUH made it easy to meet new people and build lasting friendships. I always felt included and valued, and I know I've made connections that will last a lifetime."
+                        <br><em>- Taylor, Resident</em>
+                    </p>
+                </div>
+                <div class="impact-story">
+                    <h3>Giving Back to the Community</h3>
+                    <p>
+                        "Through service projects and volunteering, I've been able to make a real difference in the local community. IUH encourages us to give back and supports our efforts every step of the way."
+                        <br><em>- Morgan, Resident</em>
+                    </p>
+                </div>
+            </div>
+            <div class="impact-cta">
+                <a href="index.html#contact" class="btn-impact-cta">Join Our Community</a>
+            </div>
+        </div>
+    </section>
+    <!-- DONOR SECTION -->
+    <section class="donor-section">
+        <div class="donor-section-inner">
+            <h2>Our Donors</h2>
+            <p>
+                Ivory University House is made possible by the generosity of our donors and partners. Their support helps us provide affordable housing, scholarships, and a vibrant community for students. We are grateful for their commitment to student success and community impact.
+            </p>
+            <div class="donor-logos">
+                <div class="donor-logo">
+                    <img src="images/IvoryUniversityHouse_PrimaryLogo_OneColor_Black.png" alt="Ivory Foundation">
+                </div>
+                <div class="donor-logo">
+                    <img src="https://www.ivoryuniversityhouse.com/wp-content/uploads/2023/07/University-of-Utah-Logo.png" alt="University of Utah">
+                </div>
+                <div class="donor-logo">
+                    <img src="https://www.ivoryuniversityhouse.com/wp-content/uploads/2023/07/Ivory-Foundation-Logo.png" alt="Ivory Foundation">
+                </div>
+                <div class="donor-logo">
+                    <img src="https://www.ivoryuniversityhouse.com/wp-content/uploads/2023/07/Ivory-Charitable-Foundation-Logo.png" alt="Ivory Charitable Foundation">
+                </div>
+                <!-- Add more donor logos as needed -->
+            </div>
+        </div>
+    </section>
+    <!-- NEWS SECTION -->
+    <section class="news-section">
+        <div class="news-section-inner">
+            <h2>News &amp; Updates</h2>
+            <div class="news-list">
+                <div class="news-item">
+                    <h3>Ivory University House Celebrates Grand Opening</h3>
+                    <p>
+                        The grand opening of Ivory University House marks a new chapter in affordable student housing at the University of Utah. Students, donors, and community leaders gathered to celebrate this milestone.
+                    </p>
+                    <a href="https://www.ivoryuniversityhouse.com/2023/08/21/ivory-university-house-celebrates-grand-opening/" target="_blank">Read More</a>
+                </div>
+                <div class="news-item">
+                    <h3>Ivory University House Receives National Recognition</h3>
+                    <p>
+                        Ivory University House has been recognized nationally for its innovative approach to student housing and its commitment to affordability, safety, and community engagement.
+                    </p>
+                    <a href="https://www.ivoryuniversityhouse.com/2023/09/15/ivory-university-house-receives-national-recognition/" target="_blank">Read More</a>
+                </div>
+                <div class="news-item">
+                    <h3>Students Give Back Through Service Projects</h3>
+                    <p>
+                        Residents of Ivory University House are making a difference through a variety of service projects, volunteering their time and talents to benefit the local community.
+                    </p>
+                    <a href="https://www.ivoryuniversityhouse.com/2023/10/05/students-give-back-through-service-projects/" target="_blank">Read More</a>
+                </div>
+                <!-- Add more news items as needed -->
+            </div>
+        </div>
+    </section>
+    <footer class="footer-section">
+        <div class="footer-section-inner">
+            <div class="footer-office-hours">
+                <h3>OFFICE HOURS</h3>
+                <p>M-F 9AM - 6PM</p>
+                <p>SAT 10AM - 5PM</p>
+                <p>SUN 1PM - 5PM</p>
+                <p style="color: var(--iuh-red); font-weight: bold; margin-top: 10px;">🔍 RESIDENTS</p>
+                <p style="color: var(--iuh-red); text-transform: uppercase; font-weight: bold; margin-top: 5px;">Schedule a Self-Guided Tour</p>
+            </div>
+            <div class="footer-logo">
+                <img src="images/IvoryUniversityHouse_PrimaryLogo_OneColor_Black.png" alt="Ivory University House logo">
+            </div>
+            <div class="footer-contact">
+                <h3>CONTACT US</h3>
+                <p>1949 E UNIVERSITY DR.</p>
+                <p>TEMPE, AZ 85281</p>
+                <p style="font-weight: bold;">CALL OR TEXT (520) 422-7879</p>
+                <div class="footer-social">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook">
+                    </a>
+                    <a href="https://twitter.com" target="_blank" aria-label="Twitter" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter">
+                    </a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram">
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+</div>
+    </footer>
+</body>
+</html>
