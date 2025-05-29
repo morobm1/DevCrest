@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Client City Map | US Pinpoints</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100vw;
+            font-family: 'Oswald', Arial, sans-serif;
+            background: #f7f7f7;
+        }
+        .map-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            color: #222;
+            margin: 32px 0 12px 0;
+            font-family: 'Oswald', Arial, sans-serif;
+        }
+        #map {
+            width: 100vw;
+            height: 80vh;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px rgba(76,162,198,0.10);
+            border: 2px solid #e7e5e3;
+        }
+        @media (max-width: 900px) {
+            #map { height: 60vh; }
+        }
+        @media (max-width: 600px) {
+            #map { height: 45vh; }
+            .map-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="map-title">Client Locations Across the US</div>
+    <div id="map"></div>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibW9yb2JtMSIsImEiOiJjbWI5bzQ3NDMwZTJxMmtvazRwaXljZXhzIn0.4InlezXsVUf4mydodd7wIA';
+    // Pre-geocoded city coordinates (approximate city centers)
+    const cities = [
+        { name: 'San Diego, CA', coords: [ -117.1611, 32.7157 ] },
+        { name: 'San Francisco, CA', coords: [ -122.4194, 37.7749 ] },
+        { name: 'Mesa, AZ', coords: [ -111.8315, 33.4152 ] },
+        { name: 'Flagstaff, AZ', coords: [ -111.6513, 35.1983 ] },
+        { name: 'Eugene, OR', coords: [ -123.0867, 44.0521 ] },
+        { name: 'Gainesville, FL', coords: [ -82.3248, 29.6516 ] },
+        { name: 'Providence, RI', coords: [ -71.4128, 41.8240 ] },
+        { name: 'Lakeland, FL', coords: [ -81.9498, 28.0395 ] },
+        { name: 'Salt Lake City, UT', coords: [ -111.8910, 40.7608 ] },
+        { name: 'Bothell, WA', coords: [ -122.2054, 47.7623 ] },
+        { name: 'Golden, CO', coords: [ -105.2253, 39.7555 ] },
+        { name: 'San Luis Obispo, CA', coords: [ -120.6596, 35.2828 ] },
+        { name: 'Fort Worth, TX', coords: [ -97.3308, 32.7555 ] },
+        { name: 'Huntsville, AL', coords: [ -86.5861, 34.7304 ] },
+        { name: 'Los Angeles, CA', coords: [ -118.2437, 34.0522 ] },
+        { name: 'Newark, DE', coords: [ -75.7497, 39.6837 ] },
+        { name: 'Costa Mesa, CA', coords: [ -117.9187, 33.6411 ] }
+    ];
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: [ -98.5795, 39.8283 ], // Center of US
+        zoom: 3.6,
+        minZoom: 2.5,
+        maxZoom: 10
+    });
+    map.addControl(new mapboxgl.NavigationControl());
+    cities.forEach(city => {
+        const el = document.createElement('div');
+        el.style.background = 'linear-gradient(135deg, #E84B3F 60%, #4CA2C6 100%)';
+        el.style.width = '28px';
+        el.style.height = '28px';
+        el.style.borderRadius = '50%';
+        el.style.border = '3px solid #fff';
+        el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+        el.style.display = 'flex';
+        el.style.alignItems = 'center';
+        el.style.justifyContent = 'center';
+        el.style.cursor = 'pointer';
+        el.innerHTML = `<svg width="16" height="16" fill="white" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/></svg>`;
+        new mapboxgl.Marker(el)
+            .setLngLat(city.coords)
+            .setPopup(new mapboxgl.Popup({ offset: 18 })
+                .setHTML(`<strong style='font-size:1.1rem;'>${city.name}</strong>`))
+            .addTo(map);
+    });
+    </script>
+</body>
+</html>
