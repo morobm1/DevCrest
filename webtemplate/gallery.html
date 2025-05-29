@@ -446,6 +446,12 @@
         <p>Explore our vibrant community, modern amenities, and beautiful living spaces at Ivory University House.</p>
     </div>
     <section class="gallery-section">
+        <div style="text-align:center; margin-bottom:32px;">
+            <button class="gallery-filter-btn" data-filter="all" style="background:var(--iuh-storm);color:#fff;border:none;padding:10px 28px;margin:0 8px 8px 0;border-radius:24px;font-weight:600;letter-spacing:0.03em;cursor:pointer;transition:background 0.18s;outline:none;">All</button>
+            <button class="gallery-filter-btn" data-filter="community" style="background:var(--iuh-blue);color:#fff;border:none;padding:10px 28px;margin:0 8px 8px 0;border-radius:24px;font-weight:600;letter-spacing:0.03em;cursor:pointer;transition:background 0.18s;outline:none;">Community</button>
+            <button class="gallery-filter-btn" data-filter="apartment" style="background:var(--iuh-red);color:#fff;border:none;padding:10px 28px;margin:0 8px 8px 0;border-radius:24px;font-weight:600;letter-spacing:0.03em;cursor:pointer;transition:background 0.18s;outline:none;">Apartment</button>
+            <button class="gallery-filter-btn" data-filter="events" style="background:var(--iuh-mayo);color:#000;border:none;padding:10px 28px;margin:0 8px 8px 0;border-radius:24px;font-weight:600;letter-spacing:0.03em;cursor:pointer;transition:background 0.18s;outline:none;">Resident Events</button>
+        </div>
         <div class="gallery-masonry" id="galleryMasonry">
             <!-- Images will be injected here by JS -->
         </div>
@@ -455,9 +461,9 @@
         <div class="lightbox-content">
             <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
             <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#10094;</button>
-            <img src="" alt="Gallery Large" id="lightboxImg">
+            <img src="" alt="Gallery Large" id="lightboxImg" aria-live="polite">
             <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#10095;</button>
-            <div class="lightbox-caption" id="lightboxCaption"></div>
+            <div class="lightbox-caption" id="lightboxCaption" aria-live="polite"></div>
         </div>
     </div>
     <footer class="footer-section">
@@ -495,45 +501,86 @@
             </div>
         </div>
     </footer>
-    <script>
+    <div style="text-align:center; color:#aaa; font-size:0.95rem; margin-top:24px; margin-bottom:8px;">
+        &copy; Ivory University House, All Rights Reserved. | <a href="/privacy.html" style="color:#aaa;text-decoration:underline;">Privacy Policy</a>
+    </div>
+    <script defer>
         // Manually list all gallery images here (add or remove as needed)
         const galleryImages = [
-            { filename: "images/Gallery/IMG_3913.jpg", caption: "Art Room" },
-            { filename: "images/Gallery/IMG_3924.jpg", caption: "Common Area Lounge" },
-            { filename: "images/Gallery/IMG_3935.jpg", caption: "Community Space" },
-            { filename: "images/Gallery/IMG_3940.jpg", caption: "Lounge" },
-            { filename: "images/Gallery/IMG_3953.jpg", caption: "Community Study Lounge" },
-            { filename: "images/Gallery/IMG_3959.jpg", caption: "Printing Station" },
-            { filename: "images/Gallery/IMG_3973.jpg", caption: "Community Space" },
-            { filename: "images/Gallery/IMG_3981.jpg", caption: "Recreation Lounge" },
-            { filename: "images/Gallery/UofU_Dorms-1.jpg", caption: "Apartment"},
-            { filename: "images/Gallery/UofU_Dorms-2.jpg", caption: "Living Room"},
-            { filename: "images/Gallery/UofU_Dorms-3.jpg", caption: "Kitchen"},
-            { filename: "images/Gallery/UofU_Dorms-4.jpg", caption: "Bathroom"},
+            { filename: "images/Gallery/IMG_3913.jpg", caption: "Art Room", category: "community" },
+            { filename: "images/Gallery/IMG_3924.jpg", caption: "Common Area Lounge", category: "community" },
+            { filename: "images/Gallery/IMG_3935.jpg", caption: "Community Space", category: "community" },
+            { filename: "images/Gallery/IMG_3940.jpg", caption: "Lounge", category: "apartment" },
+            { filename: "images/Gallery/IMG_3953.jpg", caption: "Community Study Lounge", category: "community" },
+            { filename: "images/Gallery/IMG_3959.jpg", caption: "Printing Station", category: "apartment" },
+            { filename: "images/Gallery/IMG_3973.jpg", caption: "Community Space", category: "community" },
+            { filename: "images/Gallery/IMG_3981.jpg", caption: "Recreation Lounge", category: "events" },
+            { filename: "images/Gallery/UofU_Dorms-1.jpg", caption: "Apartment", category: "apartment"},
+            { filename: "images/Gallery/UofU_Dorms-2.jpg", caption: "Living Room", category: "apartment"},
+            { filename: "images/Gallery/UofU_Dorms-3.jpg", caption: "Kitchen", category: "apartment"},
+            { filename: "images/Gallery/UofU_Dorms-4.jpg", caption: "Bathroom", category: "apartment"},
             // Add more images as needed
         ];
+        // Add all Apartment images from ./images/Unit
+        [
+            "UofU_Dorms-1.jpg","UofU_Dorms-2.jpg","UofU_Dorms-3.jpg","UofU_Dorms-4.jpg","UofU_Dorms-5.jpg","UofU_Dorms-6.jpg","UofU_Dorms-7.jpg","UofU_Dorms-8.jpg","UofU_Dorms-9.jpg"
+        ].forEach(function(filename) {
+            galleryImages.push({
+                filename: "images/Unit/" + filename,
+                caption: "Apartment Photo",
+                category: "apartment"
+            });
+        });
+        // Add all Resident Life images from ./images/HR
+        [
+            "Ivory University House HR (1 of 65).jpg","Ivory University House HR (2 of 65).jpg","Ivory University House HR (3 of 65).jpg","Ivory University House HR (4 of 65).jpg","Ivory University House HR (5 of 65).jpg","Ivory University House HR (6 of 65).jpg","Ivory University House HR (7 of 65).jpg","Ivory University House HR (8 of 65).jpg","Ivory University House HR (9 of 65).jpg","Ivory University House HR (10 of 65).jpg","Ivory University House HR (11 of 65).jpg","Ivory University House HR (12 of 65).jpg","Ivory University House HR (13 of 65).jpg","Ivory University House HR (14 of 65).jpg","Ivory University House HR (15 of 65).jpg","Ivory University House HR (16 of 65).jpg","Ivory University House HR (17 of 65).jpg","Ivory University House HR (18 of 65).jpg","Ivory University House HR (19 of 65).jpg","Ivory University House HR (20 of 65).jpg","Ivory University House HR (21 of 65).jpg","Ivory University House HR (22 of 65).jpg","Ivory University House HR (23 of 65).jpg","Ivory University House HR (24 of 65).jpg","Ivory University House HR (25 of 65).jpg","Ivory University House HR (26 of 65).jpg","Ivory University House HR (27 of 65).jpg","Ivory University House HR (28 of 65).jpg","Ivory University House HR (29 of 65).jpg","Ivory University House HR (30 of 65).jpg","Ivory University House HR (31 of 65).jpg","Ivory University House HR (32 of 65).jpg","Ivory University House HR (33 of 65).jpg","Ivory University House HR (34 of 65).jpg","Ivory University House HR (35 of 65).jpg","Ivory University House HR (36 of 65).jpg","Ivory University House HR (37 of 65).jpg","Ivory University House HR (38 of 65).jpg","Ivory University House HR (39 of 65).jpg","Ivory University House HR (40 of 65).jpg","Ivory University House HR (41 of 65).jpg","Ivory University House HR (42 of 65).jpg","Ivory University House HR (43 of 65).jpg","Ivory University House HR (44 of 65).jpg","Ivory University House HR (45 of 65).jpg","Ivory University House HR (46 of 65).jpg","Ivory University House HR (47 of 65).jpg","Ivory University House HR (48 of 65).jpg","Ivory University House HR (49 of 65).jpg","Ivory University House HR (50 of 65).jpg","Ivory University House HR (51 of 65).jpg","Ivory University House HR (52 of 65).jpg","Ivory University House HR (53 of 65).jpg","Ivory University House HR (54 of 65).jpg","Ivory University House HR (55 of 65).jpg","Ivory University House HR (56 of 65).jpg","Ivory University House HR (57 of 65).jpg","Ivory University House HR (58 of 65).jpg","Ivory University House HR (59 of 65).jpg","Ivory University House HR (60 of 65).jpg","Ivory University House HR (61 of 65).jpg","Ivory University House HR (62 of 65).jpg","Ivory University House HR (63 of 65).jpg","Ivory University House HR (64 of 65).jpg","Ivory University House HR (65 of 65).jpg"
+        ].forEach(function(filename) {
+            galleryImages.push({
+                filename: "images/HR/" + filename,
+                caption: "Resident Event",
+                category: "events"
+            });
+        });
 
         // 2. Dynamically generate the gallery grid
         const galleryMasonry = document.getElementById('galleryMasonry');
-        galleryImages.forEach((img, idx) => {
-            const div = document.createElement('div');
-            div.className = 'gallery-item';
-            div.setAttribute('data-full', img.filename);
-            div.setAttribute('data-caption', img.caption || '');
-            div.setAttribute('data-index', idx);
-            div.innerHTML = `
-                <img src="${img.filename}" alt="${img.caption || 'Gallery Photo'}">
-                <div class="caption">${img.caption || ''}</div>
-            `;
-            galleryMasonry.appendChild(div);
+        function renderGallery(filter) {
+            galleryMasonry.innerHTML = '';
+            galleryImages.forEach((img, idx) => {
+                if (filter && filter !== 'all' && img.category !== filter) return;
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.setAttribute('data-full', img.filename);
+                div.setAttribute('data-caption', img.caption || '');
+                div.setAttribute('data-index', idx);
+                div.setAttribute('data-category', img.category);
+                div.innerHTML = `
+                    <img src="${img.filename}" alt="${img.caption ? img.caption : 'Gallery Photo'}" loading="lazy">
+                    <div class="caption">${img.caption || ''}</div>
+                `;
+                galleryMasonry.appendChild(div);
+            });
+        }
+        renderGallery('all');
+
+        // Filter logic
+        document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.gallery-filter-btn').forEach(b => b.style.opacity = '0.7');
+                this.style.opacity = '1';
+                renderGallery(this.getAttribute('data-filter'));
+                // Re-attach lightbox events after filtering
+                attachLightboxEvents();
+            });
         });
+        // Set initial filter button active
+        document.querySelector('.gallery-filter-btn[data-filter="all"]').style.opacity = '1';
 
         // 3. Lightbox logic
-        const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+        let currentIndex = 0;
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const lightboxCaption = document.getElementById('lightboxCaption');
-        let currentIndex = 0;
 
         function showLightbox(index) {
             const img = galleryImages[index];
@@ -543,9 +590,13 @@
             currentIndex = index;
         }
 
-        galleryItems.forEach((item, idx) => {
-            item.addEventListener('click', () => showLightbox(idx));
-        });
+        function attachLightboxEvents() {
+            const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+            galleryItems.forEach((item, idx) => {
+                item.addEventListener('click', () => showLightbox(Number(item.getAttribute('data-index'))));
+            });
+        }
+        attachLightboxEvents();
 
         document.getElementById('lightboxClose').addEventListener('click', function() {
             lightbox.classList.remove('active');
