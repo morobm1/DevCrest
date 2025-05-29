@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <!-- Mapbox GL JS CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
     <style>
         :root {
             --iuh-black: #000000;
@@ -651,7 +653,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item" >
-                        <a class="nav-link" href="./our_impact.html">Our Impact</a>
+                        <a class="nav-link" href="./our_impact.html">Apply Now</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./gallery.html">Photo Gallery</a>
@@ -663,10 +665,10 @@
                         <a class="nav-link" href="#">Contact Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary" href="#">Resident Portal</a>
+                        <a class="btn btn-primary" href="https://ivoryuniversityhouseslc.residentportal.com/auth">Resident Portal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-danger" href="./our_impact.html">Our Impact</a>
+                        <a class="btn btn-danger" href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw">Apply Now</a>
                     </li>
                 </ul>
             </div>
@@ -695,6 +697,76 @@
                 </div>
             </div>
         </section>
+        <section class="floorplan-section" style="background: var(--iuh-white); padding: 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; border-radius: 0; box-shadow: none; border-top: 1px solid var(--iuh-gray); border-bottom: 1px solid var(--iuh-gray);">
+            <div style="max-width: 1200px; margin: 0 auto; padding: 60px 20px 40px 20px; text-align: center;">
+                <h2 style="font-family: 'Oswald', Arial, sans-serif; font-weight: 700; color: var(--iuh-black); font-size: 2.3rem; margin-bottom: 18px; letter-spacing: 0.02em; text-transform: uppercase;">Floorplans</h2>
+                <p style="color: var(--iuh-storm); font-size: 1.15rem; margin-bottom: 32px;">Explore our modern, spacious layouts designed for student living.</p>
+                <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap; padding: 20px; gap: 24px;">
+                    <!-- Unit A1 -->
+                    <div style="background: white; width: 250px; border: 1px solid #ccc; text-align: center; display: flex; flex-direction: column; height: 440px;">
+                        <div style="background: black; color: white; padding: 10px; font-weight: bold;">NOW LEASING</div>
+                        <img src="./images/A1.png" alt="Unit A1" style="width: 100%; max-height: 170px; object-fit: contain; padding: 20px 20px 0 20px; flex-shrink: 0; background: #f7f7f7;">
+                        <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-end;">
+                            <div style="font-weight: bold;">UNIT A1</div>
+                            <div>Studio</div>
+                            <div>440 SQ FT</div>
+                            <div style="margin-bottom: 15px;">STARTING AT $1,899</div>
+                            <button onclick="openModal('A1','Studio','$1,899','440 SQ FT','./images/A1.png','NOW LEASING')" style="background-color:#5b5d3f;color:white;padding:10px 20px;border-radius:20px;border:none;font-weight:bold;cursor:pointer;margin-bottom:12px;margin-top:5px;margin-right:5px;margin-left:5px;">VIEW DETAILS</button>
+                        </div>
+                    </div>
+                    <!-- Unit B1 -->
+                    <div style="background: white; width: 250px; border: 1px solid #ccc; text-align: center; display: flex; flex-direction: column; height: 440px;">
+                        <div style="background: black; color: white; padding: 10px; font-weight: bold;">NOW LEASING</div>
+                        <img src="./images/B1.png" alt="Unit B1" style="width: 100%; max-height: 170px; object-fit: contain; padding: 20px 20px 0 20px; flex-shrink: 0; background: #f7f7f7;">
+                        <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-end;">
+                            <div style="font-weight: bold;">UNIT B1</div>
+                            <div>Studio</div>
+                            <div>346 SQ FT</div>
+                            <div style="margin-bottom: 15px;">STARTING AT $1,469</div>
+                            <button onclick="openModal('B1','Studio','$1,469','346 SQ FT','./images/B1.png','SOLD OUT')" style="background-color:#5b5d3f;color:white;padding:10px 20px;border-radius:20px;border:none;font-weight:bold;cursor:pointer;margin-bottom:12px;margin-top:5px;margin-right:5px;margin-left:5px;">VIEW DETAILS</button>
+                        </div>
+                    </div>
+                    <!-- Unit C1 -->
+                    <div style="background: white; width: 250px; border: 1px solid #ccc; text-align: center; display: flex; flex-direction: column; height: 440px;">
+                        <div style="background: black; color: white; padding: 10px; font-weight: bold;">NOW LEASING</div>
+                        <img src="./images/C1.png" alt="Unit C1" style="width: 100%; max-height: 170px; object-fit: contain; padding: 20px 20px 0 20px; flex-shrink: 0; background: #f7f7f7;">
+                        <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-end;">
+                            <div style="font-weight: bold;">UNIT C1</div>
+                            <div>Studio</div>
+                            <div>346 SQ FT</div>
+                            <div style="margin-bottom: 15px;">STARTING AT $1,349</div>
+                            <button onclick="openModal('C1','Studio','$1,349','346 SQ FT','./images/C1.png','NOW LEASING')" style="background-color:#5b5d3f;color:white;padding:10px 20px;border-radius:20px;border:none;font-weight:bold;cursor:pointer;margin-bottom:12px;margin-top:5px;margin-right:5px;margin-left:5px;">VIEW DETAILS</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Structure -->
+        <div id="unitModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.6);">
+            <div style="background-color:#f1f0e5;margin:60px auto;padding:30px;border-radius:10px;width:90%;max-width:1100px;display:flex;gap:40px;position:relative;flex-wrap:wrap;">
+                <!-- Close Button -->
+                <span onclick="closeModal()" style="position:absolute;top:15px;right:20px;font-size:30px;font-weight:bold;cursor:pointer;">&times;</span>
+                <!-- Unit Info -->
+                <div style="flex:1;min-width:280px;">
+                    <h2 id="modalUnitName" style="font-size:36px;margin:0 0 10px;">UNIT</h2>
+                    <p id="modalUnitPrice" style="font-size:24px;font-weight:bold;margin:0;">$ / Month</p>
+                    <p style="font-size:14px;color:#555;margin-bottom:20px;">*price based on 12 equal installments</p>
+                    <h3 style="font-size:18px;margin-bottom:10px;">UNIT TYPE</h3>
+                    <p id="modalUnitType" style="margin:4px 0;">Type</p>
+                    <p id="modalUnitSqft" style="margin:4px 0;">SQ FT</p>
+                    <div style="margin-top:20px;">
+                        <a href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw" target="_blank" style="background:#6b0000;color:white;border:none;padding:12px 25px;border-radius:30px;margin-right:10px;font-weight:bold;text-decoration:none;display:inline-block;">APPLY NOW</a>
+                        <button style="background:#5b5d3f;color:white;border:none;padding:12px 25px;border-radius:30px;font-weight:bold;">BOOK A TOUR</button>
+                    </div>
+                </div>
+                <!-- Image -->
+                <div style="flex:1;min-width:300px;">
+                    <div id="modalUnitStatus" style="background:black;color:white;text-align:center;padding:8px 0;font-weight:bold;margin-bottom:10px;">STATUS</div>
+                    <img id="modalUnitImg" src="" alt="Floorplan" style="width:100%;border:1px solid #ccc;">
+                </div>
+            </div>
+        </div>
         <section class="gallery-section">
             <div class="gallery-logo-box">
                 <img src="images/IvoryUniversityHouse_PrimaryLogo_OneColor_Black.png" alt="Ivory University House logo">
@@ -707,9 +779,7 @@
             <div class="gallery-cta-box">
                 <div class="gallery-cta-box-inner">
                     <h3>Reserve Your Spot Today</h3>
-                    <button class="btn-gallery-cta">
-                        Apply Now
-                    </button>
+                    <a href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw" target="_blank" class="btn-gallery-cta" style="text-decoration:none;display:block;">Apply Now</a>
                 </div>
             </div>
             <img src="images/IMG_3913.JPG" class="gallery-img-short" alt="Student relaxing in a cozy dorm room">
@@ -803,6 +873,83 @@
             },
         });
     </script>
+    <!-- MAPBOX MAP SECTION -->
+    <section class="map-section" style="background: var(--iuh-white); padding: 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px 0 20px; text-align: center;">
+            <h2 style="font-family: 'Oswald', Arial, sans-serif; font-weight: 700; color: var(--iuh-black); font-size: 2rem; margin-bottom: 10px; letter-spacing: 0.02em;">Find Us Here</h2>
+            <p style="color: var(--iuh-storm); font-size: 1.1rem; margin-bottom: 30px;">434 S Mario Capecchi Drive, Salt Lake City, UT 84112</p>
+        </div>
+        <div id="map" style="width: 100vw; height: 400px; margin: 0 auto; border: none;"></div>
+    </section>
+    <!-- Mapbox GL JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <script>
+        // Mapbox access token
+        mapboxgl.accessToken = 'pk.eyJ1IjoibW9yb2JtMSIsImEiOiJjbWI5bzQ3NDMwZTJxMmtvazRwaXljZXhzIn0.4InlezXsVUf4mydodd7wIA';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Coordinates for Ivory University House
+            var locations = [
+                {
+                    lng: -111.8492327,
+                    lat: 40.7593380,
+                    title: 'Ivory University House',
+                    description: '434 S Mario Capecchi Drive, Salt Lake City, UT 84112'
+                },
+                {
+                    lng: -111.8452,
+                    lat: 40.7645,
+                    title: 'Student Life-Center',
+                    description: 'George S. Eccles Student Life Center'
+                },
+                {
+                    lng: -111.8465,
+                    lat: 40.7640,
+                    title: 'Student Food Services',
+                    description: 'Kahlert Village Dining & Food Services'
+                },
+                {
+                    lng: -111.8910,
+                    lat: 40.7606,
+                    title: 'Trax Station to Downtown',
+                    description: 'University Medical Center TRAX Station'
+                },
+                {
+                    lng: -111.8457,
+                    lat: 40.7617,
+                    title: 'Church of Jesus Christ of Latter Day Saints Institute of Religion',
+                    description: 'Institute of Religion, University of Utah'
+                }
+            ];
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [locations[0].lng, locations[0].lat],
+                zoom: 15
+            });
+            // Add zoom and rotation controls
+            map.addControl(new mapboxgl.NavigationControl());
+            // Add markers
+            locations.forEach(function(loc) {
+                var el = document.createElement('div');
+                el.className = 'custom-marker';
+                el.style.background = '#E84B3F';
+                el.style.width = '28px';
+                el.style.height = '28px';
+                el.style.borderRadius = '50%';
+                el.style.border = '3px solid #fff';
+                el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+                el.style.backgroundImage = 'url(https://cdn-icons-png.flaticon.com/512/684/684908.png)';
+                el.style.backgroundSize = '60% 60%';
+                el.style.backgroundRepeat = 'no-repeat';
+                el.style.backgroundPosition = 'center';
+                new mapboxgl.Marker(el)
+                    .setLngLat([loc.lng, loc.lat])
+                    .setPopup(new mapboxgl.Popup({ offset: 25 })
+                        .setHTML('<h4 style="margin:0;font-size:1.1rem;">' + loc.title + '</h4><div style="font-size:0.95rem;">' + loc.description + '</div>'))
+                    .addTo(map);
+            });
+        });
+    </script>
     <footer class="footer-section">
         <div class="footer-section-inner">
             <div class="footer-office-hours">
@@ -838,5 +985,27 @@
             </div>
         </div>
     </footer>
+<!-- Modal JavaScript -->
+<script>
+function openModal(unit, type, price, sqft, img, status) {
+    document.getElementById("unitModal").style.display = "block";
+    document.getElementById("modalUnitName").innerText = 'UNIT ' + unit;
+    document.getElementById("modalUnitPrice").innerText = price + ' / Month';
+    document.getElementById("modalUnitType").innerText = type;
+    document.getElementById("modalUnitSqft").innerText = sqft;
+    document.getElementById("modalUnitImg").src = img;
+    document.getElementById("modalUnitStatus").innerText = status === 'SOLD OUT' ? 'SOLD OUT' : (status || 'NOW LEASING');
+}
+function closeModal() {
+    document.getElementById("unitModal").style.display = "none";
+}
+// Optional: Close when clicking outside modal
+window.onclick = function(event) {
+    const modal = document.getElementById("unitModal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+};
+</script>
 </body>
 </html>
