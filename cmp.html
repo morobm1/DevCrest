@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capstone Property Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      padding: 40px;
+      background: #fdfdfd;
+      color: #1a1a1a;
+      max-width: 850px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #1f384b;
+      font-size: 32px;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      font-size: 16px;
+    }
+    th, td {
+      padding: 14px 12px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+    th {
+      background-color: #e6f0f5;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .controls {
+      margin-top: 30px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .controls button {
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+    }
+    .add-row {
+      background-color: #2e7d32;
+      color: white;
+    }
+    .save {
+      background-color: #1565c0;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Nationwide Portfolio</h1>
+  <table id="propertyTable">
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td contenteditable="true">Academy Chorro</td><td contenteditable="true">San Luis Obispo, CA</td></tr>
+      <tr><td contenteditable="true">Academy Palomar</td><td contenteditable="true">San Luis Obispo, CA</td></tr>
+      <tr><td contenteditable="true">Blattner Hall</td><td contenteditable="true">San Francisco, CA</td></tr>
+      <tr><td contenteditable="true">Bryan Flats</td><td contenteditable="true">Fort Worth, TX</td></tr>
+    </tbody>
+  </table>
+
+  <div class="controls">
+    <button class="add-row" onclick="addRow()">Add Property</button>
+    <button class="save" onclick="saveAsImage()">Save as PNG</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    function addRow() {
+      const table = document.getElementById('propertyTable').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow();
+      const cell1 = newRow.insertCell(0);
+      const cell2 = newRow.insertCell(1);
+      cell1.contentEditable = "true";
+      cell2.contentEditable = "true";
+      cell1.innerText = "New Property";
+      cell2.innerText = "City, State";
+    }
+
+    function saveAsImage() {
+      html2canvas(document.body).then(function(canvas) {
+        const link = document.createElement('a');
+        link.download = 'capstone_portfolio.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+  </script>
+</body>
+</html>
+

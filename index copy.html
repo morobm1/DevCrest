@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ivory University House</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <!-- Mapbox GL JS CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="build/output.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            window.addEventListener("scroll", function() {
+                let navbar = document.querySelector(".navbar");
+                if (window.scrollY > 50) {
+                    navbar.classList.add("scrolled");
+                } else {
+                    navbar.classList.remove("scrolled");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+        <div class="special banner">Special Go Here</div>
+    <nav class="fixed top-10 left-0 w-full h-24 z-50 bg-black flex items-center shadow-md">
+        <div class="w-full flex items-center justify-start px-8 relative">
+            <a class="block mr-8" href="#">
+                <img src="images/IvoryUniversityHouse_PrimaryLogo_FullColorWhiteText_Opt1.png" alt="Ivory University House logo" loading="lazy" class="h-16 w-auto block mx-auto">
+            </a>
+            <ul class="flex items-center ml-auto space-x-4">
+                <li><a class="text-white font-semibold text-lg hover:text-red-500 transition" href="./our_impact.html">Our Impact</a></li>
+                <li><a class="text-white font-semibold text-lg hover:text-red-500 transition" href="./gallery.html">Photo Gallery</a></li>
+                <li><a class="text-white font-semibold text-lg hover:text-red-500 transition" href="./floorplan.html">Floorplan</a></li>
+                <li><a class="text-white font-semibold text-lg hover:text-red-500 transition" href="#">Contact Us</a></li>
+                <li><a class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600 transition" href="https://ivoryuniversityhouseslc.residentportal.com/auth">Resident Portal</a></li>
+                <li><a class="bg-red-600 text-white font-bold px-4 py-2 rounded hover:bg-red-700 transition" href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw">Apply Now</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- HERO VIDEO -->
+    <video class="video-background" autoplay muted loop playsinline>
+        <source src="images/ivoryvideo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content">
+        <section class="section-main">
+            <div class="section-main-inner">
+                <div class="section-main-left">
+                    <h1>Elevated Student Living</h1>
+                    <h3>Ivory University House is new housing steps away from University of Utah.</h3>
+                </div>
+                <div class="section-main-right">
+                    <p>Welcome to Ivory University House, where comfort, security, and a sense of belonging converge. As a home away from home, we understand the importance of creating a secure environment that parents and students can rely on. Our commitment to student well-being guided the design of the residence halls. Large gathering spaces compliment individual rooms and study areas to provide social and private spaces. Our dedicated staff is committed to creating a transformative, elevated, welcoming, and fun environment for all our students. We welcome you to Ivory University House. Discover a place where you can relax, thrive, and feel at home. We look forward to meeting you!</p>
+                    <button class="btn-schedule-tour">
+                        Schedule a Tour
+                    </button>
+                    <button class="btn-limited-spots">
+                        LIMITED SPOTS FOR FALL 2025 - START APPLICATION
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="floorplan-section" style="background: var(--iuh-white); padding: 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; border-radius: 0; box-shadow: none; border-top: 1px solid var(--iuh-gray); border-bottom: 1px solid var(--iuh-gray);">
+            <div style="max-width: 1200px; margin: 0 auto; padding: 60px 20px 40px 20px; text-align: center;">
+                <h2 style="font-family: 'Oswald', Arial, sans-serif; font-weight: 700; color: var(--iuh-black); font-size: 2.3rem; margin-bottom: 18px; letter-spacing: 0.02em; text-transform: uppercase;">Floorplans</h2>
+                <p style="color: var(--iuh-storm); font-size: 1.15rem; margin-bottom: 32px;">Explore our modern, spacious layouts designed for student living.</p>
+                <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap; padding: 20px; gap: 24px;">
+                    <!-- Unit A1 -->
+                    <div style="background: white; width: 250px; border: 1px solid #ccc; text-align: center; display: flex; flex-direction: column; height: 440px;">
+                        <div style="background: black; color: white; padding: 10px; font-weight: bold;">NOW LEASING</div>
+                        <img src="./images/A1.png" alt="Floorplan for Unit A1" loading="lazy" style="width: 100%; max-height: 170px; object-fit: contain; padding: 20px 20px 0 20px; flex-shrink: 0; background: #f7f7f7;">
+                        <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-end;">
+                            <div style="font-weight: bold;">UNIT A1</div>
+                            <div>Studio</div>
+                            <div>440 SQ FT</div>
+                            <div style="margin-bottom: 15px;">STARTING AT $1,899</div>
+                            <button onclick="openModal('A1','Studio','$1,899','440 SQ FT','./images/A1.png','NOW LEASING')" style="background-color:#5b5d3f;color:white;padding:10px 20px;border-radius:20px;border:none;font-weight:bold;cursor:pointer;margin-bottom:12px;margin-top:5px;margin-right:5px;margin-left:5px;">VIEW DETAILS</button>
+                        </div>
+                    </div>
+                    <!-- Unit B1 -->
+                    <div style="background: white; width: 250px; border: 1px solid #ccc; text-align: center; display: flex; flex-direction: column; height: 440px;">
+                        <div style="background: black; color: white; padding: 10px; font-weight: bold;">NOW LEASING</div>
+                        <img src="./images/B1.png" alt="Floorplan for Unit B1" loading="lazy" style="width: 100%; max-height: 170px; object-fit: contain; padding: 20px 20px 0 20px; flex-shrink: 0; background: #f7f7f7;">
+                        <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-end;">
+                            <div style="font-weight: bold;">UNIT B1</div>
+                            <div>Studio</div>
+                            <div>346 SQ FT</div>
+                            <div style="margin-bottom: 15px;">STARTING AT $1,469</div>
+                            <button onclick="openModal('B1','Studio','$1,469','346 SQ FT','./images/B1.png','SOLD OUT')" style="background-color:#5b5d3f;color:white;padding:10px 20px;border-radius:20px;border:none;font-weight:bold;cursor:pointer;margin-bottom:12px;margin-top:5px;margin-right:5px;margin-left:5px;">VIEW DETAILS</button>
+                        </div>
+                    </div>
+                    <!-- Unit C1 -->
+                    <div style="background: white; width: 250px; border: 1px solid #ccc; text-align: center; display: flex; flex-direction: column; height: 440px;">
+                        <div style="background: black; color: white; padding: 10px; font-weight: bold;">NOW LEASING</div>
+                        <img src="./images/C1.png" alt="Floorplan for Unit C1" loading="lazy" style="width: 100%; max-height: 170px; object-fit: contain; padding: 20px 20px 0 20px; flex-shrink: 0; background: #f7f7f7;">
+                        <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-end;">
+                            <div style="font-weight: bold;">UNIT C1</div>
+                            <div>Studio</div>
+                            <div>346 SQ FT</div>
+                            <div style="margin-bottom: 15px;">STARTING AT $1,349</div>
+                            <button onclick="openModal('C1','Studio','$1,349','346 SQ FT','./images/C1.png','NOW LEASING')" style="background-color:#5b5d3f;color:white;padding:10px 20px;border-radius:20px;border:none;font-weight:bold;cursor:pointer;margin-bottom:12px;margin-top:5px;margin-right:5px;margin-left:5px;">VIEW DETAILS</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Structure -->
+        <div id="unitModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.6);">
+            <div style="background-color:#f1f0e5;margin:60px auto;padding:30px;border-radius:10px;width:90%;max-width:1100px;display:flex;gap:40px;position:relative;flex-wrap:wrap;">
+                <!-- Close Button -->
+                <span onclick="closeModal()" style="position:absolute;top:15px;right:20px;font-size:30px;font-weight:bold;cursor:pointer;">&times;</span>
+                <!-- Unit Info -->
+                <div style="flex:1;min-width:280px;">
+                    <h2 id="modalUnitName" style="font-size:36px;margin:0 0 10px;">UNIT</h2>
+                    <p id="modalUnitPrice" style="font-size:24px;font-weight:bold;margin:0;">$ / Month</p>
+                    <p style="font-size:14px;color:#555;margin-bottom:20px;">*price based on 12 equal installments</p>
+                    <h3 style="font-size:18px;margin-bottom:10px;">UNIT TYPE</h3>
+                    <p id="modalUnitType" style="margin:4px 0;">Type</p>
+                    <p id="modalUnitSqft" style="margin:4px 0;">SQ FT</p>
+                    <div style="margin-top:20px;">
+                        <a href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw" target="_blank" style="background:#6b0000;color:white;border:none;padding:12px 25px;border-radius:30px;margin-right:10px;font-weight:bold;text-decoration:none;display:inline-block;">APPLY NOW</a>
+                        <button style="background:#5b5d3f;color:white;border:none;padding:12px 25px;border-radius:30px;font-weight:bold;">BOOK A TOUR</button>
+                    </div>
+                </div>
+                <!-- Image -->
+                <div style="flex:1;min-width:300px;">
+                    <div id="modalUnitStatus" style="background:black;color:white;text-align:center;padding:8px 0;font-weight:bold;margin-bottom:10px;">STATUS</div>
+                    <img id="modalUnitImg" src="" alt="Floorplan image for selected unit" loading="lazy" style="width:100%;border:1px solid #ccc;">
+                </div>
+            </div>
+        </div>
+        <section class="gallery-section">
+            <div class="gallery-logo-box">
+                <img src="images/IvoryUniversityHouse_PrimaryLogo_OneColor_Black.png" alt="Ivory University House logo" loading="lazy">
+            </div>
+            <img src="images/IMG_3913.JPG" class="gallery-img" alt="Student event at Ivory University House" loading="lazy">
+            <img src="images/IMG_3924.JPG" class="gallery-img" alt="Modern kitchen area" loading="lazy">
+            <img src="images/IMG_3935.JPG" class="gallery-img-wide" alt="Outdoor patio with seating" loading="lazy">
+            <img src="images/IMG_3940.JPG" class="gallery-img" alt="Fitness room with equipment" loading="lazy">
+            <img src="images/IMG_3953.JPG" class="gallery-img-small" alt="Lobby with comfortable seating" loading="lazy">
+            <div class="gallery-cta-box">
+                <div class="gallery-cta-box-inner">
+                    <h3>Reserve Your Spot Today</h3>
+                    <a href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw" target="_blank" class="btn-gallery-cta" style="text-decoration:none;display:block;">Apply Now</a>
+                </div>
+            </div>
+            <img src="images/IMG_3913.JPG" class="gallery-img-short" alt="Student relaxing in a cozy dorm room" loading="lazy">
+        </section>
+        <div class="perks-section">
+            <div class="perks-images">
+                <img src="images/IMG_3924.JPG" alt="Modern apartment interior" loading="lazy">
+            </div>
+            <div class="perks-text">
+                <div class="perks-badge">PERKS</div>
+                <h2 class="perks-title">LIVE <span style="font-weight: bold;">UPGRADED</span></h2>
+                <p style="font-size: 1.2rem; line-height: 1.6;">
+                    Live the lifestyle you deserve from the best location—and the best pool in Tempe. Our refreshing renovations provide an illuminated lifestyle from the best apartments near ASU.
+                </p>
+                <div class="perks-list">
+                    <div class="perks-list-item">
+                        <img src="images/bed.png" class="perks-list-icon" alt="Private Units & Bedspaces icon">
+                        <p>Private Units & Bedspaces</p>
+                    </div>
+                    <div class="perks-list-item">
+                        <img src="images/scholarship.png" class="perks-list-icon" alt="Scholarship icon">
+                        <p>Scholarship</p>
+                    </div>
+                    <div class="perks-list-item">
+                        <img src="images/furniture.png" class="perks-list-icon" alt="Furnished Units icon">
+                        <p>Furnished Units</p>
+                    </div>
+                    <div class="perks-list-item">
+                        <img src="images/internet.png" class="perks-list-icon" alt="All-Inclusive Utilities & Internet icon">
+                        <p>ALL-INCLUSIVE UTILITIES & INTERNET</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="community-section">
+            <div class="community-text">
+                <h2 class="community-title">A Substance Free, Safety Oriented, Amenity Packed Community</h2>
+                <p class="community-desc">
+                    Ivory University House is a vibrant and inclusive community that upholds high standards for all residents. We understand that a healthy and focused environment plays a crucial role in academic success and personal growth. That’s why we have intentionally fostered a substance-free culture within our residence halls and for safety purposes, we do not welcome overnight guests. Amenities such as recital and practice space, yoga, meditation, fitness programs, game rooms, art studio, mentors in intellectual, physical, spiritual, and psychological areas of study and exploration, cooking classes, and outdoor activities are all part of the Ivory University House experience. Join us as we work together to create an empowering environment for you and all of our residents.
+                </p>
+                <button class="btn-learn-more">
+                    Learn More
+                </button>
+            </div>
+            <div class="community-images">
+                <img src="images/IMG_3935.JPG" class="community-img-small" alt="Decorative wallpaper pattern" loading="lazy">
+                <img src="images/IMG_3953.JPG" class="community-img-large" alt="Student studying online in a bright room" loading="lazy">
+            </div>
+        </div>
+        <div class="swiper-container main-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="images/IMG_3913.JPG" alt="Student event at Ivory University House"></div>
+                <div class="swiper-slide"><img src="images/IMG_3924.JPG" alt="Modern kitchen area"></div>
+                <div class="swiper-slide"><img src="images/IMG_3935.JPG" alt="Outdoor patio with seating"></div>
+                <div class="swiper-slide"><img src="images/IMG_3940.JPG" alt="Fitness room with equipment"></div>
+                <div class="swiper-slide"><img src="images/IMG_3953.JPG" alt="Lobby with comfortable seating"></div>
+            </div>
+        </div>
+        <div class="swiper-container swiper-thumbs">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="images/IMG_3913.JPG" alt="Student event thumbnail"></div>
+                <div class="swiper-slide"><img src="images/IMG_3924.JPG" alt="Modern kitchen thumbnail"></div>
+                <div class="swiper-slide"><img src="images/IMG_3935.JPG" alt="Outdoor patio thumbnail"></div>
+                <div class="swiper-slide"><img src="images/IMG_3940.JPG" alt="Fitness room thumbnail"></div>
+                <div class="swiper-slide"><img src="images/IMG_3953.JPG" alt="Lobby thumbnail"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js" defer></script>
+    <script>
+        var thumbSwiper = new Swiper('.swiper-thumbs', {
+            slidesPerView: 5,
+            spaceBetween: 10,
+            freeMode: true,
+            watchSlidesProgress: true,
+            loop: true,
+            centeredSlides: true,
+            slideToClickedSlide: true,
+        });
+        var mainSwiper = new Swiper('.main-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            centeredSlides: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            thumbs: {
+                swiper: thumbSwiper,
+            },
+        });
+    </script>
+    <!-- MAPBOX MAP SECTION -->
+    <section class="map-section" style="background: var(--iuh-white); padding: 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px 0 20px; text-align: center;">
+            <h2 style="font-family: 'Oswald', Arial, sans-serif; font-weight: 700; color: var(--iuh-black); font-size: 2rem; margin-bottom: 10px; letter-spacing: 0.02em;">Find Us Here</h2>
+            <p style="color: var(--iuh-storm); font-size: 1.1rem; margin-bottom: 30px;">434 S Mario Capecchi Drive, Salt Lake City, UT 84112</p>
+        </div>
+        <div id="map" style="width: 100vw; height: 400px; margin: 0 auto; border: none;"></div>
+    </section>
+    <!-- Instagram Top Bar Section (below map) -->
+    <section style="background: #f1531a; color: #fff; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 0; border-bottom: 2px solid #000;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; min-height: 60px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram logo" style="width: 32px; height: 32px; filter: invert(1) brightness(2);">
+                <span style="font-size: 1.25rem; font-weight: 700; letter-spacing: 0.02em;">Follow us on Instagram</span>
+            </div>
+            <a href="https://www.instagram.com/ivoryuniversityhouse/" target="_blank" style="background: #000; color: #fff; border-radius: 24px; padding: 10px 28px; font-weight: bold; text-decoration: none; font-size: 1rem; letter-spacing: 0.03em; border: 2px solid #fff; transition: background 0.2s;">@ivoryuniversityhouse</a>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px 12px 24px;">
+            <div class="elfsight-app-13161663-14c5-417b-934f-48c7c4f3008b" data-elfsight-app-lazy></div>
+        </div>
+    </section>
+    <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <!-- Mapbox GL JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <script>
+        // Mapbox access token
+        mapboxgl.accessToken = 'pk.eyJ1IjoibW9yb2JtMSIsImEiOiJjbWI5bzQ3NDMwZTJxMmtvazRwaXljZXhzIn0.4InlezXsVUf4mydodd7wIA';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Coordinates for Ivory University House
+            var locations = [
+                {
+                    lng: -111.8492327,
+                    lat: 40.7593380,
+                    title: 'Ivory University House',
+                    description: '434 S Mario Capecchi Drive, Salt Lake City, UT 84112'
+                },
+                {
+                    lng: -111.8452,
+                    lat: 40.7645,
+                    title: 'Student Life-Center',
+                    description: 'George S. Eccles Student Life Center'
+                },
+                {
+                    lng: -111.8465,
+                    lat: 40.7640,
+                    title: 'Student Food Services',
+                    description: 'Kahlert Village Dining & Food Services'
+                },
+                {
+                    lng: -111.8910,
+                    lat: 40.7606,
+                    title: 'Trax Station to Downtown',
+                    description: 'University Medical Center TRAX Station'
+                },
+                {
+                    lng: -111.8457,
+                    lat: 40.7617,
+                    title: 'Church of Jesus Christ of Latter Day Saints Institute of Religion',
+                    description: 'Institute of Religion, University of Utah'
+                }
+            ];
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [locations[0].lng, locations[0].lat],
+                zoom: 15
+            });
+            // Add zoom and rotation controls
+            map.addControl(new mapboxgl.NavigationControl());
+            // Add markers
+            locations.forEach(function(loc) {
+                var el = document.createElement('div');
+                el.className = 'custom-marker';
+                el.style.background = '#E84B3F';
+                el.style.width = '28px';
+                el.style.height = '28px';
+                el.style.borderRadius = '50%';
+                el.style.border = '3px solid #fff';
+                el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+                el.style.backgroundImage = 'url(https://cdn-icons-png.flaticon.com/512/684/684908.png)';
+                el.style.backgroundSize = '60% 60%';
+                el.style.backgroundRepeat = 'no-repeat';
+                el.style.backgroundPosition = 'center';
+                new mapboxgl.Marker(el)
+                    .setLngLat([loc.lng, loc.lat])
+                    .setPopup(new mapboxgl.Popup({ offset: 25 })
+                        .setHTML('<h4 style="margin:0;font-size:1.1rem;">' + loc.title + '</h4><div style="font-size:0.95rem;">' + loc.description + '</div>'))
+                    .addTo(map);
+            });
+        });
+    </script>
+    <footer class="footer-section">
+        <div class="footer-section-inner">
+            <div class="footer-office-hours">
+                <h3>OFFICE HOURS</h3>
+                <p>M-F 9AM - 6PM</p>
+                <p>SAT 10AM - 5PM</p>
+                <p>SUN 1PM - 5PM</p>
+                <p style="color: var(--iuh-red); font-weight: bold; margin-top: 10px;">🔍 RESIDENTS</p>
+                <p style="color: var(--iuh-red); text-transform: uppercase; font-weight: bold; margin-top: 5px;">Schedule a Self-Guided Tour</p>
+            </div>
+            <div class="footer-logo">
+                <img src="images/IvoryUniversityHouse_PrimaryLogo_OneColor_Black.png" alt="Ivory University House logo" loading="lazy">
+            </div>
+            <div class="footer-contact">
+                <h3>CONTACT US</h3>
+                <p>434 S Mario Capecchi Drive</p>
+                <p>Salt Lake City, UT 84112</p>
+                <p style="font-weight: bold;">CALL OR TEXT (801) 396-0093</p>
+                <div class="footer-social">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook logo" loading="lazy">
+                    </a>
+                    <a href="https://twitter.com" target="_blank" aria-label="Twitter" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter logo" loading="lazy">
+                    </a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram logo" loading="lazy">
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="footer-social-icon">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok logo" loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </div>
+    <div style="text-align:center; color:#aaa; font-size:0.95rem; margin-top:24px; margin-bottom:8px;">
+        &copy; Ivory University House, All Rights Reserved. | <a href="/privacy.html" style="color:#aaa;text-decoration:underline;">Privacy Policy</a>
+    </div>
+    </footer>
+
+<!-- Modal JavaScript -->
+<script>
+function openModal(unit, type, price, sqft, img, status) {
+    document.getElementById("unitModal").style.display = "block";
+    document.getElementById("modalUnitName").innerText = 'UNIT ' + unit;
+    document.getElementById("modalUnitPrice").innerText = price + ' / Month';
+    document.getElementById("modalUnitType").innerText = type;
+    document.getElementById("modalUnitSqft").innerText = sqft;
+    document.getElementById("modalUnitImg").src = img;
+    document.getElementById("modalUnitStatus").innerText = status === 'SOLD OUT' ? 'SOLD OUT' : (status || 'NOW LEASING');
+}
+function closeModal() {
+    document.getElementById("unitModal").style.display = "none";
+}
+// Optional: Close when clicking outside modal
+window.onclick = function(event) {
+    const modal = document.getElementById("unitModal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+};
+</script>
+</body>
+</html>

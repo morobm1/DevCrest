@@ -383,18 +383,41 @@ function MarketInsight() {
   const currentUser = window.localStorage.getItem('currentUser');
   const users = JSON.parse(window.localStorage.getItem('users') || '{}');
   const allowedProperties = (users[currentUser] && users[currentUser].properties) || [];
-  // compsData: { [property]: [ { name, yearBuilt, distance, website, floorplans, specials, lastScraped } ] }
   const [compsData, setCompsData] = React.useState(() => {
     const key = `compsData_${currentUser}`;
     return JSON.parse(window.localStorage.getItem(key) || '{}');
   });
-  const [form, setForm] = React.useState({ property: allowedProperties[0] || '', name: '', yearBuilt: '', distance: '', website: '', floorplans: '' });
+  const [form, setForm] = React.useState({
+    property: allowedProperties[0] || '',
+    name: '',
+    website: '',
+    floorplans: '',
+    management: '',
+    utilities: [],
+    appFee: '',
+    adminFee: '',
+    securityDeposit: '',
+    specials: ''
+  });
   const [msg, setMsg] = React.useState('');
 
+  const utilityOptions = [
+    'Electric', 'Water', 'Sewer', 'Trash', 'Internet', 'Cable', 'Gas', 'Pest Control', 'Other'
+  ];
+
   function handleFormChange(e) {
-    const { name, value } = e.target;
-    setForm(f => ({ ...f, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    if (type === 'checkbox') {
+      setForm(f =>
+        checked
+          ? { ...f, utilities: [...f.utilities, value] }
+          : { ...f, utilities: f.utilities.filter(u => u !== value) }
+      );
+    } else {
+      setForm(f => ({ ...f, [name]: value }));
+    }
   }
+
   function handleAddComp(e) {
     e.preventDefault();
     if (!form.property || !form.name) {
@@ -403,147 +426,79 @@ function MarketInsight() {
     }
     const newComp = {
       name: form.name,
-      yearBuilt: form.yearBuilt,
-      distance: form.distance,
       website: form.website,
       floorplans: form.floorplans,
-      specials: '',
-      lastScraped: ''
+      management: form.management,
+      utilities: form.utilities,
+      appFee: form.appFee,
+      adminFee: form.adminFee,
+      securityDeposit: form.securityDeposit,
+      specials: form.specials
     };
     const newComps = { ...compsData };
     if (!newComps[form.property]) newComps[form.property] = [];
     newComps[form.property].push(newComp);
     setCompsData(newComps);
     window.localStorage.setItem(`compsData_${currentUser}`, JSON.stringify(newComps));
-    setForm(f => ({ ...f, name: '', yearBuilt: '', distance: '', website: '', floorplans: '' }));
+    setForm(f => ({ ...f, name: '', website: '', floorplans: '', management: '', utilities: [], appFee: '', adminFee: '', securityDeposit: '', specials: '' }));
     setMsg('Competitor added!');
     setTimeout(() => setMsg(''), 1200);
   }
+
+  async function handleScrapeComp(property, idx) {
+    const comp = compsData[property][idx];
+    const urls = [comp.website, comp.floorplans].filter(Boolean);
+    if (urls.length === 0) {
+      alert('No website or floorplan URL provided.');
+      return;
+    }
+    let result = { floorplans: [], specials: [] };
+    try {
+      // Try floorplan page first, then main website
+      for (const url of urls) {
+        const res = await fetch('http://localhost:4000/api/scrape', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.floorplans && data.floorplans.length > 0) result.floorplans = result.floorplans.concat(data.floorplans);
+          if (data.specials && data.specials.length > 0) result.specials = result.specials.concat(data.specials);
+        }
+      }
+      // Remove duplicates
+      result.floorplans = Array.from(new Set(result.floorplans.map(fp => typeof fp === 'string' ? fp : JSON.stringify(fp)))).map(fp => {
+        try { return JSON.parse(fp); } catch { return fp; }
+      });
+      result.specials = Array.from(new Set(result.specials));
+      // Save to comp
+      const newComps = { ...compsData };
+      newComps[property][idx].scrapedFloorplans = result.floorplans;
+      newComps[property][idx].scrapedSpecials = result.specials;
+      setCompsData(newComps);
+      window.localStorage.setItem(`compsData_${currentUser}`, JSON.stringify(newComps));
+      alert('Scraping complete!');
+    } catch (e) {
+      alert('Scraping failed: ' + (e && e.message ? e.message : e));
+    }
+  }
+
+  function handleClearSpecials(property, idx) {
+    const newComps = { ...compsData };
+    if (newComps[property] && newComps[property][idx]) {
+      newComps[property][idx].specials = '';
+      newComps[property][idx].scrapedSpecials = [];
+    }
+    setCompsData(newComps);
+    window.localStorage.setItem(`compsData_${currentUser}`, JSON.stringify(newComps));
+  }
+
   function handleDeleteComp(property, idx) {
     const newComps = { ...compsData };
     newComps[property].splice(idx, 1);
     setCompsData(newComps);
     window.localStorage.setItem(`compsData_${currentUser}`, JSON.stringify(newComps));
-  }
-  async function handleScrape(property, idx) {
-    const newComps = { ...compsData };
-    const now = new Date().toLocaleString();
-    const comp = newComps[property][idx];
-    const proxyUrl = 'https://corsproxy.io/?';
-    const mainUrl = comp.website;
-    const floorplanUrl = comp.floorplans;
-    if (!mainUrl && !floorplanUrl) {
-      comp.specials = 'No website or floorplans URL provided.';
-      comp.lastScraped = now;
-      setCompsData(newComps);
-      window.localStorage.setItem(`compsData_${currentUser}`, JSON.stringify(newComps));
-      return;
-    }
-    try {
-      // Helper to fetch and parse HTML
-      async function fetchDoc(url) {
-        if (!url) return null;
-        const res = await fetch(proxyUrl + encodeURIComponent(url));
-        const html = await res.text();
-        const parser = new window.DOMParser();
-        return parser.parseFromString(html, 'text/html');
-      }
-      // Scrape floorplans and rates from floorplan page
-      let floorplanData = [];
-      let specials = [];
-      let docFloor = await fetchDoc(floorplanUrl);
-      function extractHumanSpecials(doc) {
-        if (!doc) return [];
-        let texts = [];
-        function getTextNodes(node) {
-          if (node.nodeType === 3) {
-            texts.push(node.textContent);
-          } else if (node.nodeType === 1 && node.childNodes) {
-            for (let i = 0; i < node.childNodes.length; i++) {
-              getTextNodes(node.childNodes[i]);
-            }
-          }
-        }
-        getTextNodes(doc.body);
-        // Add text from common promo/banner elements
-        const promoSelectors = [
-          '.banner', '.promo', '.promotion', '.special', '.offer', '.announcement', '#announcement', '.notice', '.alert', '.deal', '.discount', '.move-in', '.hero', '.headline', '.lead', '.marquee', '.feature', '.highlight', '.splash', '.cta', '.main-message', '.main-banner', '.main-promo', '.main-special', '.main-offer', '.main-announcement', '.main-alert', '.main-deal', '.main-discount', '.main-move-in', '.main-hero', '.main-headline', '.main-lead', '.main-marquee', '.main-feature', '.main-highlight', '.main-splash', '.main-cta'
-        ];
-        promoSelectors.forEach(sel => {
-          doc.querySelectorAll(sel).forEach(el => {
-            if (el && el.textContent) texts.push(el.textContent);
-          });
-        });
-        // Add alt text from images with keywords
-        Array.from(doc.images || []).forEach(img => {
-          if (img.alt && img.alt.length < 120) texts.push(img.alt);
-        });
-        // Filter for lines with specials/promotions keywords
-        const keywords = /special|promotion|offer|discount|deal|save|free|limited|exclusive|bonus|move-in|parking|gift|credit|incentive|reduced|waived|application|admin|fee|now leasing|today only|limited time|first month|off/i;
-        let specials = texts
-          .map(t => t.replace(/\s+/g, ' ').trim())
-          .filter(t => t.length > 0 && t.length < 120 && keywords.test(t))
-          .filter(t => !/[{};=]|function|var |let |const |\.js|\.css|\.json|gtag|dataLayer|form_id|Saved|createElem|regex|browser|navigator|window|document|return|value:|key:|supportsLinkPrefetch|connection|saveData|this\./i.test(t))
-          .map(t => t.replace(/<[^>]+>/g, ''))
-          .filter(t => !/office hours|leasing office|contact us|call us|visit us|schedule a tour|apply now|now leasing|hours of operation|open hours|closed/i.test(t));
-        return [...new Set(specials)];
-      }
-      if (docFloor) {
-        let cards = docFloor.querySelectorAll('.fp-card');
-        if (cards.length > 0) {
-          cards.forEach(card => {
-            let name = card.querySelector('.fp-card__title');
-            let price = card.querySelector('.fp-card__price');
-            floorplanData.push({
-              name: name ? name.textContent.trim() : 'Unknown',
-              price: price ? price.textContent.trim() : 'N/A'
-            });
-          });
-        }
-        if (floorplanData.length === 0) {
-          cards = docFloor.querySelectorAll('.floorplan-card, .floorplan, .card, .unit, .plan');
-          if (cards.length === 0) cards = docFloor.querySelectorAll('[class*="floor"]');
-          if (cards.length === 0) cards = docFloor.querySelectorAll('article, section');
-          cards.forEach(card => {
-            let name = card.querySelector('.floorplan-title, .fp-title, .title, h2, h3, .name');
-            if (!name) name = card.querySelector('[class*="title"], [class*="name"]');
-            let price = card.querySelector('.floorplan-price, .fp-price, .price, .starting, .rate, [class*="price"]');
-            if (!price) price = card.textContent.match(/\$[\d,]+/);
-            floorplanData.push({
-              name: name ? name.textContent.trim() : 'Unknown',
-              price: price ? (price.textContent ? price.textContent.trim() : price[0]) : 'N/A'
-            });
-          });
-        }
-        if (floorplanData.length === 0) {
-          const allText = docFloor.body.textContent;
-          const regex = /(\w[\w\s\-]+)\s*\$([\d,]+)/g;
-          let m;
-          while ((m = regex.exec(allText))) {
-            floorplanData.push({ name: m[1].trim(), price: `${m[2]}` });
-          }
-        }
-        // Human-readable specials/promotions from floorplan page
-        specials.push(...extractHumanSpecials(docFloor));
-      }
-      // Human-readable specials/promotions from main website
-      let docMain = await fetchDoc(mainUrl);
-      if (docMain) {
-        specials.push(...extractHumanSpecials(docMain));
-      }
-      comp.floorplanData = floorplanData;
-      comp.specials = specials.length > 0 ? specials.join(' | ') : 'No specials/promotions found.';
-      comp.lastScraped = now;
-      setCompsData(newComps);
-      window.localStorage.setItem(`compsData_${currentUser}`, JSON.stringify(newComps));
-    } catch (e) {
-      comp.specials = 'Scrape failed: ' + (e && e.message ? e.message : e);
-      comp.lastScraped = now;
-      setCompsData(newComps);
-      window.localStorage.setItem(`compsData_${currentUser}`, JSON.stringify(newComps));
-      window.alert('Scraping failed. Error: ' + (e && e.message ? e.message : e));
-      console.error('Scraping error:', e);
-    }
   }
 
   return React.createElement('div', null,
@@ -559,21 +514,51 @@ function MarketInsight() {
         React.createElement('label', null, 'Competitor Name*'),
         React.createElement('input', { name: 'name', value: form.name, onChange: handleFormChange, style: { width: '100%' }, required: true })
       ),
-      React.createElement('div', { style: { flex: 1, minWidth: 120 } },
-        React.createElement('label', null, 'Year Built'),
-        React.createElement('input', { name: 'yearBuilt', value: form.yearBuilt, onChange: handleFormChange, style: { width: '100%' } })
-      ),
-      React.createElement('div', { style: { flex: 1, minWidth: 120 } },
-        React.createElement('label', null, 'Distance from Campus (mi)'),
-        React.createElement('input', { name: 'distance', value: form.distance, onChange: handleFormChange, style: { width: '100%' } })
-      ),
       React.createElement('div', { style: { flex: 2, minWidth: 180 } },
         React.createElement('label', null, 'Website'),
         React.createElement('input', { name: 'website', value: form.website, onChange: handleFormChange, style: { width: '100%' } })
       ),
       React.createElement('div', { style: { flex: 2, minWidth: 180 } },
-        React.createElement('label', null, 'Floorplans Webpage'),
+        React.createElement('label', null, 'Website Floorplan Page'),
         React.createElement('input', { name: 'floorplans', value: form.floorplans, onChange: handleFormChange, style: { width: '100%' } })
+      ),
+      React.createElement('div', { style: { flex: 2, minWidth: 180 } },
+        React.createElement('label', null, 'Management Company'),
+        React.createElement('input', { name: 'management', value: form.management, onChange: handleFormChange, style: { width: '100%' } })
+      ),
+      React.createElement('div', { style: { flex: 2, minWidth: 180 } },
+        React.createElement('label', null, 'Utilities Included'),
+        React.createElement('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 8 } },
+          utilityOptions.map(opt =>
+            React.createElement('label', { key: opt, style: { display: 'inline-flex', alignItems: 'center', fontSize: 14, background: '#e3eafc', borderRadius: 4, padding: '2px 8px' } },
+              React.createElement('input', {
+                type: 'checkbox',
+                name: 'utilities',
+                value: opt,
+                checked: form.utilities.includes(opt),
+                onChange: handleFormChange,
+                style: { marginRight: 4 }
+              }),
+              opt
+            )
+          )
+        )
+      ),
+      React.createElement('div', { style: { flex: 1, minWidth: 120 } },
+        React.createElement('label', null, 'Application Fee'),
+        React.createElement('input', { name: 'appFee', value: form.appFee, onChange: handleFormChange, style: { width: '100%' } })
+      ),
+      React.createElement('div', { style: { flex: 1, minWidth: 120 } },
+        React.createElement('label', null, 'Admin Fee'),
+        React.createElement('input', { name: 'adminFee', value: form.adminFee, onChange: handleFormChange, style: { width: '100%' } })
+      ),
+      React.createElement('div', { style: { flex: 1, minWidth: 120 } },
+        React.createElement('label', null, 'Security Deposit'),
+        React.createElement('input', { name: 'securityDeposit', value: form.securityDeposit, onChange: handleFormChange, style: { width: '100%' } })
+      ),
+      React.createElement('div', { style: { flex: 2, minWidth: 180 } },
+        React.createElement('label', null, 'Current Specials'),
+        React.createElement('input', { name: 'specials', value: form.specials, onChange: handleFormChange, style: { width: '100%' } })
       ),
       React.createElement('button', { type: 'submit', style: { background: '#1976d2', color: '#fff', border: 'none', borderRadius: 4, padding: '10px 28px', fontWeight: 600, fontSize: 16, cursor: 'pointer', minWidth: 120 } }, 'Add'),
       msg && React.createElement('div', { style: { color: '#388e3c', fontWeight: 600, marginLeft: 12 } }, msg)
@@ -589,12 +574,14 @@ function MarketInsight() {
               React.createElement('thead', null,
                 React.createElement('tr', { style: { background: '#f4f6fa' } },
                   React.createElement('th', { style: { padding: 10 } }, 'Name'),
-                  React.createElement('th', { style: { padding: 10 } }, 'Year Built'),
-                  React.createElement('th', { style: { padding: 10 } }, 'Distance (mi)'),
                   React.createElement('th', { style: { padding: 10 } }, 'Website'),
-                  React.createElement('th', { style: { padding: 10 } }, 'Floorplans'),
-                  React.createElement('th', { style: { padding: 10 } }, 'Specials/Pricing'),
-                  React.createElement('th', { style: { padding: 10 } }, 'Last Scraped'),
+                  React.createElement('th', { style: { padding: 10 } }, 'Floorplan Page'),
+                  React.createElement('th', { style: { padding: 10 } }, 'Management'),
+                  React.createElement('th', { style: { padding: 10 } }, 'Utilities'),
+                  React.createElement('th', { style: { padding: 10 } }, 'App Fee'),
+                  React.createElement('th', { style: { padding: 10 } }, 'Admin Fee'),
+                  React.createElement('th', { style: { padding: 10 } }, 'Security Deposit'),
+                  React.createElement('th', { style: { padding: 10 } }, 'Specials'),
                   React.createElement('th', { style: { padding: 10 } }, 'Actions')
                 )
               ),
@@ -602,20 +589,25 @@ function MarketInsight() {
                 compsData[property].map((comp, idx) =>
                   React.createElement('tr', { key: idx },
                     React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } }, comp.name),
-                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } }, comp.yearBuilt),
-                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } }, comp.distance),
                     React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } }, comp.website ? React.createElement('a', { href: comp.website, target: '_blank', rel: 'noopener noreferrer' }, 'Website') : ''),
-                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } },
-                      comp.floorplanData && comp.floorplanData.length > 0
-                        ? comp.floorplanData.map(fp => `${fp.name}: ${fp.price}`).join(', ')
-                        : (comp.floorplans ? React.createElement('a', { href: comp.floorplans, target: '_blank', rel: 'noopener noreferrer' }, 'Floorplans') : '')
+                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } }, comp.floorplans ? React.createElement('a', { href: comp.floorplans, target: '_blank', rel: 'noopener noreferrer' }, 'Floorplans') : ''),
+                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } }, comp.management),
+                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } }, comp.utilities && comp.utilities.length > 0 ? comp.utilities.join(', ') : ''),
+                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } }, comp.appFee),
+                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } }, comp.adminFee),
+                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } }, comp.securityDeposit),
+                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee', minWidth: 180 } },
+                      comp.specials && React.createElement('div', null,
+                        React.createElement('strong', null, 'Manual: '), comp.specials
+                      ),
+                      comp.scrapedSpecials && comp.scrapedSpecials.length > 0 && React.createElement('div', { style: { marginTop: 4 } },
+                        React.createElement('strong', { style: { color: '#1976d2' } }, 'Scraped: '),
+                        Array.isArray(comp.scrapedSpecials) ? comp.scrapedSpecials.join(' | ') : comp.scrapedSpecials
+                      )
                     ),
-                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee', color: '#1976d2', whiteSpace: 'pre-line' } },
-                      typeof comp.specials === 'string' ? comp.specials : (Array.isArray(comp.specials) ? comp.specials.join(' | ') : '')
-                    ),
-                    React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee', fontSize: 13, color: '#888' } }, comp.lastScraped),
                     React.createElement('td', { style: { padding: 8, borderBottom: '1px solid #eee' } },
-                      React.createElement('button', { onClick: () => handleScrape(property, idx), style: { background: '#388e3c', color: '#fff', border: 'none', borderRadius: 4, padding: '6px 12px', fontWeight: 500, cursor: 'pointer', marginRight: 6 } }, 'Scrape'),
+                      React.createElement('button', { onClick: () => handleScrapeComp(property, idx), style: { background: '#1976d2', color: '#fff', border: 'none', borderRadius: 4, padding: '6px 12px', fontWeight: 500, cursor: 'pointer', marginRight: 6 } }, 'Scrape Specials'),
+                      React.createElement('button', { onClick: () => handleClearSpecials(property, idx), style: { background: '#ff9800', color: '#fff', border: 'none', borderRadius: 4, padding: '6px 12px', fontWeight: 500, cursor: 'pointer', marginRight: 6 } }, 'Clear Specials'),
                       React.createElement('button', { onClick: () => handleDeleteComp(property, idx), style: { background: '#f44336', color: '#fff', border: 'none', borderRadius: 4, padding: '6px 12px', fontWeight: 500, cursor: 'pointer' } }, 'Delete')
                     )
                   )
