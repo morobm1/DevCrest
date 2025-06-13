@@ -1,15 +1,17 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const USER = 'admin';
 const PASS = 'Hiro0701!';
 
 // MongoDB Atlas connection string (replace <db_password> with your actual password)
-const MONGO_URI = 'mongodb+srv://brianstrider:Tsuaki1234@cascadia-cluster.bmtuiu2.mongodb.net/';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://brianstrider:Tsuaki1234@cascadia-cluster.bmtuiu2.mongodb.net/';;
 const DB_NAME = 'cascadia';
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 function checkAuth(req, res, next) {
