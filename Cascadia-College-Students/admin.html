@@ -202,20 +202,25 @@
       document.getElementById('content-editor').innerHTML = html;
     }
     document.getElementById('save-content-btn').onclick = function() {
-      // Convert newlines to <br> for saving
-      contentData.hero_title = document.getElementById('hero-title-input').value.replace(/\r?\n/g, '<br>');
-      contentData.hero_subtitle = document.getElementById('hero-subtitle-input').value.replace(/\r?\n/g, '<br>');
-      contentData.banner_badge = document.getElementById('banner-badge-input').value.replace(/\r?\n/g, '<br>');
-      contentData.banner_message = document.getElementById('banner-message-input').value.replace(/\r?\n/g, '<br>');
-      contentData.banner_terms = document.getElementById('banner-terms-input').value;
-      contentData.banner_button = document.getElementById('banner-button-input').value;
-      contentData.horizon_title = document.getElementById('horizon-title-input').value;
-      contentData.horizon_desc = document.getElementById('horizon-desc-input').value.replace(/\r?\n/g, '<br>');
+      // Convert newlines to <br> for saving, with null checks
+      const getVal = id => {
+        const el = document.getElementById(id);
+        if (!el) { console.warn('Missing field:', id); return ''; }
+        return el.value;
+      };
+      contentData.hero_title = getVal('hero-title-input').replace(/\r?\n/g, '<br>');
+      contentData.hero_subtitle = getVal('hero-subtitle-input').replace(/\r?\n/g, '<br>');
+      contentData.banner_badge = getVal('banner-badge-input').replace(/\r?\n/g, '<br>');
+      contentData.banner_message = getVal('banner-message-input').replace(/\r?\n/g, '<br>');
+      contentData.banner_terms = getVal('banner-terms-input');
+      contentData.banner_button = getVal('banner-button-input');
+      contentData.horizon_title = getVal('horizon-title-input');
+      contentData.horizon_desc = getVal('horizon-desc-input').replace(/\r?\n/g, '<br>');
       // Save meal plan tables from editors
       contentData.mealplan_horizon_table = getMealTableFromEditor('horizon');
       contentData.mealplan_forest_table = getMealTableFromEditor('forest');
-      contentData.mealplan_forest_title = document.getElementById('mealplan-forest-title-input').value;
-      contentData.mealplan_forest_desc = document.getElementById('mealplan-forest-desc-input').value.replace(/\r?\n/g, '<br>');
+      contentData.mealplan_forest_title = getVal('mealplan-forest-title-input');
+      contentData.mealplan_forest_desc = getVal('mealplan-forest-desc-input').replace(/\r?\n/g, '<br>');
       document.getElementById('save-content-status').innerHTML = 'Saving...';
       const authHeader = 'Basic ' + btoa(STATIC_USER + ':' + STATIC_PASS);
       fetch('https://cascadia-editor.onrender.com/api/update-content', {
