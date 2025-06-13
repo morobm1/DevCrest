@@ -16,6 +16,9 @@
             --casc-white: #ffffff;
             --casc-card-shadow: 0 8px 32px rgba(0,48,87,0.10);
         }
+        html {
+            scroll-padding-top: 80px; /* Offset for fixed navbar */
+        }
         html, body {
             background: var(--casc-bg);
             font-family: 'Inter', 'Montserrat', Arial, sans-serif;
@@ -514,13 +517,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="uhdNavbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="#floorplans">Floorplans</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#rates">Rates</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#apply">Apply</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#amenities">Amenities</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#amenities">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#mealplans">Meal Plans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-primary fw-bold px-3 py-1" style="border-radius: 2rem; background: #003057; border: none;" target="_blank" href="https://residentialvillage.prospectportal.com/Apartments/module/application_authentication/?_gl=1*157iq8r*_gcl_aw*R0NMLjE3NDU4NTM2NzEuQ2owS0NRand6cnpBQmhEOEFSSXNBTmxTV05QclA4c1hieEdQSXQtbmk4RUhybDFkY3p1a2NyVjBwcG9tOGNudnhyWkxuQlBLUWtjX19qRWFBdG04RUFMd193Y0I.*_ga*MTUxMzA0MDIyOS4xNzQxODAyMjE1*_ga_F73Z6D91ZP*czE3NDk3ODc3MDEkbzE0JGcwJHQxNzQ5Nzg3NzAxJGo2MCRsMCRoMA..">Apply Now</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -1142,8 +1147,25 @@
     <!-- Vimeo Player API -->
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
-    // Dynamic content injection for hero section and banner
+    // Dynamic content injection for hero section, banner, and meal plans with loading/error states
     document.addEventListener('DOMContentLoaded', function() {
+      // Show loading states
+      document.getElementById('hero-title').innerHTML = '<span class="text-muted">Loading...</span>';
+      document.getElementById('hero-subtitle').innerHTML = '';
+      document.getElementById('banner-badge').innerHTML = '<span class="text-muted">Loading...</span>';
+      document.getElementById('banner-message').innerHTML = '';
+      document.getElementById('banner-terms').innerHTML = '';
+      document.getElementById('banner-button').innerHTML = '';
+      document.getElementById('horizon-title').innerHTML = '<span class="text-muted">Loading...</span>';
+      document.getElementById('horizon-desc').innerHTML = '';
+      document.getElementById('forest-title').innerHTML = '<span class="text-muted">Loading...</span>';
+      document.getElementById('forest-desc').innerHTML = '';
+      document.getElementById('mealplan-heading').innerHTML = '<span class="text-muted">Loading...</span>';
+      document.getElementById('mealplan-horizon-title').innerHTML = '';
+      document.getElementById('mealplan-horizon-desc').innerHTML = '';
+      document.getElementById('mealplan-forest-title').innerHTML = '';
+      document.getElementById('mealplan-forest-desc').innerHTML = '';
+
       fetch('https://cascadia-editor.onrender.com/api/get-content')
         .then(r => r.json())
         .then(data => {
@@ -1162,6 +1184,17 @@
           if (data.mealplan_horizon_desc) document.getElementById('mealplan-horizon-desc').innerHTML = data.mealplan_horizon_desc;
           if (data.mealplan_forest_title) document.getElementById('mealplan-forest-title').innerHTML = data.mealplan_forest_title;
           if (data.mealplan_forest_desc) document.getElementById('mealplan-forest-desc').innerHTML = data.mealplan_forest_desc;
+
+          // Store meal plan tables for use in the meal plan section
+          window.mealplan_horizon_table = data.mealplan_horizon_table || [];
+          window.mealplan_forest_table = data.mealplan_forest_table || [];
+        })
+        .catch(() => {
+          document.getElementById('hero-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
+          document.getElementById('banner-badge').innerHTML = '<span class="text-danger">Could not load content.</span>';
+          document.getElementById('horizon-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
+          document.getElementById('forest-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
+          document.getElementById('mealplan-heading').innerHTML = '<span class="text-danger">Could not load content.</span>';
         });
     });
     </script>
