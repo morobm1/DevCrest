@@ -92,6 +92,8 @@
           leaseTerms[key].splice(idx, 1);
           renderLeaseTermsEditor();
         };
+        // Define a default renderEditor to prevent ReferenceError
+        function renderEditor() {}
         // Patch renderEditor to call our lease terms editor
         const origRenderEditor = renderEditor;
         renderEditor = function() {
