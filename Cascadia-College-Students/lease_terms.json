@@ -1,0 +1,57 @@
+{
+  "horizon-4br": [
+    {
+      "term": "Fall 2024",
+      "dates": "Sep 15, 2024 - Dec 15, 2024",
+      "monthly_rate": "$1,111"
+    },
+    {
+      "term": "Winter 2025",
+      "dates": "Jan 5, 2025 - Mar 25, 2025",
+      "monthly_rate": "$1,200"
+    },
+    {
+      "term": "Fire",
+      "dates": "Water",
+      "monthly_rate": "8999"
+    },
+    {
+      "term": "",
+      "dates": "",
+      "monthly_rate": ""
+    }
+  ],
+  "horizon-2br": [
+    {
+      "term": "Fall 2024",
+      "dates": "Sep 15, 2024 - Dec 15, 2024",
+      "monthly_rate": "$1,100"
+    },
+    {
+      "term": "Winter 2025",
+      "dates": "Jan 5, 2025 - Mar 25, 2025",
+      "monthly_rate": "$1,100"
+    }
+  ],
+  "forest-1br": [
+    {
+      "term": "Fall 2024",
+      "dates": "Sep 15, 2024 - Dec 15, 2024",
+      "monthly_rate": "$1,050"
+    }
+  ],
+  "forest-2br": [
+    {
+      "term": "Fall 2024",
+      "dates": "Sep 15, 2024 - Dec 15, 2024",
+      "monthly_rate": "$950"
+    }
+  ],
+  "forest-4br": [
+    {
+      "term": "Fall 2024",
+      "dates": "Sep 15, 2024 - Dec 15, 2024",
+      "monthly_rate": "$900"
+    }
+  ]
+}
