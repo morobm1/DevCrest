@@ -1108,7 +1108,7 @@
     // Lease terms dynamic loading for all modals and floorplans
     document.addEventListener('DOMContentLoaded', function() {
       function loadLeaseTermsAll() {
-        fetch('lease_terms.json')
+        fetch('https://cascadia-editor.onrender.com/api/get-lease-terms')
           .then(function(response) { return response.json(); })
           .then(function(data) {
             document.querySelectorAll('.lease-terms-table').forEach(function(leaseTermsTable) {

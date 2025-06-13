@@ -44,6 +44,61 @@
         <div id="lease-terms-editor"></div>
         <button class="btn btn-primary mt-3" id="save-btn">Save Lease Terms</button>
         <div id="save-status" class="mt-2"></div>
+        <script>
+        // Lease Terms Table Editor
+        function renderLeaseTermsEditor() {
+          let html = '';
+          const plans = [
+            { key: 'horizon-4br', label: 'Horizon Hall 4BR' },
+            { key: 'horizon-2br', label: 'Horizon Hall 2BR' },
+            { key: 'forest-1br', label: 'Forest Hall 1BR' },
+            { key: 'forest-2br', label: 'Forest Hall 2BR' },
+            { key: 'forest-4br', label: 'Forest Hall 4BR' }
+          ];
+          plans.forEach(plan => {
+            html += `<div class="mb-4 p-3 border rounded">
+              <h6>${plan.label}</h6>
+              <table class="table table-bordered align-middle mb-2">
+                <thead><tr><th>Term</th><th>Dates</th><th>Monthly Rate</th><th>Delete</th></tr></thead>
+                <tbody>`;
+            (leaseTerms[plan.key] || []).forEach((row, idx) => {
+              html += `<tr>
+                <td><input class="form-control" type="text" value="${row.term || ''}" data-key="${plan.key}" data-idx="${idx}" data-field="term"></td>
+                <td><input class="form-control" type="text" value="${row.dates || ''}" data-key="${plan.key}" data-idx="${idx}" data-field="dates"></td>
+                <td><input class="form-control" type="text" value="${row.monthly_rate || ''}" data-key="${plan.key}" data-idx="${idx}" data-field="monthly_rate"></td>
+                <td><button class="btn btn-danger btn-sm" type="button" onclick="deleteLeaseRow('${plan.key}',${idx})">Delete</button></td>
+              </tr>`;
+            });
+            html += `</tbody></table>
+              <button class="btn btn-success btn-sm" type="button" onclick="addLeaseRow('${plan.key}')">Add Row</button>
+            </div>`;
+          });
+          document.getElementById('lease-terms-editor').innerHTML = html;
+          document.querySelectorAll('#lease-terms-editor input').forEach(input => {
+            input.oninput = function() {
+              const k = this.getAttribute('data-key');
+              const i = +this.getAttribute('data-idx');
+              const f = this.getAttribute('data-field');
+              leaseTerms[k][i][f] = this.value;
+            };
+          });
+        }
+        window.addLeaseRow = function(key) {
+          if (!leaseTerms[key]) leaseTerms[key] = [];
+          leaseTerms[key].push({ term: '', dates: '', monthly_rate: '' });
+          renderLeaseTermsEditor();
+        };
+        window.deleteLeaseRow = function(key, idx) {
+          leaseTerms[key].splice(idx, 1);
+          renderLeaseTermsEditor();
+        };
+        // Patch renderEditor to call our lease terms editor
+        const origRenderEditor = renderEditor;
+        renderEditor = function() {
+          origRenderEditor();
+          renderLeaseTermsEditor();
+        };
+        </script>
       </div>
     </div>
   </div>
