@@ -842,6 +842,16 @@
         </section>
     </main>
 
+    <!-- FAQ Section -->
+    <section class="container py-5" id="faq">
+      <div class="text-center mb-4">
+        <h2 class="uhd-section-title">Frequently Asked Questions</h2>
+      </div>
+      <div class="accordion" id="faqAccordion">
+        <div id="faq-loading" class="text-muted">Loading...</div>
+      </div>
+    </section>
+
     <!-- Horizon Hall Modal -->
     <div class="modal fade" id="horizonHallModal" tabindex="-1" aria-labelledby="horizonHallModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -1106,7 +1116,39 @@
           var modal = new bootstrap.Modal(document.getElementById('galleryLightbox'));
           modal.show();
         });
-      });
+      // Render FAQ dynamically
+          function renderFaq(faqArr) {
+            const faqAccordion = document.getElementById('faqAccordion');
+            if (!Array.isArray(faqArr) || faqArr.length === 0) {
+              faqAccordion.innerHTML = '<div class="text-muted">No FAQs available at this time.</div>';
+              return;
+            }
+            let html = '';
+            faqArr.forEach((item, idx) => {
+              const collapseId = `faq${idx}`;
+              const headingId = `faq${idx}-heading`;
+              html += `<div class="accordion-item">
+                <h2 class="accordion-header" id="${headingId}">
+                  <button class="accordion-button${idx === 0 ? '' : ' collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${idx === 0 ? 'true' : 'false'}" aria-controls="${collapseId}">
+                    ${item.question ? item.question : 'Untitled Question'}
+                  </button>
+                </h2>
+                <div id="${collapseId}" class="accordion-collapse collapse${idx === 0 ? ' show' : ''}" aria-labelledby="${headingId}" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    ${item.answer ? item.answer : ''}
+                  </div>
+                </div>
+              </div>`;
+            });
+            faqAccordion.innerHTML = html;
+          }
+
+          if (Array.isArray(data.faq)) {
+            renderFaq(data.faq);
+          } else {
+            renderFaq([]);
+          }
+        });
     });
     </script>
     <script>

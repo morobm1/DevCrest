@@ -209,7 +209,12 @@
         <label class="form-label">Forest Hall Description</label>
         <textarea class="form-control" id="forest-desc-input" rows="3">${contentData.forest_desc ? contentData.forest_desc.replace(/<br\s*\/?>(\n)?/gi, '\n').replace(/</g, '&lt;').replace(/>/g, '&gt;') : ''}</textarea>
       </div>`;
+      // FAQ Editor
+      html += `<hr><h6>Frequently Asked Questions (FAQ)</h6>`;
+      html += `<div id="faq-editor"></div>`;
+      html += `<button class="btn btn-success btn-sm my-2" type="button" onclick="addFaqRow()">Add FAQ</button>`;
       document.getElementById('content-editor').innerHTML = html;
+      renderFaqEditor();
     }
     document.getElementById('save-content-btn').onclick = function() {
       // Convert newlines to <br> for saving, with null checks
@@ -231,6 +236,8 @@
       contentData.mealplan_forest_table = getMealTableFromEditor('forest');
       contentData.mealplan_forest_title = getVal('mealplan-forest-title-input');
       contentData.mealplan_forest_desc = getVal('mealplan-forest-desc-input').replace(/\r?\n/g, '<br>');
+      // Save FAQ from editor
+      contentData.faq = getFaqFromEditor();
       document.getElementById('save-content-status').innerHTML = 'Saving...';
       const authHeader = 'Basic ' + btoa(STATIC_USER + ':' + STATIC_PASS);
       fetch('https://cascadia-editor.onrender.com/api/update-content', {
@@ -280,6 +287,39 @@
       });
     };
 
+    // Render FAQ editor
+    function renderFaqEditor() {
+      let html = '<table class="table table-bordered align-middle mb-0"><thead class="table-light"><tr><th style="width:40%">Question</th><th style="width:50%">Answer</th><th style="width:10%">Delete</th></tr></thead><tbody>';
+      if (!contentData.faq) contentData.faq = [];
+      contentData.faq.forEach((row, idx) => {
+        html += `<tr>
+          <td><input class="form-control" type="text" value="${row.question || ''}" data-faq-idx="${idx}" data-faq-field="question"></td>
+          <td><input class="form-control" type="text" value="${row.answer || ''}" data-faq-idx="${idx}" data-faq-field="answer"></td>
+          <td><button class="btn btn-danger btn-sm" type="button" onclick="deleteFaqRow(${idx})">Delete</button></td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      document.getElementById('faq-editor').innerHTML = html;
+      document.querySelectorAll('#faq-editor input').forEach(input => {
+        input.oninput = function() {
+          const idx = +this.getAttribute('data-faq-idx');
+          const field = this.getAttribute('data-faq-field');
+          contentData.faq[idx][field] = this.value;
+        };
+      });
+    }
+    function addFaqRow() {
+      if (!contentData.faq) contentData.faq = [];
+      contentData.faq.push({ question: '', answer: '' });
+      renderFaqEditor();
+    }
+    function deleteFaqRow(idx) {
+      contentData.faq.splice(idx, 1);
+      renderFaqEditor();
+    }
+    function getFaqFromEditor() {
+      return contentData.faq || [];
+    }
     // Render meal plan table editors
     function renderMealTableEditor(table, id) {
       let html = '<table class="table table-bordered align-middle mb-0"><thead class="table-light"><tr><th>Plan Name</th><th>Quarterly Cost</th><th>Details</th><th>Delete</th></tr></thead><tbody>';
