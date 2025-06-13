@@ -1144,7 +1144,7 @@
     <script>
     // Dynamic content injection for hero section and banner
     document.addEventListener('DOMContentLoaded', function() {
-      fetch('content.json')
+      fetch('https://cascadia-editor.onrender.com/api/get-content')
         .then(r => r.json())
         .then(data => {
           if (data.hero_title) document.getElementById('hero-title').innerHTML = data.hero_title;
