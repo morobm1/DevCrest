@@ -170,6 +170,16 @@
         <label class="form-label">Banner Button Text</label>
         <input class="form-control" id="banner-button-input" value="${contentData.banner_button ? contentData.banner_button.replace(/</g, '&lt;').replace(/>/g, '&gt;') : ''}">
       </div>`;
+      // Horizon Hall Title
+      html += `<div class="mb-3">
+        <label class="form-label">Horizon Hall Title</label>
+        <input class="form-control" id="horizon-title-input" value="${contentData.horizon_title ? contentData.horizon_title.replace(/</g, '&lt;').replace(/>/g, '&gt;') : ''}">
+      </div>`;
+      // Horizon Hall Description
+      html += `<div class="mb-3">
+        <label class="form-label">Horizon Hall Description</label>
+        <textarea class="form-control" id="horizon-desc-input" rows="3">${contentData.horizon_desc ? contentData.horizon_desc.replace(/<br\s*\/?>(\n)?/gi, '\n').replace(/</g, '&lt;').replace(/>/g, '&gt;') : ''}</textarea>
+      </div>`;
       // Horizon Hall Meal Plan Table
       html += `<div class="mb-3">
         <label class="form-label">Horizon Hall Meal Plan Table</label>
