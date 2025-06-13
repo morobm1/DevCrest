@@ -1117,6 +1117,12 @@
           modal.show();
         });
       // Render FAQ dynamically
+      // (Moved inside fetch callback to ensure 'data' is defined)
+      fetch('https://cascadia-editor.onrender.com/api/get-content')
+        .then(r => r.json())
+        .then(data => {
+          // ...other content rendering...
+
           function renderFaq(faqArr) {
             const faqAccordion = document.getElementById('faqAccordion');
             if (!Array.isArray(faqArr) || faqArr.length === 0) {
@@ -1148,6 +1154,14 @@
           } else {
             renderFaq([]);
           }
+        })
+        .catch(() => {
+          document.getElementById('hero-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
+          document.getElementById('banner-badge').innerHTML = '<span class="text-danger">Could not load content.</span>';
+          document.getElementById('horizon-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
+          document.getElementById('forest-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
+          document.getElementById('mealplan-heading').innerHTML = '<span class="text-danger">Could not load content.</span>';
+          document.getElementById('faqAccordion').innerHTML = '<div class="text-danger">Could not load FAQ.</div>';
         });
     });
     </script>
@@ -1230,6 +1244,39 @@
           // Store meal plan tables for use in the meal plan section
           window.mealplan_horizon_table = data.mealplan_horizon_table || [];
           window.mealplan_forest_table = data.mealplan_forest_table || [];
+
+          // Render FAQ dynamically
+          function renderFaq(faqArr) {
+            const faqAccordion = document.getElementById('faqAccordion');
+            if (!Array.isArray(faqArr) || faqArr.length === 0) {
+              faqAccordion.innerHTML = '<div class="text-muted">No FAQs available at this time.</div>';
+              return;
+            }
+            let html = '';
+            faqArr.forEach((item, idx) => {
+              const collapseId = `faq${idx}`;
+              const headingId = `faq${idx}-heading`;
+              html += `<div class="accordion-item">
+                <h2 class="accordion-header" id="${headingId}">
+                  <button class="accordion-button${idx === 0 ? '' : ' collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${idx === 0 ? 'true' : 'false'}" aria-controls="${collapseId}">
+                    ${item.question ? item.question : 'Untitled Question'}
+                  </button>
+                </h2>
+                <div id="${collapseId}" class="accordion-collapse collapse${idx === 0 ? ' show' : ''}" aria-labelledby="${headingId}" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    ${item.answer ? item.answer : ''}
+                  </div>
+                </div>
+              </div>`;
+            });
+            faqAccordion.innerHTML = html;
+          }
+
+          if (Array.isArray(data.faq)) {
+            renderFaq(data.faq);
+          } else {
+            renderFaq([]);
+          }
         })
         .catch(() => {
           document.getElementById('hero-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
@@ -1237,6 +1284,7 @@
           document.getElementById('horizon-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
           document.getElementById('forest-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
           document.getElementById('mealplan-heading').innerHTML = '<span class="text-danger">Could not load content.</span>';
+          document.getElementById('faqAccordion').innerHTML = '<div class="text-danger">Could not load FAQ.</div>';
         });
     });
     </script>
