@@ -642,142 +642,161 @@
 
       <!-- Gallery Section -->
       <section class="container py-5" id="gallery">
+        <style>
+          .carousel-control-prev-icon, .carousel-control-next-icon {
+            background-color: #003057 !important;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            width: 3rem;
+            height: 3rem;
+            background-size: 60% 60%;
+          }
+          .carousel-control-prev, .carousel-control-next {
+            width: 6%;
+          }
+          .gallery-lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+          }
+        </style>
         <div class="text-center mb-4">
           <h2 class="uhd-section-title">Gallery</h2>
           <p class="lead" style="color:#5a5a5a; max-width:600px; margin:0 auto;">
-            Explore the spaces and experiences at the Residential Village. Use the arrows to browse.
+            Explore the spaces and experiences at the Residential Village. Use the arrows to browse or click the image to enlarge.
           </p>
         </div>
         <div id="galleryCarousel" class="carousel slide mx-auto" data-bs-ride="carousel" style="max-width:900px;">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_002_Dining.webp" class="d-block w-100 rounded shadow" alt="Dining Hall">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_002_Dining.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Dining Hall" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Dining Hall</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_004_Dining.webp" class="d-block w-100 rounded shadow" alt="Dining Hall">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_004_Dining.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Dining Hall" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Dining Hall</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_005_Dining.webp" class="d-block w-100 rounded shadow" alt="Dining Hall">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_005_Dining.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Dining Hall" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Dining Hall</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_009_Dining.webp" class="d-block w-100 rounded shadow" alt="Dining Hall">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_009_Dining.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Dining Hall" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Dining Hall</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_006_Dining.webp" class="d-block w-100 rounded shadow" alt="Dining Hall">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_006_Dining.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Dining Hall" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Dining Hall</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_001_Dining.webp" class="d-block w-100 rounded shadow" alt="Dining Hall">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_001_Dining.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Dining Hall" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Dining Hall</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_003_Dining.webp" class="d-block w-100 rounded shadow" alt="Dining Hall">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_003_Dining.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Dining Hall" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Dining Hall</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_008_Dining.webp" class="d-block w-100 rounded shadow" alt="Lounge">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_008_Dining.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Lounge" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Lounge</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_007_Dining.webp" class="d-block w-100 rounded shadow" alt="Lounge">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_007_Dining.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Lounge" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Lounge</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_015_Lounge.webp" class="d-block w-100 rounded shadow" alt="Community Kitchen">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_015_Lounge.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Community Kitchen" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Community Kitchen</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_013_Lounge.webp" class="d-block w-100 rounded shadow" alt="Lounge">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_013_Lounge.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Lounge" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Lounge</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_012_Lounge.webp" class="d-block w-100 rounded shadow" alt="Lounge">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_012_Lounge.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Lounge" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Lounge</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_011_Lobby.webp" class="d-block w-100 rounded shadow" alt="Lobby">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_011_Lobby.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Lobby" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Lobby</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_016_Study.webp" class="d-block w-100 rounded shadow" alt="Study Rooms">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_016_Study.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Study Rooms" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Study Rooms</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_020_Exterior.webp" class="d-block w-100 rounded shadow" alt="Exterior">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_020_Exterior.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Exterior" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Exterior</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_021_Exterior.webp" class="d-block w-100 rounded shadow" alt="Exterior">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_021_Exterior.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Exterior" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Exterior</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_017_Exterior.webp" class="d-block w-100 rounded shadow" alt="Exterior">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_017_Exterior.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Exterior" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Exterior</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_019_Exterior.webp" class="d-block w-100 rounded shadow" alt="Exterior">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_019_Exterior.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Exterior" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Exterior</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_026_LivingRoom.webp" class="d-block w-100 rounded shadow" alt="Living Room">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_026_LivingRoom.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Living Room" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Living Room</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_027_Bedroom.webp" class="d-block w-100 rounded shadow" alt="Bedroom">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_027_Bedroom.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Bedroom" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Bedroom</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_028_Kitchen.webp" class="d-block w-100 rounded shadow" alt="Kitchen">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_028_Kitchen.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Kitchen" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Kitchen</h5>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_046_Laundry.webp" class="d-block w-100 rounded shadow" alt="Laundry Room">
+              <img src="https://residentialvillage.com/wp-content/uploads/2024/12/Residential_046_Laundry.webp" class="d-block w-100 rounded shadow gallery-carousel-img" alt="Laundry Room" style="cursor:pointer;">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Laundry Room</h5>
               </div>
@@ -792,6 +811,31 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
+        <!-- Gallery Lightbox Modal -->
+        <div class="modal fade" id="galleryLightbox" tabindex="-1" aria-labelledby="galleryLightboxLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark border-0">
+              <div class="modal-header border-0">
+                <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body text-center p-0">
+                <img id="galleryLightboxImg" src="" alt="" class="gallery-lightbox-img">
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          document.querySelectorAll('.gallery-carousel-img').forEach(function(img) {
+            img.addEventListener('click', function() {
+              document.getElementById('galleryLightboxImg').src = this.src;
+              document.getElementById('galleryLightboxImg').alt = this.alt;
+              var modal = new bootstrap.Modal(document.getElementById('galleryLightbox'));
+              modal.show();
+            });
+          });
+        });
+        </script>
       </section>
 
         
@@ -1094,7 +1138,7 @@
           <div class="modal-body">
             <ul class="nav nav-tabs mb-3" id="forestHallTabs" role="tablist">
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="forest-2br-tab" data-bs-toggle="tab" data-bs-target="#forest-2br" type="button" role="tab" aria-controls="forest-2br" aria-selected="false">2BR / 1BA - Double</button>
+                <button class="nav-link active" id="forest-2br-tab" data-bs-toggle="tab" data-bs-target="#forest-2br" type="button" role="tab" aria-controls="forest-2br" aria-selected="true">2BR / 1BA - Double</button>
               </li>
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="forest-4br-tab" data-bs-toggle="tab" data-bs-target="#forest-4br" type="button" role="tab" aria-controls="forest-4br" aria-selected="false">4BR / 1BA - Single</button>
@@ -1102,7 +1146,7 @@
             </ul>
             <div class="tab-content" id="forestHallTabsContent">
 
-              <div class="tab-pane fade" id="forest-2br" role="tabpanel" aria-labelledby="forest-2br-tab">
+              <div class="tab-pane fade show active" id="forest-2br" role="tabpanel" aria-labelledby="forest-2br-tab">
                 <div class="row">
                   <div class="col-md-6 text-center">
                     <img src="https://residentialvillage.com/wp-content/uploads/2024/10/Forest-2BR-1BA-Double.webp" alt="Forest Hall 2BR 1BA Floorplan" class="uhd-floorplan-img mb-3">
