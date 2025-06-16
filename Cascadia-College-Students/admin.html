@@ -289,16 +289,21 @@
 
     // Render FAQ editor
     function renderFaqEditor() {
-      let html = '<table class="table table-bordered align-middle mb-0"><thead class="table-light"><tr><th style="width:40%">Question</th><th style="width:50%">Answer</th><th style="width:10%">Delete</th></tr></thead><tbody>';
+      let html = '<div style="border:1px solid #dee2e6; border-radius:0.5rem; overflow:hidden;">';
+      html += '<div class="row bg-light fw-bold" style="margin:0; padding:0.5rem 0; border-bottom:1px solid #dee2e6;">'
+        + '<div class="col-4">Question</div>'
+        + '<div class="col-6">Answer</div>'
+        + '<div class="col-2">Delete</div>'
+        + '</div>';
       if (!contentData.faq) contentData.faq = [];
       contentData.faq.forEach((row, idx) => {
-        html += `<tr>
-          <td><input class="form-control" type="text" value="${row.question || ''}" data-faq-idx="${idx}" data-faq-field="question"></td>
-          <td><input class="form-control" type="text" value="${row.answer || ''}" data-faq-idx="${idx}" data-faq-field="answer"></td>
-          <td><button class="btn btn-danger btn-sm" type="button" onclick="deleteFaqRow(${idx})">Delete</button></td>
-        </tr>`;
+        html += `<div class="row align-items-center faq-draggable-row" draggable="true" data-faq-idx="${idx}" style="margin:0; border-bottom:1px solid #eee; background:#fff; cursor:move;">
+          <div class="col-4"><input class="form-control" type="text" value="${row.question || ''}" data-faq-idx="${idx}" data-faq-field="question"></div>
+          <div class="col-6"><input class="form-control" type="text" value="${row.answer || ''}" data-faq-idx="${idx}" data-faq-field="answer"></div>
+          <div class="col-2"><button class="btn btn-danger btn-sm" type="button" onclick="deleteFaqRow(${idx})">Delete</button></div>
+        </div>`;
       });
-      html += '</tbody></table>';
+      html += '</div>';
       document.getElementById('faq-editor').innerHTML = html;
       document.querySelectorAll('#faq-editor input').forEach(input => {
         input.oninput = function() {
@@ -306,6 +311,34 @@
           const field = this.getAttribute('data-faq-field');
           contentData.faq[idx][field] = this.value;
         };
+      });
+      // Drag and drop FAQ reordering
+      let dragSrcIdx = null;
+      document.querySelectorAll('.faq-draggable-row').forEach(row => {
+        row.addEventListener('dragstart', function(e) {
+          dragSrcIdx = +this.getAttribute('data-faq-idx');
+          this.style.opacity = '0.5';
+        });
+        row.addEventListener('dragend', function(e) {
+          this.style.opacity = '';
+        });
+        row.addEventListener('dragover', function(e) {
+          e.preventDefault();
+          this.style.background = '#e5e5e5';
+        });
+        row.addEventListener('dragleave', function(e) {
+          this.style.background = '';
+        });
+        row.addEventListener('drop', function(e) {
+          e.preventDefault();
+          this.style.background = '';
+          const dropIdx = +this.getAttribute('data-faq-idx');
+          if (dragSrcIdx !== null && dragSrcIdx !== dropIdx) {
+            const moved = contentData.faq.splice(dragSrcIdx, 1)[0];
+            contentData.faq.splice(dropIdx, 0, moved);
+            renderFaqEditor();
+          }
+        });
       });
     }
     function addFaqRow() {
