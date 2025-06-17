@@ -1397,8 +1397,7 @@
 
       fetch('https://cascadia-editor.onrender.com/api/get-content')
       .then(r => r.json())
-      .then(resp => {
-      const data = resp.data || {};
+      .then(data => {
       if (data.hero_title) document.getElementById('hero-title').innerHTML = data.hero_title;
       if (data.hero_subtitle) document.getElementById('hero-subtitle').innerHTML = data.hero_subtitle;
       if (data.banner_badge) document.getElementById('banner-badge').innerHTML = data.banner_badge;
@@ -1416,8 +1415,7 @@
       if (data.mealplan_forest_desc) document.getElementById('mealplan-forest-desc').innerHTML = data.mealplan_forest_desc;
       
       // Store meal plan tables for use in the meal plan section
-      window.mealplan_horizon_table = data.mealplan_horizon_table || [];
-      window.mealplan_forest_table = data.mealplan_forest_table || [];
+      window.mealPlanDetails = data;
       
       // Render FAQ dynamically
       function renderFaq(faqArr) {
@@ -1483,10 +1481,11 @@
         }
         // Meal Plan Section Interactivity
         let mealPlanDetails = {};
-        fetch('content.json')
-          .then(r => r.json())
-          .then(data => {
-            mealPlanDetails = data;
+        // Removed fetch('content.json') and all related logic. Meal plan click handler should use window.mealPlanDetails set from the API response.
+        document.querySelectorAll('.mealplan-box').forEach(function(box) {
+          box.addEventListener('click', function() {
+            const mealType = this.getAttribute('data-meal');
+            const details = document.getElementById('mealplan-details');
             function renderMealPlanTable(tableData, title) {
               let html = `<div class="uhd-card text-center p-4">`;
               if (title) html += `<h3 class="fw-bold mb-3" style="color:#2d1e4a;">${title}</h3>`;
@@ -1501,24 +1500,19 @@
               html += '</tbody></table></div>';
               return html;
             }
-            document.querySelectorAll('.mealplan-box').forEach(function(box) {
-              box.addEventListener('click', function() {
-                const mealType = this.getAttribute('data-meal');
-                const details = document.getElementById('mealplan-details');
-                if (mealType === 'horizon') {
-                  details.innerHTML = renderMealPlanTable(mealPlanDetails.mealplan_horizon_table || [], mealPlanDetails.mealplan_horizon_title || '');
-                } else if (mealType === 'forest') {
-                  details.innerHTML = renderMealPlanTable(mealPlanDetails.mealplan_forest_table || [], mealPlanDetails.mealplan_forest_title || '');
-                }
-                details.style.display = 'block';
-                // Adjusted scroll: scroll to the meal plan section heading
-                const section = document.getElementById('mealplans');
-                const yOffset = -80; // offset for fixed navbar
-                const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                window.scrollTo({top: y, behavior: 'smooth'});
-              });
-            });
+            if (mealType === 'horizon') {
+              details.innerHTML = renderMealPlanTable(window.mealPlanDetails.mealplan_horizon_table || [], window.mealPlanDetails.mealplan_horizon_title || '');
+            } else if (mealType === 'forest') {
+              details.innerHTML = renderMealPlanTable(window.mealPlanDetails.mealplan_forest_table || [], window.mealPlanDetails.mealplan_forest_title || '');
+            }
+            details.style.display = 'block';
+            // Adjusted scroll: scroll to the meal plan section heading
+            const section = document.getElementById('mealplans');
+            const yOffset = -80; // offset for fixed navbar
+            const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({top: y, behavior: 'smooth'});
           });
+        });
         // Calendly tour scheduler
         var scheduleTourBtn = document.getElementById('scheduleTourBtn');
         if(scheduleTourBtn) {

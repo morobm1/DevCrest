@@ -41,7 +41,12 @@ MongoClient.connect(MONGO_URI, { useUnifiedTopology: true })
 // Get content.json
 app.get('/api/get-content', async (req, res) => {
   const doc = await contentCol.findOne({ _id: 'main' });
-  res.json(doc ? doc.data : {});
+  if (doc) {
+    delete doc._id;
+    res.json(doc);
+  } else {
+    res.json({});
+  }
 });
 
 // Update content.json
@@ -49,7 +54,7 @@ app.post('/api/update-content', checkAuth, async (req, res) => {
   const data = req.body;
   await contentCol.updateOne(
     { _id: 'main' },
-    { $set: { data } },
+    { $set: { ...data } },
     { upsert: true }
   );
   res.json({ success: true });
