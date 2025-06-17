@@ -1456,12 +1456,22 @@
           }
         })
         .catch(() => {
-          document.getElementById('hero-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
-          document.getElementById('banner-badge').innerHTML = '<span class="text-danger">Could not load content.</span>';
-          document.getElementById('horizon-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
-          document.getElementById('forest-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
-          document.getElementById('mealplan-heading').innerHTML = '<span class="text-danger">Could not load content.</span>';
-          document.getElementById('faqAccordion').innerHTML = '<div class="text-danger">Could not load FAQ.</div>';
+          document.getElementById('hero-title').innerHTML = 'Welcome to Cascadia Student Housing';
+          document.getElementById('hero-subtitle').innerHTML = 'Modern living for Cascadia College students at Horizon Hall and Forest Hall.';
+          document.getElementById('banner-badge').innerHTML = 'Now Leasing';
+          document.getElementById('banner-message').innerHTML = 'Apply for Fall 2024!';
+          document.getElementById('banner-terms').innerHTML = 'Limited spots available';
+          document.getElementById('banner-button').innerHTML = 'Apply Now';
+          document.getElementById('horizon-title').innerHTML = 'Horizon Hall';
+          document.getElementById('horizon-desc').innerHTML = 'Spacious, fully furnished apartments designed for student success. Enjoy private bedrooms, modern kitchens, and a welcoming community atmosphere.';
+          document.getElementById('forest-title').innerHTML = 'Forest Hall';
+          document.getElementById('forest-desc').innerHTML = 'Classic campus living with beautiful gathering areas, private and shared suites, and spaces that foster connection and collaboration.';
+          document.getElementById('mealplan-heading').innerHTML = 'Meal Plans';
+          document.getElementById('mealplan-horizon-title').innerHTML = 'Horizon Hall Meal Plan';
+          document.getElementById('mealplan-horizon-desc').innerHTML = 'Flexible meal plans for Horizon Hall residents.';
+          document.getElementById('mealplan-forest-title').innerHTML = 'Forest Hall Meal Plan';
+          document.getElementById('mealplan-forest-desc').innerHTML = 'Flexible meal plans for Forest Hall residents.';
+          document.getElementById('faqAccordion').innerHTML = '<div class="accordion-item"><h2 class="accordion-header" id="faq0-heading"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq0" aria-expanded="true" aria-controls="faq0">How do I apply?</button></h2><div id="faq0" class="accordion-collapse collapse show" aria-labelledby="faq0-heading" data-bs-parent="#faqAccordion"><div class="accordion-body">Visit the Residential Village website and complete the online application for Cascadia College housing.</div></div></div>';
         });
     });
     </script>
