@@ -583,7 +583,7 @@
                     <li class="nav-item"><a class="nav-link" href="#mealplans">Meal Plans</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
                     <li class="nav-item ms-2">
-                        <a class="btn btn-primary fw-bold px-3 py-1" style="border-radius: 2rem; background: #003057; border: none;" target="_blank" href="https://residentialvillage.prospectportal.com/Apartments/module/application_authentication/?_gl=1*157iq8r*_gcl_aw*R0NMLjE3NDU4NTM2NzEuQ2owS0NRand6cnpBQmhEOEFSSXNBTmxTV05QclA4c1hieEdQSXQtbmk4RUhybDFkY3p1a2NyVjBwcG9tOGNudnhyWkxuQlBLUWtjX19qRWFBdG04RUFMd193Y0I.*_ga*MTUxMzA0MDIyOS4xNzQxODAyMjE1*_ga_F73Z6D91ZP*czE3NDk3ODc3MDEkbzE0JGcwJHQxNzQ5Nzg3NzAxJGo2MCRsMCRoMA..">Apply Now</a>
+                        <a class="btn btn-primary fw-bold px-3 py-1" style="border-radius: 2rem; background: #003057; border: none;" target="_blank" href="https://residentialvillage.prospectportal.com/Apartments/module/application_authentication/?_gl=1*157iq8r*_gcl_aw*R0NMLjE3NDU4NTM2NzEuQ2owS0NRand6cnpBQmhEOEFSSXNBTmxTV05QclA4c1hieEdQSXQtbmk4RUhybDFkY3p1a2NyVjBwcG9tOGNudnhyWkxuQlBLUWtjX19qRWFBdG04RUFMd193Y0I.*_ga*MTUxMzA0MDIyOS4xNzQxODAyMjE1*_ga_F73Z6D91ZP*czE3NDk3ODc3MDEkbzE0JGcwJHQxNzQ5Nzg3NzAxJGo2MCRsMCRoMA..">8</a>
                     </li>
                 </ul>
             </div>
@@ -1099,7 +1099,8 @@
                 <p class="mb-4" style="color: #5a5a5a; font-size: 1.15rem;">
                   Ready to experience summer living or have questions? Our team is here to help you every step of the way.
                 </p>
-                <form action="https://formspree.io/f/xwkgyyqk" method="POST" autocomplete="off">
+                <form name="contact" method="POST" data-netlify="true" autocomplete="off">
+                  <input type="hidden" name="form-name" value="contact">
                   <div class="mb-3">
                     <input type="text" class="form-control uhd-modern-input" name="name" placeholder="Name" required>
                   </div>
