@@ -41,7 +41,12 @@ MongoClient.connect(MONGO_URI, { useUnifiedTopology: true })
 // Get content.json
 app.get('/api/get-content', async (req, res) => {
   const doc = await contentCol.findOne({ _id: 'main' });
-  res.json(doc ? doc.data : {});
+  if (doc) {
+    delete doc._id; // optional: do not expose _id to frontend
+    res.json(doc);
+  } else {
+    res.json({});
+  }
 });
 
 // Update content.json
