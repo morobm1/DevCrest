@@ -54,7 +54,7 @@ app.post('/api/update-content', checkAuth, async (req, res) => {
   const data = req.body;
   await contentCol.updateOne(
     { _id: 'main' },
-    { $set: { data } },
+    { $set: { ...data } },
     { upsert: true }
   );
   res.json({ success: true });
