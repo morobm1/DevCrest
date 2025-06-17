@@ -170,7 +170,7 @@
       const u = document.getElementById('username').value.trim();
       const p = document.getElementById('password').value;
       document.getElementById('login-error').textContent = '';
-      if (u === 'admin' && p === 'CMP2025!') {
+      if (u === 'admin' && p === 'Hiro0701!') {
         document.getElementById('auth-section').style.display = 'none';
         document.getElementById('admin-content').style.display = '';
         document.getElementById('admin-sidebar').style.display = '';
@@ -358,20 +358,56 @@
     }
     // --- Save Handlers for Each Section (disabled) ---
     document.getElementById('save-content-btn-hero').onclick = function() {
-      document.getElementById('save-content-status-hero').innerHTML = '<span class="text-danger">Saving is disabled in this demo.</span>';
+    contentData.hero_title = document.getElementById('hero-title-input').value.replace(/\r?\n/g, '<br>');
+    contentData.hero_subtitle = document.getElementById('hero-subtitle-input').value.replace(/\r?\n/g, '<br>');
+    saveContent('hero');
     };
     document.getElementById('save-content-btn-banner').onclick = function() {
-      document.getElementById('save-content-status-banner').innerHTML = '<span class="text-danger">Saving is disabled in this demo.</span>';
+    contentData.banner_badge = document.getElementById('banner-badge-input').value.replace(/\r?\n/g, '<br>');
+    contentData.banner_message = document.getElementById('banner-message-input').value.replace(/\r?\n/g, '<br>');
+    contentData.banner_terms = document.getElementById('banner-terms-input').value;
+    contentData.banner_button = document.getElementById('banner-button-input').value;
+    saveContent('banner');
     };
     document.getElementById('save-content-btn-hall').onclick = function() {
-      document.getElementById('save-content-status-hall').innerHTML = '<span class="text-danger">Saving is disabled in this demo.</span>';
+    contentData.horizon_title = document.getElementById('horizon-title-input').value;
+    contentData.horizon_desc = document.getElementById('horizon-desc-input').value.replace(/\r?\n/g, '<br>');
+    contentData.forest_title = document.getElementById('forest-title-input').value;
+    contentData.forest_desc = document.getElementById('forest-desc-input').value.replace(/\r?\n/g, '<br>');
+    saveContent('hall');
     };
     document.getElementById('save-content-btn-meal').onclick = function() {
-      document.getElementById('save-content-status-meal').innerHTML = '<span class="text-danger">Saving is disabled in this demo.</span>';
+    contentData.mealplan_horizon_table = getMealTableFromEditor('horizon');
+    contentData.mealplan_forest_title = document.getElementById('mealplan-forest-title-input').value;
+    contentData.mealplan_forest_desc = document.getElementById('mealplan-forest-desc-input').value.replace(/\r?\n/g, '<br>');
+    contentData.mealplan_forest_table = getMealTableFromEditor('forest');
+    saveContent('meal');
     };
     document.getElementById('save-content-btn-faq').onclick = function() {
-      document.getElementById('save-content-status-faq').innerHTML = '<span class="text-danger">Saving is disabled in this demo.</span>';
+    contentData.faq = getFaqFromEditor();
+    saveContent('faq');
     };
+    function saveContent(section) {
+    let statusId = 'save-content-status-' + section;
+    document.getElementById(statusId).innerHTML = 'Saving...';
+    // Use static credentials for basic auth
+    const authHeader = 'Basic ' + btoa('admin:Hiro0701!');
+    fetch('https://cascadia-editor.onrender.com/api/update-content', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'Authorization': authHeader
+    },
+    body: JSON.stringify(contentData)
+    })
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(() => {
+    document.getElementById(statusId).innerHTML = '<span class="text-success">Saved successfully!</span>';
+    })
+    .catch(() => {
+    document.getElementById(statusId).innerHTML = '<span class="text-danger">Save failed. Please try again or contact IT.</span>';
+    });
+    }
     // --- Lease Terms Section (dummy) ---
     function renderLeaseTermsEditor() {
       let html = '';
