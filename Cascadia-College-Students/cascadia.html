@@ -1490,6 +1490,10 @@
             function renderMealPlanTable(tableData, title) {
               let html = `<div class="uhd-card text-center p-4">`;
               if (title) html += `<h3 class="fw-bold mb-3" style="color:#2d1e4a;">${title}</h3>`;
+              if (!tableData || !tableData.length) {
+                html += '<div class="text-muted">No meal plans available for this hall.</div></div>';
+                return html;
+              }
               html += `<table class="table table-bordered align-middle mb-3"><thead class="table-light"><tr><th>Plan Name</th><th>Quarterly Cost</th><th>Details</th></tr></thead><tbody>`;
               tableData.forEach(row => {
                 html += `<tr><td>${row.plan}</td><td>${row.cost}</td><td>${row.details}</td></tr>`;
