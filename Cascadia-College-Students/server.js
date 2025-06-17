@@ -13,8 +13,8 @@ const ALLOWED_USERS = [
 ];
 
 // MongoDB Atlas connection string
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://brianstrider:Tsuaki1234@cascadia-cluster.bmtuiu2.mongodb.net/';
-const DB_NAME = 'cascadia';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://<username>:<password>@user_auth.mongodb.net/';
+const DB_NAME = 'user_auth';
 
 const app = express();
 app.use(cors());
