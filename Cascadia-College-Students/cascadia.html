@@ -1396,61 +1396,62 @@
       document.getElementById('mealplan-forest-desc').innerHTML = '';
 
       fetch('https://cascadia-editor.onrender.com/api/get-content')
-        .then(r => r.json())
-        .then(data => {
-          if (data.hero_title) document.getElementById('hero-title').innerHTML = data.hero_title;
-          if (data.hero_subtitle) document.getElementById('hero-subtitle').innerHTML = data.hero_subtitle;
-          if (data.banner_badge) document.getElementById('banner-badge').innerHTML = data.banner_badge;
-          if (data.banner_message) document.getElementById('banner-message').innerHTML = data.banner_message;
-          if (data.banner_terms) document.getElementById('banner-terms').innerHTML = data.banner_terms;
-          if (data.banner_button) document.getElementById('banner-button').innerHTML = data.banner_button;
-          if (data.horizon_title) document.getElementById('horizon-title').innerHTML = data.horizon_title;
-          if (data.horizon_desc) document.getElementById('horizon-desc').innerHTML = data.horizon_desc;
-          if (data.forest_title) document.getElementById('forest-title').innerHTML = data.forest_title;
-          if (data.forest_desc) document.getElementById('forest-desc').innerHTML = data.forest_desc;
-          if (data.mealplan_heading) document.getElementById('mealplan-heading').innerHTML = data.mealplan_heading;
-          if (data.mealplan_horizon_title) document.getElementById('mealplan-horizon-title').innerHTML = data.mealplan_horizon_title;
-          if (data.mealplan_horizon_desc) document.getElementById('mealplan-horizon-desc').innerHTML = data.mealplan_horizon_desc;
-          if (data.mealplan_forest_title) document.getElementById('mealplan-forest-title').innerHTML = data.mealplan_forest_title;
-          if (data.mealplan_forest_desc) document.getElementById('mealplan-forest-desc').innerHTML = data.mealplan_forest_desc;
-
-          // Store meal plan tables for use in the meal plan section
-          window.mealplan_horizon_table = data.mealplan_horizon_table || [];
-          window.mealplan_forest_table = data.mealplan_forest_table || [];
-
-          // Render FAQ dynamically
-          function renderFaq(faqArr) {
-            const faqAccordion = document.getElementById('faqAccordion');
-            if (!Array.isArray(faqArr) || faqArr.length === 0) {
-              faqAccordion.innerHTML = '<div class="text-muted">No FAQs available at this time.</div>';
-              return;
-            }
-            let html = '';
-            faqArr.forEach((item, idx) => {
-              const collapseId = `faq${idx}`;
-              const headingId = `faq${idx}-heading`;
-              html += `<div class="accordion-item">
-                <h2 class="accordion-header" id="${headingId}">
-                  <button class="accordion-button${idx === 0 ? '' : ' collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${idx === 0 ? 'true' : 'false'}" aria-controls="${collapseId}">
-                    ${item.question ? item.question : 'Untitled Question'}
-                  </button>
-                </h2>
-                <div id="${collapseId}" class="accordion-collapse collapse${idx === 0 ? ' show' : ''}" aria-labelledby="${headingId}" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body">
-                    ${item.answer ? item.answer : ''}
-                  </div>
-                </div>
-              </div>`;
-            });
-            faqAccordion.innerHTML = html;
-          }
-
-          if (Array.isArray(data.faq)) {
-            renderFaq(data.faq);
-          } else {
-            renderFaq([]);
-          }
-        })
+      .then(r => r.json())
+      .then(resp => {
+      const data = resp.data || {};
+      if (data.hero_title) document.getElementById('hero-title').innerHTML = data.hero_title;
+      if (data.hero_subtitle) document.getElementById('hero-subtitle').innerHTML = data.hero_subtitle;
+      if (data.banner_badge) document.getElementById('banner-badge').innerHTML = data.banner_badge;
+      if (data.banner_message) document.getElementById('banner-message').innerHTML = data.banner_message;
+      if (data.banner_terms) document.getElementById('banner-terms').innerHTML = data.banner_terms;
+      if (data.banner_button) document.getElementById('banner-button').innerHTML = data.banner_button;
+      if (data.horizon_title) document.getElementById('horizon-title').innerHTML = data.horizon_title;
+      if (data.horizon_desc) document.getElementById('horizon-desc').innerHTML = data.horizon_desc;
+      if (data.forest_title) document.getElementById('forest-title').innerHTML = data.forest_title;
+      if (data.forest_desc) document.getElementById('forest-desc').innerHTML = data.forest_desc;
+      if (data.mealplan_heading) document.getElementById('mealplan-heading').innerHTML = data.mealplan_heading;
+      if (data.mealplan_horizon_title) document.getElementById('mealplan-horizon-title').innerHTML = data.mealplan_horizon_title;
+      if (data.mealplan_horizon_desc) document.getElementById('mealplan-horizon-desc').innerHTML = data.mealplan_horizon_desc;
+      if (data.mealplan_forest_title) document.getElementById('mealplan-forest-title').innerHTML = data.mealplan_forest_title;
+      if (data.mealplan_forest_desc) document.getElementById('mealplan-forest-desc').innerHTML = data.mealplan_forest_desc;
+      
+      // Store meal plan tables for use in the meal plan section
+      window.mealplan_horizon_table = data.mealplan_horizon_table || [];
+      window.mealplan_forest_table = data.mealplan_forest_table || [];
+      
+      // Render FAQ dynamically
+      function renderFaq(faqArr) {
+      const faqAccordion = document.getElementById('faqAccordion');
+      if (!Array.isArray(faqArr) || faqArr.length === 0) {
+      faqAccordion.innerHTML = '<div class="text-muted">No FAQs available at this time.</div>';
+      return;
+      }
+      let html = '';
+      faqArr.forEach((item, idx) => {
+      const collapseId = `faq${idx}`;
+      const headingId = `faq${idx}-heading`;
+      html += `<div class="accordion-item">
+      <h2 class="accordion-header" id="${headingId}">
+      <button class="accordion-button${idx === 0 ? '' : ' collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${idx === 0 ? 'true' : 'false'}" aria-controls="${collapseId}">
+      ${item.question ? item.question : 'Untitled Question'}
+      </button>
+      </h2>
+      <div id="${collapseId}" class="accordion-collapse collapse${idx === 0 ? ' show' : ''}" aria-labelledby="${headingId}" data-bs-parent="#faqAccordion">
+      <div class="accordion-body">
+      ${item.answer ? item.answer : ''}
+      </div>
+      </div>
+      </div>`;
+      });
+      faqAccordion.innerHTML = html;
+      }
+      
+      if (Array.isArray(data.faq)) {
+      renderFaq(data.faq);
+      } else {
+      renderFaq([]);
+      }
+      })
         .catch(() => {
           document.getElementById('hero-title').innerHTML = '<span class="text-danger">Could not load content.</span>';
           document.getElementById('banner-badge').innerHTML = '<span class="text-danger">Could not load content.</span>';
