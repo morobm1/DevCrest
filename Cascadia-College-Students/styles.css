@@ -337,4 +337,11 @@ main p {
     transition: filter 0.3s ease;
 }
 
+.footer-social a + a {
+  margin-left: 12px;
+}
+.footer-social i {
+  font-size: 1.4rem;
+  color: white;
+}
 
