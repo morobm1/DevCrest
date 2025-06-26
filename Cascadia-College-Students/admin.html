@@ -87,6 +87,7 @@
         <a class="nav-link" id="tab-meal" data-bs-toggle="tab" href="#section-meal" role="tab">Meal Plans</a>
         <a class="nav-link" id="tab-lease" data-bs-toggle="tab" href="#section-lease" role="tab">Lease Terms</a>
         <a class="nav-link" id="tab-faq" data-bs-toggle="tab" href="#section-faq" role="tab">FAQ</a>
+        <a class="nav-link" id="tab-comparison" data-bs-toggle="tab" href="#section-comparison" role="tab">Comparison</a>
       </div>
       <button class="signout-btn" id="signout-btn">Sign Out</button>
     </nav>
@@ -158,11 +159,84 @@
               <div id="save-content-status-faq" class="mt-3"></div>
             </div>
           </div>
+          <div class="tab-pane fade" id="section-comparison" role="tabpanel">
+            <div class="admin-section">
+              <h5>Edit Feature Comparison Table</h5>
+              <div id="comparison-editor"></div>
+              <button class="btn btn-success btn-sm my-2" type="button" id="add-comparison-row">Add Row</button>
+              <button class="btn btn-primary mt-2" id="save-comparison-btn">Save Chart</button>
+              <div id="save-comparison-status" class="mt-3"></div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // --- Comparison Table Admin Logic ---
+    let comparisonData = [];
+    function renderComparisonEditor() {
+      let html = '<div class="table-responsive"><table class="table table-bordered align-middle text-center bg-white shadow-sm">';
+      html += '<thead class="table-light"><tr><th>Feature</th><th>Horizon Hall</th><th>Forest Hall</th><th>Delete</th></tr></thead><tbody>';
+      comparisonData.forEach((row, idx) => {
+        html += `<tr>
+          <td><input class="form-control" type="text" value="${row.feature || ''}" data-cmp-idx="${idx}" data-cmp-field="feature"></td>
+          <td>${comparisonInput(row.horizon, idx, 'horizon')}</td>
+          <td>${comparisonInput(row.forest, idx, 'forest')}</td>
+          <td><button class="btn btn-danger btn-sm" type="button" onclick="deleteComparisonRow(${idx})">Delete</button></td>
+        </tr>`;
+      });
+      html += '</tbody></table></div>';
+      document.getElementById('comparison-editor').innerHTML = html;
+      document.querySelectorAll('#comparison-editor input').forEach(input => {
+        input.oninput = function() {
+          const idx = +this.getAttribute('data-cmp-idx');
+          const field = this.getAttribute('data-cmp-field');
+          comparisonData[idx][field] = this.value;
+          renderComparisonEditor(); // re-render to update styling
+        };
+      });
+    }
+    function comparisonInput(val, idx, field) {
+      let v = val || '';
+      let style = '';
+      if (v.trim() === '✓') style = 'text-success fw-bold';
+      else if (v.trim() === '✗') style = 'text-danger fw-bold';
+      return `<input class="form-control text-center ${style}" type="text" value="${v}" data-cmp-idx="${idx}" data-cmp-field="${field}">`;
+    }
+    window.deleteComparisonRow = function(idx) {
+      comparisonData.splice(idx, 1);
+      renderComparisonEditor();
+    };
+    document.getElementById('add-comparison-row').onclick = function() {
+      comparisonData.push({ feature: '', horizon: '', forest: '' });
+      renderComparisonEditor();
+    };
+    document.getElementById('save-comparison-btn').onclick = function() {
+      document.getElementById('save-comparison-status').innerHTML = 'Saving...';
+      fetch('/api/save-comparison', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comparisonData)
+      })
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(() => {
+        document.getElementById('save-comparison-status').innerHTML = '<span class="text-success">Saved successfully!</span>';
+      })
+      .catch(() => {
+        document.getElementById('save-comparison-status').innerHTML = '<span class="text-danger">Save failed. Please try again.</span>';
+      });
+    };
+    function loadComparisonData() {
+      fetch('/api/get-comparison')
+        .then(r => r.ok ? r.json() : [])
+        .then(data => { comparisonData = Array.isArray(data) ? data : []; renderComparisonEditor(); })
+        .catch(() => { comparisonData = []; renderComparisonEditor(); });
+    }
+    // Load comparison data when tab is shown
+    document.getElementById('tab-comparison').addEventListener('shown.bs.tab', loadComparisonData);
+  </script>
   <script>
     // --- Frontend-only Authentication Logic ---
     document.getElementById('login-form').onsubmit = function(e) {
