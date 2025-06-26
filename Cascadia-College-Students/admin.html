@@ -214,8 +214,18 @@
       let style = '';
       if (v.trim() === '✓') style = 'text-success fw-bold';
       else if (v.trim() === '✗') style = 'text-danger fw-bold';
-      return `<input class="form-control text-center ${style}" type="text" value="${v}" data-cmp-idx="${idx}" data-cmp-field="${field}">`;
+      return `
+        <div class="input-group input-group-sm flex-nowrap">
+          <input class="form-control text-center ${style}" type="text" value="${v}" data-cmp-idx="${idx}" data-cmp-field="${field}" style="min-width:40px;">
+          <button class="btn btn-outline-success" type="button" tabindex="-1" onclick="setComparisonSymbol(${idx}, '${field}', '✓')">✓</button>
+          <button class="btn btn-outline-danger" type="button" tabindex="-1" onclick="setComparisonSymbol(${idx}, '${field}', '✗')">✗</button>
+        </div>
+      `;
     }
+    window.setComparisonSymbol = function(idx, field, symbol) {
+      comparisonData[idx][field] = symbol;
+      renderComparisonEditor();
+    };
     window.deleteComparisonRow = function(idx) {
       comparisonData.splice(idx, 1);
       renderComparisonEditor();
@@ -240,7 +250,7 @@
       });
     };
     function loadComparisonData() {
-      fetch('/api/get-content')
+      fetch('https://cascadia-editor.onrender.com/api/get-content')
         .then(r => r.ok ? r.json() : {})
         .then(data => {
           comparisonData = Array.isArray(data.comparison_table) ? data.comparison_table : [];
@@ -254,10 +264,12 @@
       document.getElementById('save-comparison-status').innerHTML = 'Saving...';
       // Use static credentials for basic auth
       const authHeader = 'Basic ' + btoa('admin:Hiro0701!');
-      fetch('/api/update-content', {
+      // Merge with all other content fields
+      contentData.comparison_table = comparisonData;
+      fetch('https://cascadia-editor.onrender.com/api/update-content', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': authHeader },
-        body: JSON.stringify({ comparison_table: comparisonData })
+        body: JSON.stringify(contentData)
       })
       .then(r => r.ok ? r.json() : Promise.reject())
       .then(() => {

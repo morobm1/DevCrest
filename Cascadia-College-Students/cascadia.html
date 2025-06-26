@@ -812,46 +812,37 @@
                   <th style="min-width:120px;">Forest Hall</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Private Bedrooms</td>
-                  <td class="text-success fw-bold">✓</td>
-                  <td class="text-danger fw-bold">✗</td>
-                </tr>
-                <tr>
-                  <td>Shared Bedrooms</td>
-                  <td class="text-danger fw-bold">✗</td>
-                  <td class="text-success fw-bold">✓</td>
-                </tr>
-                <tr>
-                  <td>Full Kitchen</td>
-                  <td class="text-success fw-bold">✓</td>
-                  <td class="text-success fw-bold">✓</td>
-                </tr>
-                <tr>
-                  <td>In-Unit Laundry</td>
-                  <td class="text-success fw-bold">✓</td>
-                  <td class="text-danger fw-bold">✗</td>
-                </tr>
-                <tr>
-                  <td>Community Lounges</td>
-                  <td class="text-success fw-bold">✓</td>
-                  <td class="text-success fw-bold">✓</td>
-                </tr>
-                <tr>
-                  <td>Study Rooms</td>
-                  <td class="text-success fw-bold">✓</td>
-                  <td class="text-success fw-bold">✓</td>
-                </tr>
-                <tr>
-                  <td>Flexible Lease Terms</td>
-                  <td class="text-success fw-bold">✓</td>
-                  <td class="text-success fw-bold">✓</td>
-                </tr>
+              <tbody id="comparison-table-body">
+                <tr><td colspan="3" class="text-muted">Loading...</td></tr>
               </tbody>
             </table>
           </div>
         </section>
+        <script>
+        // Dynamic Comparison Table Loader
+        function renderComparisonTable(rows) {
+          const tbody = document.getElementById('comparison-table-body');
+          if (!Array.isArray(rows) || rows.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="3" class="text-muted">No comparison data available.</td></tr>';
+            return;
+          }
+          tbody.innerHTML = rows.map(row => {
+            const h = (row.horizon||'').trim();
+            const f = (row.forest||'').trim();
+            const hClass = h === '✓' ? 'text-success fw-bold' : h === '✗' ? 'text-danger fw-bold' : '';
+            const fClass = f === '✓' ? 'text-success fw-bold' : f === '✗' ? 'text-danger fw-bold' : '';
+            return `<tr>
+              <td>${row.feature||''}</td>
+              <td class="${hClass}">${h||''}</td>
+              <td class="${fClass}">${f||''}</td>
+            </tr>`;
+          }).join('');
+        }
+        fetch('https://cascadia-editor.onrender.com/api/get-content')
+          .then(r => r.ok ? r.json() : {})
+          .then(data => renderComparisonTable(data.comparison_table))
+          .catch(() => renderComparisonTable([]));
+        </script>
 
       <!-- Gallery Section -->
       <section class="container py-5" id="gallery">
