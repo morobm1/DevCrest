@@ -194,7 +194,18 @@
           const idx = +this.getAttribute('data-cmp-idx');
           const field = this.getAttribute('data-cmp-field');
           comparisonData[idx][field] = this.value;
-          renderComparisonEditor(); // re-render to update styling
+          // Only update the style of this input, not the whole table
+          if (field === 'horizon' || field === 'forest') {
+            if (this.value.trim() === '✓') {
+              this.classList.add('text-success', 'fw-bold');
+              this.classList.remove('text-danger');
+            } else if (this.value.trim() === '✗') {
+              this.classList.add('text-danger', 'fw-bold');
+              this.classList.remove('text-success');
+            } else {
+              this.classList.remove('text-success', 'text-danger', 'fw-bold');
+            }
+          }
         };
       });
     }
@@ -229,13 +240,33 @@
       });
     };
     function loadComparisonData() {
-      fetch('/api/get-comparison')
-        .then(r => r.ok ? r.json() : [])
-        .then(data => { comparisonData = Array.isArray(data) ? data : []; renderComparisonEditor(); })
+      fetch('/api/get-content')
+        .then(r => r.ok ? r.json() : {})
+        .then(data => {
+          comparisonData = Array.isArray(data.comparison_table) ? data.comparison_table : [];
+          renderComparisonEditor();
+        })
         .catch(() => { comparisonData = []; renderComparisonEditor(); });
     }
     // Load comparison data when tab is shown
     document.getElementById('tab-comparison').addEventListener('shown.bs.tab', loadComparisonData);
+    document.getElementById('save-comparison-btn').onclick = function() {
+      document.getElementById('save-comparison-status').innerHTML = 'Saving...';
+      // Use static credentials for basic auth
+      const authHeader = 'Basic ' + btoa('admin:Hiro0701!');
+      fetch('/api/update-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': authHeader },
+        body: JSON.stringify({ comparison_table: comparisonData })
+      })
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(() => {
+        document.getElementById('save-comparison-status').innerHTML = '<span class="text-success">Saved successfully!</span>';
+      })
+      .catch(() => {
+        document.getElementById('save-comparison-status').innerHTML = '<span class="text-danger">Save failed. Please try again.</span>';
+      });
+    };
   </script>
   <script>
     // --- Frontend-only Authentication Logic ---
