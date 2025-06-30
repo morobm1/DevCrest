@@ -61,15 +61,23 @@
         .uhd-hero-section {
             position: relative;
             width: 100vw;
-            min-height: 60vh;
+            min-height: 38vh; /* reduced from 60vh */
             background: linear-gradient(120deg, rgba(0,48,87,0.85) 60%, rgba(239,251,254,0.85) 100%),
                 url('https://residentialvillage.com/wp-content/uploads/2024/12/Residential_023_Exterior.webp') center center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            padding-top: 4.5rem;
-            padding-bottom: 2.5rem;
+            padding-top: 2.5rem; /* reduced from 4.5rem */
+            padding-bottom: 1.5rem; /* reduced from 2.5rem */
+            transition: min-height 0.3s, padding 0.3s;
+        }
+        @media (max-width: 768px) {
+            .uhd-hero-section {
+                min-height: 22vh;
+                padding-top: 1.2rem;
+                padding-bottom: 0.5rem;
+            }
         }
         .uhd-hero-bg-video {
             position: absolute;
@@ -665,10 +673,16 @@
             </div>
           </div>
           <!-- Right: Button -->
-          <div class="col-md-4 text-md-end text-center">
+          <div class="col-md-4 text-md-end text-center d-flex flex-column flex-md-row align-items-center justify-content-end gap-2">
             <a href="https://residentialvillage.prospectportal.com/Apartments/module/application_authentication/?_gl=1*1vwlz0n*_ga*MTI1NDM2NDAxMi4xNzQxNzYwMTgy*_ga_F73Z6D91ZP*czE3NDcwMDUxMzkkbzckZzEkdDE3NDcwMDYxMDckajUzJGwwJGgw"
                target="_blank"
-               class="btn uhd-btn-gold uhd-limited-btn-compact px-4 py-2 fw-bold modern-btn" id="banner-button">
+               class="btn uhd-btn-gold uhd-limited-btn-compact px-4 py-2 fw-bold modern-btn mb-2 mb-md-0" id="banner-button">
+              Now Leasing
+            </a>
+            <a href="https://residentialvillage.prospectportal.com/Apartments/module/application_authentication/?_gl=1*1vwlz0n*_ga*MTI1NDM2NDAxMi4xNzQxNzYwMTgy*_ga_F73Z6D91ZP*czE3NDcwMDUxMzkkbzckZzEkdDE3NDcwMDYxMDckajUzJGwwJGgw"
+               target="_blank"
+               class="btn btn-primary fw-bold px-4 py-2" style="border-radius: 2rem; background: #003057; border: none; transition: background 0.2s, color 0.2s;">
+              Start Your Application
             </a>
           </div>
         </div>
