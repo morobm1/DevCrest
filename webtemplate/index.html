@@ -1,4 +1,4 @@
-0
+30
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +10,102 @@
     <!-- Mapbox GL JS CSS -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
     <link rel="stylesheet" href="build/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <style>
+      /* Slick hero styling to mimic centered spotlight effect */
+      #hero-slick .slick-list { overflow: visible; }
+      #hero-slick .slick-track { display: flex; align-items: center; }
+      #hero-slick .slick-slide { margin: 0 8px; transition: transform .45s ease, opacity .45s ease, filter .45s ease; }
+      #hero-slick .slick-slide img { width: 100%; height: 420px; object-fit: cover; border-radius: 14px; }
+      #hero-slick .slick-slide { transform: scale(.88); opacity: .6; filter: blur(1px) saturate(.95); }
+      #hero-slick .slick-center { transform: scale(1); opacity: 1; filter: none; }
+      @media (max-width: 1024px) { #hero-slick .slick-slide img { height: 360px; } }
+      @media (max-width: 640px) { #hero-slick .slick-slide { margin: 0 8px; } #hero-slick .slick-slide img { height: 240px; } }
+
+      /* Contact dropdown hover without Tailwind variants */
+      .nav-contact { position: relative; }
+      .nav-contact .dropdown { position: absolute; right: 0; top: 100%; opacity: 0; visibility: hidden; transform: translateY(4px); transition: opacity .15s ease-out, transform .15s ease-out, visibility .15s; z-index: 40; }
+      .nav-contact:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+      .nav-contact.open .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+      /* Smooth scrolling and scroll-down arrow */
+      html { scroll-behavior: smooth; }
+      .scroll-down {
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        z-index: 20;
+        width: 46px;
+        height: 46px;
+        border-radius: 9999px;
+        background: rgba(255,255,255,0.95);
+        color: #0f172a; /* arrow color via currentColor */
+        border: 2px solid rgba(0,0,0,0.15);
+        display: grid;
+        place-items: center;
+        animation: bounceY 1.6s ease-in-out infinite;
+      }
+      .scroll-down:hover { background: #fde047; color: #001f3f; border-color: #001f3f; }
+      .scroll-down svg { display: block; }
+      @keyframes bounceY {
+        0%, 100% { transform: translate(-50%, 0); }
+        50% { transform: translate(-50%, -8px); }
+      }
+      /* Anchor offset for fixed header when navigating to Floorplans */
+      #floorplans { scroll-margin-top: 132px; }
+      @media (min-width: 768px) {
+        #floorplans { scroll-margin-top: 148px; }
+      }
+      /* Amenities icon animations and base strokes */
+      .animate-inline-svg { display: inline-flex; align-items: center; justify-content: center; gap: 10px; transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
+      .animate-inline-svg:hover { background-color: transparent; }
+      .animate-inline-svg svg { display: block; }
+      .animate-inline-svg svg *, .animate-inline-svg svg { transition: stroke .2s ease; }
+      .animate-inline-svg:hover .house0,
+      .animate-inline-svg:hover .gamepad0,
+      .animate-inline-svg:hover .gamepad1,
+      .animate-inline-svg:hover .computer0,
+      .animate-inline-svg:hover .computer1,
+      .animate-inline-svg:hover .study0,
+      .animate-inline-svg:hover .weights0,
+      .animate-inline-svg:hover .weights1,
+      .animate-inline-svg:hover .yoga0 { stroke: #fde047; }
+      /* Clubhouse */
+      .theme-icon-clubhouse .house0 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .animate-inline-svg:hover .theme-icon-clubhouse,
+      .animate-inline-svg:focus .theme-icon-clubhouse { animation: themeIconRubberband 1.25s linear infinite; }
+      @keyframes themeIconRubberband { from { transform: scale3d(1,1,1); } 30% { transform: scale3d(1.25,0.75,1); } 40% { transform: scale3d(0.75,1.25,1); } 50% { transform: scale3d(1.15,0.85,1); } 65% { transform: scale3d(0.95,1.05,1); } 75% { transform: scale3d(1.05,0.95,1); } to { transform: scale3d(1,1,1); } }
+      /* Gamepad */
+      .theme-icon-gamepad .gamepad0 { fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: round; }
+      .theme-icon-gamepad .gamepad1 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .animate-inline-svg:focus .theme-icon-gamepad,
+      .animate-inline-svg:hover .theme-icon-gamepad { animation: tada 1.5s infinite; }
+      @keyframes tada { from { transform: scale3d(1, 1, 1); } 10%, 20% { transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg); } 30%, 50%, 70%, 90% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg); } 40%, 60%, 80% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg); } to { transform: scale3d(1, 1, 1); } }
+      /* Computer */
+      .theme-icon-computer { fill: none; stroke: #000000; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+      .computer0 { fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: round; }
+      .computer1 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .animate-inline-svg:focus .theme-icon-computer,
+      .animate-inline-svg:hover .theme-icon-computer { animation: wobble-top 1.5s infinite; }
+      @keyframes wobble-top { 16.65% { transform: skew(-12deg); } 33.3% { transform: skew(10deg); } 49.95% { transform: skew(-6deg); } 66.6% { transform: skew(4deg); } 83.25% { transform: skew(-2deg); } 100% { transform: skew(0); } }
+      /* Study */
+      .study0 { fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+      .animate-inline-svg:hover .wiggle,
+      .animate-inline-svg:focus .wiggle { animation: wiggle 2s ease-in-out infinite; transform-origin: center; }
+      @keyframes wiggle { 0% { transform: rotate(0deg); } 50% { transform: rotate(7.5deg); } 100% { transform: rotate(0deg); } }
+      /* Weights */
+      .theme-icon-weights .weights0 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .theme-icon-weights .weights1 { fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: round; }
+      .animate-inline-svg:hover .theme-icon-weights,
+      .animate-inline-svg:focus .theme-icon-weights { animation: themeIconWeights 1.25s ease-in infinite; }
+      @keyframes themeIconWeights { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+      /* Yoga */
+      .theme-icon-yoga .yoga0 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .animate-inline-svg:hover .theme-icon-yoga,
+      .animate-inline-svg:focus .theme-icon-yoga { animation: themeIconMeditate 1.25s ease-in-out infinite; }
+      @keyframes themeIconMeditate { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             window.addEventListener("scroll", function() {
@@ -24,55 +120,177 @@
     </script>
 </head>
 <body class="bg-brand-gray font-sans">
-    <!-- Top Banner -->
-    <div class="w-full bg-brand-blue text-white text-center font-extrabold text-xl md:text-2xl py-5 tracking-wide fixed top-0 left-0 z-50 shadow-2xl flex items-center justify-center border-b-4 border-brand-yellow">
-        <span class="drop-shadow-lg">Limited availability. <span class="mx-2">SOLD OUT OF <span class="underline">A1</span> and <span class="underline">C1</span> UNITS</span></span>
-    </div>
-    <!-- Navigation Bar -->
-    <nav class="fixed top-8 left-0 w-full h-20 z-40 bg-brand-red bg-opacity-100 flex items-center shadow-md" style="background-color: #e84b3f !important;">
+    <header class="fixed top-0 left-0 w-full z-50">
+        <div class="w-full bg-brand-blue text-white text-center font-extrabold text-base md:text-lg h-12 md:h-16 tracking-wide flex items-center justify-center border-b-4 border-brand-yellow shadow-2xl">
+            <span class="drop-shadow-lg">Limited availability. <span class="mx-2">SOLD OUT OF <span class="underline">A1</span> and <span class="underline">C1</span> UNITS</span></span>
+        </div>
+        <nav class="navbar w-full h-20 bg-brand-red bg-opacity-100 flex items-center shadow-md">
         <div class="w-full flex items-center justify-start px-8 relative max-w-7xl mx-auto">
-            <a class="block mr-8" href="#">
+            <a class="block mr-8" href="index.html">
                 <img src="images/IvoryUniversityHouse_PrimaryLogo_FullColorWhiteText_Opt1.png" alt="Ivory University House logo" loading="lazy" class="h-14 w-auto block mx-auto">
             </a>
-            <ul class="flex items-center ml-auto space-x-4">
-                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition" href="./our_impact.html">Our Impact</a></li>
-                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition" href="./gallery.html">Photo Gallery</a></li>
-                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition" href="./floorplan.html">Floorplan</a></li>
-                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition" href="#">Contact Us</a></li>
-                <li><a class="bg-brand-yellow text-brand-blue font-bold px-4 py-2 rounded hover:bg-brand-yellow hover:text-brand-blue transition shadow border-2 border-brand-blue" style="background-color: #f1c24b !important;" href="https://ivoryuniversityhouseslc.residentportal.com/auth">Resident Portal</a></li>
-                <li><a class="bg-brand-blue text-white font-bold px-4 py-2 rounded hover:bg-brand-yellow hover:text-brand-blue transition shadow border-2 border-brand-yellow" style="background-color: #295491 !important;" href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw">Apply Now</a></li>
+            <ul class="flex items-center ml-auto space-x-4 flex-nowrap">
+                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./our_impact.html">Our Impact</a></li>
+                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./gallery.html">Photo Gallery</a></li>
+                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./scholarship.html">Scholarship</a></li>
+                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./floorplan.html">Floorplan</a></li>
+                <li class="relative nav-contact">
+                    <a href="#" class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition inline-flex items-center whitespace-nowrap">
+                        Contact Us
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-1">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <div class="dropdown absolute right-0 w-60Core Value Agreement
+The Core Value Agreement at Ivory University House serves as a framework to help our team create a respectful, inclusive, and harmonious community for residents. We believe that maintaining a positive living environment is essential for fostering personal growth, academic success, and meaningful connections. Our Core Value Statement  outlines clear expectations for all students living at Ivory University House.
+
+Students applying to live at Ivory University House agree to refrain from the following activities on the premises: 
+
+Possession/consumption/distribution of alcoholic beverages, marijuana, cannabis products, tobacco products, smoking and vaping products or other illegal substances
+
+Gambling
+
+Possession/viewing/distribution/display of pornographic material
+
+Any illegal activity or any behavior that violates state or federal laws
+
+Overnight guests 
+
+As you think about your housing options, please consider carefully whether these standards are consistent with your lifestyle. Please be advised that engagement in any of the above activities or change in enrollment status could result in removal from Ivory University House. 
+ bg-white text-brand-blue shadow-xl border border-brand-yellow z-100">
+                        <a href="./corevalues.html" class="block px-4 py-2 font-oswald font-semibold hover:bg-brand-yellow hover:text-brand-blue transition">Core Values</a>
+                        <a href="./interview-process.html" class="block px-4 py-2 font-oswald font-semibold hover:bg-brand-yellow hover:text-brand-blue transition">Interview Process</a>
+                    </div>
+                </li>
+                <li><a class="bg-brand-yellow text-brand-blue font-bold px-4 py-2 rounded hover:bg-brand-yellow hover:text-brand-blue transition shadow border-2 border-brand-blue" href="https://ivoryuniversityhouseslc.residentportal.com/auth">Resident Portal</a></li>
+                <li><a class="bg-brand-blue text-white font-bold px-4 py-2 rounded hover:bg-brand-yellow hover:text-brand-blue transition shadow border-2 border-brand-yellow" href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw">Apply Now</a></li>
             </ul>
         </div>
     </nav>
+    </header>
+    <!-- Contact Overlay -->
+    <div id="contactOverlay" class="fixed inset-0 z-[60] hidden">
+      <div class="absolute inset-0 bg-black/70" id="contactOverlayBackdrop"></div>
+      <div class="relative z-10 flex items-start justify-center pt-28 px-5">
+        <div class="w-full max-w-3xl bg-white rounded-2xl shadow-2xl border-4 border-brand-yellow overflow-hidden">
+          <div class="flex items-center justify-between bg-brand-red text-white px-6 py-4">
+            <h2 class="font-oswald font-extrabold text-xl tracking-wide">Get in Touch</h2>
+            <button id="contactOverlayClose" class="text-white text-2xl leading-none hover:text-brand-yellow" aria-label="Close">&times;</button>
+          </div>
+          <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="./corevalues.html" class="block rounded-lg border border-brand-blue p-4 hover:bg-brand-yellow hover:text-brand-blue transition">
+              <div class="font-oswald font-bold text-brand-blue text-lg">Core Values</div>
+              <div class="text-sm text-brand-blue/80">Learn about our guiding principles</div>
+            </a>
+            <a href="#" class="block rounded-lg border border-brand-blue p-4 hover:bg-brand-yellow hover:text-brand-blue transition">
+              <div class="font-oswald font-bold text-brand-blue text-lg">Book a Tour</div>
+              <div class="text-sm text-brand-blue/80">Schedule a visit</div>
+            </a>
+            <a href="https://ivoryuniversityhouseslc.residentportal.com/auth" target="_blank" class="block rounded-lg border border-brand-blue p-4 hover:bg-brand-yellow hover:text-brand-blue transition">
+              <div class="font-oswald font-bold text-brand-blue text-lg">Resident Portal</div>
+              <div class="text-sm text-brand-blue/80">Current residents</div>
+            </a>
+            <a href="./floorplan.html" class="block rounded-lg border border-brand-blue p-4 hover:bg-brand-yellow hover:text-brand-blue transition">
+              <div class="font-oswald font-bold text-brand-blue text-lg">Floorplans</div>
+              <div class="text-sm text-brand-blue/80">See layouts</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- HERO VIDEO & MAIN -->
-    <div class="relative w-full h-screen flex flex-col justify-center items-center pt-20">
+    <div class="mt-[132px] md:mt-[148px] relative w-full h-[56vh] md:h-[60vh] lg:h-[62vh] flex flex-col items-center justify-start">
         <video class="absolute inset-0 w-full h-full object-cover z-0" autoplay muted loop playsinline>
             <source src="images/ivoryvideo.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <div class="relative z-10 flex flex-col items-center justify-center w-full h-full">
-            <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl border-4 border-brand-blue px-8 py-10 flex flex-col items-center text-center">
+        <div class="relative z-10 w-full flex items-start justify-center pt-8 md:pt-14 lg:pt-16">
+                <div class="w-full max-w-3xl shadow-2xl border-4 border-brand-blue px-8 md:px-10 py-8 md:py-10 flex flex-col items-center text-center" style="background-color: rgba(255, 255, 255, 0.85); margin-top: 100px;">
                 <h1 class="text-4xl md:text-5xl font-extrabold text-brand-red mb-3 leading-tight drop-shadow font-oswald">Elevated Student Living</h1>
                 <h3 class="text-xl md:text-2xl font-semibold text-brand-blue mb-4 font-oswald">Ivory University House is new housing steps away from University of Utah.</h3>
-                <p class="text-brand-blue text-base md:text-lg leading-relaxed mb-6">Welcome to Ivory University House, where comfort, security, and a sense of belonging converge. As a home away from home, we understand the importance of creating a secure environment that parents and students can rely on. Our commitment to student well-being guided the design of the residence halls. Large gathering spaces compliment individual rooms and study areas to provide social and private spaces. Our dedicated staff is committed to creating a transformative, elevated, welcoming, and fun environment for all our students. We welcome you to Ivory University House. Discover a place where you can relax, thrive, and feel at home. We look forward to meeting you!</p>
+                <p class="text-brand-blue text-base md:text-lg leading-relaxed mb-6"></p>
                 <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
-                    <button class="bg-brand-red text-white font-bold px-6 py-3 rounded shadow uppercase tracking-wide hover:bg-brand-yellow hover:text-brand-blue transition font-oswald w-full md:w-auto" style="background-color: #e84b3f !important;">
+                    <button class="bg-brand-red text-white font-bold px-6 py-3 rounded shadow uppercase tracking-wide hover:bg-brand-yellow hover:text-brand-blue transition font-oswald w-full md:w-auto">
                         Schedule a Tour
                     </button>
-                    <button class="bg-brand-yellow text-brand-blue font-bold px-6 py-3 rounded shadow uppercase tracking-wide hover:bg-brand-red hover:text-white transition font-oswald w-full md:w-auto" style="background-color: #f1c24b !important; color: #295491 !important;">
+                    <button class="bg-brand-yellow text-brand-blue font-bold px-6 py-3 rounded shadow uppercase tracking-wide hover:bg-brand-red hover:text-white transition font-oswald w-full md:w-auto">
                         Limited Spots for Fall 2025
                     </button>
                 </div>
             </div>
         </div>
+    <a href="#floorplans" class="scroll-down" aria-label="Scroll to Floorplans">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 16.5l-6-6 1.41-1.41L12 13.67l4.59-4.58L18 10.5l-6 6z" fill="currentColor"/>
+      </svg>
+    </a>
     </div>
-        <section class="w-screen bg-brand-white border-y border-brand-gray py-20">
+        <!-- Welcome Home Section (848-inspired) -->
+        <section class="w-screen bg-white py-20 relative isolate left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+            <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-10 items-center">
+                <!-- Left: Title + Copy -->
+                <div class="home-section-1__left relative">
+                    <div class="home-section-1__left-square absolute -z-0 left-[-28px] top-10 w-20 h-20 md:w-24 md:h-24 bg-brand-yellow rounded-lg opacity-80 will-change-transform" data-parallax data-speed="0.08"></div>
+                    <div class="home-section-1__content space-y-5 relative z-10">
+                        <div class="home-section-1__title">
+                            <span class="home-section-1__title--line-1 fade-up block text-brand-blue text-lg md:text-xl font-oswald font-bold opacity-0 translate-y-6">Welcome Home</span>
+                            <h2 class="home-section-1__title--line-2 fade-up text-4xl md:text-5xl font-oswald font-extrabold text-brand-blue leading-tight opacity-0 translate-y-6">IVORY UNIVERSITY STUDENTS</h2>
+                        </div>
+                        <div class="fade-up opacity-0 translate-y-6">
+                            <p class="text-lg text-brand-blue/90">
+                                Ivory University House is a vibrant and inclusive community that upholds high standards for all residents. We understand that a healthy and focused environment plays a crucial role in academic success and personal growth. That’s why we have intentionally fostered a substance-free culture within our residence halls and for safety purposes, we do not welcome overnight guests. Amenities such as recital and practice space, yoga, meditation, fitness programs, game rooms, art studio, mentors in intellectual, physical, spiritual, and psychological areas of study and exploration, cooking classes, and outdoor activities are all part of the Ivory University House experience. Join us as we work together to create an empowering environment for you and all of our residents.
+                            </p>
+                        </div>
+                        <a href="#" class="home-section-1__btn fade-up inline-block bg-brand-red text-white font-bold px-6 py-3 rounded shadow hover:bg-brand-blue transition opacity-0 translate-y-6">Schedule A Tour Today</a>
+                    </div>
+                </div>
+                <!-- Right: Panorama slices -->
+                <div class="home-section-1__right">
+                    <div class="panorama relative h-[420px] md:h-[520px] overflow-hidden">
+                        <img class="panorama__image-1 blur-[0.3px] absolute left-2 md:left-6 top-10 md:top-14 w-28 md:w-32 lg:w-36 h-[72%] object-cover rounded-xl shadow-xl pointer-events-none will-change-transform" src="images/IMG_3924.JPG" alt="Resort style pool" loading="lazy" data-parallax data-speed="0.12" />
+                        <img class="panorama__image-2 blur-[0.3px] absolute left-1/2 -translate-x-1/2 top-1 md:top-2 w-28 md:w-32 lg:w-36 h-[72%] object-cover rounded-xl shadow-lg pointer-events-none will-change-transform" src="images/IMG_3935.JPG" alt="Resort style pool" loading="lazy" data-parallax data-speed="0.18" />
+                        <img class="panorama__image-3 blur-[0.3px] absolute right-2 md:right-6 bottom-2 md:bottom-6 w-28 md:w-32 lg:w-36 h-[72%] object-cover rounded-xl shadow-lg pointer-events-none will-change-transform" src="images/IMG_3940.JPG" alt="Resort style pool" loading="lazy" data-parallax data-speed="0.24" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fade-up animation using IntersectionObserver
+            const faders = document.querySelectorAll('.fade-up');
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('opacity-0','translate-y-6');
+                        entry.target.classList.add('opacity-100','translate-y-0','transition-all','duration-700');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            faders.forEach(el => io.observe(el));
+
+            // Parallax on scroll for decorative square and slices
+            const parallaxEls = document.querySelectorAll('[data-parallax]');
+            function parallaxOnScroll() {
+                parallaxEls.forEach(el => {
+                    const speed = parseFloat(el.getAttribute('data-speed')) || 0.12;
+                    const rect = el.getBoundingClientRect();
+                    // Subtle movement relative to viewport center
+                    const offset = (rect.top - window.innerHeight / 2) * speed;
+                    el.style.transform = 'translate3d(0,' + offset.toFixed(1) + 'px,0)';
+                });
+            }
+            window.addEventListener('scroll', parallaxOnScroll, { passive: true });
+            parallaxOnScroll();
+        });
+        </script>
+        <section id="floorplans" class="w-screen bg-brand-white border-y border-brand-gray py-20">
             <div class="max-w-5xl mx-auto text-center">
                 <h2 class="font-oswald font-extrabold text-brand-blue text-4xl mb-4 tracking-wide uppercase drop-shadow">Floorplans</h2>
                 <p class="text-brand-green text-lg mb-10 font-semibold">Explore our modern, spacious layouts designed for student living.</p>
                 <div class="flex flex-wrap justify-evenly gap-10 p-5">
                     <!-- Unit A1 -->
-                    <div class="bg-brand-gray w-[270px] border-2 border-brand-blue text-center flex flex-col h-[460px] shadow-lg rounded-2xl overflow-hidden">
+                    <div class="bg-white w-[270px] border-2 border-brand-blue text-center flex flex-col h-[460px] shadow-lg rounded-2xl overflow-hidden">
                         <div class="bg-brand-red text-white py-2 font-bold font-oswald text-lg tracking-wide">NOW LEASING</div>
                         <img src="./images/A1.png" alt="Floorplan for Unit A1" loading="lazy" class="w-full max-h-[170px] object-contain p-5 pt-5 bg-brand-white flex-shrink-0">
                         <div class="flex-1 flex flex-col justify-end pb-4">
@@ -84,7 +302,7 @@
                         </div>
                     </div>
                     <!-- Unit B1 -->
-                    <div class="bg-brand-gray w-[270px] border-2 border-brand-blue text-center flex flex-col h-[460px] shadow-lg rounded-2xl overflow-hidden">
+                    <div class="bg-white w-[270px] border-2 border-brand-blue text-center flex flex-col h-[460px] shadow-lg rounded-2xl overflow-hidden">
                         <div class="bg-brand-red text-white py-2 font-bold font-oswald text-lg tracking-wide">NOW LEASING</div>
                         <img src="./images/B1.png" alt="Floorplan for Unit B1" loading="lazy" class="w-full max-h-[170px] object-contain p-5 pt-5 bg-brand-white flex-shrink-0">
                         <div class="flex-1 flex flex-col justify-end pb-4">
@@ -96,7 +314,7 @@
                         </div>
                     </div>
                     <!-- Unit C1 -->
-                    <div class="bg-brand-gray w-[270px] border-2 border-brand-blue text-center flex flex-col h-[460px] shadow-lg rounded-2xl overflow-hidden">
+                    <div class="bg-white w-[270px] border-2 border-brand-blue text-center flex flex-col h-[460px] shadow-lg rounded-2xl overflow-hidden">
                         <div class="bg-brand-red text-white py-2 font-bold font-oswald text-lg tracking-wide">NOW LEASING</div>
                         <img src="./images/C1.png" alt="Floorplan for Unit C1" loading="lazy" class="w-full max-h-[170px] object-contain p-5 pt-5 bg-brand-white flex-shrink-0">
                         <div class="flex-1 flex flex-col justify-end pb-4">
@@ -157,91 +375,172 @@
             <div class="flex-none w-80 flex items-center justify-center">
                 <img src="images/IMG_3924.JPG" alt="Modern apartment interior" loading="lazy" class="w-full rounded-lg object-cover max-h-80">
             </div>
-            <div class="flex-1 min-w-[250px] max-w-xl text-left flex flex-col justify-center">
-                <div class="inline-block bg-yellow-400 text-black px-4 py-1 rounded font-bold text-base mb-2">PERKS</div>
-                <h2 class="text-3xl font-bold mb-4">LIVE <span class="font-extrabold">UPGRADED</span></h2>
-                <p class="text-lg mb-6 leading-relaxed">
-                    Live the lifestyle you deserve from the best location—and the best pool in Tempe. Our refreshing renovations provide an illuminated lifestyle from the best apartments near ASU.
-                </p>
-                <div class="flex flex-wrap gap-6 mt-4">
-                    <div class="flex-1 min-w-[150px] text-center">
-                        <img src="images/bed.png" class="mx-auto w-10" alt="Private Units & Bedspaces icon">
-                        <p class="mt-2">Private Units & Bedspaces</p>
-                    </div>
-                    <div class="flex-1 min-w-[150px] text-center">
-                        <img src="images/scholarship.png" class="mx-auto w-10" alt="Scholarship icon">
-                        <p class="mt-2">Scholarship</p>
-                    </div>
-                    <div class="flex-1 min-w-[150px] text-center">
-                        <img src="images/furniture.png" class="mx-auto w-10" alt="Furnished Units icon">
-                        <p class="mt-2">Furnished Units</p>
-                    </div>
-                    <div class="flex-1 min-w-[150px] text-center">
-                        <img src="images/internet.png" class="mx-auto w-10" alt="All-Inclusive Utilities & Internet icon">
-                        <p class="mt-2">ALL-INCLUSIVE UTILITIES & INTERNET</p>
-                    </div>
-                </div>
+            <div class="flex-1 min-w-[250px] max-w-xl text-left flex flex-col justify-center home-section-3__right">
+              <div class="home-section-1__title">
+                <span class="home-section-1__title--line-1 fade-up block text-white text-lg md:text-xl font-oswald font-bold">Modern</span>
+                <h2 class="home-section-1__title--line-2 fade-up text-4xl md:text-5xl font-oswald font-extrabold text-white leading-tight">AMENITIES</h2>
+              </div>
+              <div class="home-section-3__content fade-up">
+                <br>
+                <p>Here at Ivory University House, our residents have access to amenities designed to help them find balance between school, wellness, and community.</p>
+              </div>
+              <br>
+              <ul class="home-section-3__amenities fade-right grid grid-cols-3 gap-6">
+                <li class="home-section-3__amenity home-section-3__icon">
+                  <div class="home-section-3__link animate-inline-svg" href="./amenities.html">
+                    <div class="svg-inline">
+                      <svg class="theme-icon-clubhouse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51.1 44" width="33" height="29" aria-hidden="true">
+                        <g>
+                          <polygon class="house0" points="25.6,8.5 8.7,23.6 8.7,42.8 21.2,42.8 21.2,31.9 29.9,31.9 29.9,42.8 42.4,42.8 42.4,23.6"></polygon>
+                          <polyline class="house0" points="49.8,22.3 25.5,1.1 14.1,11.1 14.1,4.7 8.8,4.7 8.8,15.7 1.3,22.3"></polyline>
+                        </g>
+                      </svg>
+                    </div> <span>Rooftop Clubhouse</span>
+                  </div>
+                </li>
+                <li class="home-section-3__amenity home-section-3__icon">
+                  <div class="home-section-3__link animate-inline-svg" href="./amenities.html">
+                    <div class="svg-inline">
+                      <svg class="theme-icon-gamepad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.3 40.3" width="39" height="28" aria-hidden="true">
+                        <g>
+                          <path class="gamepad0" d="M16.1,1.1C9.4,1.1,3.9,6.2,3.2,12.7l-2,18.7c0,0.3,0,0.5,0,0.8c0,3.9,3.1,7,7,7c2.1,0,3.9-0.9,5.2-2.3l6.9-7.8 c1.1-1.2,2.6-1.9,4.2-1.9h7.4c1.6,0,3.1,0.7,4.2,1.9l6.9,7.8c1.3,1.4,3.1,2.3,5.2,2.3c3.9,0,7-3.1,7-7c0-0.3,0-0.5,0-0.8l-2-18.7 C52.3,6.2,46.8,1.1,40.1,1.1H16.1z"></path>
+                          <circle class="gamepad1" cx="45.1" cy="16.1" r="2"></circle>
+                          <circle class="gamepad1" cx="40.1" cy="21.1" r="2"></circle>
+                          <circle class="gamepad1" cx="35.1" cy="16.1" r="2"></circle>
+                          <circle class="gamepad1" cx="40.1" cy="11.1" r="2"></circle>
+                          <path class="gamepad1" d="M23.1,16.1c0-1.1-0.9-2-2-2h-3v-3c0-1.1-0.9-2-2-2c-1.1,0-2,0.9-2,2v3h-3c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h3 v3c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-3h3C22.2,18.1,23.1,17.2,23.1,16.1z"></path>
+                        </g>
+                      </svg>
+                    </div> <span>Media &amp; Game Lounge</span>
+                  </div>
+                </li>
+                <li class="home-section-3__amenity home-section-3__icon">
+                  <div class="home-section-3__link animate-inline-svg" href="./amenities.html">
+                    <div class="svg-inline">
+                      <svg class="theme-icon-computer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 44" width="56" height="44" aria-hidden="true">
+                        <g>
+                          <line class="computer0" x1="25" y1="43" x2="25" y2="37"></line>
+                          <line class="computer1" x1="37" y1="43" x2="19" y2="43"></line>
+                          <line class="computer0" x1="31" y1="37" x2="31" y2="43"></line>
+                          <path class="computer0" d="M55,3c0-1.1-0.9-2-2-2H3C1.9,1,1,1.9,1,3v32c0,1.1,0.9,2,2,2h50c1.1,0,2-0.9,2-2V3z"></path>
+                          <line class="computer0" x1="1" y1="33" x2="55" y2="33"></line>
+                        </g>
+                      </svg>
+                    </div> <span>Computer Lab</span>
+                  </div>
+                </li>
+                <li class="home-section-3__amenity home-section-3__icon">
+                  <div class="home-section-3__link animate-inline-svg" href="./amenities.html">
+                    <div class="svg-inline">
+                      <svg class="theme-icon-study" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.7 41.4" width="44" height="41" aria-hidden="true">
+                        <g>
+                          <path class="study0" d="M42.8,26.4c-2.1,2.2-2,5.6,0.1,7.7c0.1,0.1,0.1,0.1,0.2,0.1"></path>
+                          <path class="study0" d="M29.5,32.7l-4.7,0.9l0,0c0.9,0,1.6,0.7,1.6,1.6v5.2l2.4-2.4l2.4,1.6v-5.3C31,33.5,30.3,32.7,29.5,32.7
+L29.5,32.7z"></path>
+                          <polyline class="study0" points="31,36.5 43.7,34.1 42.1,33 "></polyline>
+                          <path class="study0" d="M5.8,19.7L4.3,20c-2.1,0.4-3.6,2.4-3.2,4.6c0.2,0.9,0.6,1.7,1.3,2.3L15,37.9"></path>
+                          <line class="study0 wiggle" x1="1" y1="8.8" x2="1" y2="16.7"></line>
+                          <path class="study0 wiggle" d="M1.7,9.9L20.8,18c0.5,0.2,1,0.3,1.5,0.3l0,0c0.5,0,1-0.1,1.5-0.3L43,9.9c0.4-0.2,0.7-0.6,0.7-1.1l0,0
+c0-0.5-0.3-0.9-0.8-1.1l-19-6.6c-0.5-0.2-1-0.3-1.5-0.3l0,0c-0.5,0-1,0.1-1.5,0.3l-19,6.6C1.3,7.9,1,8.4,1,8.9l0,0
+C1,9.3,1.3,9.8,1.7,9.9z"></path>
+                          <path class="study0 wiggle" d="M8.9,13v7.4c0,0.8,0.4,1.5,1,1.9c7.1,5.3,17.8,5.3,24.9,0c0.6-0.5,1-1.2,1-1.9V13"></path>
+                          <path class="study0" d="M38.4,22.6l5.2,3.7L16.9,31c-2.1,0.4-3.6,2.4-3.2,4.6c0.4,2.1,2.4,3.6,4.6,3.2l8-1.5"></path>
+                        </g>
+                      </svg>
+                    </div> <span>Private Study Rooms</span>
+                  </div>
+                </li>
+                <li class="home-section-3__amenity home-section-3__icon">
+                  <div class="home-section-3__link animate-inline-svg" href="./amenities.html">
+                    <div class="svg-inline">
+                      <svg class="theme-icon-weights" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 61.2 40.8" width="43" height="28" aria-hidden="true">
+                        <g>
+                          <path class="weights0" d="M17.6,19.4v1.2c0,1.2,0.4,2.3,1,3.3l3.6,5.5c0.9,1.3,1.3,2.9,1.3,4.4v5.6"></path>
+                          <path class="weights1" d="M21.6,9.4h-1c-1.7,0-3,1.3-3,3v1"></path>
+                          <path class="weights0" d="M13.6,19.4h6c1.1,0,2-0.9,2-2V8.5c0-1.6,1.2-3,2.7-3.1c1.2-0.1,2.2,0.5,2.8,1.3c0.5-0.8,1.5-1.3,2.5-1.3
+c1.6,0,2.9,1.2,3,2.8c0.5-0.5,1.2-0.8,2-0.8c1.4,0,2.5,0.9,2.9,2.2c0.5-0.2,1-0.3,1.6-0.2c1.5,0.2,2.5,1.6,2.5,3.1v10.1
+c0,1.1-0.2,2.2-0.5,3.3L40,30c-0.3,0.9-0.4,1.8-0.4,2.7v6.6"></path>
+                          <line class="weights1" x1="21.6" y1="13.4" x2="13.6" y2="13.4"></line>
+                          <line class="weights1" x1="47.6" y1="19.4" x2="41.6" y2="19.4"></line>
+                          <line class="weights1" x1="41.6" y1="13.4" x2="47.6" y2="13.4"></line>
+                          <path class="weights1" d="M11.6,31.4h-2c-1.1,0-2-0.9-2-2v-26c0-1.1,0.9-2,2-2h2c1.1,0,2,0.9,2,2v26C13.6,30.5,12.7,31.4,11.6,31.4z"></path>
+                          <path class="weights1" d="M7.6,29.4h-4c-1.1,0-2-0.9-2-2v-22c0-1.1,0.9-2,2-2h4"></path>
+                          <path class="weights1" d="M49.6,31.4h2c1.1,0,2-0.9,2-2v-26c0-1.1-0.9-2-2-2h-2c-1.1,0-2,0.9-2,2v26C47.6,30.5,48.5,31.4,49.6,31.4z"></path>
+                          <path class="weights1" d="M53.6,29.4h4c1.1,0,2-0.9,2-2v-22c0-1.1-0.9-2-2-2h-4"></path>
+                        </g>
+                      </svg>
+                    </div> <span>Fitness Center</span>
+                  </div>
+                </li>
+                <li class="home-section-3__amenity home-section-3__icon">
+                  <div class="home-section-3__link animate-inline-svg" href="./amenities.html">
+                    <div class="svg-inline">
+                      <svg class="theme-icon-yoga" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.5 45.5" width="45" height="45" aria-hidden="true">
+                        <g>
+                          <circle class="yoga0" cx="22.8" cy="7.3" r="6"></circle>
+                          <path class="yoga0" d="M28.8,37.4H18.5c-1.9,0-3.4,1.5-3.4,3.4c0,1.9,1.5,3.4,3.4,3.4h17c1.8,0,3.5-1.4,3.6-3.2 c0.1-1.3-0.6-2.5-1.6-3.1c-1.4-0.9-4.3-2.8-6.8-4.4c-1.1-0.7-1.7-1.9-1.6-3.2l0.6-6.6l2.4,4.8c0.6,1.2,1.8,1.9,3.1,1.9h6.5 c1.4,0,2.6-1.2,2.6-2.6l0,0c0-1.4-1.2-2.6-2.6-2.6h-5.4c-0.4,0-0.7-0.2-0.8-0.5l-2.4-5.9c-0.6-1.5-1.8-2.6-3.4-3 c-4.3-1.1-9.7-1.1-14,0c-1.5,0.4-2.8,1.6-3.4,3c-0.8,2-1.9,4.7-2.4,5.9c-0.1,0.3-0.4,0.5-0.8,0.5H3.8c-1.4,0-2.6,1.2-2.6,2.6l0,0 c0,1.4,1.2,2.6,2.6,2.6h6.5c1.3,0,2.5-0.7,3.1-1.9l2.4-4.8l0.6,6.6c0.1,1.3-0.5,2.5-1.6,3.2C12.3,35.2,9.5,37,8,37.9 c-1,0.6-1.7,1.8-1.6,3.1c0.1,1.8,1.8,3.2,3.6,3.2h2.4"></path>
+                        </g>
+                      </svg>
+                    </div> <span>Yoga Studio</span>
+                  </div>
+                </li>
+              </ul>
             </div>
         </div>
         <div class="flex flex-wrap justify-center items-start bg-white py-12 px-5 max-w-6xl mx-auto gap-10">
             <div class="flex-1 min-w-[300px] max-w-xl">
-                <h2 class="text-2xl font-bold mb-4">A Substance Free, Safety Oriented, Amenity Packed Community</h2>
+                <div class="home-section-1__title">
+                    <span class="home-section-1__title--line-1 fade-up block text-brand-blue text-lg md:text-xl font-oswald font-bold">A Substance Free, Safety Oriented</span>
+                    <h2 class="home-section-1__title--line-2 fade-up text-4xl md:text-5xl font-oswald font-extrabold text-brand-blue leading-tight">AMENITY PACKED COMMUNITY</h2>
+                </div>
+                <br>
                 <p class="mb-6 text-base leading-relaxed">
                     Ivory University House is a vibrant and inclusive community that upholds high standards for all residents. We understand that a healthy and focused environment plays a crucial role in academic success and personal growth. That’s why we have intentionally fostered a substance-free culture within our residence halls and for safety purposes, we do not welcome overnight guests. Amenities such as recital and practice space, yoga, meditation, fitness programs, game rooms, art studio, mentors in intellectual, physical, spiritual, and psychological areas of study and exploration, cooking classes, and outdoor activities are all part of the Ivory University House experience. Join us as we work together to create an empowering environment for you and all of our residents.
                 </p>
-                <button class="bg-green-800 text-white font-bold px-6 py-2 rounded hover:bg-yellow-400 hover:text-black transition">
+                <a href="./corevalues.html" class="inline-block bg-green-800 text-white font-bold px-6 py-2 rounded hover:bg-yellow-400 hover:text-black transition">
                     Learn More
-                </button>
+                </a>
             </div>
             <div class="flex-1 min-w-[220px] max-w-md flex gap-3 h-auto items-stretch">
                 <img src="images/IMG_3935.JPG" class="w-1/4 h-full object-cover aspect-[3/4] rounded-lg" alt="Decorative wallpaper pattern" loading="lazy">
                 <img src="images/IMG_3953.JPG" class="w-2/4 h-full object-cover aspect-[3/4] rounded-lg" alt="Student studying online in a bright room" loading="lazy">
             </div>
         </div>
-        <div class="swiper-container main-swiper max-w-6xl mx-auto mt-10 rounded-lg shadow bg-white">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="images/IMG_3913.JPG" alt="Student event at Ivory University House" class="w-full h-60 md:h-72 object-cover rounded-lg"></div>
-                <div class="swiper-slide"><img src="images/IMG_3924.JPG" alt="Modern kitchen area" class="w-full h-60 md:h-72 object-cover rounded-lg"></div>
-                <div class="swiper-slide"><img src="images/IMG_3935.JPG" alt="Outdoor patio with seating" class="w-full h-60 md:h-72 object-cover rounded-lg"></div>
-                <div class="swiper-slide"><img src="images/IMG_3940.JPG" alt="Fitness room with equipment" class="w-full h-60 md:h-72 object-cover rounded-lg"></div>
-                <div class="swiper-slide"><img src="images/IMG_3953.JPG" alt="Lobby with comfortable seating" class="w-full h-60 md:h-72 object-cover rounded-lg"></div>
-            </div>
-        </div>
-        <div class="swiper-container swiper-thumbs max-w-6xl mx-auto mt-4 mb-10 rounded bg-gray-200">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="images/IMG_3913.JPG" alt="Student event thumbnail" class="w-20 h-12 object-cover rounded"></div>
-                <div class="swiper-slide"><img src="images/IMG_3924.JPG" alt="Modern kitchen thumbnail" class="w-20 h-12 object-cover rounded"></div>
-                <div class="swiper-slide"><img src="images/IMG_3935.JPG" alt="Outdoor patio thumbnail" class="w-20 h-12 object-cover rounded"></div>
-                <div class="swiper-slide"><img src="images/IMG_3940.JPG" alt="Fitness room thumbnail" class="w-20 h-12 object-cover rounded"></div>
-                <div class="swiper-slide"><img src="images/IMG_3953.JPG" alt="Lobby thumbnail" class="w-20 h-12 object-cover rounded"></div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js" defer></script>
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
-        var thumbSwiper = new Swiper('.swiper-thumbs', {
-            slidesPerView: 5,
-            spaceBetween: 10,
-            freeMode: true,
-            watchSlidesProgress: true,
-            loop: true,
-            centeredSlides: true,
-            slideToClickedSlide: true,
+      $(function(){
+        $('#hero-slick').slick({
+          dots: true,
+          arrows: true,
+          infinite: true,
+          autoplay: true,
+          autoplaySpeed: 3000,
+          speed: 600,
+          pauseOnHover: false,
+          centerMode: true,
+          centerPadding: '120px',
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          responsive: [
+            { breakpoint: 1280, settings: { centerPadding: '100px' } },
+            { breakpoint: 1024, settings: { centerPadding: '80px' } },
+            { breakpoint: 768, settings: { centerPadding: '40px' } },
+            { breakpoint: 640, settings: { centerPadding: '16px' } }
+          ]
         });
-        var mainSwiper = new Swiper('.main-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            loop: true,
-            centeredSlides: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            thumbs: {
-                swiper: thumbSwiper,
-            },
-        });
+      });
     </script>
+    <section class="max-w-6xl mx-auto mt-10 rounded-lg bg-transparent overflow-hidden">
+      <div id="hero-slick" class="w-full">
+        <div><img src="images/IMG_3913.JPG" alt="Student event at Ivory University House" class="w-full h-auto object-cover" loading="lazy"></div>
+        <div><img src="images/IMG_3924.JPG" alt="Modern kitchen area" class="w-full h-auto object-cover" loading="lazy"></div>
+        <div><img src="images/IMG_3935.JPG" alt="Outdoor patio with seating" class="w-full h-auto object-cover" loading="lazy"></div>
+        <div><img src="images/IMG_3940.JPG" alt="Fitness room with equipment" class="w-full h-auto object-cover" loading="lazy"></div>
+        <div><img src="images/IMG_3953.JPG" alt="Lobby with comfortable seating" class="w-full h-auto object-cover" loading="lazy"></div>
+      </div>
+    </section>
+    
     <!-- MAPBOX MAP SECTION -->
     <section class="w-screen bg-white py-0 relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
         <div class="max-w-5xl mx-auto pt-10 pb-0 px-5 text-center">
@@ -251,7 +550,7 @@
         <div id="map" class="w-screen h-[400px] mx-auto border-0"></div>
     </section>
     <!-- Instagram Top Bar Section (below map) -->
-    <section class="w-screen bg-[#f1531a] text-white relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] border-b-2 border-black p-0">
+    <section class="w-screen bg-brand-red text-white relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] border-b-2 border-black p-0">
         <div class="max-w-5xl mx-auto flex items-center justify-between px-6 min-h-[60px] flex-wrap">
             <div class="flex items-center gap-4">
                 <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram logo" class="w-8 h-8" style="filter: invert(1) brightness(2);">
@@ -316,15 +615,11 @@
                 var el = document.createElement('div');
                 el.className = 'custom-marker';
                 el.style.background = '#E84B3F';
-                el.style.width = '28px';
-                el.style.height = '28px';
+                el.style.width = '16px';
+                el.style.height = '16px';
                 el.style.borderRadius = '50%';
                 el.style.border = '3px solid #fff';
-                el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
-                el.style.backgroundImage = 'url(https://cdn-icons-png.flaticon.com/512/684/684908.png)';
-                el.style.backgroundSize = '60% 60%';
-                el.style.backgroundRepeat = 'no-repeat';
-                el.style.backgroundPosition = 'center';
+                el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
                 new mapboxgl.Marker(el)
                     .setLngLat([loc.lng, loc.lat])
                     .setPopup(new mapboxgl.Popup({ offset: 25 })
@@ -333,18 +628,16 @@
             });
         });
     </script>
-    <footer class="w-screen bg-black text-white mt-16 rounded-t-2xl shadow-lg p-0 relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+    <footer class="w-screen bg-black text-white mt-0 rounded-t-2xl shadow-lg p-0 relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
         <div class="max-w-6xl mx-auto flex flex-wrap flex-row justify-between items-start py-10 px-5 gap-10">
+            <div class="flex-1 min-w-[200px] flex items-center justify-center">
+                <img src="images/LOGO_IvoryHouse_1C-Cream_Mv1a.webp" alt="Ivory University House logo" loading="lazy" class="max-w-[180px] min-w-[100px] w-full rounded-lg block mx-auto shadow-md">
+            </div>
             <div class="flex-1 min-w-[200px]">
                 <h3 class="text-lg font-bold text-yellow-400 mb-2">OFFICE HOURS</h3>
                 <p>M-F 9AM - 6PM</p>
-                <p>SAT 10AM - 5PM</p>
-                <p>SUN 1PM - 5PM</p>
-                <p class="text-red-500 font-bold mt-3">🔍 RESIDENTS</p>
-                <p class="text-red-500 uppercase font-bold mt-1">Schedule a Self-Guided Tour</p>
-            </div>
-            <div class="flex-1 min-w-[200px] flex items-center justify-center">
-                <img src="images/IvoryUniversityHouse_PrimaryLogo_OneColor_Black.png" alt="Ivory University House logo" loading="lazy" class="max-w-[180px] min-w-[100px] w-full bg-white rounded-lg block mx-auto shadow-md">
+                <p>SAT 10AM - 2PM</p>
+                <p>SUN CLOSED</p>
             </div>
             <div class="flex-1 min-w-[200px]">
                 <h3 class="text-lg font-bold text-yellow-400 mb-2">CONTACT US</h3>
@@ -385,6 +678,24 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 };
+</script>
+<script>
+// Click fallback for Contact Us dropdown (works on touch devices)
+document.addEventListener('DOMContentLoaded', function(){
+  var navContact = document.querySelector('.nav-contact');
+  if (!navContact) return;
+  var trigger = navContact.querySelector('a');
+  trigger.addEventListener('click', function(e){
+    // If already open and clicking again, let it close
+    e.preventDefault();
+    navContact.classList.toggle('open');
+  });
+  document.addEventListener('click', function(e){
+    if (!navContact.contains(e.target)) {
+      navContact.classList.remove('open');
+    }
+  });
+});
 </script>
 </body>
 </html>

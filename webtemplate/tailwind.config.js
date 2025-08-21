@@ -1,6 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./*.html"],
+  safelist: [
+    'opacity-100',
+    'translate-y-0',
+    'transition-all',
+    'duration-700',
+  ],
   theme: {
     extend: {
       colors: {

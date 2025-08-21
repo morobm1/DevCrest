@@ -1,640 +1,332 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Photo Gallery | Ivory University House</title>
-    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --iuh-black: #000000;
-            --iuh-white: #FFFFFF;
-            --iuh-red: #E84B3F;
-            --iuh-storm: #367D3D;
-            --iuh-blue: #4CA2C6;
-            --iuh-mayo: #F1C24B;
-            --iuh-gray: #E7E5E3;
-            --banner-height: 40px;
-            --navbar-height: 100px;
-        }
-        html, body {
-            font-family: 'Oswald', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-            font-weight: 300;
-            background: var(--iuh-gray);
-            color: var(--iuh-black);
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            /* Remove padding-top to fix white gap, and use margin on .gallery-hero instead */
-            /* padding-top: calc(var(--banner-height) + var(--navbar-height)); */
-        }
-        .special.banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--banner-height);
-            background-color: var(--iuh-red);
-            color: var(--iuh-white);
-            text-align: center;
-            font-weight: 700;
-            z-index: 1100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            letter-spacing: 0.05em;
-        }
-        .navbar {
-            position: fixed;
-            top: var(--banner-height);
-            left: 0;
-            width: 100%;
-            height: var(--navbar-height);
-            z-index: 1050;
-            background-color: var(--iuh-black);
-            margin-top: 0 !important;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .navbar .container-fluid {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding-left: 0;
-            padding-right: 0;
-            position: relative;
-        }
-        .navbar-brand {
-            position: static;
-            margin-left: 32px;
-            margin-right: 32px;
-            transform: none;
-            left: unset;
-        }
-        .navbar-brand img {
-            height: 60px;
-            width: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        .navbar .collapse.navbar-collapse {
-            flex-grow: 0;
-            margin-left: auto;
-        }
-        .navbar .nav-link, .navbar .btn {
-            color: var(--iuh-white) !important;
-            font-weight: 500;
-            font-size: 1.1rem;
-            letter-spacing: 0.03em;
-        }
-        .navbar .btn-primary {
-            background: var(--iuh-blue);
-            border: none;
-        }
-        .navbar .btn-danger {
-            background: var(--iuh-red);
-            border: none;
-        }
-        .navbar .btn-primary:hover, .navbar .btn-danger:hover {
-            opacity: 0.85;
-        }
-        .gallery-hero {
-            background: var(--iuh-storm);
-            color: var(--iuh-white);
-            padding: 120px 0 60px 0;
-            text-align: center;
-            /* Add margin-top to offset fixed nav and banner */
-            margin-top: calc(var(--banner-height) + var(--navbar-height));
-        }
-        .gallery-hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            letter-spacing: 0.04em;
-        }
-        .gallery-hero p {
-            font-size: 1.3rem;
-            font-weight: 400;
-            margin-bottom: 0;
-        }
-        .gallery-section {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 20px 80px 20px;
-        }
-        /* Masonry Grid */
-        .gallery-masonry {
-            column-count: 4;
-            column-gap: 24px;
-        }
-        .gallery-masonry .gallery-item {
-            break-inside: avoid;
-            margin-bottom: 24px;
-            position: relative;
-            cursor: pointer;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            background: var(--iuh-white);
-            transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.18s;
-        }
-        .gallery-masonry .gallery-item:hover {
-            transform: scale(1.025);
-            box-shadow: 0 6px 24px rgba(52,125,61,0.13);
-            z-index: 2;
-        }
-        .gallery-masonry .gallery-item img {
-            width: 100%;
-            display: block;
-            object-fit: cover;
-            transition: filter 0.2s;
-            min-height: 180px;
-        }
-        .gallery-masonry .gallery-item .caption {
-            position: absolute;
-            left: 0; right: 0; bottom: 0;
-            background: linear-gradient(0deg, rgba(52,125,61,0.92) 0%, rgba(52,125,61,0.0) 100%);
-            color: var(--iuh-white);
-            padding: 18px 18px 10px 18px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            opacity: 0;
-            transition: opacity 0.2s;
-            pointer-events: none;
-        }
-        .gallery-masonry .gallery-item:hover .caption {
-            opacity: 1;
-        }
-        /* Responsive Masonry */
-        @media (max-width: 1200px) {
-            .gallery-masonry { column-count: 3; }
-        }
-        @media (max-width: 900px) {
-            .gallery-masonry { column-count: 2; }
-        }
-        @media (max-width: 600px) {
-            .gallery-masonry { column-count: 1; }
-            .gallery-section { padding: 20px 6px 40px 6px; }
-            .gallery-hero { padding: 80px 0 30px 0; }
-        }
-        /* Lightbox Styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0; top: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.97);
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.2s;
-        }
-        .lightbox.active {
-            display: flex;
-        }
-        .lightbox-content {
-            position: relative;
-            max-width: 96vw;
-            max-height: 92vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .lightbox-content img {
-            width: auto;
-            height: 80vh;
-            max-width: 90vw;
-            max-height: 90vh;
-            border-radius: 10px 10px 0 0;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.25);
-            background: var(--iuh-white);
-            object-fit: contain;
-            display: block;
-        }
-        .lightbox-close, .lightbox-prev, .lightbox-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.45);
-            color: var(--iuh-white);
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            font-size: 2.2rem;
-            cursor: pointer;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.18s;
-        }
-        .lightbox-close {
-            top: 24px;
-            right: 24px;
-            left: auto;
-            transform: none;
-            font-size: 2.5rem;
-            background: rgba(0,0,0,0.7);
-        }
-        .lightbox-prev {
-            left: -60px;
-        }
-        .lightbox-next {
-            right: -60px;
-        }
-        .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
-            background: var(--iuh-red);
-        }
-        /* Improved Lightbox Caption Styling */
-        .lightbox-caption {
-            width: 100%;
-            max-width: 90vw;
-            margin: 0 auto;
-            padding: 0;
-            position: relative;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            color: #fff;
-            font-size: 1.3rem;
-            font-weight: 500;
-            text-align: center;
-            z-index: 5;
-            /* Gradient background below image, fading up */
-            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.0) 100%);
-            border-radius: 0 0 10px 10px;
-            padding: 24px 12px 18px 12px;
-            margin-top: -12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-            display: block;
-        }
-        @media (max-width: 900px) {
-            .lightbox-content img {
-                height: 50vh;
-            }
-            .lightbox-prev, .lightbox-next {
-                width: 38px;
-                height: 38px;
-                font-size: 1.5rem;
-                left: -36px;
-                right: -36px;
-            }
-        }
-        @media (max-width: 600px) {
-            .lightbox-content img {
-                height: 36vh;
-            }
-            .lightbox-prev, .lightbox-next {
-                left: 4px;
-                right: 4px;
-                top: 90%;
-                transform: translateY(-50%);
-            }
-            .lightbox-close {
-                top: 8px;
-                right: 8px;
-            }
-            .lightbox-caption {
-                font-size: 1.05rem;
-                padding: 14px 6px 10px 6px;
-            }
-        }
-        /* Footer styles (same as index) */
-        .footer-section {
-            width: 100vw;
-            background: var(--iuh-black);
-            color: var(--iuh-white);
-            margin: 60px 0 0 0;
-            border-radius: 12px 12px 0 0;
-            box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
-            padding: 0;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-        }
-        .footer-section-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 40px 20px;
-            gap: 40px;
-        }
-        .footer-section-inner > div {
-            flex: 1 1 0;
-            min-width: 200px;
-        }
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .footer-logo img {
-            max-width: 180px;
-            min-width: 100px;
-            width: 100%;
-            background: var(--iuh-white);
-            border-radius: 8px;
-            display: block;
-            margin: 0 auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .footer-office-hours h3,
-        .footer-contact h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 0.03em;
-            color: var(--iuh-mayo);
-        }
-        .footer-office-hours p,
-        .footer-contact p {
-            margin: 0 0 6px 0;
-            font-size: 1rem;
-            color: var(--iuh-white);
-        }
-        .footer-social {
-            margin-top: 12px;
-            display: flex;
-            gap: 14px;
-            justify-content: flex-start;
-        }
-        .footer-social-icon img {
-            width: 28px;
-            height: 28px;
-            filter: grayscale(1) brightness(1.2);
-            transition: filter 0.2s;
-        }
-        .footer-social-icon img:hover {
-            filter: none;
-        }
-        @media (max-width: 900px) {
-            .footer-section-inner {
-                flex-direction: column;
-                align-items: center;
-                gap: 24px;
-                padding: 24px 10px;
-            }
-            .footer-section-inner > div {
-                min-width: 0;
-                width: 100%;
-                text-align: center;
-            }
-            .footer-logo img {
-                margin: 20px auto;
-            }
-            .footer-social {
-                justify-content: center;
-            }
-        }
-        @media (max-width: 700px) {
-            .footer-section-inner {
-                flex-direction: column;
-                gap: 20px;
-                padding: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photo Gallery | Ivory University House</title>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="build/output.css">
+  <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            window.addEventListener("scroll", function() {
+                let navbar = document.querySelector(".navbar");
+                if (window.scrollY > 50) {
+                    navbar.classList.add("scrolled");
+                } else {
+                    navbar.classList.remove("scrolled");
+                }
+            });
+        });
+  </script>
+<style>
+    .nav-contact { position: relative; }
+    .nav-contact .dropdown { position: absolute; right: 0; top: 100%; opacity: 0; visibility: hidden; transform: translateY(4px); transition: opacity .15s ease-out, transform .15s ease-out, visibility .15s; z-index: 40; }
+    .nav-contact:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-contact.open .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  </style>
 </head>
-<body>
-    <div class="special banner">Special Go Here</div>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="images/IvoryUniversityHouse_PrimaryLogo_FullColorWhiteText_Opt1.png" alt="Ivory University House logo">
+<body class="bg-brand-gray font-sans">
+  <header class="fixed top-0 left-0 w-full z-50">
+    <div class="w-full bg-brand-blue text-white text-center font-extrabold text-base md:text-lg h-12 md:h-16 tracking-wide flex items-center justify-center border-b-4 border-brand-yellow shadow-2xl">
+      <span class="drop-shadow-lg">Limited availability. <span class="mx-2">SOLD OUT OF <span class="underline">A1</span> and <span class="underline">C1</span> UNITS</span></span>
+    </div>
+    <nav class="navbar w-full h-20 bg-brand-red bg-opacity-100 flex items-center shadow-md">
+      <div class="w-full flex items-center justify-start px-8 relative max-w-7xl mx-auto">
+        <a class="block mr-8" href="index.html">
+          <img src="images/IvoryUniversityHouse_PrimaryLogo_FullColorWhiteText_Opt1.png" alt="Ivory University House logo" loading="lazy" class="h-14 w-auto block mx-auto">
+        </a>
+        <ul class="flex items-center ml-auto space-x-4 flex-nowrap">
+          <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./our_impact.html">Our Impact</a></li>
+          <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./gallery.html">Photo Gallery</a></li>
+          <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./scholarship.html">Scholarship</a></li>
+          <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./floorplan.html">Floorplan</a></li>
+          <li class="relative nav-contact">
+            <a href="#" class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition inline-flex items-center whitespace-nowrap">Contact Us
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-1">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z" clip-rule="evenodd" />
+              </svg>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item" >
-                        <a class="nav-link" href="./our_impact.html">Our Impact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./gallery.html">Photo Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./floorplan.html">Floorplan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-primary">Resident Portal</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-danger"><a class="nav-link" href="./our_impact.html">Our Impact</a></button>
-                    </li>
-                </ul>
+            <div class="dropdown absolute right-0 w-56 bg-white text-brand-blue rounded-md shadow-xl border border-brand-yellow z-40">
+              <a href="./corevalues.html" class="block px-4 py-2 font-oswald font-semibold hover:bg-brand-yellow hover:text-brand-blue transition">Core Values</a>
+              <a href="./interview-process.html" class="block px-4 py-2 font-oswald font-semibold hover:bg-brand-yellow hover:text-brand-blue transition">Interview Process</a>
             </div>
-        </div>
+          </li>
+          <li><a class="bg-brand-yellow text-brand-blue font-bold px-4 py-2 rounded hover:bg-brand-yellow hover:text-brand-blue transition shadow border-2 border-brand-blue" href="https://ivoryuniversityhouseslc.residentportal.com/auth">Resident Portal</a></li>
+          <li><a class="bg-brand-blue text-white font-bold px-4 py-2 rounded hover:bg-brand-yellow hover:text-brand-blue transition shadow border-2 border-brand-yellow" href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw">Apply Now</a></li>
+        </ul>
+      </div>
     </nav>
-    <div class="gallery-hero">
-        <h1>Photo Gallery</h1>
-        <p>Explore our vibrant community, modern amenities, and beautiful living spaces at Ivory University House.</p>
+  </header>
+    <!-- Contact Overlay -->
+    <div id="contactOverlay" class="fixed inset-0 z-[60] hidden">
+      <div class="absolute inset-0 bg-black/70" id="contactOverlayBackdrop"></div>
+      <div class="relative z-10 flex items-start justify-center pt-28 px-5">
+        <div class="w-full max-w-3xl bg-white rounded-2xl shadow-2xl border-4 border-brand-yellow overflow-hidden">
+          <div class="flex items-center justify-between bg-brand-red text-white px-6 py-4">
+            <h2 class="font-oswald font-extrabold text-xl tracking-wide">Get in Touch</h2>
+            <button id="contactOverlayClose" class="text-white text-2xl leading-none hover:text-brand-yellow" aria-label="Close">&times;</button>
+          </div>
+          <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="./corevalues.html" class="block rounded-lg border border-brand-blue p-4 hover:bg-brand-yellow hover:text-brand-blue transition">
+              <div class="font-oswald font-bold text-brand-blue text-lg">Core Values</div>
+              <div class="text-sm text-brand-blue/80">Learn about our guiding principles</div>
+            </a>
+            <a href="#" class="block rounded-lg border border-brand-blue p-4 hover:bg-brand-yellow hover:text-brand-blue transition">
+              <div class="font-oswald font-bold text-brand-blue text-lg">Book a Tour</div>
+              <div class="text-sm text-brand-blue/80">Schedule a visit</div>
+            </a>
+            <a href="https://ivoryuniversityhouseslc.residentportal.com/auth" target="_blank" class="block rounded-lg border border-brand-blue p-4 hover:bg-brand-yellow hover:text-brand-blue transition">
+              <div class="font-oswald font-bold text-brand-blue text-lg">Resident Portal</div>
+              <div class="text-sm text-brand-blue/80">Current residents</div>
+            </a>
+            <a href="./floorplan.html" class="block rounded-lg border border-brand-blue p-4 hover:bg-brand-yellow hover:text-brand-blue transition">
+              <div class="font-oswald font-bold text-brand-blue text-lg">Floorplans</div>
+              <div class="text-sm text-brand-blue/80">See layouts</div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <section class="gallery-section">
-        <div style="text-align:center; margin-bottom:32px;">
-            <button class="gallery-filter-btn" data-filter="all" style="background:var(--iuh-storm);color:#fff;border:none;padding:10px 28px;margin:0 8px 8px 0;border-radius:24px;font-weight:600;letter-spacing:0.03em;cursor:pointer;transition:background 0.18s;outline:none;">All</button>
-            <button class="gallery-filter-btn" data-filter="community" style="background:var(--iuh-blue);color:#fff;border:none;padding:10px 28px;margin:0 8px 8px 0;border-radius:24px;font-weight:600;letter-spacing:0.03em;cursor:pointer;transition:background 0.18s;outline:none;">Community</button>
-            <button class="gallery-filter-btn" data-filter="apartment" style="background:var(--iuh-red);color:#fff;border:none;padding:10px 28px;margin:0 8px 8px 0;border-radius:24px;font-weight:600;letter-spacing:0.03em;cursor:pointer;transition:background 0.18s;outline:none;">Apartment</button>
-            <button class="gallery-filter-btn" data-filter="events" style="background:var(--iuh-mayo);color:#000;border:none;padding:10px 28px;margin:0 8px 8px 0;border-radius:24px;font-weight:600;letter-spacing:0.03em;cursor:pointer;transition:background 0.18s;outline:none;">Resident Events</button>
-        </div>
-        <div class="gallery-masonry" id="galleryMasonry">
-            <!-- Images will be injected here by JS -->
-        </div>
-    </section>
-    <!-- Lightbox Modal -->
-    <div class="lightbox" id="lightbox">
-        <div class="lightbox-content">
-            <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
-            <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#10094;</button>
-            <img src="" alt="Gallery Large" id="lightboxImg" aria-live="polite">
-            <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#10095;</button>
-            <div class="lightbox-caption" id="lightboxCaption" aria-live="polite"></div>
-        </div>
+    <div class="mt-[132px] md:mt-[148px]"></div>
+
+  <!-- Hero -->
+  <section class="bg-brand-green text-white text-center py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-oswald font-extrabold mb-3">Photo Gallery</h1>
+      <p class="text-lg md:text-xl font-light">Explore our vibrant community, modern amenities, and beautiful living spaces at Ivory University House.</p>
     </div>
-    <footer class="footer-section">
-        <div class="footer-section-inner">
-            <div class="footer-office-hours">
-                <h3>OFFICE HOURS</h3>
-                <p>M-F 9AM - 6PM</p>
-                <p>SAT 10AM - 5PM</p>
-                <p>SUN 1PM - 5PM</p>
-                <p style="color: var(--iuh-red); font-weight: bold; margin-top: 10px;">🔍 RESIDENTS</p>
-                <p style="color: var(--iuh-red); text-transform: uppercase; font-weight: bold; margin-top: 5px;">Schedule a Self-Guided Tour</p>
-            </div>
-            <div class="footer-logo">
-                <img src="images/IvoryUniversityHouse_PrimaryLogo_OneColor_Black.png" alt="Ivory University House logo">
-            </div>
-            <div class="footer-contact">
-                <h3>CONTACT US</h3>
-                <p>1949 E UNIVERSITY DR.</p>
-                <p>TEMPE, AZ 85281</p>
-                <p style="font-weight: bold;">CALL OR TEXT (520) 422-7879</p>
-                <div class="footer-social">
-                    <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="footer-social-icon">
-                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook">
-                    </a>
-                    <a href="https://twitter.com" target="_blank" aria-label="Twitter" class="footer-social-icon">
-                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter">
-                    </a>
-                    <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="footer-social-icon">
-                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram">
-                    </a>
-                    <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="footer-social-icon">
-                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <div style="text-align:center; color:#aaa; font-size:0.95rem; margin-top:24px; margin-bottom:8px;">
-        &copy; Ivory University House, All Rights Reserved. | <a href="/privacy.html" style="color:#aaa;text-decoration:underline;">Privacy Policy</a>
+  </section>
+
+  <!-- Filters -->
+  <section class="bg-white py-6">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <button class="gallery-filter-btn bg-brand-green text-white px-5 py-2 rounded-full font-semibold tracking-wide" data-filter="all">All</button>
+        <button class="gallery-filter-btn bg-brand-cyan text-white px-5 py-2 rounded-full font-semibold tracking-wide opacity-80 hover:opacity-100" data-filter="community">Community</button>
+        <button class="gallery-filter-btn bg-brand-red text-white px-5 py-2 rounded-full font-semibold tracking-wide opacity-80 hover:opacity-100" data-filter="apartment">Apartment</button>
+        <button class="gallery-filter-btn bg-brand-yellow text-black px-5 py-2 rounded-full font-semibold tracking-wide opacity-80 hover:opacity-100" data-filter="events">Resident Events</button>
+      </div>
     </div>
-    <script defer>
-        // Manually list all gallery images here (add or remove as needed)
-        const galleryImages = [
-            { filename: "images/Gallery/IMG_3913.jpg", caption: "Art Room", category: "community" },
-            { filename: "images/Gallery/IMG_3924.jpg", caption: "Common Area Lounge", category: "community" },
-            { filename: "images/Gallery/IMG_3935.jpg", caption: "Community Space", category: "community" },
-            { filename: "images/Gallery/IMG_3940.jpg", caption: "Lounge", category: "apartment" },
-            { filename: "images/Gallery/IMG_3953.jpg", caption: "Community Study Lounge", category: "community" },
-            { filename: "images/Gallery/IMG_3959.jpg", caption: "Printing Station", category: "apartment" },
-            { filename: "images/Gallery/IMG_3973.jpg", caption: "Community Space", category: "community" },
-            { filename: "images/Gallery/IMG_3981.jpg", caption: "Recreation Lounge", category: "events" },
-            { filename: "images/Gallery/UofU_Dorms-1.jpg", caption: "Apartment", category: "apartment"},
-            { filename: "images/Gallery/UofU_Dorms-2.jpg", caption: "Living Room", category: "apartment"},
-            { filename: "images/Gallery/UofU_Dorms-3.jpg", caption: "Kitchen", category: "apartment"},
-            { filename: "images/Gallery/UofU_Dorms-4.jpg", caption: "Bathroom", category: "apartment"},
-            // Add more images as needed
-        ];
-        // Add all Apartment images from ./images/Unit
-        [
-            "UofU_Dorms-1.jpg","UofU_Dorms-2.jpg","UofU_Dorms-3.jpg","UofU_Dorms-4.jpg","UofU_Dorms-5.jpg","UofU_Dorms-6.jpg","UofU_Dorms-7.jpg","UofU_Dorms-8.jpg","UofU_Dorms-9.jpg"
-        ].forEach(function(filename) {
-            galleryImages.push({
-                filename: "images/Unit/" + filename,
-                caption: "Apartment Photo",
-                category: "apartment"
-            });
-        });
-        // Add all Resident Life images from ./images/HR
-        [
-            "Ivory University House HR (1 of 65).jpg","Ivory University House HR (2 of 65).jpg","Ivory University House HR (3 of 65).jpg","Ivory University House HR (4 of 65).jpg","Ivory University House HR (5 of 65).jpg","Ivory University House HR (6 of 65).jpg","Ivory University House HR (7 of 65).jpg","Ivory University House HR (8 of 65).jpg","Ivory University House HR (9 of 65).jpg","Ivory University House HR (10 of 65).jpg","Ivory University House HR (11 of 65).jpg","Ivory University House HR (12 of 65).jpg","Ivory University House HR (13 of 65).jpg","Ivory University House HR (14 of 65).jpg","Ivory University House HR (15 of 65).jpg","Ivory University House HR (16 of 65).jpg","Ivory University House HR (17 of 65).jpg","Ivory University House HR (18 of 65).jpg","Ivory University House HR (19 of 65).jpg","Ivory University House HR (20 of 65).jpg","Ivory University House HR (21 of 65).jpg","Ivory University House HR (22 of 65).jpg","Ivory University House HR (23 of 65).jpg","Ivory University House HR (24 of 65).jpg","Ivory University House HR (25 of 65).jpg","Ivory University House HR (26 of 65).jpg","Ivory University House HR (27 of 65).jpg","Ivory University House HR (28 of 65).jpg","Ivory University House HR (29 of 65).jpg","Ivory University House HR (30 of 65).jpg","Ivory University House HR (31 of 65).jpg","Ivory University House HR (32 of 65).jpg","Ivory University House HR (33 of 65).jpg","Ivory University House HR (34 of 65).jpg","Ivory University House HR (35 of 65).jpg","Ivory University House HR (36 of 65).jpg","Ivory University House HR (37 of 65).jpg","Ivory University House HR (38 of 65).jpg","Ivory University House HR (39 of 65).jpg","Ivory University House HR (40 of 65).jpg","Ivory University House HR (41 of 65).jpg","Ivory University House HR (42 of 65).jpg","Ivory University House HR (43 of 65).jpg","Ivory University House HR (44 of 65).jpg","Ivory University House HR (45 of 65).jpg","Ivory University House HR (46 of 65).jpg","Ivory University House HR (47 of 65).jpg","Ivory University House HR (48 of 65).jpg","Ivory University House HR (49 of 65).jpg","Ivory University House HR (50 of 65).jpg","Ivory University House HR (51 of 65).jpg","Ivory University House HR (52 of 65).jpg","Ivory University House HR (53 of 65).jpg","Ivory University House HR (54 of 65).jpg","Ivory University House HR (55 of 65).jpg","Ivory University House HR (56 of 65).jpg","Ivory University House HR (57 of 65).jpg","Ivory University House HR (58 of 65).jpg","Ivory University House HR (59 of 65).jpg","Ivory University House HR (60 of 65).jpg","Ivory University House HR (61 of 65).jpg","Ivory University House HR (62 of 65).jpg","Ivory University House HR (63 of 65).jpg","Ivory University House HR (64 of 65).jpg","Ivory University House HR (65 of 65).jpg"
-        ].forEach(function(filename) {
-            galleryImages.push({
-                filename: "images/HR/" + filename,
-                caption: "Resident Event",
-                category: "events"
-            });
-        });
+  </section>
 
-        // 2. Dynamically generate the gallery grid
-        const galleryMasonry = document.getElementById('galleryMasonry');
-        function renderGallery(filter) {
-            galleryMasonry.innerHTML = '';
-            galleryImages.forEach((img, idx) => {
-                if (filter && filter !== 'all' && img.category !== filter) return;
-                const div = document.createElement('div');
-                div.className = 'gallery-item';
-                div.setAttribute('data-full', img.filename);
-                div.setAttribute('data-caption', img.caption || '');
-                div.setAttribute('data-index', idx);
-                div.setAttribute('data-category', img.category);
-                div.innerHTML = `
-                    <img src="${img.filename}" alt="${img.caption ? img.caption : 'Gallery Photo'}" loading="lazy">
-                    <div class="caption">${img.caption || ''}</div>
-                `;
-                galleryMasonry.appendChild(div);
-            });
-        }
-        renderGallery('all');
+  <!-- Masonry Grid -->
+  <section class="bg-white pb-14">
+    <div class="max-w-[1400px] mx-auto px-4">
+      <div id="galleryMasonry" class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 [column-fill:_balance]"></div>
+    </div>
+  </section>
 
-        // Filter logic
-        document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.gallery-filter-btn').forEach(b => b.style.opacity = '0.7');
-                this.style.opacity = '1';
-                renderGallery(this.getAttribute('data-filter'));
-                // Re-attach lightbox events after filtering
-                attachLightboxEvents();
-            });
-        });
-        // Set initial filter button active
-        document.querySelector('.gallery-filter-btn[data-filter="all"]').style.opacity = '1';
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
+    <div class="relative max-w-[96vw] max-h-[92vh] flex flex-col items-center">
+      <button id="lightboxClose" aria-label="Close" class="absolute -top-10 right-0 text-white text-4xl leading-none">&times;</button>
+      <button id="lightboxPrev" aria-label="Previous" class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 text-white text-2xl">&#10094;</button>
+      <img id="lightboxImg" src="" alt="Gallery Large" class="max-h-[80vh] max-w-[90vw] object-contain rounded-lg shadow" />
+      <button id="lightboxNext" aria-label="Next" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 text-white text-2xl">&#10095;</button>
+      <div id="lightboxCaption" class="w-full max-w-[90vw] text-center text-white text-lg font-medium mt-3"></div>
+    </div>
+  </div>
 
-        // 3. Lightbox logic
-        let currentIndex = 0;
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lightboxCaption = document.getElementById('lightboxCaption');
+  <!-- Footer -->
+  <footer class="w-screen bg-black text-white mt-16 rounded-t-2xl shadow-lg p-0 relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+    <div class="max-w-6xl mx-auto flex flex-wrap flex-row justify-between items-start py-10 px-5 gap-10">
+      <div class="flex-1 min-w-[200px] flex items-center justify-center">
+        <img src="images/LOGO_IvoryHouse_1C-Cream_Mv1a.webp" alt="Ivory University House logo" loading="lazy" class="max-w-[180px] min-w-[100px] w-full rounded-lg block mx-auto shadow-md">
+      </div>
+      <div class="flex-1 min-w-[200px]">
+        <h3 class="text-lg font-bold text-yellow-400 mb-2">OFFICE HOURS</h3>
+        <p>M-F 9AM - 6PM</p>
+        <p>SAT 10AM - 2PM</p>
+        <p>SUN CLOSED</p>
+      </div>
+      <div class="flex-1 min-w-[200px]">
+        <h3 class="text-lg font-bold text-yellow-400 mb-2">CONTACT US</h3>
+        <p>434 S Mario Capecchi Drive</p>
+        <p>Salt Lake City, UT 84112</p>
+        <p class="font-bold">CALL OR TEXT (801) 396-0093</p>
+        <div class="flex gap-4 mt-3">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+          <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center text-gray-400 text-sm mt-6 mb-2">
+      &copy; Ivory University House, All Rights Reserved. | <a href="/privacy.html" class="underline text-gray-400">Privacy Policy</a>
+    </div>
+  </footer>
 
-        function showLightbox(index) {
-            const img = galleryImages[index];
-            lightboxImg.src = img.filename;
-            lightboxCaption.textContent = img.caption || '';
-            lightbox.classList.add('active');
-            currentIndex = index;
-        }
+  <script defer>
+    // Gallery data
+    const galleryImages = [
+      { filename: 'images/Gallery/IMG_3913.JPG', caption: 'Art Room', category: 'community' },
+      { filename: 'images/Gallery/IMG_3924.JPG', caption: 'Common Area Lounge', category: 'community' },
+      { filename: 'images/Gallery/IMG_3935.JPG', caption: 'Community Space', category: 'community' },
+      { filename: 'images/Gallery/IMG_3940.JPG', caption: 'Lounge', category: 'apartment' },
+      { filename: 'images/Gallery/IMG_3953.JPG', caption: 'Community Study Lounge', category: 'community' },
+      { filename: 'images/Gallery/IMG_3959.JPG', caption: 'Printing Station', category: 'apartment' },
+      { filename: 'images/Gallery/IMG_3973.JPG', caption: 'Community Space', category: 'community' },
+      { filename: 'images/Gallery/IMG_3981.JPG', caption: 'Recreation Lounge', category: 'events' },
+      { filename: 'images/Gallery/UofU_Dorms-1.jpg', caption: 'Apartment', category: 'apartment' },
+      { filename: 'images/Gallery/UofU_Dorms-2.jpg', caption: 'Living Room', category: 'apartment' },
+      { filename: 'images/Gallery/UofU_Dorms-3.jpg', caption: 'Kitchen', category: 'apartment' },
+      { filename: 'images/Gallery/UofU_Dorms-4.jpg', caption: 'Bathroom', category: 'apartment' },
+    ];
 
-        function attachLightboxEvents() {
-            const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
-            galleryItems.forEach((item, idx) => {
-                item.addEventListener('click', () => showLightbox(Number(item.getAttribute('data-index'))));
-            });
-        }
+    // Add unit images
+    [
+      'UofU_Dorms-1.jpg','UofU_Dorms-2.jpg','UofU_Dorms-3.jpg','UofU_Dorms-4.jpg','UofU_Dorms-5.jpg','UofU_Dorms-6.jpg','UofU_Dorms-7.jpg','UofU_Dorms-8.jpg','UofU_Dorms-9.jpg'
+    ].forEach(function (filename) {
+      galleryImages.push({ filename: 'images/Unit/' + filename, caption: 'Apartment Photo', category: 'apartment' });
+    });
+
+    // Add HR images (Resident events)
+    [
+      'Ivory University House HR (1 of 65).jpg','Ivory University House HR (2 of 65).jpg','Ivory University House HR (3 of 65).jpg','Ivory University House HR (4 of 65).jpg','Ivory University House HR (5 of 65).jpg','Ivory University House HR (6 of 65).jpg','Ivory University House HR (7 of 65).jpg','Ivory University House HR (8 of 65).jpg','Ivory University House HR (9 of 65).jpg','Ivory University House HR (10 of 65).jpg','Ivory University House HR (11 of 65).jpg','Ivory University House HR (12 of 65).jpg','Ivory University House HR (13 of 65).jpg','Ivory University House HR (14 of 65).jpg','Ivory University House HR (15 of 65).jpg','Ivory University House HR (16 of 65).jpg','Ivory University House HR (17 of 65).jpg','Ivory University House HR (18 of 65).jpg','Ivory University House HR (19 of 65).jpg','Ivory University House HR (20 of 65).jpg','Ivory University House HR (21 of 65).jpg','Ivory University House HR (22 of 65).jpg','Ivory University House HR (23 of 65).jpg','Ivory University House HR (24 of 65).jpg','Ivory University House HR (25 of 65).jpg','Ivory University House HR (26 of 65).jpg','Ivory University House HR (27 of 65).jpg','Ivory University House HR (28 of 65).jpg','Ivory University House HR (29 of 65).jpg','Ivory University House HR (30 of 65).jpg','Ivory University House HR (31 of 65).jpg','Ivory University House HR (32 of 65).jpg','Ivory University House HR (33 of 65).jpg','Ivory University House HR (34 of 65).jpg','Ivory University House HR (35 of 65).jpg','Ivory University House HR (36 of 65).jpg','Ivory University House HR (37 of 65).jpg','Ivory University House HR (38 of 65).jpg','Ivory University House HR (39 of 65).jpg','Ivory University House HR (40 of 65).jpg','Ivory University House HR (41 of 65).jpg','Ivory University House HR (42 of 65).jpg','Ivory University House HR (43 of 65).jpg','Ivory University House HR (44 of 65).jpg','Ivory University House HR (45 of 65).jpg','Ivory University House HR (46 of 65).jpg','Ivory University House HR (47 of 65).jpg','Ivory University House HR (48 of 65).jpg','Ivory University House HR (49 of 65).jpg','Ivory University House HR (50 of 65).jpg','Ivory University House HR (51 of 65).jpg','Ivory University House HR (52 of 65).jpg','Ivory University House HR (53 of 65).jpg','Ivory University House HR (54 of 65).jpg','Ivory University House HR (55 of 65).jpg','Ivory University House HR (56 of 65).jpg','Ivory University House HR (57 of 65).jpg','Ivory University House HR (58 of 65).jpg','Ivory University House HR (59 of 65).jpg','Ivory University House HR (60 of 65).jpg','Ivory University House HR (61 of 65).jpg','Ivory University House HR (62 of 65).jpg','Ivory University House HR (63 of 65).jpg','Ivory University House HR (64 of 65).jpg','Ivory University House HR (65 of 65).jpg'
+    ].forEach(function (filename) {
+      galleryImages.push({ filename: 'images/HR/' + filename, caption: 'Resident Event', category: 'events' });
+    });
+
+    // Render gallery
+    const galleryMasonry = document.getElementById('galleryMasonry');
+    function renderGallery(filter) {
+      galleryMasonry.innerHTML = '';
+      galleryImages.forEach((img, idx) => {
+        if (filter && filter !== 'all' && img.category !== filter) return;
+        const item = document.createElement('div');
+        item.className = 'mb-6 gallery-item [break-inside:avoid] rounded-xl overflow-hidden shadow bg-white cursor-pointer';
+        item.setAttribute('data-full', img.filename);
+        item.setAttribute('data-caption', img.caption || '');
+        item.setAttribute('data-index', idx);
+        item.setAttribute('data-category', img.category);
+        item.innerHTML = `
+          <img src="${img.filename}" alt="${img.caption ? img.caption : 'Gallery Photo'}" loading="lazy" class="w-full h-auto object-cover">
+          ${img.caption ? `<div class='px-4 py-2 text-sm text-white bg-gradient-to-t from-black/80 to-transparent -mt-10 relative'>${img.caption}</div>` : ''}
+        `;
+        galleryMasonry.appendChild(item);
+      });
+    }
+    renderGallery('all');
+
+    // Filter logic
+    document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.gallery-filter-btn').forEach(b => b.classList.add('opacity-80'));
+        this.classList.remove('opacity-80');
+        renderGallery(this.getAttribute('data-filter'));
         attachLightboxEvents();
+      });
+    });
 
-        document.getElementById('lightboxClose').addEventListener('click', function() {
-            lightbox.classList.remove('active');
-            lightboxImg.src = '';
-        });
+    // Lightbox logic
+    let currentIndex = 0;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
 
-        document.getElementById('lightboxPrev').addEventListener('click', function(e) {
-            e.stopPropagation();
-            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-            showLightbox(currentIndex);
-        });
+    function showLightbox(index) {
+      const img = galleryImages[index];
+      lightboxImg.src = img.filename;
+      lightboxCaption.textContent = img.caption || '';
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+      currentIndex = index;
+    }
 
-        document.getElementById('lightboxNext').addEventListener('click', function(e) {
-            e.stopPropagation();
-            currentIndex = (currentIndex + 1) % galleryImages.length;
-            showLightbox(currentIndex);
-        });
+    function attachLightboxEvents() {
+      document.querySelectorAll('#galleryMasonry .gallery-item').forEach(item => {
+        item.addEventListener('click', () => showLightbox(Number(item.getAttribute('data-index'))));
+      });
+    }
+    attachLightboxEvents();
 
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === this) {
-                lightbox.classList.remove('active');
-                lightboxImg.src = '';
-            }
-        });
+    document.getElementById('lightboxClose').addEventListener('click', function () {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      lightboxImg.src = '';
+    });
 
-        document.addEventListener('keydown', function(e) {
-            if (!lightbox.classList.contains('active')) return;
-            if (e.key === "Escape") {
-                lightbox.classList.remove('active');
-                lightboxImg.src = '';
-            } else if (e.key === "ArrowLeft") {
-                currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-                showLightbox(currentIndex);
-            } else if (e.key === "ArrowRight") {
-                currentIndex = (currentIndex + 1) % galleryImages.length;
-                showLightbox(currentIndex);
-            }
-        });
-    </script>
+    document.getElementById('lightboxPrev').addEventListener('click', function (e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      showLightbox(currentIndex);
+    });
+
+    document.getElementById('lightboxNext').addEventListener('click', function (e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      showLightbox(currentIndex);
+    });
+
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        lightboxImg.src = '';
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (lightbox.classList.contains('hidden')) return;
+      if (e.key === 'Escape') {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        lightboxImg.src = '';
+      } else if (e.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        showLightbox(currentIndex);
+      } else if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % galleryImages.length;
+        showLightbox(currentIndex);
+      }
+    });
+  </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const toggle = document.getElementById('contactToggle');
+  const overlay = document.getElementById('contactOverlay');
+  const closeBtn = document.getElementById('contactOverlayClose');
+  const backdrop = document.getElementById('contactOverlayBackdrop');
+
+  function openOverlay() {
+    if (!overlay) return;
+    overlay.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    if (toggle) toggle.setAttribute('aria-expanded','true');
+  }
+  function closeOverlay() {
+    if (!overlay) return;
+    overlay.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+    if (toggle) toggle.setAttribute('aria-expanded','false');
+  }
+
+  if (toggle) {
+    toggle.addEventListener('click', function(e){ e.preventDefault(); openOverlay(); });
+  }
+  if (closeBtn) closeBtn.addEventListener('click', closeOverlay);
+  if (backdrop) backdrop.addEventListener('click', closeOverlay);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeOverlay(); });
+});
+</script>
+<script>
+// Click fallback for Contact Us dropdown (works on touch devices)
+document.addEventListener('DOMContentLoaded', function(){
+  var navContact = document.querySelector('.nav-contact');
+  if (!navContact) return;
+  var trigger = navContact.querySelector('a');
+  trigger.addEventListener('click', function(e){
+    // If already open and clicking again, let it close
+    e.preventDefault();
+    navContact.classList.toggle('open');
+  });
+  document.addEventListener('click', function(e){
+    if (!navContact.contains(e.target)) {
+      navContact.classList.remove('open');
+    }
+  });
+});
+</script>
 </body>
 </html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contract | Ivory University House</title>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="build/output.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      window.addEventListener("scroll", function() {
+        let navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) { navbar.classList.add("scrolled"); } else { navbar.classList.remove("scrolled"); }
+      });
+    });
+  </script>
+  <style>
+    .prose ul{margin-left:1.5rem !important;}
+    .prose ol{margin-left:1.5rem !important;}
+    @media(min-width:768px){.prose ul,.prose ol{margin-left:2rem !important;}}
+    .nav-contact { position: relative; }
+    .nav-contact .dropdown { position: absolute; right: 0; top: 100%; opacity: 0; visibility: hidden; transform: translateY(4px); transition: opacity .15s ease-out, transform .15s ease-out, visibility .15s; z-index: 40; }
+    .nav-contact:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-contact.open .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  </style>
+</head>
+<body class="bg-brand-gray font-sans">
+  <header class="fixed top-0 left-0 w-full z-50">
+    <div class="w-full bg-brand-blue text-white text-center font-extrabold text-base md:text-lg h-12 md:h-16 tracking-wide flex items-center justify-center border-b-4 border-brand-yellow shadow-2xl">
+      <span class="drop-shadow-lg">Limited availability. <span class="mx-2">SOLD OUT OF <span class="underline">A1</span> and <span class="underline">C1</span> UNITS</span></span>
+    </div>
+    <nav class="navbar w-full h-20 bg-brand-red bg-opacity-100 flex items-center shadow-md">
+      <div class="w-full flex items-center justify-start px-8 relative max-w-7xl mx-auto">
+        <a class="block mr-8" href="index.html">
+          <img src="images/IvoryUniversityHouse_PrimaryLogo_FullColorWhiteText_Opt1.png" alt="Ivory University House logo" loading="lazy" class="h-14 w-auto block mx-auto">
+        </a>
+        <ul class="flex items-center ml-auto space-x-4 flex-nowrap">
+          <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./our_impact.html">Our Impact</a></li>
+          <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./gallery.html">Photo Gallery</a></li>
+          <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./scholarship.html">Scholarship</a></li>
+          <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition whitespace-nowrap" href="./floorplan.html">Floorplan</a></li>
+          <li class="relative nav-contact">
+            <a href="#" class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition inline-flex items-center whitespace-nowrap">Contact Us
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-1">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z" clip-rule="evenodd" />
+              </svg>
+            </a>
+            <div class="dropdown absolute right-0 w-56 bg-white text-brand-blue rounded-md shadow-xl border border-brand-yellow z-40">
+              <a href="./corevalues.html" class="block px-4 py-2 font-oswald font-semibold hover:bg-brand-yellow hover:text-brand-blue transition">Core Values</a>
+              <a href="./interview-process.html" class="block px-4 py-2 font-oswald font-semibold hover:bg-brand-yellow hover:text-brand-blue transition">Interview Process</a>
+            </div>
+          </li>
+          <li><a class="bg-brand-yellow text-brand-blue font-bold px-4 py-2 rounded hover:bg-brand-yellow hover:text-brand-blue transition shadow border-2 border-brand-blue" href="https://ivoryuniversityhouseslc.residentportal.com/auth">Resident Portal</a></li>
+          <li><a class="bg-brand-blue text-white font-bold px-4 py-2 rounded hover:bg-brand-yellow hover:text-brand-blue transition shadow border-2 border-brand-yellow" href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw">Apply Now</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="mt-[132px] md:mt-[148px]"></div>
+
+  <!-- Hero -->
+  <section class="bg-white text-center py-12">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-oswald font-extrabold text-brand-blue mb-2">Housing Contract</h1>
+      <p class="text-lg md:text-xl text-brand-green font-semibold">Key terms and conditions for residency at Ivory University House</p>
+      <div class="mt-4 mx-auto h-1 w-24 bg-brand-yellow rounded"></div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="bg-white py-6">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="bg-white rounded-2xl shadow-lg border border-brand-gray/50 p-6 md:p-10 leading-relaxed relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image:url('images/IvoryUniversityHouse_Icon_Ivory.png');background-repeat:no-repeat;background-size:320px auto;background-position:center;"></div>
+        <div class="prose prose-lg max-w-none relative z-10 text-brand-blue/90">
+          <p class="mb-6">This page summarizes the primary terms of the Ivory University House Housing Contract. It is provided for information only and does not replace the official lease. The official lease you sign governs.</p>
+
+          <h2 class="font-oswald font-extrabold text-brand-red mt-0 mb-4 text-2xl">1. Overview and Purpose</h2>
+          <p>Ivory University House provides student-focused housing to foster academic success, wellness, and community engagement in a substance‑free environment.</p>
+
+          <h3 class="font-oswald font-bold text-brand-blue mt-6 mb-3 text-xl">2. Eligibility</h3>
+          <ul class="list-disc space-y-2">
+            <li>Active enrollment at a qualifying institution during the lease term.</li>
+            <li>Completion of the brief applicant <a href="./interview-process.html" class="underline text-brand-red hover:text-brand-blue">interview process</a>.</li>
+            <li>Agreement to the <a href="./corevalues.html" class="underline text-brand-red hover:text-brand-blue">Core Value Agreement</a>.</li>
+          </ul>
+
+          <h3 class="font-oswald font-bold text-brand-blue mt-6 mb-3 text-xl">3. Term and Occupancy</h3>
+          <ul class="list-disc space-y-2">
+            <li>Fixed lease term with defined start and end dates.</li>
+            <li>Single-resident occupancy per bed space; no overnight guests.</li>
+            <li>Check-in/out procedures and condition report required.</li>
+          </ul>
+
+          <h3 class="font-oswald font-bold text-brand-blue mt-6 mb-3 text-xl">4. Payments and Fees</h3>
+          <ul class="list-disc space-y-2">
+            <li>Monthly installments due per the payment schedule in your lease.</li>
+            <li>Security deposit due upon lease execution to reserve your space.</li>
+            <li>Late fees and other charges as specified in the official lease.</li>
+          </ul>
+
+          <h3 class="font-oswald font-bold text-brand-blue mt-6 mb-3 text-xl">5. Resident Responsibilities</h3>
+          <ul class="list-disc space-y-2">
+            <li>Maintain cleanliness and reasonable care of the unit and common areas.</li>
+            <li>Promptly report maintenance issues and safety concerns.</li>
+            <li>Comply with all community policies, notices, and staff instructions.</li>
+          </ul>
+
+          <h3 class="font-oswald font-bold text-brand-blue mt-6 mb-3 text-xl">6. Community Standards and Prohibited Conduct</h3>
+          <p>Residents must adhere to our substance‑free standards and safety practices outlined in the <a href="./corevalues.html" class="underline text-brand-red hover:text-brand-blue">Core Value Agreement</a>.</p>
+          <ul class="list-disc space-y-2">
+            <li>No possession, consumption, or distribution of alcohol, marijuana/cannabis, tobacco, smoking, or vaping products.</li>
+            <li>No gambling, pornographic material, or illegal activity.</li>
+            <li>No overnight guests.</li>
+          </ul>
+
+          <h3 class="font-oswald font-bold text-brand-blue mt-6 mb-3 text-xl">7. Maintenance and Repairs</h3>
+          <ul class="list-disc space-y-2">
+            <li>Submit maintenance requests through designated channels.</li>
+            <li>Non-emergency repairs performed during normal business hours.</li>
+            <li>Emergency maintenance available for urgent safety issues.</li>
+          </ul>
+
+          <h3 class="font-oswald font-bold text-brand-blue mt-6 mb-3 text-xl">8. Termination and Cancellation</h3>
+          <ul class="list-disc space-y-2">
+            <li>Early termination, reassignment, or subletting subject to lease.</li>
+            <li>Violation of the Core Values or lease terms may result in removal.</li>
+            <li>Move-out procedures and deposit reconciliation follow the lease.</li>
+          </ul>
+
+          <h3 class="font-oswald font-bold text-brand-blue mt-6 mb-3 text-xl">9. Notices and Communication</h3>
+          <ul class="list-disc space-y-2">
+            <li>Official notices may be delivered electronically or in writing.</li>
+            <li>Residents are responsible for keeping contact information current.</li>
+          </ul>
+
+          <div class="mt-8 bg-brand-gray/40 border-l-4 border-brand-yellow px-5 py-4 rounded-r">
+            <p class="m-0"><strong>Disclaimer:</strong> This summary is informational. The signed lease is the controlling document. For a copy of your official lease, contact our office.</p>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw" target="_blank" class="inline-block bg-brand-red text-white font-bold px-6 py-3 rounded shadow hover:bg-brand-yellow hover:text-brand-blue transition">Apply Now</a>
+            <a href="./corevalues.html" class="inline-block bg-brand-blue text-white font-bold px-6 py-3 rounded shadow hover:bg-brand-yellow hover:text-brand-blue transition">Core Values</a>
+            <a href="./interview-process.html" class="inline-block bg-brand-yellow text-brand-blue font-bold px-6 py-3 rounded shadow hover:bg-brand-red hover:text-white transition">Interview Process</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="w-screen bg-black text-white mt-0 rounded-t-2xl shadow-lg p-0 relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+    <div class="max-w-6xl mx-auto flex flex-wrap flex-row justify-between items-start py-10 px-5 gap-10">
+      <div class="flex-1 min-w-[200px] flex items-center justify-center">
+        <img src="images/LOGO_IvoryHouse_1C-Cream_Mv1a.webp" alt="Ivory University House logo" loading="lazy" class="max-w-[180px] min-w-[100px] w-full rounded-lg block mx-auto shadow-md">
+      </div>
+      <div class="flex-1 min-w-[200px]">
+        <h3 class="text-lg font-bold text-yellow-400 mb-2">OFFICE HOURS</h3>
+        <p>M-F 9AM - 6PM</p>
+        <p>SAT 10AM - 2PM</p>
+        <p>SUN CLOSED</p>
+      </div>
+      <div class="flex-1 min-w-[200px]">
+        <h3 class="text-lg font-bold text-yellow-400 mb-2">CONTACT US</h3>
+        <p>434 S Mario Capecchi Drive</p>
+        <p>Salt Lake City, UT 84112</p>
+        <p class="font-bold">CALL OR TEXT (801) 396-0093</p>
+        <div class="flex gap-4 mt-3">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+          <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center text-gray-400 text-sm mt-6 mb-2">
+      &copy; Ivory University House, All Rights Reserved. | <a href="/privacy.html" class="underline text-gray-400">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script>
+  // Click fallback for Contact Us dropdown (works on touch devices)
+  document.addEventListener('DOMContentLoaded', function(){
+    var navContact = document.querySelector('.nav-contact');
+    if (!navContact) return;
+    var trigger = navContact.querySelector('a');
+    trigger.addEventListener('click', function(e){
+      e.preventDefault();
+      navContact.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e){
+      if (!navContact.contains(e.target)) {
+        navContact.classList.remove('open');
+      }
+    });
+  });
+  </script>
+</body>
+</html>

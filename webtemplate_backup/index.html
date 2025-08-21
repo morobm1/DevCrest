@@ -1,0 +1,390 @@
+0
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ivory University House</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <!-- Mapbox GL JS CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="build/output.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            window.addEventListener("scroll", function() {
+                let navbar = document.querySelector(".navbar");
+                if (window.scrollY > 50) {
+                    navbar.classList.add("scrolled");
+                } else {
+                    navbar.classList.remove("scrolled");
+                }
+            });
+        });
+    </script>
+</head>
+<body class="bg-brand-gray font-sans">
+    <!-- Top Banner -->
+    <div class="w-full bg-brand-blue text-white text-center font-extrabold text-xl md:text-2xl py-5 tracking-wide fixed top-0 left-0 z-50 shadow-2xl flex items-center justify-center border-b-4 border-brand-yellow">
+        <span class="drop-shadow-lg">Limited availability. <span class="mx-2">SOLD OUT OF <span class="underline">A1</span> and <span class="underline">C1</span> UNITS</span></span>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="fixed top-8 left-0 w-full h-20 z-40 bg-brand-red bg-opacity-100 flex items-center shadow-md" style="background-color: #e84b3f !important;">
+        <div class="w-full flex items-center justify-start px-8 relative max-w-7xl mx-auto">
+            <a class="block mr-8" href="#">
+                <img src="images/IvoryUniversityHouse_PrimaryLogo_FullColorWhiteText_Opt1.png" alt="Ivory University House logo" loading="lazy" class="h-14 w-auto block mx-auto">
+            </a>
+            <ul class="flex items-center ml-auto space-x-4">
+                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition" href="./our_impact.html">Our Impact</a></li>
+                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition" href="./gallery.html">Photo Gallery</a></li>
+                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition" href="./floorplan.html">Floorplan</a></li>
+                <li><a class="text-white font-oswald font-semibold text-lg hover:text-brand-yellow transition" href="#">Contact Us</a></li>
+                <li><a class="bg-brand-yellow text-brand-blue font-bold px-4 py-2 rounded hover:bg-brand-yellow hover:text-brand-blue transition shadow border-2 border-brand-blue" style="background-color: #f1c24b !important;" href="https://ivoryuniversityhouseslc.residentportal.com/auth">Resident Portal</a></li>
+                <li><a class="bg-brand-blue text-white font-bold px-4 py-2 rounded hover:bg-brand-yellow hover:text-brand-blue transition shadow border-2 border-brand-yellow" style="background-color: #295491 !important;" href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw">Apply Now</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- HERO VIDEO & MAIN -->
+    <div class="relative w-full h-screen flex flex-col justify-center items-center pt-20">
+        <video class="absolute inset-0 w-full h-full object-cover z-0" autoplay muted loop playsinline>
+            <source src="images/ivoryvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="relative z-10 flex flex-col items-center justify-center w-full h-full">
+            <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl border-4 border-brand-blue px-8 py-10 flex flex-col items-center text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-brand-red mb-3 leading-tight drop-shadow font-oswald">Elevated Student Living</h1>
+                <h3 class="text-xl md:text-2xl font-semibold text-brand-blue mb-4 font-oswald">Ivory University House is new housing steps away from University of Utah.</h3>
+                <p class="text-brand-blue text-base md:text-lg leading-relaxed mb-6">Welcome to Ivory University House, where comfort, security, and a sense of belonging converge. As a home away from home, we understand the importance of creating a secure environment that parents and students can rely on. Our commitment to student well-being guided the design of the residence halls. Large gathering spaces compliment individual rooms and study areas to provide social and private spaces. Our dedicated staff is committed to creating a transformative, elevated, welcoming, and fun environment for all our students. We welcome you to Ivory University House. Discover a place where you can relax, thrive, and feel at home. We look forward to meeting you!</p>
+                <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
+                    <button class="bg-brand-red text-white font-bold px-6 py-3 rounded shadow uppercase tracking-wide hover:bg-brand-yellow hover:text-brand-blue transition font-oswald w-full md:w-auto" style="background-color: #e84b3f !important;">
+                        Schedule a Tour
+                    </button>
+                    <button class="bg-brand-yellow text-brand-blue font-bold px-6 py-3 rounded shadow uppercase tracking-wide hover:bg-brand-red hover:text-white transition font-oswald w-full md:w-auto" style="background-color: #f1c24b !important; color: #295491 !important;">
+                        Limited Spots for Fall 2025
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <section class="w-screen bg-brand-white border-y border-brand-gray py-20">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="font-oswald font-extrabold text-brand-blue text-4xl mb-4 tracking-wide uppercase drop-shadow">Floorplans</h2>
+                <p class="text-brand-green text-lg mb-10 font-semibold">Explore our modern, spacious layouts designed for student living.</p>
+                <div class="flex flex-wrap justify-evenly gap-10 p-5">
+                    <!-- Unit A1 -->
+                    <div class="bg-brand-gray w-[270px] border-2 border-brand-blue text-center flex flex-col h-[460px] shadow-lg rounded-2xl overflow-hidden">
+                        <div class="bg-brand-red text-white py-2 font-bold font-oswald text-lg tracking-wide">NOW LEASING</div>
+                        <img src="./images/A1.png" alt="Floorplan for Unit A1" loading="lazy" class="w-full max-h-[170px] object-contain p-5 pt-5 bg-brand-white flex-shrink-0">
+                        <div class="flex-1 flex flex-col justify-end pb-4">
+                            <div class="font-bold text-brand-blue text-lg">UNIT A1</div>
+                            <div class="text-brand-blue">Studio</div>
+                            <div class="text-brand-blue">440 SQ FT</div>
+                            <div class="mb-4 text-brand-red font-bold">STARTING AT $1,899</div>
+                            <button onclick="openModal('A1','Studio','$1,899','440 SQ FT','./images/A1.png','NOW LEASING')" class="bg-brand-blue text-white px-5 py-2 rounded-full font-bold cursor-pointer mb-3 mt-1 mx-1 hover:bg-brand-yellow hover:text-brand-blue transition shadow">VIEW DETAILS</button>
+                        </div>
+                    </div>
+                    <!-- Unit B1 -->
+                    <div class="bg-brand-gray w-[270px] border-2 border-brand-blue text-center flex flex-col h-[460px] shadow-lg rounded-2xl overflow-hidden">
+                        <div class="bg-brand-red text-white py-2 font-bold font-oswald text-lg tracking-wide">NOW LEASING</div>
+                        <img src="./images/B1.png" alt="Floorplan for Unit B1" loading="lazy" class="w-full max-h-[170px] object-contain p-5 pt-5 bg-brand-white flex-shrink-0">
+                        <div class="flex-1 flex flex-col justify-end pb-4">
+                            <div class="font-bold text-brand-blue text-lg">UNIT B1</div>
+                            <div class="text-brand-blue">Studio</div>
+                            <div class="text-brand-blue">346 SQ FT</div>
+                            <div class="mb-4 text-brand-red font-bold">STARTING AT $1,469</div>
+                            <button onclick="openModal('B1','Studio','$1,469','346 SQ FT','./images/B1.png','SOLD OUT')" class="bg-brand-blue text-white px-5 py-2 rounded-full font-bold cursor-pointer mb-3 mt-1 mx-1 hover:bg-brand-yellow hover:text-brand-blue transition shadow">VIEW DETAILS</button>
+                        </div>
+                    </div>
+                    <!-- Unit C1 -->
+                    <div class="bg-brand-gray w-[270px] border-2 border-brand-blue text-center flex flex-col h-[460px] shadow-lg rounded-2xl overflow-hidden">
+                        <div class="bg-brand-red text-white py-2 font-bold font-oswald text-lg tracking-wide">NOW LEASING</div>
+                        <img src="./images/C1.png" alt="Floorplan for Unit C1" loading="lazy" class="w-full max-h-[170px] object-contain p-5 pt-5 bg-brand-white flex-shrink-0">
+                        <div class="flex-1 flex flex-col justify-end pb-4">
+                            <div class="font-bold text-brand-blue text-lg">UNIT C1</div>
+                            <div class="text-brand-blue">Studio</div>
+                            <div class="text-brand-blue">346 SQ FT</div>
+                            <div class="mb-4 text-brand-red font-bold">STARTING AT $1,349</div>
+                            <button onclick="openModal('C1','Studio','$1,349','346 SQ FT','./images/C1.png','NOW LEASING')" class="bg-brand-blue text-white px-5 py-2 rounded-full font-bold cursor-pointer mb-3 mt-1 mx-1 hover:bg-brand-yellow hover:text-brand-blue transition shadow">VIEW DETAILS</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Structure -->
+        <div id="unitModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.6);">
+            <div style="background-color:#f1f0e5;margin:60px auto;padding:30px;border-radius:10px;width:90%;max-width:1100px;display:flex;gap:40px;position:relative;flex-wrap:wrap;">
+                <!-- Close Button -->
+                <span onclick="closeModal()" style="position:absolute;top:15px;right:20px;font-size:30px;font-weight:bold;cursor:pointer;">&times;</span>
+                <!-- Unit Info -->
+                <div style="flex:1;min-width:280px;">
+                    <h2 id="modalUnitName" style="font-size:36px;margin:0 0 10px;">UNIT</h2>
+                    <p id="modalUnitPrice" style="font-size:24px;font-weight:bold;margin:0;">$ / Month</p>
+                    <p style="font-size:14px;color:#555;margin-bottom:20px;">*price based on 12 equal installments</p>
+                    <h3 style="font-size:18px;margin-bottom:10px;">UNIT TYPE</h3>
+                    <p id="modalUnitType" style="margin:4px 0;">Type</p>
+                    <p id="modalUnitSqft" style="margin:4px 0;">SQ FT</p>
+                    <div style="margin-top:20px;">
+                        <a href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw" target="_blank" style="background:#6b0000;color:white;border:none;padding:12px 25px;border-radius:30px;margin-right:10px;font-weight:bold;text-decoration:none;display:inline-block;">APPLY NOW</a>
+                        <button style="background:#5b5d3f;color:white;border:none;padding:12px 25px;border-radius:30px;font-weight:bold;">BOOK A TOUR</button>
+                    </div>
+                </div>
+                <!-- Image -->
+                <div style="flex:1;min-width:300px;">
+                    <div id="modalUnitStatus" style="background:black;color:white;text-align:center;padding:8px 0;font-weight:bold;margin-bottom:10px;">STATUS</div>
+                    <img id="modalUnitImg" src="" alt="Floorplan image for selected unit" loading="lazy" style="width:100%;border:1px solid #ccc;">
+                </div>
+            </div>
+        </div>
+        <section class="grid grid-cols-3 gap-5 p-12 bg-gray-100 max-w-6xl mx-auto items-stretch">
+            <div class="col-span-1 bg-yellow-400 flex items-center justify-center p-5 h-full">
+                <img src="images/IvoryUniversityHouse_PrimaryLogo_OneColor_Black.png" alt="Ivory University House logo" loading="lazy" class="max-w-[90%] h-auto bg-white rounded-lg p-2 shadow-md block">
+            </div>
+            <img src="images/IMG_3913.JPG" class="rounded-lg shadow-sm w-full object-cover aspect-square h-full" alt="Student event at Ivory University House" loading="lazy">
+            <img src="images/IMG_3924.JPG" class="rounded-lg shadow-sm w-full object-cover aspect-square h-full" alt="Modern kitchen area" loading="lazy">
+            <img src="images/IMG_3935.JPG" class="col-span-2 rounded-lg shadow-sm w-full object-cover aspect-[2/1] h-full" alt="Outdoor patio with seating" loading="lazy">
+            <img src="images/IMG_3940.JPG" class="rounded-lg shadow-sm w-full object-cover aspect-square h-full" alt="Fitness room with equipment" loading="lazy">
+            <img src="images/IMG_3953.JPG" class="rounded-lg shadow-sm w-full object-cover aspect-[3/1] h-[200px]" alt="Lobby with comfortable seating" loading="lazy">
+            <div class="col-span-1 text-center bg-green-800 rounded-lg text-white font-bold flex flex-col items-center justify-center h-[200px] w-full">
+                <div class="w-full h-full flex flex-col items-center justify-center">
+                    <h3 class="text-2xl font-bold mb-6 tracking-wide">Reserve Your Spot Today</h3>
+                    <a href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw" target="_blank" class="block mt-0 py-5 w-[95%] text-xl font-bold uppercase rounded bg-red-600 text-white tracking-wide hover:bg-blue-500 transition">Apply Now</a>
+                </div>
+            </div>
+            <img src="images/IMG_3913.JPG" class="rounded-lg shadow-sm w-full object-cover aspect-square h-[200px]" alt="Student relaxing in a cozy dorm room" loading="lazy">
+        </section>
+        <div class="flex flex-wrap items-stretch justify-center bg-green-800 py-12 px-5 text-white gap-10">
+            <div class="flex-none w-80 flex items-center justify-center">
+                <img src="images/IMG_3924.JPG" alt="Modern apartment interior" loading="lazy" class="w-full rounded-lg object-cover max-h-80">
+            </div>
+            <div class="flex-1 min-w-[250px] max-w-xl text-left flex flex-col justify-center">
+                <div class="inline-block bg-yellow-400 text-black px-4 py-1 rounded font-bold text-base mb-2">PERKS</div>
+                <h2 class="text-3xl font-bold mb-4">LIVE <span class="font-extrabold">UPGRADED</span></h2>
+                <p class="text-lg mb-6 leading-relaxed">
+                    Live the lifestyle you deserve from the best location—and the best pool in Tempe. Our refreshing renovations provide an illuminated lifestyle from the best apartments near ASU.
+                </p>
+                <div class="flex flex-wrap gap-6 mt-4">
+                    <div class="flex-1 min-w-[150px] text-center">
+                        <img src="images/bed.png" class="mx-auto w-10" alt="Private Units & Bedspaces icon">
+                        <p class="mt-2">Private Units & Bedspaces</p>
+                    </div>
+                    <div class="flex-1 min-w-[150px] text-center">
+                        <img src="images/scholarship.png" class="mx-auto w-10" alt="Scholarship icon">
+                        <p class="mt-2">Scholarship</p>
+                    </div>
+                    <div class="flex-1 min-w-[150px] text-center">
+                        <img src="images/furniture.png" class="mx-auto w-10" alt="Furnished Units icon">
+                        <p class="mt-2">Furnished Units</p>
+                    </div>
+                    <div class="flex-1 min-w-[150px] text-center">
+                        <img src="images/internet.png" class="mx-auto w-10" alt="All-Inclusive Utilities & Internet icon">
+                        <p class="mt-2">ALL-INCLUSIVE UTILITIES & INTERNET</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap justify-center items-start bg-white py-12 px-5 max-w-6xl mx-auto gap-10">
+            <div class="flex-1 min-w-[300px] max-w-xl">
+                <h2 class="text-2xl font-bold mb-4">A Substance Free, Safety Oriented, Amenity Packed Community</h2>
+                <p class="mb-6 text-base leading-relaxed">
+                    Ivory University House is a vibrant and inclusive community that upholds high standards for all residents. We understand that a healthy and focused environment plays a crucial role in academic success and personal growth. That’s why we have intentionally fostered a substance-free culture within our residence halls and for safety purposes, we do not welcome overnight guests. Amenities such as recital and practice space, yoga, meditation, fitness programs, game rooms, art studio, mentors in intellectual, physical, spiritual, and psychological areas of study and exploration, cooking classes, and outdoor activities are all part of the Ivory University House experience. Join us as we work together to create an empowering environment for you and all of our residents.
+                </p>
+                <button class="bg-green-800 text-white font-bold px-6 py-2 rounded hover:bg-yellow-400 hover:text-black transition">
+                    Learn More
+                </button>
+            </div>
+            <div class="flex-1 min-w-[220px] max-w-md flex gap-3 h-auto items-stretch">
+                <img src="images/IMG_3935.JPG" class="w-1/4 h-full object-cover aspect-[3/4] rounded-lg" alt="Decorative wallpaper pattern" loading="lazy">
+                <img src="images/IMG_3953.JPG" class="w-2/4 h-full object-cover aspect-[3/4] rounded-lg" alt="Student studying online in a bright room" loading="lazy">
+            </div>
+        </div>
+        <div class="swiper-container main-swiper max-w-6xl mx-auto mt-10 rounded-lg shadow bg-white">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="images/IMG_3913.JPG" alt="Student event at Ivory University House" class="w-full h-60 md:h-72 object-cover rounded-lg"></div>
+                <div class="swiper-slide"><img src="images/IMG_3924.JPG" alt="Modern kitchen area" class="w-full h-60 md:h-72 object-cover rounded-lg"></div>
+                <div class="swiper-slide"><img src="images/IMG_3935.JPG" alt="Outdoor patio with seating" class="w-full h-60 md:h-72 object-cover rounded-lg"></div>
+                <div class="swiper-slide"><img src="images/IMG_3940.JPG" alt="Fitness room with equipment" class="w-full h-60 md:h-72 object-cover rounded-lg"></div>
+                <div class="swiper-slide"><img src="images/IMG_3953.JPG" alt="Lobby with comfortable seating" class="w-full h-60 md:h-72 object-cover rounded-lg"></div>
+            </div>
+        </div>
+        <div class="swiper-container swiper-thumbs max-w-6xl mx-auto mt-4 mb-10 rounded bg-gray-200">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="images/IMG_3913.JPG" alt="Student event thumbnail" class="w-20 h-12 object-cover rounded"></div>
+                <div class="swiper-slide"><img src="images/IMG_3924.JPG" alt="Modern kitchen thumbnail" class="w-20 h-12 object-cover rounded"></div>
+                <div class="swiper-slide"><img src="images/IMG_3935.JPG" alt="Outdoor patio thumbnail" class="w-20 h-12 object-cover rounded"></div>
+                <div class="swiper-slide"><img src="images/IMG_3940.JPG" alt="Fitness room thumbnail" class="w-20 h-12 object-cover rounded"></div>
+                <div class="swiper-slide"><img src="images/IMG_3953.JPG" alt="Lobby thumbnail" class="w-20 h-12 object-cover rounded"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js" defer></script>
+    <script>
+        var thumbSwiper = new Swiper('.swiper-thumbs', {
+            slidesPerView: 5,
+            spaceBetween: 10,
+            freeMode: true,
+            watchSlidesProgress: true,
+            loop: true,
+            centeredSlides: true,
+            slideToClickedSlide: true,
+        });
+        var mainSwiper = new Swiper('.main-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            centeredSlides: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            thumbs: {
+                swiper: thumbSwiper,
+            },
+        });
+    </script>
+    <!-- MAPBOX MAP SECTION -->
+    <section class="w-screen bg-white py-0 relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+        <div class="max-w-5xl mx-auto pt-10 pb-0 px-5 text-center">
+            <h2 class="font-oswald font-bold text-black text-2xl mb-2 tracking-wide">Find Us Here</h2>
+            <p class="text-green-800 text-base mb-6">434 S Mario Capecchi Drive, Salt Lake City, UT 84112</p>
+        </div>
+        <div id="map" class="w-screen h-[400px] mx-auto border-0"></div>
+    </section>
+    <!-- Instagram Top Bar Section (below map) -->
+    <section class="w-screen bg-[#f1531a] text-white relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] border-b-2 border-black p-0">
+        <div class="max-w-5xl mx-auto flex items-center justify-between px-6 min-h-[60px] flex-wrap">
+            <div class="flex items-center gap-4">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram logo" class="w-8 h-8" style="filter: invert(1) brightness(2);">
+                <span class="text-xl font-bold tracking-wide">Follow us on Instagram</span>
+            </div>
+            <a href="https://www.instagram.com/ivoryuniversityhouse/" target="_blank" class="bg-black text-white rounded-full px-7 py-2 font-bold text-base tracking-wide border-2 border-white hover:bg-white hover:text-black transition">@ivoryuniversityhouse</a>
+        </div>
+        <div class="max-w-5xl mx-auto px-6 pb-3">
+            <div class="elfsight-app-13161663-14c5-417b-934f-48c7c4f3008b" data-elfsight-app-lazy></div>
+        </div>
+    </section>
+    <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <!-- Mapbox GL JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <script>
+        // Mapbox access token
+        mapboxgl.accessToken = 'pk.eyJ1IjoibW9yb2JtMSIsImEiOiJjbWI5bzQ3NDMwZTJxMmtvazRwaXljZXhzIn0.4InlezXsVUf4mydodd7wIA';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Coordinates for Ivory University House
+            var locations = [
+                {
+                    lng: -111.8492327,
+                    lat: 40.7593380,
+                    title: 'Ivory University House',
+                    description: '434 S Mario Capecchi Drive, Salt Lake City, UT 84112'
+                },
+                {
+                    lng: -111.8452,
+                    lat: 40.7645,
+                    title: 'Student Life-Center',
+                    description: 'George S. Eccles Student Life Center'
+                },
+                {
+                    lng: -111.8465,
+                    lat: 40.7640,
+                    title: 'Student Food Services',
+                    description: 'Kahlert Village Dining & Food Services'
+                },
+                {
+                    lng: -111.8910,
+                    lat: 40.7606,
+                    title: 'Trax Station to Downtown',
+                    description: 'University Medical Center TRAX Station'
+                },
+                {
+                    lng: -111.8457,
+                    lat: 40.7617,
+                    title: 'Church of Jesus Christ of Latter Day Saints Institute of Religion',
+                    description: 'Institute of Religion, University of Utah'
+                }
+            ];
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [locations[0].lng, locations[0].lat],
+                zoom: 15
+            });
+            // Add zoom and rotation controls
+            map.addControl(new mapboxgl.NavigationControl());
+            // Add markers
+            locations.forEach(function(loc) {
+                var el = document.createElement('div');
+                el.className = 'custom-marker';
+                el.style.background = '#E84B3F';
+                el.style.width = '28px';
+                el.style.height = '28px';
+                el.style.borderRadius = '50%';
+                el.style.border = '3px solid #fff';
+                el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+                el.style.backgroundImage = 'url(https://cdn-icons-png.flaticon.com/512/684/684908.png)';
+                el.style.backgroundSize = '60% 60%';
+                el.style.backgroundRepeat = 'no-repeat';
+                el.style.backgroundPosition = 'center';
+                new mapboxgl.Marker(el)
+                    .setLngLat([loc.lng, loc.lat])
+                    .setPopup(new mapboxgl.Popup({ offset: 25 })
+                        .setHTML('<h4 style="margin:0;font-size:1.1rem;">' + loc.title + '</h4><div style="font-size:0.95rem;">' + loc.description + '</div>'))
+                    .addTo(map);
+            });
+        });
+    </script>
+    <footer class="w-screen bg-black text-white mt-16 rounded-t-2xl shadow-lg p-0 relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+        <div class="max-w-6xl mx-auto flex flex-wrap flex-row justify-between items-start py-10 px-5 gap-10">
+            <div class="flex-1 min-w-[200px]">
+                <h3 class="text-lg font-bold text-yellow-400 mb-2">OFFICE HOURS</h3>
+                <p>M-F 9AM - 6PM</p>
+                <p>SAT 10AM - 5PM</p>
+                <p>SUN 1PM - 5PM</p>
+                <p class="text-red-500 font-bold mt-3">🔍 RESIDENTS</p>
+                <p class="text-red-500 uppercase font-bold mt-1">Schedule a Self-Guided Tour</p>
+            </div>
+            <div class="flex-1 min-w-[200px] flex items-center justify-center">
+                <img src="images/IvoryUniversityHouse_PrimaryLogo_OneColor_Black.png" alt="Ivory University House logo" loading="lazy" class="max-w-[180px] min-w-[100px] w-full bg-white rounded-lg block mx-auto shadow-md">
+            </div>
+            <div class="flex-1 min-w-[200px]">
+                <h3 class="text-lg font-bold text-yellow-400 mb-2">CONTACT US</h3>
+                <p>434 S Mario Capecchi Drive</p>
+                <p>Salt Lake City, UT 84112</p>
+                <p class="font-bold">CALL OR TEXT (801) 396-0093</p>
+                <div class="flex gap-4 mt-3">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+                    <a href="https://twitter.com" target="_blank" aria-label="Twitter" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+                    <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="inline-block"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok logo" loading="lazy" class="w-7 h-7 grayscale brightness-110 hover:grayscale-0 transition"></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-400 text-sm mt-6 mb-2">
+            &copy; Ivory University House, All Rights Reserved. | <a href="/privacy.html" class="underline text-gray-400">Privacy Policy</a>
+        </div>
+    </footer>
+
+<!-- Modal JavaScript -->
+<script>
+function openModal(unit, type, price, sqft, img, status) {
+    document.getElementById("unitModal").style.display = "block";
+    document.getElementById("modalUnitName").innerText = 'UNIT ' + unit;
+    document.getElementById("modalUnitPrice").innerText = price + ' / Month';
+    document.getElementById("modalUnitType").innerText = type;
+    document.getElementById("modalUnitSqft").innerText = sqft;
+    document.getElementById("modalUnitImg").src = img;
+    document.getElementById("modalUnitStatus").innerText = status === 'SOLD OUT' ? 'SOLD OUT' : (status || 'NOW LEASING');
+}
+function closeModal() {
+    document.getElementById("unitModal").style.display = "none";
+}
+// Optional: Close when clicking outside modal
+window.onclick = function(event) {
+    const modal = document.getElementById("unitModal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+};
+</script>
+</body>
+</html>
