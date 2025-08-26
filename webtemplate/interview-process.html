@@ -72,46 +72,104 @@
     </div>
   </section>
 
-  <!-- Content -->
+  <!-- Content with ARIA Tabs -->
   <section class="bg-white py-6">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="bg-white rounded-2xl shadow-lg border border-brand-gray/50 p-6 md:p-10 leading-relaxed relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image:url('images/IvoryUniversityHouse_Icon_Ivory.png');background-repeat:no-repeat;background-size:320px auto;background-position:center;"></div>
-        <div class="prose prose-lg max-w-none relative z-10 text-brand-blue/90">
-          <h2 class="font-oswald font-extrabold text-brand-red mt-0 mb-4 text-2xl">Interview Process for Ivory University House Applicants</h2>
-          <p>
-            The purpose of these interviews is to get to know the future residents and help them understand the mission of Ivory University House, answer any questions they have, and review the Core Value Agreement.
-          </p>
-          <p>
-            These interviews are kept to about 15 minutes in length and held via Zoom.
-          </p>
+    <div class="max-w-[1200px] mx-auto px-4">
+      <!-- Tabs header -->
+      <div role="tablist" aria-label="Interview process tabs" class="flex flex-wrap gap-2 md:gap-3">
+        <button role="tab" id="tab-outline" aria-controls="panel-outline" aria-selected="true" tabindex="0" class="rounded-full px-4 py-2 border-2 border-brand-yellow bg-white text-black font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-yellow">Interview Outline</button>
+        <button role="tab" id="tab-four-pillars" aria-controls="four-pillars" aria-selected="false" tabindex="-1" class="rounded-full px-4 py-2 border-2 border-brand-yellow bg-white text-black font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-yellow">Four Pillars</button>
+      </div>
 
-          <h3 class="font-oswald font-bold text-brand-blue mt-6 mb-3 text-xl">Interview Outline</h3>
-          <ol class="list-decimal space-y-3">
-            <li>
-              We’ll begin by asking questions to get to know the person better. Learn about their hobbies, what they are studying, what they’re looking for in housing, etc. We’ll then confirm the following data points:
-              <ol type="a" class="list-[lower-alpha] mt-2 space-y-1">
-                <li>Hometown</li>
-                <li>High School attended</li>
-                <li>University currently attending</li>
-                <li>Year in school</li>
-                <li>UNID</li>
-                <li>Ivory Scholarship recipient</li>
-                <li>Community service/engagement</li>
-                <li>Engineering student</li>
+      <!-- Tabpanels -->
+      <div class="mt-6">
+        <!-- Panel: Interview Outline (existing content) -->
+        <div id="panel-outline" role="tabpanel" aria-labelledby="tab-outline" tabindex="0" class="outline-none">
+          <div class="bg-white rounded-2xl shadow-lg border border-brand-gray/50 p-6 md:p-10 leading-relaxed relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image:url('images/IvoryUniversityHouse_Icon_Ivory.png');background-repeat:no-repeat;background-size:320px auto;background-position:center;"></div>
+            <div class="prose prose-lg max-w-none relative z-10 text-brand-blue/90">
+              <h2 class="font-oswald font-extrabold text-brand-red mt-0 mb-4 text-2xl">Interview Process for Ivory University House Applicants</h2>
+              <p>
+                The purpose of these interviews is to get to know the future residents and help them understand the mission of Ivory University House, answer any questions they have, and review the Core Value Agreement.
+              </p>
+              <p>
+                These interviews are kept to about 15 minutes in length and held via Zoom.
+              </p>
+
+              <h3 class="font-oswald font-bold text-brand-blue mt-6 mb-3 text-xl">Interview Outline</h3>
+              <ol class="list-decimal space-y-3">
+                <li>
+                  We’ll begin by asking questions to get to know the person better. Learn about their hobbies, what they are studying, what they’re looking for in housing, etc. We’ll then confirm the following data points:
+                  <ol type="a" class="list-[lower-alpha] mt-2 space-y-1">
+                    <li>Hometown</li>
+                    <li>High School attended</li>
+                    <li>University currently attending</li>
+                    <li>Year in school</li>
+                    <li>UNID</li>
+                    <li>Ivory Scholarship recipient</li>
+                    <li>Community service/engagement</li>
+                    <li>Engineering student</li>
+                  </ol>
+                </li>
+                <li>Ask how they learned about Ivory University House and why they chose to apply.</li>
+                <li>Explain the details of the Ivory University House and its philanthropic mission.</li>
+                <li>
+                  Introduce our Core Value Agreement (“At IUH, the Core Value Agreement is something that is very important to us. It’s our way of creating the desired culture and environment for all residents.”). Read through Core Value Agreement (<a href="./corevalues.html" class="text-brand-red underline hover:text-brand-blue">found here</a>).
+                </li>
+                <li>If they determine IUH is a good fit for them, explain that a lease will be sent out shortly and once they sign it and have paid the security deposit, their spot will be secured.</li>
+                <li>Ask if there are any questions for our team.</li>
               </ol>
-            </li>
-            <li>Ask how they learned about Ivory University House and why they chose to apply.</li>
-            <li>Explain the details of the Ivory University House and its philanthropic mission.</li>
-            <li>
-              Introduce our Core Value Agreement (“At IUH, the Core Value Agreement is something that is very important to us. It’s our way of creating the desired culture and environment for all residents.”). Read through Core Value Agreement (<a href="./corevalues.html" class="text-brand-red underline hover:text-brand-blue">found here</a>).
-            </li>
-            <li>If they determine IUH is a good fit for them, explain that a lease will be sent out shortly and once they sign it and have paid the security deposit, their spot will be secured.</li>
-            <li>Ask if there are any questions for our team.</li>
-          </ol>
 
-          <div class="mt-8 bg-brand-gray/40 border-l-4 border-brand-yellow px-5 py-4 rounded-r">
-            <p class="m-0"><span class="font-oswald font-bold text-brand-blue">Direct link:</span> https://www.ivoryuniversityhouse.com/interview-process</p>
+              <div class="mt-8 bg-brand-gray/40 border-l-4 border-brand-yellow px-5 py-4 rounded-r">
+                <p class="m-0"><span class="font-oswald font-bold text-brand-blue">Direct link:</span> https://www.ivoryuniversityhouse.com/interview-process</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel: Four Pillars -->
+        <div id="four-pillars" role="tabpanel" aria-labelledby="tab-four-pillars" tabindex="0" class="hidden outline-none">
+          <!-- Optional section header bar -->
+          <div class="bg-brand-red text-white rounded-xl shadow px-6 py-3 font-oswald font-extrabold tracking-wide">Four Pillars</div>
+
+          <!-- Quick anchors -->
+          <div class="mt-4 flex flex-wrap gap-2">
+            <a class="px-3 py-1 rounded-full border-2 border-brand-yellow text-black bg-white font-semibold" href="#pillar-spiritual">SPIRITUAL</a>
+            <a class="px-3 py-1 rounded-full border-2 border-brand-yellow text-black bg-white font-semibold" href="#pillar-social">SOCIAL</a>
+            <a class="px-3 py-1 rounded-full border-2 border-brand-yellow text-black bg-white font-semibold" href="#pillar-physical">PHYSICAL</a>
+            <a class="px-3 py-1 rounded-full border-2 border-brand-yellow text-black bg-white font-semibold" href="#pillar-intellectual">INTELLECTUAL</a>
+          </div>
+
+          <!-- Cards grid -->
+          <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+            <!-- Spiritual -->
+            <article id="pillar-spiritual" class="relative bg-brand-blue rounded-2xl shadow-lg p-6 md:p-8 text-white min-h-[220px] flex flex-col">
+              <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image:url('images/IvoryUniversityHouse_Icon_Ivory.png');background-repeat:no-repeat;background-size:220px;background-position:right bottom"></div>
+              <div class="h-8 mb-2"></div>
+              <h2 class="font-oswald font-extrabold uppercase tracking-wide text-brand-yellow text-xl mb-2 relative z-10">SPIRITUAL</h2>
+              <p class="text-white text-base leading-relaxed relative z-10">Disciple practiced through prayer, scripture study, covenant commitment, and Christlike services</p>
+            </article>
+            <!-- Social -->
+            <article id="pillar-social" class="relative bg-brand-blue rounded-2xl shadow-lg p-6 md:p-8 text-white min-h-[220px] flex flex-col">
+              <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image:url('images/IvoryUniversityHouse_Icon_Ivory.png');background-repeat:no-repeat;background-size:220px;background-position:right bottom"></div>
+              <div class="h-8 mb-2"></div>
+              <h2 class="font-oswald font-extrabold uppercase tracking-wide text-brand-yellow text-xl mb-2 relative z-10">SOCIAL</h2>
+              <p class="text-white text-base leading-relaxed relative z-10">A culture of belonging that develops leadership, accountability, and service-minded friendship</p>
+            </article>
+            <!-- Physical -->
+            <article id="pillar-physical" class="relative bg-brand-blue rounded-2xl shadow-lg p-6 md:p-8 text-white min-h-[220px] flex flex-col">
+              <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image:url('images/IvoryUniversityHouse_Icon_Ivory.png');background-repeat:no-repeat;background-size:220px;background-position:right bottom"></div>
+              <div class="h-8 mb-2"></div>
+              <h2 class="font-oswald font-extrabold uppercase tracking-wide text-brand-yellow text-xl mb-2 relative z-10">PHYSICAL</h2>
+              <p class="text-white text-base leading-relaxed relative z-10">Stewardship of the body through healthy habits, safe activity, and restorative rest</p>
+            </article>
+            <!-- Intellectual -->
+            <article id="pillar-intellectual" class="relative bg-brand-blue rounded-2xl shadow-lg p-6 md:p-8 text-white min-h-[220px] flex flex-col">
+              <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image:url('images/IvoryUniversityHouse_Icon_Ivory.png');background-repeat:no-repeat;background-size:220px;background-position:right bottom"></div>
+              <div class="h-8 mb-2"></div>
+              <h2 class="font-oswald font-extrabold uppercase tracking-wide text-brand-yellow text-xl mb-2 relative z-10">INTELLECTUAL</h2>
+              <p class="text-white text-base leading-relaxed relative z-10">Disciplined learning that seeks truth, builds capacity, and applies knowledge with integrity</p>
+            </article>
           </div>
         </div>
       </div>
@@ -164,6 +222,63 @@
       }
     });
   });
+  </script>
+<script>
+    // Accessible Tabs: click, keyboard, and hash activation
+    (function(){
+      const tablist = document.querySelector('[role="tablist"][aria-label="Interview process tabs"]');
+      if (!tablist) return;
+      const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+      const panels = [
+        document.getElementById('panel-outline'),
+        document.getElementById('four-pillars'),
+      ];
+      function activateTab(index, setFocus = true) {
+        tabs.forEach((t, i) => {
+          const selected = i === index;
+          t.setAttribute('aria-selected', selected ? 'true' : 'false');
+          t.tabIndex = selected ? 0 : -1;
+          if (panels[i]) {
+            if (selected) {
+              panels[i].classList.remove('hidden');
+            } else {
+              panels[i].classList.add('hidden');
+            }
+          }
+        });
+        if (setFocus) tabs[index].focus();
+      }
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => activateTab(i, false));
+        tab.addEventListener('keydown', (e) => {
+          let idx = tabs.findIndex(t => t === document.activeElement);
+          if (idx < 0) idx = i;
+          switch (e.key) {
+            case 'ArrowRight': e.preventDefault(); activateTab((idx + 1) % tabs.length); break;
+            case 'ArrowLeft': e.preventDefault(); activateTab((idx - 1 + tabs.length) % tabs.length); break;
+            case 'Home': e.preventDefault(); activateTab(0); break;
+            case 'End': e.preventDefault(); activateTab(tabs.length - 1); break;
+          }
+        });
+      });
+      // Hash routing: #four-pillars or #pillar-*
+      function handleHash() {
+        const h = location.hash || '';
+        if (h === '#four-pillars' || h.startsWith('#pillar-')) {
+          activateTab(1, false);
+          if (h && h !== '#four-pillars') {
+            const el = document.querySelector(h);
+            if (el) {
+              setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+            }
+          }
+        } else {
+          activateTab(0, false);
+        }
+      }
+      window.addEventListener('hashchange', handleHash);
+      handleHash();
+    })();
   </script>
 </body>
 </html>
