@@ -10,6 +10,8 @@
     <!-- Mapbox GL JS CSS -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
     <link rel="stylesheet" href="build/output.css">
+    <!-- Brand tokens and global styles -->
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     <style>
@@ -39,14 +41,14 @@
         width: 46px;
         height: 46px;
         border-radius: 9999px;
-        background: rgba(255,255,255,0.95);
-        color: #0f172a; /* arrow color via currentColor */
-        border: 2px solid rgba(0,0,0,0.15);
+        background: color-mix(in srgb, var(--color-white) 95%, transparent);
+        color: var(--color-black); /* arrow color via currentColor */
+        border: 2px solid color-mix(in srgb, var(--color-black) 15%, transparent);
         display: grid;
         place-items: center;
         animation: bounceY 1.6s ease-in-out infinite;
       }
-      .scroll-down:hover { background: #fde047; color: #001f3f; border-color: #001f3f; }
+      .scroll-down:hover { background: var(--color-mayonnaise); color: var(--color-black); border-color: var(--color-black); }
       .scroll-down svg { display: block; }
       @keyframes bounceY {
         0%, 100% { transform: translate(-50%, 0); }
@@ -70,38 +72,38 @@
       .animate-inline-svg:hover .study0,
       .animate-inline-svg:hover .weights0,
       .animate-inline-svg:hover .weights1,
-      .animate-inline-svg:hover .yoga0 { stroke: #fde047; }
+      .animate-inline-svg:hover .yoga0 { stroke: var(--color-mayonnaise); }
       /* Clubhouse */
-      .theme-icon-clubhouse .house0 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .theme-icon-clubhouse .house0 { fill: none; stroke: var(--color-black); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
       .animate-inline-svg:hover .theme-icon-clubhouse,
       .animate-inline-svg:focus .theme-icon-clubhouse { animation: themeIconRubberband 1.25s linear infinite; }
       @keyframes themeIconRubberband { from { transform: scale3d(1,1,1); } 30% { transform: scale3d(1.25,0.75,1); } 40% { transform: scale3d(0.75,1.25,1); } 50% { transform: scale3d(1.15,0.85,1); } 65% { transform: scale3d(0.95,1.05,1); } 75% { transform: scale3d(1.05,0.95,1); } to { transform: scale3d(1,1,1); } }
       /* Gamepad */
-      .theme-icon-gamepad .gamepad0 { fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: round; }
-      .theme-icon-gamepad .gamepad1 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .theme-icon-gamepad .gamepad0 { fill: none; stroke: var(--color-black); stroke-width: 2; stroke-linejoin: round; }
+      .theme-icon-gamepad .gamepad1 { fill: none; stroke: var(--color-black); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
       .animate-inline-svg:focus .theme-icon-gamepad,
       .animate-inline-svg:hover .theme-icon-gamepad { animation: tada 1.5s infinite; }
       @keyframes tada { from { transform: scale3d(1, 1, 1); } 10%, 20% { transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg); } 30%, 50%, 70%, 90% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg); } 40%, 60%, 80% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg); } to { transform: scale3d(1, 1, 1); } }
       /* Computer */
-      .theme-icon-computer { fill: none; stroke: #000000; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
-      .computer0 { fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: round; }
-      .computer1 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .theme-icon-computer { fill: none; stroke: var(--color-black); stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+      .computer0 { fill: none; stroke: var(--color-black); stroke-width: 2; stroke-linejoin: round; }
+      .computer1 { fill: none; stroke: var(--color-black); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
       .animate-inline-svg:focus .theme-icon-computer,
       .animate-inline-svg:hover .theme-icon-computer { animation: wobble-top 1.5s infinite; }
       @keyframes wobble-top { 16.65% { transform: skew(-12deg); } 33.3% { transform: skew(10deg); } 49.95% { transform: skew(-6deg); } 66.6% { transform: skew(4deg); } 83.25% { transform: skew(-2deg); } 100% { transform: skew(0); } }
       /* Study */
-      .study0 { fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+      .study0 { fill: none; stroke: var(--color-black); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
       .animate-inline-svg:hover .wiggle,
       .animate-inline-svg:focus .wiggle { animation: wiggle 2s ease-in-out infinite; transform-origin: center; }
       @keyframes wiggle { 0% { transform: rotate(0deg); } 50% { transform: rotate(7.5deg); } 100% { transform: rotate(0deg); } }
       /* Weights */
-      .theme-icon-weights .weights0 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-      .theme-icon-weights .weights1 { fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: round; }
+      .theme-icon-weights .weights0 { fill: none; stroke: var(--color-black); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .theme-icon-weights .weights1 { fill: none; stroke: var(--color-black); stroke-width: 2; stroke-linejoin: round; }
       .animate-inline-svg:hover .theme-icon-weights,
       .animate-inline-svg:focus .theme-icon-weights { animation: themeIconWeights 1.25s ease-in infinite; }
       @keyframes themeIconWeights { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
       /* Yoga */
-      .theme-icon-yoga .yoga0 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .theme-icon-yoga .yoga0 { fill: none; stroke: var(--color-black); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
       .animate-inline-svg:hover .theme-icon-yoga,
       .animate-inline-svg:focus .theme-icon-yoga { animation: themeIconMeditate 1.25s ease-in-out infinite; }
       @keyframes themeIconMeditate { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
@@ -205,7 +207,7 @@ As you think about your housing options, please consider carefully whether these
             Your browser does not support the video tag.
         </video>
         <div class="relative z-10 w-full flex items-start justify-center pt-8 md:pt-14 lg:pt-16">
-                <div class="w-full max-w-3xl shadow-2xl border-4 border-brand-blue px-8 md:px-10 py-8 md:py-10 flex flex-col items-center text-center" style="background-color: rgba(255, 255, 255, 0.85); margin-top: 100px;">
+                <div class="w-full max-w-3xl shadow-2xl border-4 border-brand-blue px-8 md:px-10 py-8 md:py-10 flex flex-col items-center text-center" style="background-color: color-mix(in srgb, var(--color-white) 85%, transparent); margin-top: 100px;">
                 <h1 class="text-4xl md:text-5xl font-extrabold text-brand-red mb-3 leading-tight drop-shadow font-oswald">Elevated Student Living</h1>
                 <h3 class="text-xl md:text-2xl font-semibold text-brand-blue mb-4 font-oswald">Ivory University House is new housing steps away from University of Utah.</h3>
                 <p class="text-brand-blue text-base md:text-lg leading-relaxed mb-6"></p>
@@ -297,7 +299,7 @@ As you think about your housing options, please consider carefully whether these
                             <div class="font-bold text-brand-blue text-lg">UNIT A1</div>
                             <div class="text-brand-blue">Studio</div>
                             <div class="text-brand-blue">440 SQ FT</div>
-                            <div class="mb-4 text-brand-red font-bold">STARTING AT $1,899</div>
+                            <div class="mb-4 text-brand-red font-bold">CONTACT FOR RATES</div>
                             <button onclick="openModal('A1','Studio','$1,899','440 SQ FT','./images/A1.png','NOW LEASING')" class="bg-brand-blue text-white px-5 py-2 rounded-full font-bold cursor-pointer mb-3 mt-1 mx-1 hover:bg-brand-yellow hover:text-brand-blue transition shadow">VIEW DETAILS</button>
                         </div>
                     </div>
@@ -309,7 +311,7 @@ As you think about your housing options, please consider carefully whether these
                             <div class="font-bold text-brand-blue text-lg">UNIT B1</div>
                             <div class="text-brand-blue">Studio</div>
                             <div class="text-brand-blue">346 SQ FT</div>
-                            <div class="mb-4 text-brand-red font-bold">STARTING AT $1,469</div>
+                            <div class="mb-4 text-brand-red font-bold">CONTACT FOR RATES</div>
                             <button onclick="openModal('B1','Studio','$1,469','346 SQ FT','./images/B1.png','SOLD OUT')" class="bg-brand-blue text-white px-5 py-2 rounded-full font-bold cursor-pointer mb-3 mt-1 mx-1 hover:bg-brand-yellow hover:text-brand-blue transition shadow">VIEW DETAILS</button>
                         </div>
                     </div>
@@ -321,7 +323,7 @@ As you think about your housing options, please consider carefully whether these
                             <div class="font-bold text-brand-blue text-lg">UNIT C1</div>
                             <div class="text-brand-blue">Studio</div>
                             <div class="text-brand-blue">346 SQ FT</div>
-                            <div class="mb-4 text-brand-red font-bold">STARTING AT $1,349</div>
+                            <div class="mb-4 text-brand-red font-bold">CONTACT FOR RATES</div>
                             <button onclick="openModal('C1','Studio','$1,349','346 SQ FT','./images/C1.png','NOW LEASING')" class="bg-brand-blue text-white px-5 py-2 rounded-full font-bold cursor-pointer mb-3 mt-1 mx-1 hover:bg-brand-yellow hover:text-brand-blue transition shadow">VIEW DETAILS</button>
                         </div>
                     </div>
@@ -331,26 +333,26 @@ As you think about your housing options, please consider carefully whether these
 
         <!-- Modal Structure -->
         <div id="unitModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.6);">
-            <div style="background-color:#f1f0e5;margin:60px auto;padding:30px;border-radius:10px;width:90%;max-width:1100px;display:flex;gap:40px;position:relative;flex-wrap:wrap;">
+            <div style="background-color:var(--color-neutral-porcelain);margin:60px auto;padding:30px;border-radius:10px;width:90%;max-width:1100px;display:flex;gap:40px;position:relative;flex-wrap:wrap;">
                 <!-- Close Button -->
                 <span onclick="closeModal()" style="position:absolute;top:15px;right:20px;font-size:30px;font-weight:bold;cursor:pointer;">&times;</span>
                 <!-- Unit Info -->
                 <div style="flex:1;min-width:280px;">
                     <h2 id="modalUnitName" style="font-size:36px;margin:0 0 10px;">UNIT</h2>
                     <p id="modalUnitPrice" style="font-size:24px;font-weight:bold;margin:0;">$ / Month</p>
-                    <p style="font-size:14px;color:#555;margin-bottom:20px;">*price based on 12 equal installments</p>
+                    <p style="font-size:14px;color:color-mix(in srgb, var(--color-black) 65%, white);margin-bottom:20px;">*price based on 12 equal installments</p>
                     <h3 style="font-size:18px;margin-bottom:10px;">UNIT TYPE</h3>
                     <p id="modalUnitType" style="margin:4px 0;">Type</p>
                     <p id="modalUnitSqft" style="margin:4px 0;">SQ FT</p>
                     <div style="margin-top:20px;">
-                        <a href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw" target="_blank" style="background:#6b0000;color:white;border:none;padding:12px 25px;border-radius:30px;margin-right:10px;font-weight:bold;text-decoration:none;display:inline-block;">APPLY NOW</a>
-                        <button style="background:#5b5d3f;color:white;border:none;padding:12px 25px;border-radius:30px;font-weight:bold;">BOOK A TOUR</button>
+                        <a href="https://ivoryuniversityhouse.prospectportal.com/Apartments/module/application_authentication/?_gl=1*ki3398*_ga*MjEwOTc0MDIwMC4xNzQxNjQ3NjUw*_ga_5QRKCY2ZWW*czE3NDg1Mzk4MTQkbzYkZzAkdDE3NDg1Mzk4MTQkajYwJGwwJGgw" target="_blank" style="background:var(--color-iuh-red);color:var(--color-white);border:none;padding:12px 25px;border-radius:30px;margin-right:10px;font-weight:bold;text-decoration:none;display:inline-block;">APPLY NOW</a>
+                        <button style="background:var(--color-storm-cloud);color:var(--color-white);border:none;padding:12px 25px;border-radius:30px;font-weight:bold;">BOOK A TOUR</button>
                     </div>
                 </div>
                 <!-- Image -->
                 <div style="flex:1;min-width:300px;">
-                    <div id="modalUnitStatus" style="background:black;color:white;text-align:center;padding:8px 0;font-weight:bold;margin-bottom:10px;">STATUS</div>
-                    <img id="modalUnitImg" src="" alt="Floorplan image for selected unit" loading="lazy" style="width:100%;border:1px solid #ccc;">
+                    <div id="modalUnitStatus" style="background:var(--color-black);color:var(--color-white);text-align:center;padding:8px 0;font-weight:bold;margin-bottom:10px;">STATUS</div>
+                    <img id="modalUnitImg" src="" alt="Floorplan image for selected unit" loading="lazy" style="width:100%;border:1px solid color-mix(in srgb, var(--color-black) 20%, white);">
                 </div>
             </div>
         </div>
@@ -614,11 +616,11 @@ c0,1.1-0.2,2.2-0.5,3.3L40,30c-0.3,0.9-0.4,1.8-0.4,2.7v6.6"></path>
             locations.forEach(function(loc) {
                 var el = document.createElement('div');
                 el.className = 'custom-marker';
-                el.style.background = '#E84B3F';
+                el.style.background = 'var(--color-iuh-red)';
                 el.style.width = '16px';
                 el.style.height = '16px';
                 el.style.borderRadius = '50%';
-                el.style.border = '3px solid #fff';
+                el.style.border = '3px solid var(--color-white)';
                 el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
                 new mapboxgl.Marker(el)
                     .setLngLat([loc.lng, loc.lat])
@@ -628,7 +630,7 @@ c0,1.1-0.2,2.2-0.5,3.3L40,30c-0.3,0.9-0.4,1.8-0.4,2.7v6.6"></path>
             });
         });
     </script>
-    <footer class="w-screen bg-black text-white mt-0 rounded-t-2xl shadow-lg p-0 relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+    <footer class="w-screen bg-brand-black text-brand-white mt-0 rounded-t-2xl shadow-lg p-0 relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
         <div class="max-w-6xl mx-auto flex flex-wrap flex-row justify-between items-start py-10 px-5 gap-10">
             <div class="flex-1 min-w-[200px] flex items-center justify-center">
                 <img src="images/LOGO_IvoryHouse_1C-Cream_Mv1a.webp" alt="Ivory University House logo" loading="lazy" class="max-w-[180px] min-w-[100px] w-full rounded-lg block mx-auto shadow-md">
@@ -652,8 +654,8 @@ c0,1.1-0.2,2.2-0.5,3.3L40,30c-0.3,0.9-0.4,1.8-0.4,2.7v6.6"></path>
                 </div>
             </div>
         </div>
-        <div class="text-center text-gray-400 text-sm mt-6 mb-2">
-            &copy; Ivory University House, All Rights Reserved. | <a href="/privacy.html" class="underline text-gray-400">Privacy Policy</a>
+        <div class="text-center text-brand-gray text-sm mt-6 mb-2">
+            &copy; Ivory University House, All Rights Reserved. | <a href="/privacy.html" class="underline text-brand-gray">Privacy Policy</a>
         </div>
     </footer>
 

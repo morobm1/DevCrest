@@ -6,21 +6,23 @@
     <title>Photo Gallery | Ivory University House</title>
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="build/output.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         :root {
-            --iuh-black: #000000;
-            --iuh-white: #FFFFFF;
-            --iuh-red: #E84B3F;
-            --iuh-storm: #367D3D;
-            --iuh-blue: #4CA2C6;
-            --iuh-mayo: #F1C24B;
-            --iuh-gray: #E7E5E3;
+            --iuh-black: var(--color-black);
+            --iuh-white: var(--color-white);
+            --iuh-red: var(--color-iuh-red);
+            --iuh-storm: var(--color-storm-cloud);
+            --iuh-blue: var(--color-french-blue);
+            --iuh-mayo: var(--color-mayonnaise);
+            --iuh-gray: var(--color-neutral-porcelain);
             --banner-height: 40px;
             --navbar-height: 100px;
         }
         html, body {
-            font-family: 'Oswald', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-            font-weight: 300;
+            font-family: "Acme Gothic", "Oswald", "Arial Narrow", Arial, Helvetica, sans-serif;
+            font-weight: 400;
             background: var(--iuh-gray);
             color: var(--iuh-black);
             margin: 0;
@@ -195,15 +197,15 @@
             max-height: 90vh;
             border-radius: 10px;
             box-shadow: 0 2px 16px rgba(0,0,0,0.25);
-            background: #fff;
+            background: var(--iuh-white);
             object-fit: contain;
         }
         .lightbox-close, .lightbox-prev, .lightbox-next {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0,0,0,0.45);
-            color: #fff;
+            background: color-mix(in srgb, var(--iuh-black) 45%, transparent);
+            color: var(--iuh-white);
             border: none;
             border-radius: 50%;
             width: 48px;
@@ -225,9 +227,9 @@
         }
         .lightbox-prev { left: -60px; }
         .lightbox-next { right: -60px; }
-        .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { background: #E84B3F; }
+        .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { background: var(--iuh-red); }
         .lightbox-caption {
-            color: #fff;
+            color: var(--iuh-white);
             text-align: center;
             margin-top: 18px;
             font-size: 1.2rem;

@@ -9,21 +9,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     <link rel="stylesheet" href="build/output.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         :root {
-            --iuh-black: #000000;
-            --iuh-white: #FFFFFF;
-            --iuh-red: #E84B3F;
-            --iuh-storm: #367D3D;
-            --iuh-blue: #4CA2C6;
-            --iuh-mayo: #F1C24B;
-            --iuh-gray: #E7E5E3;
+            --iuh-black: var(--color-black);
+            --iuh-white: var(--color-white);
+            --iuh-red: var(--color-iuh-red);
+            --iuh-storm: var(--color-storm-cloud);
+            --iuh-blue: var(--color-french-blue);
+            --iuh-mayo: var(--color-mayonnaise);
+            --iuh-gray: var(--color-neutral-porcelain);
             --banner-height: 40px;
             --navbar-height: 100px;
         }
         body, html {
-            font-family: 'Oswald', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-            font-weight: 300;
+            font-family: "Acme Gothic", "Oswald", "Arial Narrow", Arial, Helvetica, sans-serif;
+            font-weight: 400;
             background: var(--iuh-gray);
             color: var(--iuh-black);
         }
@@ -126,7 +127,7 @@
         .hero-impact-video-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.45);
+            background: color-mix(in srgb, var(--iuh-black) 45%, transparent);
             z-index: 2;
         }
         .hero-impact-content {
@@ -190,7 +191,7 @@
             text-align: center;
         }
         .impact-video-embed h2 {
-            color: #367D3D;
+            color: var(--iuh-storm);
             font-weight: 700;
             margin-bottom: 24px;
         }
